@@ -11,5 +11,237 @@
    ========================================================================== */
 
 /* ==========================================================================
-   Global settings
+   Global Settings
    ========================================================================== */
+
+div,
+input { /* border for initial testing */
+	border: 1px solid #6CF;
+	font-family: Quicksand;
+	font-weight: 400;
+	font-size: 25px;
+}
+
+a:link,
+a:active,
+a:hover,
+a:visited { /* pesky link underlines, begone! */
+	text-decoration: none;
+}
+
+form,
+input {
+	margin: 0px;
+}
+
+html,
+body,
+.bcrumbs-wrapper {
+	width: 100%;
+	height: 100%;
+}
+
+.breadcrumb { /* resetting Bootstrap breadcrumb (user path) ul background*/
+	background-color: transparent;
+}
+
+.img-polaroid {
+	min-width: 200px;
+	height: 200px;
+}
+
+.input-append button.add-on { /* attaches buttons to input fields, notably header searchbox */
+    height: 30px !important;
+}
+
+.bcrumbs-content { /* set the width of all content divs */
+	width: 960px;
+	height: 100%;
+	margin: auto;
+}
+
+.bcrumbs-view { /* set height/width of each Breadcrumbs view */
+	width: 100%;
+	min-height: 100%;
+	display: block;
+}
+
+.img-crop { /* Style for all elements that crop images */
+	overflow: hidden;
+}
+
+.img-overlay,
+.img-overlay-text {
+	display: block;
+	position: absolute;
+	height: 200px;
+	width: 200px;
+}
+
+.img-overlay {
+	background-color: #000;
+	z-index: 1000;
+	opacity: 0.5;
+	height: 210px;
+	width: 210px;
+}
+
+.img-overlay-text {
+	text-align: left;
+	color: #fff;
+	font-size: 15px;
+	margin: 5px;
+}
+
+.bcrumbs-listing { /* Class for all list gridding */
+	width: 210px;
+	height: 260px;
+	margin: 0px 10px;
+	display: inline-block;
+	text-align: center;
+}
+
+.bcrumbs-listing > span,
+.bcrumbs-listing > img {
+	display: block;
+	margin-bottom: 20px;
+}
+
+.bcrumbs-single-list-item-img {
+	width: 210px;
+	height: 210px;
+	overflow: hidden;
+}
+
+.bcrumbs-single-list-item-img:hover {
+	opacity: 0.8;
+}
+
+.bcrumbs-single-icons {
+	position: relative;
+	float: left;
+	margin-top: -30px;
+	background-color: #fff;
+	opacity: 0.8;
+	height: 40px;
+	width: 100%;
+}
+
+.bcrumbs-single-icons,
+.img-overlay-text {
+	z-index: 9999;
+}
+
+.bcrumbs-single-icons > a { /* Class for all single items shown in lists */
+	display: inline-block;
+	padding: 0px 15.4px;
+}
+
+.text-icon { /* alignment for icons that are placed next to text */
+	margin-top: 6px;
+	
+}
+
+/* ==========================================================================
+   Breadcrumbs Header
+   ========================================================================== */
+
+.bcrumbs-header {
+	width: 100%;
+	height: 7%;
+	min-height: 50px;
+	overflow: visible;
+}
+
+.bcrumbs-logo,
+.bcrumbs-header > form,
+.bcrumbs-header-link {
+	vertical-align: top;
+	padding: 0% 0.5%;
+}
+
+.bcrumbs-logo,
+.bcrumbs-header > form,
+.bcrumbs-header-link > span {
+	position: relative;
+	display: inline-block;
+	top: 25%;
+}
+
+.bcrumbs-logo {
+	font-size: 50px;
+}
+
+.bcrumbs-header-link { /* set header links to right of browser*/
+	display: block;
+	float: right;
+	height: 100%;
+}
+
+.bcrumbs-header-link:hover {
+	background-color: #F0F0F0;
+}
+
+/* ==========================================================================
+   Breadcrumbs My Crumbs View
+   ========================================================================== */
+
+.bcrumbs-list {
+	background-image:url(../img/bcrumbs-list-bg.png);
+	background-repeat: no-repeat;
+}
+
+.bcrumbs-list-img {
+	height: 194px;
+	width: 194px;
+	padding: 3px;
+}
+
+.bcrumbs-list-add:hover {
+	background-color: #F6F6F6;
+}
+
+/* ==========================================================================
+   Breadcrumbs Single View
+   ========================================================================== */
+
+.bcrumbs-single-item-nav > li {
+	font-size: 15px;
+	font-weight: 900;
+	width: 230px;
+}
+
+.bcrumbs-single-item-nav > li > a {
+	padding-left: 30px;
+}
+
+.bcrumbs-single-item-nav > li > i {
+	float: left;
+	margin-top: 10px;
+	margin-left: 5px;
+}
+
+.bcrumbs-single-item-section > p {
+	font-size: 20px;
+	font-weight: 400;
+	line-height: 26px;
+	margin-bottom: 20px;
+}
+
+.bcrumbs-single-item-img {
+	height: 300px;
+	width: 100%;
+	overflow: hidden;
+}
+
+/* ==========================================================================
+   Breadcrumbs Browse View
+   ========================================================================== */
+
+.bcrumbs-browse-collapse {
+	width: 100%;
+	height: 50px;
+	font-family: Quicksand;
+	font-weight: 700;
+	font-size: 20px;
+}
