@@ -4,7 +4,9 @@
   $(document).ready(function() {
     var myApplication;
     console.log("Initialized Properly");
-    return myApplication = new LOAF.ApplicationView();
+    return myApplication = new LOAF.ApplicationView({
+      el: $(".bcrumbs-wrapper")
+    });
   });
 
   window.LOAF = {};

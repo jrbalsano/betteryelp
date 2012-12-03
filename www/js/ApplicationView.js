@@ -2,29 +2,30 @@
 (function() {
 
   LOAF.ApplicationView = Backbone.View.extend({
-    initialize: function(options) {
-      $(".bcrumbs-view").hide();
-      $(".bcrumbs-mycrumbs-view").show();
-      return this.fsObject = new LOAF.FsJsonObject({
-        read: false,
-        onReady: function(fsObject) {
-          debugger;
-          var newObject;
-          newObject = {
-            a: 12,
-            b: 14,
-            c: 16
-          };
-          return fsObject.writeObject(newObject, function() {
-            var otherObject;
-            return otherObject = new LOAF.FsJsonObject({
-              onReady: function(newOtherObject) {
-                debugger;
-              }
-            });
-          });
-        }
-      });
+    initialize: function() {
+      this.$(".bcrumbs-view").hide();
+      this.$(".bcrumbs-mycrumbs-view").show();
+      return this.myCrumbs = true;
+    },
+    events: {
+      "click .bcrumbs-add-crumbs-link": "showAddCrumbs",
+      "click .bcrumbs-my-crumbs-link": "showMyCrumbs"
+    },
+    showAddCrumbs: function(e) {
+      e.preventDefault();
+      if (this.myCrumbs) {
+        this.$(".bcrumbs-mycrumbs-view").hide();
+        this.$(".bcrumbs-yelp-view").show();
+        return this.myCrumbs = !this.myCrumbs;
+      }
+    },
+    showMyCrumbs: function(e) {
+      e.preventDefault();
+      if (!this.myCrumbs) {
+        this.$(".bcrumbs-yelp-view").hide();
+        this.$(".bcrumbs-mycrumbs-view").show();
+        return this.myCrumbs = !this.myCrumbs;
+      }
     }
   });
 
