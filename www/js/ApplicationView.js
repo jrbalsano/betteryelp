@@ -2,11 +2,26 @@
 (function() {
 
   LOAF.ApplicationView = Backbone.View.extend({
-    tagName: div,
-    className: bcrumbs - wrapper,
-    intialize: function(options) {
-      this.$(".bcrumbs-view").hide();
-      return this.$(".bcrumbs-mycrumbs-view").show();
+    initialize: function(options) {
+      $(".bcrumbs-view").hide();
+      $(".bcrumbs-mycrumbs-view").show();
+      return this.fsObject = new LOAF.FsJsonObject({
+        read: false,
+        onReady: function(fsObject) {
+          debugger;
+          var newObject;
+          newObject = {
+            a: 12,
+            b: 14,
+            c: 16
+          };
+          return fsObject.writeObject(newObject, function() {
+            var otherObject;
+            otherObject = new LOAF.FsJsonObject();
+            debugger;
+          });
+        }
+      });
     }
   });
 
