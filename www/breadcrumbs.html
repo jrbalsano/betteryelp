@@ -14,12 +14,17 @@
 
     <!--Breadcrumbs: Javascript-->
     <script type="text/javascript" src="js/jquery.min.js"></script>
-    <script type="text/javascript" src="js/backbone-min.js"></script>
     <script type="text/javascript" src="js/underscore-min.js"></script>
+    <script type="text/javascript" src="js/backbone-min.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/mustache.js"></script>
+    <script type="text/javascript" src="http://oauth.googlecode.com/svn/code/javascript/oauth.js"></script>
+    <script type="text/javascript" src="http://oauth.googlecode.com/svn/code/javascript/sha1.js"></script>
     <script type="text/javascript" src="js/application.js"></script>
+    <script type="text/javascript" src="js/fs.js"></script>
+    <script type="text/javascript" src="js/ApplicationView.js"></script>
     <script type="text/javascript" src="js/Business.js"></script>
+    <script type="text/javascript" src="js/YelpList.js"></script>
 
     <title>Breadcrumbs</title>
   </head>
@@ -39,13 +44,13 @@
         <form><div class = "bcrumbs-crumbs-search input-append"><input type = "search" class = "bcrumbs-crumbs-search-input" placeholder = "Search your Crumbs..." name = "search"><button class = "btn add-on"><i class = "icon-search"></i></button></div></form><!--mycrumbs search-->
 
         <!--bcrumbs-my-crumbs-link-->
-        <a href = "javascript:void(0)" class = "bcrumbs-add-crumbs-link bcrumbs-header-link" onclick = "showMyCrumbs()">
+        <a href = "javascript:void(0)" class = "bcrumbs-my-crumbs-link bcrumbs-header-link">
           <span>My Crumbs</span>
         </a><!--my-crumbs-link-->
 
 
         <!--bcrumbs-add-crumbs-link-->
-        <a href = "javascript:void(0)" class = "bcrumbs-add-crumbs-link bcrumbs-header-link" onclick = "addMoreCrumbs()">
+        <a href = "javascript:void(0)" class = "bcrumbs-add-crumbs-link bcrumbs-header-link">
           <span>+ Add Crumbs</span>
         </a><!--add-crumbs-link-->
 
