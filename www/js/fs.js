@@ -16,30 +16,39 @@
       this.options = options;
       window.requestFileSystem = window.requestFileSystem || window.webkitRequestFileSystem;
       window.webkitStorageInfo.requestQuota(window.PERSISTENT, this.options.size, function(grantedbytes) {
-        return window.requestFileSystem(window.PERSISTENT, _this.options.size, _this._onGranted, _this.onError);
+        window.requestFileSystem(window.PERSISTENT, _this.options.size, function(fs) {
+          return _this._onGranted(fs);
+        });
+        return _this.onError;
       }, this._onError);
     }
+
+    FsJsonObject.prototype.getObject = function() {
+      return this._jsonObject;
+    };
 
     FsJsonObject.prototype.writeObject = function(object, successCallback) {
       var fileEntryHandler, fileWriterHandler,
         _this = this;
-      this._jsonObject = object;
-      successCallback = successCallback || function() {};
-      fileWriterHandler = function(fileWriter) {
-        var bb, json_string;
-        window.BlobBuilder = window.BlobBuilder || window.WebKitBlobBuilder;
-        bb = new BlobBuilder();
-        json_string = JSON.stringify(_this._jsonObject);
-        bb.append(json_string);
-        fileWriter.write(bb.getBlob('text/plain'));
-        return successCallback();
-      };
-      fileEntryHandler = function(fileEntry) {
-        return fileEntry.createWriter(fileWriterHandler, _this._onError);
-      };
-      return this.fs.root.getFile(this.options.fileName, {
-        create: true
-      }, fileEntryHandler, this._onError);
+      if (this.fs) {
+        this._jsonObject = object;
+        successCallback = successCallback || function() {};
+        fileWriterHandler = function(fileWriter) {
+          var bb, json_string;
+          window.BlobBuilder = window.BlobBuilder || window.WebKitBlobBuilder;
+          bb = new BlobBuilder();
+          json_string = JSON.stringify(_this._jsonObject);
+          bb.append(json_string);
+          fileWriter.write(bb.getBlob('text/plain'));
+          return successCallback();
+        };
+        fileEntryHandler = function(fileEntry) {
+          return fileEntry.createWriter(fileWriterHandler, _this._onError);
+        };
+        return this.fs.root.getFile(this.options.fileName, {
+          create: true
+        }, fileEntryHandler, this._onError);
+      }
     };
 
     FsJsonObject.prototype._onGranted = function(fs) {

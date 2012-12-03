@@ -10,25 +10,32 @@ class LOAF.FsJsonObject
     window.webkitStorageInfo.requestQuota window.PERSISTENT,
       @options.size
       (grantedbytes) =>
-        window.requestFileSystem window.PERSISTENT, @options.size, @_onGranted, @onError
-      @_onError 
+        window.requestFileSystem window.PERSISTENT, @options.size, (fs) =>
+          @_onGranted(fs)
+        @onError
+      @_onError
+
+  getObject: ->
+    @_jsonObject
+
 
   writeObject: (object, successCallback) ->
-    @_jsonObject = object
-    successCallback = successCallback || ->
+    if @fs
+      @_jsonObject = object
+      successCallback = successCallback || ->
 
-    fileWriterHandler = (fileWriter) =>
-      window.BlobBuilder = window.BlobBuilder || window.WebKitBlobBuilder
-      bb = new BlobBuilder()
-      json_string = JSON.stringify(@_jsonObject)
-      bb.append json_string
-      fileWriter.write bb.getBlob('text/plain')
-      successCallback()
+      fileWriterHandler = (fileWriter) =>
+        window.BlobBuilder = window.BlobBuilder || window.WebKitBlobBuilder
+        bb = new BlobBuilder()
+        json_string = JSON.stringify(@_jsonObject)
+        bb.append json_string
+        fileWriter.write bb.getBlob('text/plain')
+        successCallback()
 
-    fileEntryHandler = (fileEntry) =>
-      fileEntry.createWriter fileWriterHandler, @_onError
+      fileEntryHandler = (fileEntry) =>
+        fileEntry.createWriter fileWriterHandler, @_onError
 
-    @fs.root.getFile @options.fileName, {create: true}, fileEntryHandler, @_onError
+      @fs.root.getFile @options.fileName, {create: true}, fileEntryHandler, @_onError
 
   _onGranted: (fs) =>
     @fs = fs

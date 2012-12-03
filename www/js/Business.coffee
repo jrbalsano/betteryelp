@@ -1,1 +1,0 @@
-LOAF.Business = Backbone.Model

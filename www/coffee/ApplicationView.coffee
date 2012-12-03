@@ -13,5 +13,6 @@ LOAF.ApplicationView = Backbone.View.extend
           b: 14
           c: 16
         fsObject.writeObject newObject, ->
-          otherObject = new LOAF.FsJsonObject()
-          debugger
+          otherObject = new LOAF.FsJsonObject
+            onReady: (newOtherObject) ->
+              debugger

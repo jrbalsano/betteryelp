@@ -17,8 +17,11 @@
           };
           return fsObject.writeObject(newObject, function() {
             var otherObject;
-            otherObject = new LOAF.FsJsonObject();
-            debugger;
+            return otherObject = new LOAF.FsJsonObject({
+              onReady: function(newOtherObject) {
+                debugger;
+              }
+            });
           });
         }
       });
