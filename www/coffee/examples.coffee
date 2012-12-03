@@ -42,8 +42,55 @@ myList.size()
 
 #Assume all above has already occurred
 myList.size() # returns 40
-myList.fetch(page: 2) 
+myList.fetch(page: 2)
 myList.size() # still returns 40
 
 #End YelpList
-###
+####
+
+####
+# FsJsonObject
+####
+# This is a custom object that handles writing JSON objects to the FileSystem.
+# It also supports reading objects from the FileSystem using the HTML5
+# FileSystem API. Because the FileSystem API is asynchronous, all calls to this
+# object except for the get call are asynchronous.
+#
+# Start by writing something to the server. The FsJsonObject defaults to
+# writing to the file "Breadcrumbs.txt"
+
+myObject =
+  a: 12
+  b: 14
+  c: 16
+
+myJson = new LOAF.FsJsonObject
+  read: false # since we are not reading an object, set this false
+  # onReady is called once the browser has obtained permission to
+  # write to the filesystem.
+  onReady: (fsObject) ->
+    console.log("Ready to go")
+    # Now we can write an object.
+    # The function passed as an argument here is called only if the object was
+    # successfully written
+    jsObject.writeObject myObject, ->
+      console.log("Write success.")
+      # Now let's try loading the results into a new FsJsonObject
+      newJsonObject = new LOAF.FsJsonObject
+        read: true # read defaults to true so this isn't really necessary
+        onReady: (newFsObject) -> # Called once read is completed succesfully
+          console.log fsObject.getObject()
+
+# Ideally, we should never be reading and then writing so close to each other
+# so we won't have all these nested callbacks. 
+# Lastly, there are other options accessible for use when creating a new object
+# Here they are explicitly used with their default values.
+
+myJson = new LOAF.FsJsonObject
+  read: true # Whether or not to read from the file
+  size: 5120 # How many bytes to request from the browser
+  fileName: "Breadcrumbs.txt" # The filename to write to/read from
+  onReady: -> # The function to call once initialized.
+
+# End FsJsonObject
+####
