@@ -1,7 +1,11 @@
 $(document).ready ->
   console.log "Running"
-  LOAF.mySearch = new LOAF.YelpList
+  LOAF.mySearch = new LOAF.YelpList [], term: "cookies"
   LOAF.mySearch.fetch()
+  LOAF.myCategory = new LOAF.YelpList [], category: "active"
+  LOAF.myCategory.fetch()
+  LOAF.myCategory.fetch(page: 2)
+  LOAF.myCategory.fetch(page: 2)
 
 window.LOAF = {}
 

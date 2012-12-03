@@ -2,13 +2,22 @@
 (function() {
 
   LOAF.YelpList = Backbone.Collection.extend({
+    initialize: function(models, options) {
+      this.term = options.term;
+      return this.category = options.category;
+    },
     model: LOAF.Business,
     url: 'http://api.yelp.com/v2/search?',
-    fetch: function(options) {
-      var accessor, message, parameterMap, parameters;
-      if (!options) {
-        options = {};
+    type: function() {
+      if (this.category) {
+        "category";
+
       }
+      return "term";
+    },
+    fetch: function(controls) {
+      var accessor, message, options, parameterMap, parameters;
+      options = {};
       accessor = {
         consumerSecret: LOAF.auth.consumerSecret,
         tokenSecret: LOAF.auth.accessTokenSecret
@@ -20,6 +29,15 @@
       parameters.push(['oauth_token', LOAF.auth.accessToken]);
       parameters.push(['oauth_signature_method', 'HMAC-SHA1']);
       parameters.push(['location', "New York City"]);
+      if (this.term) {
+        parameters.push(['term', this.term]);
+      }
+      if (this.category) {
+        parameters.push(['category_filter', this.category]);
+      }
+      if (controls && controls.page) {
+        parameters.push(['offset', (controls.page - 1) * 20]);
+      }
       message = {
         'action': this.url,
         'method': 'GET',
@@ -33,13 +51,11 @@
       options.data = parameterMap;
       options.cache = true;
       options.dataType = 'jsonp';
-      options.jsonpCallback = 'cb';
       options.success = this._onResponse;
       options.context = this;
       return $.ajax(options);
     },
     _onResponse: function(data, textStats, xhr) {
-      debugger;
       var _this = this;
       return _.each(data.businesses, function(business) {
         var busModel;

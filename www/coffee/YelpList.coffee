@@ -1,8 +1,18 @@
 LOAF.YelpList = Backbone.Collection.extend
+  initialize: (models, options) ->
+    @term = options.term
+    @category = options.category
+
   model: LOAF.Business
+  
   url: 'http://api.yelp.com/v2/search?'
-  fetch: (options) ->
-    options = {} unless options
+
+  type: ->
+    "category" if @category
+    "term"
+
+  fetch: (controls) ->
+    options = {}
     accessor = 
       consumerSecret: LOAF.auth.consumerSecret,
       tokenSecret: LOAF.auth.accessTokenSecret
@@ -13,6 +23,9 @@ LOAF.YelpList = Backbone.Collection.extend
     parameters.push ['oauth_token', LOAF.auth.accessToken]
     parameters.push ['oauth_signature_method', 'HMAC-SHA1']
     parameters.push ['location', "New York City"]
+    parameters.push ['term', @term] if @term
+    parameters.push ['category_filter', @category] if @category
+    parameters.push ['offset', (controls.page - 1) * 20] if controls && controls.page
 
     message = 
       'action': @url,
@@ -28,14 +41,12 @@ LOAF.YelpList = Backbone.Collection.extend
     options.data = parameterMap
     options.cache = true
     options.dataType = 'jsonp'
-    options.jsonpCallback = 'cb'
     options.success = @_onResponse
     options.context = @
 
     $.ajax options
 
   _onResponse: (data, textStats, xhr) ->
-    debugger
     _.each data.businesses, (business) =>
       unless @get(business.id) # create a new model if one does not exist
         busModel = new LOAF.Business(business)

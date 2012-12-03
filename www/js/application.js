@@ -3,8 +3,20 @@
 
   $(document).ready(function() {
     console.log("Running");
-    LOAF.mySearch = new LOAF.YelpList;
-    return LOAF.mySearch.fetch();
+    LOAF.mySearch = new LOAF.YelpList([], {
+      term: "cookies"
+    });
+    LOAF.mySearch.fetch();
+    LOAF.myCategory = new LOAF.YelpList([], {
+      category: "active"
+    });
+    LOAF.myCategory.fetch();
+    LOAF.myCategory.fetch({
+      page: 2
+    });
+    return LOAF.myCategory.fetch({
+      page: 2
+    });
   });
 
   window.LOAF = {};
