@@ -1,7 +1,7 @@
 $(document).ready ->
   console.log "Running"
-  mySearch = new LOAF.YelpList
-  mySearch.fetch()
+  LOAF.mySearch = new LOAF.YelpList
+  LOAF.mySearch.fetch()
 
 window.LOAF = {}
 

@@ -2,10 +2,9 @@
 (function() {
 
   $(document).ready(function() {
-    var mySearch;
     console.log("Running");
-    mySearch = new LOAF.YelpList;
-    return mySearch.fetch();
+    LOAF.mySearch = new LOAF.YelpList;
+    return LOAF.mySearch.fetch();
   });
 
   window.LOAF = {};

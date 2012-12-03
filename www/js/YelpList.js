@@ -10,10 +10,11 @@
         options = {};
       }
       accessor = {
-        consumerSecret: LOAF.auth.conserumerSecret,
+        consumerSecret: LOAF.auth.consumerSecret,
         tokenSecret: LOAF.auth.accessTokenSecret
       };
       parameters = [];
+      parameters.push(['callback', 'cb']);
       parameters.push(['oauth_consumer_key', LOAF.auth.consumerKey]);
       parameters.push(['oauth_consumer_secret', LOAF.auth.consumerSecret]);
       parameters.push(['oauth_token', LOAF.auth.accessToken]);
@@ -31,15 +32,22 @@
       options.url = this.url;
       options.data = parameterMap;
       options.cache = true;
-      options.dataType = 'json';
-      options.success = this.onResponse;
-      console.log("Attempting");
-      console.log(options);
-      return Backbone.Model.prototype.fetch.apply(this, options);
+      options.dataType = 'jsonp';
+      options.jsonpCallback = 'cb';
+      options.success = this._onResponse;
+      options.context = this;
+      return $.ajax(options);
     },
-    onResponse: function(collection, response, options) {
-      console.log("Success");
-      return console.log(response);
+    _onResponse: function(data, textStats, xhr) {
+      debugger;
+      var _this = this;
+      return _.each(data.businesses, function(business) {
+        var busModel;
+        if (!_this.get(business.id)) {
+          busModel = new LOAF.Business(business);
+          return _this.add(busModel);
+        }
+      });
     }
   });
 

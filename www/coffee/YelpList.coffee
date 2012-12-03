@@ -4,9 +4,10 @@ LOAF.YelpList = Backbone.Collection.extend
   fetch: (options) ->
     options = {} unless options
     accessor = 
-      consumerSecret: LOAF.auth.conserumerSecret,
+      consumerSecret: LOAF.auth.consumerSecret,
       tokenSecret: LOAF.auth.accessTokenSecret
     parameters = []
+    parameters.push ['callback', 'cb']
     parameters.push ['oauth_consumer_key', LOAF.auth.consumerKey]
     parameters.push ['oauth_consumer_secret', LOAF.auth.consumerSecret]
     parameters.push ['oauth_token', LOAF.auth.accessToken]
@@ -26,13 +27,17 @@ LOAF.YelpList = Backbone.Collection.extend
     options.url = @url
     options.data = parameterMap
     options.cache = true
-    options.dataType = 'json'
-    options.success = @onResponse
-    console.log "Attempting"
-    console.log options
-    Backbone.Model.prototype.fetch.apply @, options
+    options.dataType = 'jsonp'
+    options.jsonpCallback = 'cb'
+    options.success = @_onResponse
+    options.context = @
 
-  onResponse: (collection, response, options) ->
-    console.log "Success"
-    console.log response
+    $.ajax options
+
+  _onResponse: (data, textStats, xhr) ->
+    debugger
+    _.each data.businesses, (business) =>
+      unless @get(business.id) # create a new model if one does not exist
+        busModel = new LOAF.Business(business)
+        @add(busModel)
 
