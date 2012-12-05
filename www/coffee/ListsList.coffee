@@ -11,3 +11,9 @@ class LOAF.ListsList
 
   getLists: ->
     @lists.slice 0
+
+  search: (term) ->
+    _.flatten _.map @lists, 
+      (list) ->
+        list.search(term)
+      true

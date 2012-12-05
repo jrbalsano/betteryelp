@@ -22,6 +22,12 @@
       return this.lists.slice(0);
     };
 
+    ListsList.prototype.search = function(term) {
+      return _.flatten(_.map(this.lists, function(list) {
+        return list.search(term);
+      }, true));
+    };
+
     return ListsList;
 
   })();
