@@ -53,7 +53,9 @@ LOAF.YelpList = Backbone.Collection.extend
 
   _onResponse: (data, textStats, xhr) ->
     _.each data.businesses, (business) =>
-      unless @get(business.id) # create a new model if one does not exist
+      if existing_business = @get(business.id) # update the model if one exists
+        existing_business.set(business)
+      else # create a new model if one does not exist
         busModel = new LOAF.Business(business)
         @add(busModel)
 
