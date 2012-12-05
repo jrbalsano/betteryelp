@@ -15,6 +15,11 @@
       }
       return "term";
     },
+    search: function(term) {
+      return this.models.filter(function(model) {
+        return model.search(term);
+      });
+    },
     fetch: function(controls) {
       var accessor, message, options, parameterMap, parameters;
       options = {};
