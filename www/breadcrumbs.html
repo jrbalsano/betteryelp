@@ -22,6 +22,7 @@
     <script type="text/javascript" src="http://oauth.googlecode.com/svn/code/javascript/sha1.js"></script>
     <script type="text/javascript" src="js/application.js"></script>
     <script type="text/javascript" src="js/fs.js"></script>
+    <script type="text/javascript" src="js/BreadcrumbView.js"></script>
     <script type="text/javascript" src="js/ApplicationView.js"></script>
     <script type="text/javascript" src="js/Business.js"></script>
     <script type="text/javascript" src="js/YelpList.js"></script>
@@ -391,10 +392,12 @@
       </div><!--content-->
 
     </div><!--wrapper-->
-
-
-    <!--Breadcrumbs: Scripts-->
-    <script src="js/jquery.min.js"></script><!--(can haz) JQuery-->
+    <div class="template history-list">
+      {{#historyItems}}
+      <li><a href = "javascript:void(0)" data-id="{{id}}" class = "history-link">{{title}}</a><span class = "divider">/</span></li>
+      {{/historyItems}}
+      <li class = "active">{{currentTitle}}</li>
+    </div>
 
   </body>
 </html>
