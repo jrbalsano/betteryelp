@@ -1,5 +1,6 @@
-LOAF.ApplicationView = Backbone.View.extend
+LOAF.ApplicationView = LOAF.BreadcrumbView.extend
   initialize: ->
+    @initHistory()
     @$(".bcrumbs-view").hide()
     #MyBookmarksView.render()
     #AddBookmarksView.hide()
