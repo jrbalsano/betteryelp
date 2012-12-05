@@ -187,8 +187,55 @@ body,
    ========================================================================== */
 
 .bcrumbs-list {
-	background-image:url(../img/bcrumbs-list-bg.png);
-	background-repeat: no-repeat;
+  width: 225px;
+  padding: 25px;
+}
+
+.bcrumbs-list-stack {
+	height: 200px; 
+  position: relative;
+  width: 200px;
+  padding-bottom:15px;
+}
+
+.bcrumbs-list-img-2, .bcrumbs-list-img-3 {
+	border: 6px solid #fff;
+	height: 200px; width: 200px; 
+	position: absolute;
+	-webkit-box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+	-moz-box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+	box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+}
+
+.bcrumbs-list-img-1 {
+	border: 6px solid #fff;
+	height: 200px; width: 200px; 
+	position: absolute;
+  top: 0;
+  left: 0;
+	-webkit-box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+	-moz-box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+	box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+}
+
+.bcrumbs-list-img-2 {
+	top: -2px;
+	left: 8px;
+	-webkit-transform: rotate(3deg);
+	-moz-transform: rotate(3deg);
+	-o-transform: rotate(3deg);
+	-ms-transform: rotate(3deg);
+	transform: rotate(3deg);
+}
+
+.bcrumbs-list-img-3 {
+	top: -6px;
+	left: 12px;
+	-webkit-transform: rotate(8deg);
+	-moz-transform: rotate(8deg);
+	-o-transform: rotate(8deg);
+	-ms-transform: rotate(8deg);
+	transform: rotate(8deg);
 }
 
 .bcrumbs-list-img {
@@ -199,6 +246,10 @@ body,
 
 .bcrumbs-list-add:hover {
 	background-color: #F6F6F6;
+}
+
+.bcrumbs-list-add {
+	padding: 32px;
 }
 
 /* ==========================================================================

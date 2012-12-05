@@ -112,3 +112,35 @@ myJson = new LOAF.FsJsonObject
 
 # End FsJsonObject
 ####
+
+
+####
+# ListsList
+####
+# This is a custom object that can be used to contain all the lists a user has
+# made or alternatively all of the lists that have been generated via searches.
+# It supports three methods: initialization, adding list, removing list,
+# and getting an array of the lists.
+#
+# To initialize
+
+myList1 = new YelpList
+myList2 = new YelpList
+myList3 = new YelpList
+myList4 = new YelpList
+somelists = [myList1, myList2, myList3]
+listsWrapper = newLOAF.Lists
+  lists: somelists
+
+# To add to the list
+
+listsWrapper.addList myList4
+
+# To remove from the list
+listsWrapper.removeList myList2
+
+# To get the lists
+listsWrapper.getLists # -> [myList1, myList3, myList4]
+
+# End of ListsList
+####
