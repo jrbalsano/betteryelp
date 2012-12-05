@@ -15,6 +15,11 @@
       }
       return "term";
     },
+    search: function(term) {
+      return this.models.filter(function(model) {
+        return model.search(term);
+      });
+    },
     fetch: function(controls) {
       var accessor, message, options, parameterMap, parameters;
       options = {};
@@ -58,8 +63,10 @@
     _onResponse: function(data, textStats, xhr) {
       var _this = this;
       return _.each(data.businesses, function(business) {
-        var busModel;
-        if (!_this.get(business.id)) {
+        var busModel, existing_business;
+        if (existing_business = _this.get(business.id)) {
+          return existing_business.set(business);
+        } else {
           busModel = new LOAF.Business(business);
           return _this.add(busModel);
         }

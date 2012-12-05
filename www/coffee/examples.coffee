@@ -5,6 +5,19 @@
 ####################################################################
 
 ####
+# Business
+####
+# This is a BackBone Model meant to hold data that comes from Yelp database.
+# Use the get and set methods to fetch its information. To find out if the
+# model should be returned for a particular search, use the "search" function.
+
+myBusiness = new LOAF.Business
+myBusiness.search("sushi") # returns true if name or category contains "sushi"
+
+# End Business
+####
+
+####
 # YelpList
 ####
 # BackBone collection used to get results from the server. Has two types, 
@@ -37,13 +50,18 @@ myList.models
 
 myList.size()
 
-# DUE NOTE: If a model already exists in the collection, it will not be added
+# NOTE: If a model already exists in the collection, it will not be added
 # twice. Ex:
 
 #Assume all above has already occurred
 myList.size() # returns 40
 myList.fetch(page: 2)
 myList.size() # still returns 40
+
+# To search a YelpList, simply use the search function
+
+myList.search("sushi") 
+# returns array of Businesses containing Sushi in name or category
 
 #End YelpList
 ####
