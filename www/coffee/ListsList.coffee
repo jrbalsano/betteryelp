@@ -8,3 +8,6 @@ class LOAF.ListsList
 
   removeList: (list) ->
     @lists = _.without @lists, list
+
+  getLists: ->
+    @lists.slice 0

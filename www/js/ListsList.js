@@ -18,6 +18,10 @@
       return this.lists = _.without(this.lists, list);
     };
 
+    ListsList.prototype.getLists = function() {
+      return this.lists.slice(0);
+    };
+
     return ListsList;
 
   })();
