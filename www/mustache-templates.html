@@ -1,0 +1,159 @@
+<!--Breadcrumbs: Mustache Templates
+	created by Yanyi Luo for UID Fall 2012
+    modified
+-->
+
+<!-----------My Crumbs View: List Item Template------------>
+<script id = "bc-list-view-list" type = "text/html">
+	<div class = "bcrumbs-list bcrumbs-listing">
+		<span class = "bcrumbs-list-stack">
+			<img class = "bcrumbs-list-img-3" src = "{{3rd most recently added business img}}">
+			<img class = "bcrumbs-list-img-2" src = "{{2nd most recently added business img}}">
+			<img class = "bcrumbs-list-img-1" src = "{{1st most recently added business img}}">
+			<span><a href = "{{link to list}}">{{name of list}}</a></span>
+		</span>
+	</div>
+</script>
+
+
+<!-----------My Crumbs View: List Single Item Template------------>
+<script id = "bc-list-view-single" type = "text/html">
+	<div class = "bcrumbs-single-list-item bcrumbs-listing">
+		<span class = "bcrumbs-single-list-item-img img-crop">
+		
+		  <span class = "img-overlay-text" style = "display: none;">
+		  <!--show/hide appropriate text here-->
+			<!--Info hover-->
+			<span class = "bc-list-view-single-info" style = "display: none;">
+				<button class = "close pull-right">&times;</button>
+				<b>Price</b> {{how expensive in $$$}}<br />
+				<b>Rating</b> {{while (hasStars) append <i class = "icon-star icon-white"></i>}}<br />
+				<b>Reviews</b> {{number of reviews}}
+			</span>
+			
+			<!--Notes hover-->
+			<span class = "bc-list-view-single-notes" style = "display: none;">
+				<button class = "close pull-right">&times;</button>
+				{{this_business notes}}
+			</span>
+			
+			<!--Lists hover-->
+			<span class = "bc-list-view-single-lists" style = "display: none;">
+				<button class = "close pull-right">&times;</button>
+				<!--while has lists (if need to be truncated, list as many as possible then append with +3, +4, etc)-->
+				{{this_business lists}}<br />
+			</span>
+			
+			<!--Reviews hover-->
+			<span class = "bc-list-view-single-reviews" style = "display: none;">
+				<button class = "close pull-right">&times;</button>
+				<!--most recent review-->
+				{{this_business most recent reviews}}<br />
+			</span>
+
+		  </span>
+		  <span class = "img-overlay" style = "display: none;"></span>
+
+			<img src = "{{image for this business}}">
+			<span class = "bcrumbs-single-icons">
+				<a href = "javascript:void(0)"><i class="icon-info-sign"></i></a>
+                <a href = "javascript:void(0)"><i class="icon-edit"></i></a>
+                <a href = "javascript:void(0)"><i class="icon-list"></i></a>
+                <a href = "javascript:void(0)"><i class="icon-star"></i></a>
+			</span>
+		</span>
+		<span><a href = "{{link to single view detail}}">{{name of business}}</a></span>
+	</div>
+</script>
+
+<!-----------Add Crumbs View: List Single Item Template------------>
+<script id = "bc-yelp-view-single" type = "text/html">
+	<div class = "bcrumbs-single-list-item bcrumbs-listing">
+		<span class = "bcrumbs-single-list-item-img img-crop">
+		
+		  <span class = "img-overlay-text" style = "display: none;">
+		  <!--show/hide appropriate text here-->
+			<!--Info hover-->
+			<span class = "bc-list-view-single-info" style = "display: none;">
+				<button class = "close pull-right">&times;</button>
+				<b>Price</b> {{how expensive in $$$}}<br />
+				<b>Rating</b> {{while (hasStars) append <i class = "icon-star icon-white"></i>}}<br />
+				<b>Reviews</b> {{number of reviews}}
+			</span>
+			
+			<!--Notes hover-->
+			<span class = "bc-list-view-single-add" style = "display: none;">
+				<button class = "close pull-right">&times;</button>
+				<!--Not sure what this interaction looks like -- list dropdown?-->
+			</span>
+			
+			<!--Lists hover-->
+			<span class = "bc-list-view-single-lists" style = "display: none;">
+				<button class = "close pull-right">&times;</button>
+				<!--while has lists (if need to be truncated, list as many as possible then append with +3, +4, etc)-->
+				{{this_business lists}}<br />
+			</span>
+			
+			<!--Reviews hover-->
+			<span class = "bc-list-view-single-reviews" style = "display: none;">
+				<button class = "close pull-right">&times;</button>
+				<!--most recent review-->
+				{{this_business most recent reviews}}<br />
+			</span>
+
+		  </span>
+		  <span class = "img-overlay" style = "display: none;"></span>
+
+			<img src = "{{image for this business}}">
+			<span class = "bcrumbs-single-icons">
+				<a href = "javascript:void(0)"><i class="icon-info-sign"></i></a>
+                <a href = "javascript:void(0)"><i class="icon-plus"></i></a>
+                <a href = "javascript:void(0)"><i class="icon-list"></i></a>
+                <a href = "javascript:void(0)"><i class="icon-star"></i></a>
+			</span>
+		</span>
+		<span><a href = "{{link to single view detail}}">{{business name}}</a></span>
+	</div>
+</script>
+
+<!-----------My Crumbs View: List Single Item Template------------>
+<script id = "bc-single-item" type = "text/html">
+<!--this page's breadcrumbs can be inserted right before the below-->
+	<h2>{{name of business}}</h2>
+	<div class = "bcrumbs-single-item-img">
+	  <img src = "{{img of business}}" style = "margin-top:-25%;">
+	</div>
+
+	<ul class="bcrumbs-single-item-nav nav nav-pills">
+	  <li class = "active"><i class = "icon-info-sign icon-white"></i> <a href = "#">Information</a></li>
+	  <li><i class = "icon-edit"></i><a href = "#">Notes</a></li>
+	  <li><i class = "icon-list"></i><a href = "#">Lists</a></li>
+	  <li><i class = "icon-star"></i><a href = "#">Reviews</a></li>
+	  <div class = "clearfix"></div>
+	</ul>
+
+	<div class = "bcrumbs-single-item-info bcrumbs-single-item-section">
+	  <h3>Information</h3>
+	  <p>Rating: {{overall business rating}}</p>
+	  <p>Location: {{business address}}</p>
+	  <p>Info: {{general overview}}</p>
+	</div>
+	
+	<div class = "bcrumbs-single-item-notes bcrumbs-single-item-section">
+	  <h3>Notes</h3>
+	  <p>{{notes about business}}</p>
+	</div>
+
+	<div class = "bcrumbs-single-item-lists bcrumbs-single-item-section">
+	  <h3>Lists</h3>
+	  <p><a href = "{{link to list}}">{{name of list the business belongs to}}</a></p>
+	</div>
+
+	<div class = "bcrumbs-single-item-reviews bcrumbs-single-item-section">
+	  <h3>Reviews</h3>
+	  <!--while has reviews-->
+	  <p>Date: {{date of review}}</p>
+	  <p>Rating: {{nearest whole number of stars /* while (hasStars) append <i class = "icon-star"></i> */}}</p>
+	  <p>{{review text}}</p>
+	</div>
+</script>
