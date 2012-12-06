@@ -99,6 +99,11 @@ body,
 	padding: 10px;
 }
 
+.bcrumbs-loading img {
+  padding-left: 146px;
+  display: none;
+}
+
 .img-crop { /* Style for all elements that crop images */
 	overflow: hidden;
 }

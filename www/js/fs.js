@@ -78,7 +78,7 @@
     };
 
     FsJsonObject.prototype._fileRead = function(output) {
-      debugger;      if (output) {
+      if (output) {
         return this._jsonObject = JSON && JSON.parse(output) || $.parseJSON(output);
       }
     };
