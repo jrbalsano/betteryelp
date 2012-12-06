@@ -1,13 +1,17 @@
 LOAF.ApplicationView = LOAF.BreadcrumbView.extend
   initialize: ->
     @initHistory()
+    @loadingTimeout = setTimeout( =>
+      @$(".bcrumbs-loading").show()
+    1000)
     @startApplication @onStart
 
   onStart: ->
-    @$(".bcrumbs-view").hide()
-    #MyBookmarksView.render()
-    #AddBookmarksView.hide()
-    @$(".bcrumbs-mycrumbs-view").show()
+    # MyBookmarksView.render()
+    # AddBookmarksView.hide()
+    clearTimeout @loadingTimeout
+    @$(".bcrumbs-loading").hide()
+    # @$(".bcrumbs-mycrumbs-view").show()
     @myCrumbs = true
 
   startApplication: (cb) ->

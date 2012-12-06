@@ -56,7 +56,6 @@ class LOAF.FsJsonObject
       @options.onReady @
 
   _fileRead: (output) ->
-    debugger
     @_jsonObject = JSON && JSON.parse(output) || $.parseJSON(output) if output
 
   _onError: (e) ->

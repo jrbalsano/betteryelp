@@ -3,12 +3,16 @@
 
   LOAF.ApplicationView = LOAF.BreadcrumbView.extend({
     initialize: function() {
+      var _this = this;
       this.initHistory();
+      this.loadingTimeout = setTimeout(function() {
+        return _this.$(".bcrumbs-loading").show();
+      }, 1000);
       return this.startApplication(this.onStart);
     },
     onStart: function() {
-      this.$(".bcrumbs-view").hide();
-      this.$(".bcrumbs-mycrumbs-view").show();
+      clearTimeout(this.loadingTimeout);
+      this.$(".bcrumbs-loading").hide();
       return this.myCrumbs = true;
     },
     startApplication: function(cb) {
