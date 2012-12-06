@@ -5,7 +5,7 @@
     initialize: function(models, options) {
       options = options ? options : {};
       this.name = options.name;
-      return this.isAllCrumbs = options.isAllCrumbs;
+      return this.isAllCrumbs = options.isAllCrumbs || false;
     },
     model: LOAF.Business,
     search: function(term) {
