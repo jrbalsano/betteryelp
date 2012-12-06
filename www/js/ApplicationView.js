@@ -4,9 +4,27 @@
   LOAF.ApplicationView = LOAF.BreadcrumbView.extend({
     initialize: function() {
       this.initHistory();
+      return this.startApplication(this.onStart);
+    },
+    onStart: function() {
       this.$(".bcrumbs-view").hide();
       this.$(".bcrumbs-mycrumbs-view").show();
       return this.myCrumbs = true;
+    },
+    startApplication: function(cb) {
+      var loadApp,
+        _this = this;
+      return loadApp = new LOAF.FsJsonObject({
+        onReady: function(fs) {
+          var data;
+          data = fs.getObject();
+          if (data.sessionExists(_this._loadSession(data, cb))) {
+
+          } else {
+            return _this._newSession(cb);
+          }
+        }
+      });
     },
     events: {
       "click .bcrumbs-add-crumbs-link": "showAddCrumbs",
@@ -27,6 +45,42 @@
         this.$(".bcrumbs-mycrumbs-view").show();
         return this.myCrumbs = !this.myCrumbs;
       }
+    },
+    saveApplication: function() {
+      var object;
+      object = {};
+      object.sessionExists = true;
+      object.yelpLists = LOAF.yelpLists;
+      object.customLists = LOAF.customLists;
+      return new LOAF.FsJsonObject({
+        read: false,
+        onReady: function(newSave) {
+          return newSave.writeObject(object, function() {
+            return console.log("Save complete");
+          });
+        }
+      });
+    },
+    _newSession: function(cb) {
+      LOAF.yelpLists = new LOAF.ListsList();
+      LOAF.customLists = new LOAF.ListsList();
+      return cb();
+    },
+    _loadSession: function(session, cb) {
+      var cLs, tempCLs, tempYLs, yLs;
+      yLs = session.yelpLists;
+      tempYLs = [];
+      _.each(yLs, function(yL) {
+        return tempYLs.push(new LOAF.YelpList(yL));
+      });
+      LOAF.yelpLists = new LOAF.ListsList(tempYLs);
+      cLs = session.customLists;
+      tempCLs = [];
+      _.each(cLs, function(cL) {
+        return tempYLs.push(new LOAF.CustomList(cL));
+      });
+      LOAF.customLists = new LOAF.ListsList(tempCLs);
+      return cb();
     }
   });
 
