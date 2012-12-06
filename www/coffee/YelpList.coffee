@@ -2,6 +2,7 @@ LOAF.YelpList = Backbone.Collection.extend
   initialize: (models, options) ->
     @term = options.term
     @category = options.category
+    @id = options.id
 
   model: LOAF.Business
   
@@ -18,6 +19,8 @@ LOAF.YelpList = Backbone.Collection.extend
 
   fetch: (controls) ->
     options = {}
+    controls = if controls then controls else {}
+    controls.page = if controls.page then controls.page else 0
     accessor = 
       consumerSecret: LOAF.auth.consumerSecret,
       tokenSecret: LOAF.auth.accessTokenSecret
@@ -59,3 +62,9 @@ LOAF.YelpList = Backbone.Collection.extend
         busModel = new LOAF.Business(business)
         @add(busModel)
 
+  toJSON: ->
+    object =
+      models: Backbone.Collection.prototype.toJSON.call this
+      category: @category
+      term: @term
+      id: @id

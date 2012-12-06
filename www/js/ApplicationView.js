@@ -50,8 +50,8 @@
       var object;
       object = {};
       object.sessionExists = true;
-      object.yelpLists = LOAF.yelpLists;
-      object.customLists = LOAF.customLists;
+      object.yelpLists = LOAF.yelpLists.getLists();
+      object.customLists = LOAF.customLists.getLists();
       return new LOAF.FsJsonObject({
         read: false,
         onReady: function(newSave) {
@@ -62,24 +62,59 @@
       });
     },
     _newSession: function(cb) {
-      LOAF.yelpLists = new LOAF.ListsList();
-      LOAF.customLists = new LOAF.ListsList();
+      var categories, categoryLists;
+      LOAF.yelpLists = new LOAF.ListsList;
+      LOAF.customLists = new LOAF.ListsList;
+      LOAF.allCrumbsList = new LOAF.CustomList([], {
+        name: "All Crumbs",
+        isAllCrumbs: true
+      });
+      LOAF.customLists.addList(LOAF.allCrumbsList);
+      categories = ["active", "arts", "food", "hotelstravel", "localflavor", "localservices", "nightlife", "restaurants", "shopping"];
+      categoryLists = _.map(categories, function(category) {
+        var list;
+        list = new LOAF.YelpList([], {
+          category: category
+        });
+        list.fetch();
+        return list;
+      });
+      LOAF.yelpLists.addLists(categoryLists);
+      this.saveApplication();
       return cb();
     },
     _loadSession: function(session, cb) {
       var cLs, tempCLs, tempYLs, yLs;
+      console.log(session);
       yLs = session.yelpLists;
       tempYLs = [];
       _.each(yLs, function(yL) {
-        return tempYLs.push(new LOAF.YelpList(yL));
+        return tempYLs.push(new LOAF.YelpList(yL.models, {
+          category: yL.category,
+          term: yL.term,
+          id: yL.id
+        }));
       });
-      LOAF.yelpLists = new LOAF.ListsList(tempYLs);
+      LOAF.yelpLists = new LOAF.ListsList({
+        lists: tempYLs
+      });
       cLs = session.customLists;
       tempCLs = [];
       _.each(cLs, function(cL) {
-        return tempYLs.push(new LOAF.CustomList(cL));
+        var customList;
+        customList = new LOAF.CustomList(cL, {
+          name: cL.name,
+          isAllCrumbs: cL.isAllCrumbs,
+          id: cL.id
+        });
+        tempCLs.push(customList);
+        if (customList.isAllCrumbs) {
+          return LOAF.allCrumbsList = customList;
+        }
       });
-      LOAF.customLists = new LOAF.ListsList(tempCLs);
+      LOAF.customLists = new LOAF.ListsList({
+        lists: tempCLs
+      });
       return cb();
     }
   });

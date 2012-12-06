@@ -4,13 +4,16 @@
   LOAF.ListsList = (function() {
 
     function ListsList(options) {
-      this.lists = [];
-      if (options && options.lists) {
-        _.each(options.lists, this.lists.push);
-      }
+      options = options ? options : {};
+      this.lists = options.lists ? options.lists : [];
     }
 
+    ListsList.prototype.addLists = function(lists) {
+      return _.each(lists, this.addList, this);
+    };
+
     ListsList.prototype.addList = function(list) {
+      list.id = LOAF.yelpLists.getLists().length + LOAF.customLists.getLists().length;
       return this.lists.push(list);
     };
 

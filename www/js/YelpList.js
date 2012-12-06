@@ -4,7 +4,8 @@
   LOAF.YelpList = Backbone.Collection.extend({
     initialize: function(models, options) {
       this.term = options.term;
-      return this.category = options.category;
+      this.category = options.category;
+      return this.id = options.id;
     },
     model: LOAF.Business,
     url: 'http://api.yelp.com/v2/search?',
@@ -23,6 +24,8 @@
     fetch: function(controls) {
       var accessor, message, options, parameterMap, parameters;
       options = {};
+      controls = controls ? controls : {};
+      controls.page = controls.page ? controls.page : 0;
       accessor = {
         consumerSecret: LOAF.auth.consumerSecret,
         tokenSecret: LOAF.auth.accessTokenSecret
@@ -71,6 +74,15 @@
           return _this.add(busModel);
         }
       });
+    },
+    toJSON: function() {
+      var object;
+      return object = {
+        models: Backbone.Collection.prototype.toJSON.call(this),
+        category: this.category,
+        term: this.term,
+        id: this.id
+      };
     }
   });
 

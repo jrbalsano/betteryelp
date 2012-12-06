@@ -38,8 +38,8 @@ LOAF.ApplicationView = LOAF.BreadcrumbView.extend
   saveApplication: ->
     object = {}
     object.sessionExists = true
-    object.yelpLists = LOAF.yelpLists
-    object.customLists = LOAF.customLists
+    object.yelpLists = LOAF.yelpLists.getLists()
+    object.customLists = LOAF.customLists.getLists()
     new LOAF.FsJsonObject
       read: false
       onReady: (newSave) ->
@@ -47,25 +47,49 @@ LOAF.ApplicationView = LOAF.BreadcrumbView.extend
           console.log "Save complete"
 
   _newSession: (cb) ->
-    LOAF.yelpLists = new LOAF.ListsList()
-    LOAF.customLists = new LOAF.ListsList()
+    # Generate List of Yelp Lists
+    LOAF.yelpLists = new LOAF.ListsList
+    # create custom lists list and all crumbs list.
+    LOAF.customLists = new LOAF.ListsList
+    LOAF.allCrumbsList = new LOAF.CustomList [], name: "All Crumbs", isAllCrumbs: true
+    LOAF.customLists.addList LOAF.allCrumbsList
+    # Generate searches
+    categories = ["active", "arts", "food", "hotelstravel", "localflavor", 
+      "localservices", "nightlife", "restaurants", "shopping"]
+    categoryLists = _.map categories, (category) ->
+      list = new LOAF.YelpList [], category: category
+      list.fetch()
+      list
+    LOAF.yelpLists.addLists categoryLists
+    # Save the new Session
+    @saveApplication()
     #Call the callback
     cb()
 
   _loadSession: (session, cb) -> 
+    console.log session
     # load in the yelp lists, creating models and collections
     yLs = session.yelpLists
     tempYLs = []
     _.each yLs, (yL) ->
-      tempYLs.push new LOAF.YelpList yL
-    LOAF.yelpLists = new LOAF.ListsList tempYLs
+      tempYLs.push new LOAF.YelpList yL.models,
+        category: yL.category
+        term: yL.term
+        id: yL.id
+    LOAF.yelpLists = new LOAF.ListsList lists: tempYLs
 
     #load in the custom lists, creating models and collections
     cLs = session.customLists
     tempCLs = []
     _.each cLs, (cL) ->
-      tempYLs.push new LOAF.CustomList cL
-    LOAF.customLists = new LOAF.ListsList tempCLs
+      customList = new LOAF.CustomList cL,
+        name: cL.name
+        isAllCrumbs: cL.isAllCrumbs
+        id: cL.id
+      tempCLs.push customList
+      if customList.isAllCrumbs then LOAF.allCrumbsList = customList
+
+    LOAF.customLists = new LOAF.ListsList lists: tempCLs
     
     # Call the callback
     cb()
