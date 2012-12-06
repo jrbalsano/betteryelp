@@ -5,6 +5,8 @@
     render: function() {}
   });
 
-  LOAF.YelpListPreView = BackBone.View.extend;
+  LOAF.YelpListPreView = BackBone.View.extend({
+    render: function() {}
+  });
 
 }).call(this);
