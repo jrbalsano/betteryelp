@@ -13,7 +13,7 @@ LOAF.YelpList = Backbone.Collection.extend
 
   # Returns an array of Business that contain matches for the search term
   search: (term) ->
-    @models.filter (model) ->
+    @filter (model) ->
       model.search(term)
 
   fetch: (controls) ->
