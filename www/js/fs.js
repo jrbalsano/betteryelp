@@ -9,7 +9,7 @@
 
       var _this = this;
       options = options || {};
-      options.size = options.size || 5120;
+      options.size = options.size || 5 * 1024 * 1024;
       options.fileName = options.fileName || "Breadcrumbs.json";
       options.read = options.read || true;
       options.onReady = options.onReady || function() {};
@@ -78,7 +78,7 @@
     };
 
     FsJsonObject.prototype._fileRead = function(output) {
-      if (output) {
+      debugger;      if (output) {
         return this._jsonObject = JSON && JSON.parse(output) || $.parseJSON(output);
       }
     };

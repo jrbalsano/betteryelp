@@ -50,7 +50,7 @@ LOAF.ApplicationView = LOAF.BreadcrumbView.extend
     # Generate List of Yelp Lists
     LOAF.yelpLists = new LOAF.ListsList
     # create custom lists list and all crumbs list.
-    LOAF.customLists = new LOAF.ListsList()
+    LOAF.customLists = new LOAF.ListsList
     LOAF.allCrumbsList = new LOAF.CustomList [], name: "All Crumbs", isAllCrumbs: true
     LOAF.customLists.addList LOAF.allCrumbsList
     # Generate searches

@@ -64,7 +64,7 @@
     _newSession: function(cb) {
       var categories, categoryLists;
       LOAF.yelpLists = new LOAF.ListsList;
-      LOAF.customLists = new LOAF.ListsList();
+      LOAF.customLists = new LOAF.ListsList;
       LOAF.allCrumbsList = new LOAF.CustomList([], {
         name: "All Crumbs",
         isAllCrumbs: true

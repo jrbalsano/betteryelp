@@ -19,6 +19,8 @@ LOAF.YelpList = Backbone.Collection.extend
 
   fetch: (controls) ->
     options = {}
+    controls = if controls then controls else {}
+    controls.page = if controls.page then controls.page else 0
     accessor = 
       consumerSecret: LOAF.auth.consumerSecret,
       tokenSecret: LOAF.auth.accessTokenSecret

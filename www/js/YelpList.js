@@ -24,6 +24,8 @@
     fetch: function(controls) {
       var accessor, message, options, parameterMap, parameters;
       options = {};
+      controls = controls ? controls : {};
+      controls.page = controls.page ? controls.page : 0;
       accessor = {
         consumerSecret: LOAF.auth.consumerSecret,
         tokenSecret: LOAF.auth.accessTokenSecret
