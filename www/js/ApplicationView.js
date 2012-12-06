@@ -50,8 +50,8 @@
       var object;
       object = {};
       object.sessionExists = true;
-      object.yelpLists = LOAF.yelpLists;
-      object.customLists = LOAF.customLists;
+      object.yelpLists = LOAF.yelpLists.getLists();
+      object.customLists = LOAF.customLists.getLists();
       return new LOAF.FsJsonObject({
         read: false,
         onReady: function(newSave) {
@@ -64,6 +64,12 @@
     _newSession: function(cb) {
       var categories, categoryLists;
       LOAF.customLists = new LOAF.ListsList();
+      LOAF.allCrumbsList = new LOAF.CustomList({
+        name: "All Crumbs",
+        isAllCrumbs: true
+      });
+      LOAF.customLists.add(LOAF.allCrumbsList);
+      LOAF.yelpLists = new LOAF.ListsList;
       categories = ["active", "arts", "food", "hotelstravel", "localflavor", "localservices", "nightlife", "restaurants", "shopping"];
       categoryLists = _.map(categories, function(category) {
         var list;
@@ -73,17 +79,11 @@
         list.fetch();
         return list;
       });
-      LOAF.yelpLists = new LOAF.ListsList({
-        lists: categoryLists
-      });
-      LOAF.allCrumbsList = new LOAF.CustomList({
-        name: "All Crumbs",
-        isAllCrumbs: true
-      });
-      LOAF.customLists.add(LOAF.allCrumbsList);
-      this.saveApplication();
-      return cb();
-    },
+      return LOAF.yelpLists.addLists(categoryLists);
+    }
+  }, this.saveApplication(), cb());
+
+  ({
     _loadSession: function(session, cb) {
       var cLs, tempCLs, tempYLs, yLs;
       yLs = session.yelpLists;

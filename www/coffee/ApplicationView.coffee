@@ -38,8 +38,8 @@ LOAF.ApplicationView = LOAF.BreadcrumbView.extend
   saveApplication: ->
     object = {}
     object.sessionExists = true
-    object.yelpLists = LOAF.yelpLists
-    object.customLists = LOAF.customLists
+    object.yelpLists = LOAF.yelpLists.getLists()
+    object.customLists = LOAF.customLists.getLists()
     new LOAF.FsJsonObject
       read: false
       onReady: (newSave) ->
@@ -47,7 +47,12 @@ LOAF.ApplicationView = LOAF.BreadcrumbView.extend
           console.log "Save complete"
 
   _newSession: (cb) ->
+    # create custom lists list and all crumbs list.
     LOAF.customLists = new LOAF.ListsList()
+    LOAF.allCrumbsList = new LOAF.CustomList name: "All Crumbs", isAllCrumbs: true
+    LOAF.customLists.add LOAF.allCrumbsList
+    # Generate List of Yelp Lists
+    LOAF.yelpLists = new LOAF.ListsList
     # Generate searches
     categories = ["active", "arts", "food", "hotelstravel", "localflavor", 
       "localservices", "nightlife", "restaurants", "shopping"]
@@ -55,10 +60,8 @@ LOAF.ApplicationView = LOAF.BreadcrumbView.extend
       list = new LOAF.YelpList [], category: category
       list.fetch()
       list
-    LOAF.yelpLists = new LOAF.ListsList lists: categoryLists
-    LOAF.allCrumbsList = new LOAF.CustomList name: "All Crumbs", isAllCrumbs: true
-    LOAF.customLists.add LOAF.allCrumbsList
-    # Save the new Session
+     LOAF.yelpLists.addLists categoryLists
+        # Save the new Session
     @saveApplication()
     #Call the callback
     cb()

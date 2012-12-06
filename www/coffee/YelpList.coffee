@@ -2,6 +2,7 @@ LOAF.YelpList = Backbone.Collection.extend
   initialize: (models, options) ->
     @term = options.term
     @category = options.category
+    @id = options.id
 
   model: LOAF.Business
   
@@ -59,3 +60,9 @@ LOAF.YelpList = Backbone.Collection.extend
         busModel = new LOAF.Business(business)
         @add(busModel)
 
+  toJSON: ->
+    object =
+      models: Backbone.Collection.prototype.toJSON.call this
+      category: @category
+      term: @term
+      id: @id

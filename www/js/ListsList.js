@@ -10,8 +10,13 @@
       }
     }
 
+    ListsList.prototype.addLists = function(lists) {
+      return _.each(lists, this.addList);
+    };
+
     ListsList.prototype.addList = function(list) {
-      return this.lists.push(list);
+      this.lists.push(list);
+      return list.id = LOAF.yelpLists.getLists().length + LOAF.yelpLists.getLists().length;
     };
 
     ListsList.prototype.removeList = function(list) {
