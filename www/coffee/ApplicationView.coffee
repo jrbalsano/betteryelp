@@ -47,8 +47,19 @@ LOAF.ApplicationView = LOAF.BreadcrumbView.extend
           console.log "Save complete"
 
   _newSession: (cb) ->
-    LOAF.yelpLists = new LOAF.ListsList()
     LOAF.customLists = new LOAF.ListsList()
+    # Generate searches
+    categories = ["active", "arts", "food", "hotelstravel", "localflavor", 
+      "localservices", "nightlife", "restaurants", "shopping"]
+    categoryLists = _.map categories, (category) ->
+      list = new LOAF.YelpList [], category: category
+      list.fetch()
+      list
+    LOAF.yelpLists = new LOAF.ListsList lists: categoryLists
+    LOAF.allCrumbsList = new LOAF.CustomList name: "All Crumbs", isAllCrumbs: true
+    LOAF.customLists.add LOAF.allCrumbsList
+    # Save the new Session
+    @saveApplication()
     #Call the callback
     cb()
 

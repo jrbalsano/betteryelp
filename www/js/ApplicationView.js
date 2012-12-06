@@ -62,8 +62,26 @@
       });
     },
     _newSession: function(cb) {
-      LOAF.yelpLists = new LOAF.ListsList();
+      var categories, categoryLists;
       LOAF.customLists = new LOAF.ListsList();
+      categories = ["active", "arts", "food", "hotelstravel", "localflavor", "localservices", "nightlife", "restaurants", "shopping"];
+      categoryLists = _.map(categories, function(category) {
+        var list;
+        list = new LOAF.YelpList([], {
+          category: category
+        });
+        list.fetch();
+        return list;
+      });
+      LOAF.yelpLists = new LOAF.ListsList({
+        lists: categoryLists
+      });
+      LOAF.allCrumbsList = new LOAF.CustomList({
+        name: "All Crumbs",
+        isAllCrumbs: true
+      });
+      LOAF.customLists.add(LOAF.allCrumbsList);
+      this.saveApplication();
       return cb();
     },
     _loadSession: function(session, cb) {
