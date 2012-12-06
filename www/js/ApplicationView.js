@@ -18,8 +18,8 @@
         onReady: function(fs) {
           var data;
           data = fs.getObject();
-          if (data.sessionExists(_this._loadSession(data, cb))) {
-
+          if (data.sessionExists) {
+            return _this._loadSession(data, cb);
           } else {
             return _this._newSession(cb);
           }
