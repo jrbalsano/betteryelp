@@ -15,7 +15,7 @@ LOAF.ApplicationView = LOAF.BreadcrumbView.extend
       onReady: (fs) =>
         # This function implements all the features
         data = fs.getObject()
-        if data.sessionExists @_loadSession data, cb else @_newSession cb
+        if data.sessionExists then @_loadSession data, cb else @_newSession cb
 
   events:
     "click .bcrumbs-add-crumbs-link": "showAddCrumbs"

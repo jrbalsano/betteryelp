@@ -1,192 +1,166 @@
 <!--Breadcrumbs: Mustache Templates
-	created by Yanyi Luo for UID Fall 2012
-    modified
+created by Yanyi Luo for UID Fall 2012
+modified
 -->
 
-<!-----------My Crumbs View: List Item Template------------>
+<!-----------My Crumbs View: List Item Template----------->
 <script id = "bc-list-view-list" type = "text/html">
-<div id = "bc-crumbs-list-view-wrapper">
-	<div class = "bcrumbs-list bcrumbs-listing">
-		<span class = "bcrumbs-list-stack">
-			<img class = "bcrumbs-list-img-3" src = "{{3rd most recently added business img}}">
-			<img class = "bcrumbs-list-img-2" src = "{{2nd most recently added business img}}">
-			<img class = "bcrumbs-list-img-1" src = "{{1st most recently added business img}}">
-			<span><a href = "{{link to list}}">{{name of list}}</a></span>
-		</span>
-	</div>
-</div>
+  <div class = "bcrumbs-list bcrumbs-listing">
+    <span class = "bcrumbs-list-stack">
+      <img class = "bcrumbs-list-img-3" src = "{{3rd most recently added business img}}">
+      <img class = "bcrumbs-list-img-2" src = "{{2nd most recently added business img}}">
+      <img class = "bcrumbs-list-img-1" src = "{{1st most recently added business img}}">
+      <span><a href = "{{link to list}}">{{name of list}}</a></span>
+    </span>
+  </div>
 </script>
 
 
-<!-----------My Crumbs View: List Single Item Template------------>
+<!-----------My Crumbs View: List Single Item Template----------->
 <script id = "bc-list-view-single" type = "text/html">
-<div id = "bc-list-view-single-wrapper">
-	<div class = "bcrumbs-single-list-item bcrumbs-listing">
-		<span class = "bcrumbs-single-list-item-img img-crop">
-		
-		  <span class = "img-overlay-text" style = "display: none;">
-		  <!--show/hide appropriate text here-->
-		  </span>
-		  <span class = "img-overlay" style = "display: none;"></span>
+  <div class = "bcrumbs-single-list-item bcrumbs-listing">
+    <span class = "bcrumbs-single-list-item-img img-crop">
 
-			<img src = "{{image for this business}}">
-			<span class = "bcrumbs-single-icons">
-				<a href = "javascript:void(0)"><i class="icon-info-sign"></i></a>
-                <a href = "javascript:void(0)"><i class="icon-edit"></i></a>
-                <a href = "javascript:void(0)"><i class="icon-list"></i></a>
-                <a href = "javascript:void(0)"><i class="icon-star"></i></a>
-			</span>
-		</span>
-		<span><a href = "{{link to single view detail}}">{{name of business}}</a></span>
-	</div>
-</div>
+      <span class = "img-overlay-text" style = "display: none;">
+        <!--show/hide appropriate text here-->
+      </span>
+      <span class = "img-overlay" style = "display: none;"></span>
+
+      <img src = "{{image for this business}}">
+      <span class = "bcrumbs-single-icons">
+        <a href = "javascript:void(0)"><i class="icon-info-sign"></i></a>
+        <a href = "javascript:void(0)"><i class="icon-edit"></i></a>
+        <a href = "javascript:void(0)"><i class="icon-list"></i></a>
+        <a href = "javascript:void(0)"><i class="icon-star"></i></a>
+      </span>
+    </span>
+    <span><a href = "{{link to single view detail}}">{{name of business}}</a></span>
+  </div>
 </script>
 
-<!-----------List Single Item: Hover Templates------------>
-  <!--Info hover-->
+<!-----------List Single Item: Hover Templates----------->
+<!--Info hover-->
 <script id = "bc-list-view-single-info-s" type = "text/html">
-<div id = "bc-list-view-single-info-wrapper">
   <span class = "bc-list-view-single-info" style = "display: none;">
-      <button class = "close pull-right">&times;</button>
-      <b>Price</b> {{how expensive in $$$}}<br />
-      <b>Rating</b> {{while (hasStars) append <i class = "icon-star icon-white"></i>}}<br />
-      <b>Reviews</b> {{number of reviews}}
+    <button class = "close pull-right">&times;</button>
+    <b>Price</b> {{how expensive in $$$}}<br />
+    <b>Rating</b> {{while (hasStars) append <i class = "icon-star icon-white"></i>}}<br />
+    <b>Reviews</b> {{number of reviews}}
   </span>
-</div>  
 </script>
 
-  <!--Notes hover-->
+<!--Notes hover-->
 <script id = "bc-list-view-single-notes-s" type = "text/html">
-<div id = "bc-list-view-single-notes-wrapper">
   <span class = "bc-list-view-single-notes" style = "display: none;">
-      <button class = "close pull-right">&times;</button>
-      {{this_business notes}}
+    <button class = "close pull-right">&times;</button>
+    {{this_business notes}}
   </span>
-</div>
 </script>
-  
-  <!--Lists hover-->
+
+<!--Lists hover-->
 <script id = "bc-list-view-single-lists-s" type = "text/html">
-<div id = "bc-list-view-single-lists-wrapper">
   <span class = "bc-list-view-single-lists" style = "display: none;">
-      <button class = "close pull-right">&times;</button>
-      <!--while has lists (if need to be truncated, list as many as possible then append with +3, +4, etc)-->
-      {{this_business lists}}<br />
+    <button class = "close pull-right">&times;</button>
+    <!--while has lists (if need to be truncated, list as many as possible then append with +3, +4, etc)-->
+    {{this_business lists}}<br />
   </span>
-</div>
 </script>
 
-  <!--Reviews hover-->
+<!--Reviews hover-->
 <script id = "bc-list-view-single-reviews-s" type = "text/html">
-<div id = "bc-list-view-single-reviews-wrapper">
   <span class = "bc-list-view-single-reviews" style = "display: none;">
-      <button class = "close pull-right">&times;</button>
-      <!--most recent review-->
-      {{this_business most recent reviews}}<br />
+    <button class = "close pull-right">&times;</button>
+    <!--most recent review-->
+    {{this_business most recent reviews}}<br />
   </span>
-</div>
 </script>
 
-	<!--Add to list hover-->
+<!--Add to list hover-->
 <script id = "bc-list-view-single-add-s" type = "text/html">
-<div id = "bc-list-view-single-add-wrapper">
-	<span class = "bc-list-view-single-add" style = "display: none;">
-		<button class = "close pull-right">&times;</button>
-		<!--Not sure what this interaction looks like -- list dropdown?-->
-	</span>
-</div>
+  <span class = "bc-list-view-single-add" style = "display: none;">
+    <button class = "close pull-right">&times;</button>
+    <!--Not sure what this interaction looks like -- list dropdown?-->
+  </span>
 </script>
 
-<!-----------Add Crumbs View: List Single Item Template------------>
+<!-----------Add Crumbs View: List Single Item Template----------->
 <script id = "bc-yelp-view-single" type = "text/html">
-<div id = "yelp-list-view-single-wrapper">
-	<div class = "bcrumbs-single-list-item bcrumbs-listing">
-		<span class = "bcrumbs-single-list-item-img img-crop">
-		
-		  <span class = "img-overlay-text" style = "display: none;">
-		  <!--show/hide appropriate text here-->
-		  </span>
-		  
-		  <span class = "img-overlay" style = "display: none;"></span>
+  <div class = "bcrumbs-single-list-item bcrumbs-listing">
+    <span class = "bcrumbs-single-list-item-img img-crop">
 
-			<img src = "{{image for this business}}">
-			<span class = "bcrumbs-single-icons">
-				<a href = "javascript:void(0)"><i class="icon-info-sign"></i></a>
-                <a href = "javascript:void(0)"><i class="icon-plus"></i></a>
-                <a href = "javascript:void(0)"><i class="icon-list"></i></a>
-                <a href = "javascript:void(0)"><i class="icon-star"></i></a>
-			</span>
-		</span>
-		<span><a href = "{{link to single view detail}}">{{business name}}</a></span>
-	</div>
-</div>
+      <span class = "img-overlay-text" style = "display: none;">
+        <!--show/hide appropriate text here-->
+      </span>
+
+      <span class = "img-overlay" style = "display: none;"></span>
+
+      <img src = "{{image for this business}}">
+      <span class = "bcrumbs-single-icons">
+        <a href = "javascript:void(0)"><i class="icon-info-sign"></i></a>
+        <a href = "javascript:void(0)"><i class="icon-plus"></i></a>
+        <a href = "javascript:void(0)"><i class="icon-list"></i></a>
+        <a href = "javascript:void(0)"><i class="icon-star"></i></a>
+      </span>
+    </span>
+    <span><a href = "{{link to single view detail}}">{{business name}}</a></span>
+  </div>
 </script>
 
-<!-----------List Single Item Template------------>
+<!-----------List Single Item Template----------->
 <script id = "bc-single-item" type = "text/html">
-<!--this page's breadcrumbs can be inserted right before the below-->
-<div id = "bc-single-wrapper">
-	<h2>{{name of business}}</h2>
-	<div class = "bcrumbs-single-item-img">
-	  <img src = "{{img of business}}" style = "margin-top:-25%;">
-	</div>
+  <!--this page's breadcrumbs can be inserted right before the below-->
+  <h2>{{name of business}}</h2>
+  <div class = "bcrumbs-single-item-img">
+    <img src = "{{img of business}}" style = "margin-top:-25%;">
+  </div>
 
-	<ul class="bcrumbs-single-item-nav nav nav-pills">
-	  <li class = "active"><i class = "icon-info-sign icon-white"></i> <a href = "#">Information</a></li>
-	  <li><i class = "icon-edit"></i><a href = "#">Notes</a></li>
-	  <li><i class = "icon-list"></i><a href = "#">Lists</a></li>
-	  <li><i class = "icon-star"></i><a href = "#">Reviews</a></li>
-	  <div class = "clearfix"></div>
-	</ul>
+  <ul class="bcrumbs-single-item-nav nav nav-pills">
+    <li class = "active"><i class = "icon-info-sign icon-white"></i> <a href = "#">Information</a></li>
+    <li><i class = "icon-edit"></i><a href = "#">Notes</a></li>
+    <li><i class = "icon-list"></i><a href = "#">Lists</a></li>
+    <li><i class = "icon-star"></i><a href = "#">Reviews</a></li>
+    <div class = "clearfix"></div>
+  </ul>
 
-	<!--append section div below-->
-	
-</div>
+  <!--append section div below-->
+
 </script>
 
-<!-----------List Single Item: Section Templates------------>
+<!-----------List Single Item: Section Templates----------->
 
-	<!--Information-->
+<!--Information-->
 <script id = "bc-single-section-info-s" type = "text/html">
-<div id = "bc-single-section-info-wrapper">
-	<div class = "bcrumbs-single-item-info bcrumbs-single-item-section">
-	  <h3>Information</h3>
-	  <p>Rating: {{overall business rating}}</p>
-	  <p>Location: {{business address}}</p>
-	  <p>Info: {{general overview}}</p>
-	</div>
-</div>
+  <div class = "bcrumbs-single-item-info bcrumbs-single-item-section">
+    <h3>Information</h3>
+    <p>Rating: {{overall business rating}}</p>
+    <p>Location: {{business address}}</p>
+    <p>Info: {{general overview}}</p>
+  </div>
 </script>
 
-	<!--Notes-->
+<!--Notes-->
 <script id = "bc-single-section-notes-s" type = "text/html">
-<div id = "bc-single-section-notes-wrapper">	
-	<div class = "bcrumbs-single-item-notes bcrumbs-single-item-section">
-	  <h3>Notes</h3>
-	  <p>{{notes about business}}</p>
-	</div>
-</div>
+  <div class = "bcrumbs-single-item-notes bcrumbs-single-item-section">
+    <h3>Notes</h3>
+    <p>{{notes about business}}</p>
+  </div>
 </script>
 
-	<!--Lists-->
+<!--Lists-->
 <script id = "bc-single-section-lists-s" type = "text/html">
-<div id = "bc-single-section-lists-wrapper">
-	<div class = "bcrumbs-single-item-lists bcrumbs-single-item-section">
-	  <h3>Lists</h3>
-	  <p><a href = "{{link to list}}">{{name of list the business belongs to}}</a></p>
-	</div>
-</div>
+  <div class = "bcrumbs-single-item-lists bcrumbs-single-item-section">
+    <h3>Lists</h3>
+    <p><a href = "{{link to list}}">{{name of list the business belongs to}}</a></p>
+  </div>
 </script>
 
-	<!--Reviews-->
+<!--Reviews-->
 <script id = "bc-single-section-reviews-s" type = "text/html">
-<div id = "bc-single-section-reviews-wrapper">
-	<div class = "bcrumbs-single-item-reviews bcrumbs-single-item-section">
-	  <h3>Reviews</h3>
-	  <!--while has reviews-->
-	  <p>Date: {{date of review}}</p>
-	  <p>Rating: {{nearest whole number of stars /* while (hasStars) append <i class = "icon-star"></i> */}}</p>
-	  <p>{{review text}}</p>
-	</div>
-</div>
+  <div class = "bcrumbs-single-item-reviews bcrumbs-single-item-section">
+    <h3>Reviews</h3>
+    <!--while has reviews-->
+    <p>Date: {{date of review}}</p>
+    <p>Rating: {{nearest whole number of stars /* while (hasStars) append <i class = "icon-star"></i> */}}</p>
+    <p>{{review text}}</p>
+  </div>
 </script>
