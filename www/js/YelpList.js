@@ -16,7 +16,7 @@
       return "term";
     },
     search: function(term) {
-      return this.models.filter(function(model) {
+      return this.filter(function(model) {
         return model.search(term);
       });
     },
