@@ -1,4 +1,4 @@
-LOAF.CustomList = BackBone.Collection.extend
+LOAF.CustomList = Backbone.Collection.extend
   initialize: (models, options) ->
     options = if options then options else {}
     @name = options.name

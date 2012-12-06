@@ -16,7 +16,7 @@ class LOAF.FsJsonObject
       @_onError
 
   getObject: ->
-    @_jsonObject
+    @_jsonObject || {}
 
 
   writeObject: (object, successCallback) ->

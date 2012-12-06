@@ -24,7 +24,7 @@
     }
 
     FsJsonObject.prototype.getObject = function() {
-      return this._jsonObject;
+      return this._jsonObject || {};
     };
 
     FsJsonObject.prototype.writeObject = function(object, successCallback) {

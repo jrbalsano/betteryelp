@@ -4,19 +4,17 @@
   LOAF.ListsList = (function() {
 
     function ListsList(options) {
-      this.lists = [];
-      if (options && options.lists) {
-        _.each(options.lists, this.lists.push);
-      }
+      options = options ? options : {};
+      this.lists = options.lists ? options.lists : [];
     }
 
     ListsList.prototype.addLists = function(lists) {
-      return _.each(lists, this.addList);
+      return _.each(lists, this.addList, this);
     };
 
     ListsList.prototype.addList = function(list) {
-      this.lists.push(list);
-      return list.id = LOAF.yelpLists.getLists().length + LOAF.yelpLists.getLists().length;
+      list.id = LOAF.yelpLists.getLists().length + LOAF.customLists.getLists().length;
+      return this.lists.push(list);
     };
 
     ListsList.prototype.removeList = function(list) {
