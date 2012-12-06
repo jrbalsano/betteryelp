@@ -89,13 +89,21 @@
       yLs = session.yelpLists;
       tempYLs = [];
       _.each(yLs, function(yL) {
-        return tempYLs.push(new LOAF.YelpList(yL));
+        return tempYLs.push(new LOAF.YelpList(yL.models, {
+          category: yL.category,
+          term: yL.term,
+          id: yL.id
+        }));
       });
       LOAF.yelpLists = new LOAF.ListsList(tempYLs);
       cLs = session.customLists;
       tempCLs = [];
       _.each(cLs, function(cL) {
-        return tempYLs.push(new LOAF.CustomList(cL));
+        return tempCLs.push(new LOAF.CustomList(cL, {
+          name: cL.name,
+          isAllCrumbs: cL.isAllCrumbs,
+          id: cL.id
+        }));
       });
       LOAF.customLists = new LOAF.ListsList(tempCLs);
       return cb();

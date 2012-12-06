@@ -71,14 +71,20 @@ LOAF.ApplicationView = LOAF.BreadcrumbView.extend
     yLs = session.yelpLists
     tempYLs = []
     _.each yLs, (yL) ->
-      tempYLs.push new LOAF.YelpList yL
+      tempYLs.push new LOAF.YelpList yL.models,
+        category: yL.category
+        term: yL.term
+        id: yL.id
     LOAF.yelpLists = new LOAF.ListsList tempYLs
 
     #load in the custom lists, creating models and collections
     cLs = session.customLists
     tempCLs = []
     _.each cLs, (cL) ->
-      tempYLs.push new LOAF.CustomList cL
+      tempCLs.push new LOAF.CustomList cL,
+        name: cL.name
+        isAllCrumbs: cL.isAllCrumbs
+        id: cL.id
     LOAF.customLists = new LOAF.ListsList tempCLs
     
     # Call the callback
