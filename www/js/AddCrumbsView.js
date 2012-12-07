@@ -4,6 +4,32 @@
   LOAF.AddCrumbsView = LOAF.BreadcrumbView.extend({
     tagName: 'div',
     className: 'bcrumbs-yelp-view',
+    initialize: function() {
+      this.state = {};
+      return this.state.browseExpanded = false;
+    },
+    events: {
+      "click .bcrumbs-browse-category-toggle": "onCategoryToggle",
+      "click .bcrumbs-browse-collapse": "onCategoryToggle"
+    },
+    onCategoryToggle: function(e) {
+      e.preventDefault;
+      if (this.state.browseExpanded) {
+        this.$(".bcrumbs-browse-category-toggle h3").html("Browse Categories +");
+        _.each(this.$(".bcrumbs-browse-items >.bcrumbs-list.bcrumbs-listing"), function(o, i) {
+          if (i > 2) {
+            return $(o).hide();
+          }
+        });
+        this.$(".bcrumbs-browse-collapse").hide();
+        return this.state.browseExpanded = false;
+      } else {
+        this.$(".bcrumbs-browse-category-toggle h3").html("Browse Categories -");
+        this.$(".bcrumbs-browse-items >.bcrumbs-list.bcrumbs-listing").show();
+        this.$(".bcrumbs-browse-collapse").show();
+        return this.state.browseExpanded = true;
+      }
+    },
     render: function() {
       var categoryHtml;
       categoryHtml = "";
@@ -19,6 +45,18 @@
         return categoryHtml += Mustache.render(LOAF.templates.bcListViewList, obj);
       });
       this.$(".bcrumbs-browse-items").html(categoryHtml);
+      _.each(this.$(".bcrumbs-browse-items >.bcrumbs-list.bcrumbs-listing"), function(o, i) {
+        if (i > 2) {
+          return $(o).hide();
+        }
+      });
+      this.$(".bcrumbs-browse-collapse").hide();
+      if ((LOAF.yelpLists.where({
+        "term": false
+      })).length === 0) {
+        this.$(".bcrumbs-recent-searches-section").hide();
+      }
+      this.$(".bcrumbs-recent-searches-collapse").hide();
       return this;
     }
   });

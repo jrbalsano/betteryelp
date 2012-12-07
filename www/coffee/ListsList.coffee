@@ -28,6 +28,8 @@ class LOAF.ListsList
         error: (c, x, o) ->
           console.log x
 
+  where: (properties) ->
+    _.where @lists, properties
 
   search: (term) ->
     _.flatten _.map @lists,

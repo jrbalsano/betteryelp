@@ -61,7 +61,7 @@
       options.cache = true;
       options.dataType = 'jsonp';
       options.success = function(a, b, c) {
-        debugger;        _this._onResponse(a, b, c);
+        _this._onResponse(a, b, c);
         if (controls.success) {
           return controls.success(a, b, c);
         }

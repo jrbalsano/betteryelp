@@ -50,7 +50,6 @@ LOAF.YelpList = Backbone.Collection.extend
     options.cache = true
     options.dataType = 'jsonp'
     options.success = (a, b, c) =>
-      debugger
       @_onResponse a, b, c
       controls.success a, b, c if controls.success
     options.error = (a, b, c) ->

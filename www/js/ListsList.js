@@ -45,6 +45,10 @@
       });
     };
 
+    ListsList.prototype.where = function(properties) {
+      return _.where(this.lists, properties);
+    };
+
     ListsList.prototype.search = function(term) {
       return _.flatten(_.map(this.lists, function(list) {
         return list.search(term);

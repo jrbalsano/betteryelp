@@ -1,6 +1,27 @@
 LOAF.AddCrumbsView = LOAF.BreadcrumbView.extend
   tagName: 'div'
   className: 'bcrumbs-yelp-view'
+  initialize: ->
+    @state = {}
+    @state.browseExpanded = false
+
+  events:
+    "click .bcrumbs-browse-category-toggle": "onCategoryToggle"
+    "click .bcrumbs-browse-collapse": "onCategoryToggle"
+
+  onCategoryToggle: (e) ->
+    e.preventDefault
+    if @state.browseExpanded
+      @$(".bcrumbs-browse-category-toggle h3").html "Browse Categories +"
+      _.each @$(".bcrumbs-browse-items >.bcrumbs-list.bcrumbs-listing"), (o, i) ->
+        $(o).hide() if i > 2
+      @$(".bcrumbs-browse-collapse").hide()
+      @state.browseExpanded = false
+    else
+      @$(".bcrumbs-browse-category-toggle h3").html "Browse Categories -"
+      @$(".bcrumbs-browse-items >.bcrumbs-list.bcrumbs-listing").show()
+      @$(".bcrumbs-browse-collapse").show()
+      @state.browseExpanded = true
 
   render: ->
     categoryHtml = ""
@@ -13,4 +34,10 @@ LOAF.AddCrumbsView = LOAF.BreadcrumbView.extend
         id: list.id
       categoryHtml += Mustache.render LOAF.templates.bcListViewList, obj
     @$(".bcrumbs-browse-items").html categoryHtml
+    _.each @$(".bcrumbs-browse-items >.bcrumbs-list.bcrumbs-listing"), (o, i) ->
+      $(o).hide() if i > 2
+    @$(".bcrumbs-browse-collapse").hide()
+
+    if (LOAF.yelpLists.where "term": false).length == 0 then @$(".bcrumbs-recent-searches-section").hide()
+    @$(".bcrumbs-recent-searches-collapse").hide()
     @
