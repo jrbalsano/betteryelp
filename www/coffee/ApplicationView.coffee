@@ -4,7 +4,7 @@ LOAF.ApplicationView = LOAF.BreadcrumbView.extend
     @$(".bcrumbs-view").hide()
     @loadingTimeout = setTimeout( =>
       @$(".bcrumbs-loading").show()
-    1000)
+    500)
     @startApplication @onStart, @
 
   onStart: ->
@@ -13,9 +13,10 @@ LOAF.ApplicationView = LOAF.BreadcrumbView.extend
     clearTimeout @loadingTimeout
     @$(".bcrumbs-loading").hide()
     @addCrumbsView = new LOAF.AddCrumbsView
+      el: @$(".bcrumbs-yelp-view")
     @addCrumbsView.render()
-    # @$(".bcrumbs-mycrumbs-view").show()
-    @myCrumbs = true
+    @$(".bcrumbs-yelp-view").show()
+    @myCrumbs = false
 
   startApplication: (cb, context) ->
     loadApp = new LOAF.FsJsonObject
@@ -61,17 +62,21 @@ LOAF.ApplicationView = LOAF.BreadcrumbView.extend
     LOAF.allCrumbsList = new LOAF.CustomList [], name: "All Crumbs", isAllCrumbs: true
     LOAF.customLists.addList LOAF.allCrumbsList
     # Generate searches
-    categories = ["active", "arts", "food", "hotelstravel", "localflavor", 
-      "localservices", "nightlife", "restaurants", "shopping"]
+    categories = ["active", "arts", "food", "hotelstravel", "localflavor"
+            "localservices", "nightlife", "restaurants", "shopping"]
     categoryLists = _.map categories, (category) ->
       list = new LOAF.YelpList [], category: category
-      list.fetch()
       list
     LOAF.yelpLists.addLists categoryLists
-    # Save the new Session
-    @saveApplication()
-    #Call the callback
-    cb.call(context)
+    LOAF.yelpLists.fetchLists ( =>
+      # Save the new Session
+      @saveApplication()
+      #Call the callback
+      cb.call(context)),
+      (collection, xhr, options) ->
+        console.log xhr
+      
+
 
   _loadSession: (session, cb, context) ->
     console.log session

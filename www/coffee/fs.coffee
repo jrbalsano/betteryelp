@@ -26,10 +26,14 @@ class LOAF.FsJsonObject
 
       fileWriterHandler = (fileWriter) =>
         window.BlobBuilder = window.BlobBuilder || window.WebKitBlobBuilder
-        bb = new BlobBuilder()
         json_string = JSON.stringify(@_jsonObject)
-        bb.append json_string
-        fileWriter.write bb.getBlob('text/plain')
+        if typeof(BlobBuilder) != 'undefined'
+          bb = new BlobBuilder()
+          bb.append json_string
+          blob = bb.getBlob('text/plain')
+        else
+          blob = new Blob([json_string])
+        fileWriter.write blob
         successCallback()
 
       fileEntryHandler = (fileEntry) =>

@@ -16,8 +16,23 @@ class LOAF.ListsList
   getLists: ->
     @lists.slice 0
 
+  fetchLists: (onSuccess, onError)->
+    heardBack = 0
+    hollaBack = =>
+      heardBack++
+      onSuccess() if heardBack == @lists.length
+
+    _.each @lists, (list) ->
+      list.fetch
+        success: hollaBack
+        error: (c, x, o) ->
+          console.log x
+
+  where: (properties) ->
+    _.where @lists, properties
+
   search: (term) ->
-    _.flatten _.map @lists, 
+    _.flatten _.map @lists,
       (list) ->
         list.search(term)
       true

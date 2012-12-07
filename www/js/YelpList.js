@@ -22,7 +22,8 @@
       });
     },
     fetch: function(controls) {
-      var accessor, message, options, parameterMap, parameters;
+      var accessor, message, options, parameterMap, parameters,
+        _this = this;
       options = {};
       controls = controls ? controls : {};
       controls.page = controls.page ? controls.page : 0;
@@ -59,7 +60,17 @@
       options.data = parameterMap;
       options.cache = true;
       options.dataType = 'jsonp';
-      options.success = this._onResponse;
+      options.success = function(a, b, c) {
+        _this._onResponse(a, b, c);
+        if (controls.success) {
+          return controls.success(a, b, c);
+        }
+      };
+      options.error = function(a, b, c) {
+        if (controls.error) {
+          return controls.error;
+        }
+      };
       options.context = this;
       return $.ajax(options);
     },
