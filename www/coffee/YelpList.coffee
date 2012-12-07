@@ -3,6 +3,7 @@ LOAF.YelpList = Backbone.Collection.extend
     @term = options.term
     @category = options.category
     @id = options.id
+    @title = options.title || options.category || options.term
 
   model: LOAF.Business
   

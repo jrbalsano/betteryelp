@@ -17,3 +17,4 @@ $(document).ready ->
     LOAF.templates.bcSingleSectionNotesS = getTemplate "bc-single-section-notes-s"
     LOAF.templates.bcSingleSectionListsS = getTemplate "bc-single-section-lists-s"
     LOAF.templates.bcSingleSectionReviewsS = getTemplate "bc-single-section-reviews-s"
+    LOAF.templates.bcSingleListView = getTemplate "bc-single-list-view"
