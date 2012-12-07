@@ -21,7 +21,7 @@ LOAF.YelpList = Backbone.Collection.extend
     options = {}
     controls = if controls then controls else {}
     controls.page = if controls.page then controls.page else 0
-    accessor = 
+    accessor =
       consumerSecret: LOAF.auth.consumerSecret,
       tokenSecret: LOAF.auth.accessTokenSecret
     parameters = []
@@ -49,7 +49,12 @@ LOAF.YelpList = Backbone.Collection.extend
     options.data = parameterMap
     options.cache = true
     options.dataType = 'jsonp'
-    options.success = @_onResponse
+    options.success = (a, b, c) =>
+      debugger
+      @_onResponse a, b, c
+      controls.success a, b, c if controls.success
+    options.error = (a, b, c) ->
+      controls.error if controls.error
     options.context = @
 
     $.ajax options

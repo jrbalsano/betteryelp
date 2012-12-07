@@ -18,7 +18,6 @@
         };
         return categoryHtml += Mustache.render(LOAF.templates.bcListViewList, obj);
       });
-      debugger;
       this.$(".bcrumbs-browse-items").html(categoryHtml);
       return this;
     }

@@ -8,7 +8,7 @@
       this.$(".bcrumbs-view").hide();
       this.loadingTimeout = setTimeout(function() {
         return _this.$(".bcrumbs-loading").show();
-      }, 1000);
+      }, 500);
       return this.startApplication(this.onStart, this);
     },
     onStart: function() {
@@ -72,7 +72,8 @@
       });
     },
     _newSession: function(cb, context) {
-      var categories, categoryLists;
+      var categories, categoryLists,
+        _this = this;
       LOAF.yelpLists = new LOAF.ListsList;
       LOAF.customLists = new LOAF.ListsList;
       LOAF.allCrumbsList = new LOAF.CustomList([], {
@@ -86,12 +87,15 @@
         list = new LOAF.YelpList([], {
           category: category
         });
-        list.fetch();
         return list;
       });
       LOAF.yelpLists.addLists(categoryLists);
-      this.saveApplication();
-      return cb.call(context);
+      return LOAF.yelpLists.fetchLists((function() {
+        _this.saveApplication();
+        return cb.call(context);
+      }), function(collection, xhr, options) {
+        return console.log(xhr);
+      });
     },
     _loadSession: function(session, cb, context) {
       var cLs, tempCLs, tempYLs, yLs;
