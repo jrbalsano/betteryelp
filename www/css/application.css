@@ -38,6 +38,13 @@ a {
 	transition: color 0.5s ease-out;
 }
 
+h1,
+h2,
+h3,
+h4 {
+	color: #e95d00;
+}
+
 div:hover,
 .bcrumbs-header-link:hover {
 	-webkit-transition: background-color 0.5s ease-out; /* Saf3.2+, Chrome */
@@ -60,7 +67,7 @@ html,
 body,
 .bcrumbs-wrapper {
 	width: 100%;
-	height: 100%;
+	min-height: 100%;
 	background-image:url(../img/subtle_dots.png);
 	background-position: top left;
 	background-repeat:repeat;
@@ -76,9 +83,13 @@ body,
 
 .bcrumbs-content { /* set the width of all content divs */
 	width: 960px;
-	height: 100%;
+	min-height: 100%;
 	margin: auto;
 	background-color: #fff;
+	position: relative;
+	top: 75px;
+	
+	z-index: 30;
 }
 
 .bcrumbs-view { /* set height/width of each Breadcrumbs view */
@@ -86,6 +97,10 @@ body,
 	min-height: 100%;
 	display: block;
 	padding: 10px;
+}
+
+.bcrumbs-loading img {
+  padding-left: 146px;
 }
 
 .img-crop { /* Style for all elements that crop images */
@@ -165,14 +180,17 @@ body,
 }
 
 /* ==========================================================================
-   Breadcrumbs Header
+   Breadcrumbs Header & Footer
    ========================================================================== */
 
 .bcrumbs-header {
 	width: 100%;
 	overflow: visible;
+	position: fixed;
+	top: 0;
 	
 	background-color: #e95d00;
+	z-index: 100;
 }
 
 .bcrumbs-header,
@@ -230,6 +248,31 @@ body,
 
 .bcrumbs-header-link:hover {
 	background-color:#D23F0D;
+}
+
+.bc-footer {
+	width: 100%;
+	position: fixed;
+	bottom: 0px;
+	height: 20px;
+	background-color: #e95d00;
+	
+	z-index: 100;
+}
+
+.bc-footer,
+.bc-footer a {
+	color: #fff;
+	font-weight: 600;
+	font-size: 15px;
+}
+
+.bc-footer > span {
+	padding: 0px 5px;
+}
+
+.bc-footer-links {
+	float: right;
 }
 
 /* ==========================================================================
@@ -344,6 +387,8 @@ body,
 /* ==========================================================================
    Breadcrumbs Browse View
    ========================================================================== */
+.bcrumbs-yelp-view {
+}
 
 .bcrumbs-browse-collapse {
 	width: 100%;

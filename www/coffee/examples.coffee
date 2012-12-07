@@ -18,6 +18,28 @@ myBusiness.search("sushi") # returns true if name or category contains "sushi"
 ####
 
 ####
+# CustomList
+####
+# BackBone collection used to store a user generated list. Has a name, and
+# isAllCrumbs property which denotes whether or not it is the master list of
+# all the breadcrumbs the user has saved.
+#
+# To create a CustomList, just pass in a name and whether or not it isAllCrumbs
+# You also must pass a list of starting Businesses, most likely empty.
+
+myList = new LOAF.CustomList [],
+  name: "My Jazz Clubs"
+allCrumbs = new LOAF.CustomList [],
+  name: "All Crumbs"
+  isAllCrumbs: true
+
+# There are not any special functions to be had here because these lists do not
+# interact with the server. Just the BackBone methods.
+#
+# End CustomList
+####
+
+####
 # YelpList
 ####
 # BackBone collection used to get results from the server. Has two types, 

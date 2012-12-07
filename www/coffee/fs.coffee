@@ -1,7 +1,7 @@
 class LOAF.FsJsonObject
   constructor: (options) ->
     options = options || {}
-    options.size = options.size || 5120 # default size to 5 MiB
+    options.size = options.size || 5 * 1024 * 1024 # default size to 5 MiB
     options.fileName = options.fileName || "Breadcrumbs.json" # default to Breadcrumbs.json
     options.read = options.read || true # default to reading the file automatically
     options.onReady = options.onReady || -> # Function to be called when ready
@@ -16,7 +16,7 @@ class LOAF.FsJsonObject
       @_onError
 
   getObject: ->
-    @_jsonObject
+    @_jsonObject || {}
 
 
   writeObject: (object, successCallback) ->

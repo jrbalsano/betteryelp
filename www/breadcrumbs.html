@@ -23,10 +23,14 @@
     <script type="text/javascript" src="js/application.js"></script>
     <script type="text/javascript" src="js/ListsList.js"></script>
     <script type="text/javascript" src="js/fs.js"></script>
+    <script type="text/javascript" src="js/ListsList.js"></script>
+    <script type="text/javascript" src="js/Temps.js"></script>
     <script type="text/javascript" src="js/BreadcrumbView.js"></script>
+    <script type="text/javascript" src="js/AddCrumbsView.js"></script>
     <script type="text/javascript" src="js/ApplicationView.js"></script>
     <script type="text/javascript" src="js/Business.js"></script>
     <script type="text/javascript" src="js/YelpList.js"></script>
+    <script type="text/javascript" src="js/CustomList.js"></script>
 
     <title>Breadcrumbs</title>
   </head>
@@ -50,7 +54,7 @@
           <span>My Crumbs</span>
         </a><!--my-crumbs-link-->
 
-		<p>|</p>
+        <p>|</p>
 
         <!--bcrumbs-add-crumbs-link-->
         <a href = "javascript:void(0)" class = "bcrumbs-add-crumbs-link bcrumbs-header-link">
@@ -59,348 +63,37 @@
 
 
       </div><!--header-->
+      <div class = "clearfix"></div>
 
-      <!----------breadcrumbs content------------->
+      <!----------breadcrumbs content---------->
       <div class = "bcrumbs-content">
+        <div class = "bcrumbs-view bcrumbs-loading">
+          <img src="img/breadcrumbs_cat_load_color.gif" />
+        </div>
 
-        <!----------breadcrumbs: my crumbs------------->
-        <div class = "bcrumbs-mycrumbs-view bcrumbs-view">
-
-          <h2>My Crumbs</h2>
-
-          <div class = "bcrumbs-list bcrumbs-listing">
-
-            <span class = "bcrumbs-list-stack">
-              <img class = "bcrumbs-list-img-3" src = "img/bestface.png">
-              <img class = "bcrumbs-list-img-2" src = "img/bestface.png">
-              <img class = "bcrumbs-list-img-1" src = "img/bestface.png">
-            </span>
-
-            <span><a href = "#">Favorite Bars</a></span>
-          </div>
-
-          <div class = "bcrumbs-list bcrumbs-listing">
-            <span class = "bcrumbs-list-stack">
-              <img class = "bcrumbs-list-img-3" src = "img/bestface.png">
-              <img class = "bcrumbs-list-img-2" src = "img/bestface.png">
-              <img class = "bcrumbs-list-img-1" src = "img/bestface.png">
-            </span>
-            <span><a href = "#">Favorite Bars</a></span>
-          </div>
-
-          <div class = "bcrumbs-list bcrumbs-listing">
-            <span class = "bcrumbs-list-stack">
-              <img class = "bcrumbs-list-img-3" src = "img/bestface.png">
-              <img class = "bcrumbs-list-img-2" src = "img/bestface.png">
-              <img class = "bcrumbs-list-img-1" src = "img/bestface.png">
-            </span>
-            <span><a href = "#">Favorite Bars</a></span>
-          </div>
-
-          <div class = "bcrumbs-list bcrumbs-listing">
-            <span class = "bcrumbs-list-stack">
-              <img class = "bcrumbs-list-img-3" src = "img/bestface.png">
-              <img class = "bcrumbs-list-img-2" src = "img/bestface.png">
-              <img class = "bcrumbs-list-img-1" src = "img/bestface.png">
-            </span>
-            <span><a href = "#">Favorite Bars</a></span>
-          </div>
-
-
-          <div class = "bcrumbs-list-add bcrumbs-listing">
-            <span class = "bcrumbs-list-img img-crop"><img src = "img/bcrumbs-add.png"></span>
-            <span>New List</span>
-          </div>
-
-        </div><!--my crumbs-->
-
-        <!----------breadcrumbs: list view---------->
-        <div class = "bcrumbs-list-view bcrumbs-view">
-
-          <ul class = "bcrumbs-path breadcrumb">
-            <li><a href = "#">My Crumbs</a><span class = "divider">/</span></li>
-            <li class = "active">Favorite Bars</li>
-          </ul>
-
-          <span class = "edit-toggle pull-right">
-            Edit Mode:            
-            <div class="btn-group">
-              <button class="btn">On</button>
-              <button class="btn">Off</button>
-            </div>
-          </span>
-
-
-          <h2>Favorite Bars</h2>
-
-          <div class = "bcrumbs-single-list-item bcrumbs-listing">
-            <span class = "bcrumbs-single-list-item-img img-crop">
-              <img src = "img/bestface.png">
-              <span class = "bcrumbs-single-icons">
-                <a href = "#"><i class="icon-info-sign"></i></a>
-                <a href = "#"><i class="icon-edit"></i></a>
-                <a href = "#"><i class="icon-list"></i></a>
-                <a href = "#"><i class="icon-star"></i></a>
-              </span>
-            </span>
-            <span><a href = "#">Smoke</a></span>
-          </div>
-
-          <div class = "bcrumbs-single-list-item bcrumbs-listing">
-
-            <span class = "bcrumbs-single-list-item-img img-crop">
-              <span class = "img-overlay-text">
-                <button class = "close pull-right">&times;</button>
-                <b>Price</b> $$$<br />
-                <b>Rating</b> <i class = "icon-star icon-white"></i><i class = "icon-star icon-white"></i><i class = "icon-star icon-white"></i><br />
-                <b>Reviews</b> "Blah blah blah blah blah blah"
-
-              </span>
-              <span class = "img-overlay"></span>
-              <img src = "img/bestface.png" />
-              <span class = "bcrumbs-single-icons">
-                <a href = "#" class = "bcrumbs-icon-active"><i class="icon-info-sign"></i></a>
-                <a href = "#"><i class="icon-edit"></i></a>
-                <a href = "#"><i class="icon-list"></i></a>
-                <a href = "#"><i class="icon-star"></i></a>
-              </span>
-            </span>
-
-            <span><a href = "#">Smoke</a></span>
-          </div>
-
-          <div class = "bcrumbs-single-list-item bcrumbs-listing">
-            <span class = "bcrumbs-single-list-item-img img-crop">
-              <img src = "img/bestface.png">
-              <span class = "bcrumbs-single-icons">
-                <a href = "#"><i class="icon-info-sign"></i></a>
-                <a href = "#"><i class="icon-edit"></i></a>
-                <a href = "#"><i class="icon-list"></i></a>
-                <a href = "#"><i class="icon-star"></i></a>
-              </span>
-            </span>
-            <span><a href = "#">Smoke</a></span>
-          </div>
-
-          <div class = "bcrumbs-single-list-item bcrumbs-listing">
-            <span class = "bcrumbs-single-list-item-img img-crop">
-              <img src = "img/bestface.png">
-              <span class = "bcrumbs-single-icons">
-                <a href = "#"><i class="icon-info-sign"></i></a>
-                <a href = "#"><i class="icon-edit"></i></a>
-                <a href = "#"><i class="icon-list"></i></a>
-                <a href = "#"><i class="icon-star"></i></a>
-              </span>
-            </span>
-            <span><a href = "#">Smoke</a></span>
-          </div>
-
-
-
-        </div><!--list view-->
-
-        <!----------breadcrumbs: single item view---------->
-        <div class = "bcrumbs-single-view bcrumbs-view">
-
-          <ul class = "bcrumbs-path breadcrumb">
-            <li><a href = "#">My Crumbs</a><span class = "divider">/</span></li>
-            <li><a href = "#">Favorite Bars</a><span class = "divider">/</span></li>
-            <li class = "active">Smoke</li>
-          </ul>
-
-          <h2>Smoke</h2>
-          <div class = "bcrumbs-single-item-img carousel">
-            <img src = "img/cuteface.jpeg" style = "margin-top:-25%;">
-          </div>
-
-          <ul class="bcrumbs-single-item-nav nav nav-pills">
-            <li class = "active"><i class = "icon-info-sign icon-white"></i> <a href = "#">Information</a></li>
-            <li><i class = "icon-edit"></i><a href = "#">Notes</a></li>
-            <li><i class = "icon-list"></i><a href = "#">Lists</a></li>
-            <li><i class = "icon-star"></i><a href = "#">Reviews</a></li>
-            <div class = "clearfix"></div>
-          </ul>
-
-          <div class = "bcrumbs-single-item-info bcrumbs-single-item-section">
-            <h3>Information</h3>
-            <p>
-            Selvage echo park leggings bushwick tofu. Typewriter fixie polaroid small batch. Kale chips typewriter retro iphone truffaut, fanny pack Austin direct trade butcher. High life aesthetic mustache squid street art. Truffaut cardigan artisan banh mi four loko, salvia vice umami food truck. Godard vinyl lo-fi echo park hoodie, messenger bag american apparel DIY vegan mumblecore sartorial. Fixie put a bird on it lomo keffiyeh twee squid.
-
-            Viral yr squid, VHS you probably haven't heard of them polaroid iphone occupy pinterest before they sold out kale chips gastropub. Trust fund ennui gentrify post-ironic, VHS polaroid godard high life before they sold out. Gastropub twee photo booth truffaut 3 wolf moon fap. Stumptown street art keffiyeh, banksy high life sustainable food truck hoodie pitchfork. Typewriter single-origin coffee ethical swag, pitchfork DIY ennui leggings small batch hella fanny pack mcsweeney's cardigan. Art party truffaut 8-bit swag bicycle rights post-ironic, pickled sriracha +1 ethnic. Ethnic street art helvetica fanny pack shoreditch iphone, cray master cleanse +1 small batch.</p>
-          </div>
-        </div><!--single item view-->
-
-        <div class = "clearfix"></div>
-
-        <!----------breadcrumbs: browse yelp---------->
         <div class = "bcrumbs-yelp-view bcrumbs-view">
-
-          <ul class = "bcrumbs-path breadcrumb">
-            <li><a href = "#">My Crumbs</a><span class = "divider">/</span></li>
-            <li class = "active">Add Crumbs</li>
-          </ul>
-
-
           <!--bcrumbs-yelp-search-->
-          <form class = "pull-right"><div class = "bcrumbs-yelp-search input-append"><input type = "search" class = "bcrumbs-yelp-search-input" placeholder = "Search Yelp" name = "search"><button class = "btn add-on"><i class = "icon-search"></i></button></div></form><!--yelp search-->
-
-
+          <form class = "pull-right"><div class = "bcrumbs-yelp-search input-append"><input type = "search" class = "bcrumbs-yelp-search-input" placeholder = "Search Yelp" name = "search"><button class = "btn add-on"><i class = "icon-search"></i></button></div></form>
           <div class = "bcrumbs-browse-section bcrumbs-category-browse">
-            <h3>Browse Categories <a href = "#"><i class = "icon-minus text-icon"></i></a></h3>
-
-            <div class = "bcrumbs-list bcrumbs-listing">
-              <span class = "bcrumbs-list-img img-crop"><img src = "img/bestface.png"></span>
-              <span><a href = "#">Theatres</a></span>
-            </div>
-
-            <div class = "bcrumbs-list bcrumbs-listing">
-              <span class = "bcrumbs-list-img img-crop"><img src = "img/bestface.png"></span>
-              <span><a href = "#">Theatres</a></span>
-            </div>
-
-            <div class = "bcrumbs-list bcrumbs-listing">
-              <span class = "bcrumbs-list-img img-crop"><img src = "img/bestface.png"></span>
-              <span><a href = "#">Theatres</a></span>
-            </div>
-
-            <div class = "bcrumbs-list bcrumbs-listing">
-              <span class = "bcrumbs-list-img img-crop"><img src = "img/bestface.png"></span>
-              <span><a href = "#">Theatres</a></span>
-            </div>
-
-            <div class = "bcrumbs-list bcrumbs-listing">
-              <span class = "bcrumbs-list-img img-crop"><img src = "img/bestface.png"></span>
-              <span><a href = "#">Theatres</a></span>
-            </div>
-
-
+            <h3>Browse Categories <a href = "javascript:void(0)"><i class = "icon-plus text-icon"></i></a></h3>
+            <div class = "bcrumbs-browse-items"></div>
             <button class = "bcrumbs-browse-collapse btn btn-link">Collapse <i class = "icon-arrow-up text-icon"></i></button>
           </div><!--categories browse-->
 
           <div class = "bcrumbs-recent-searches-section bcrumbs-category-browse">
-            <h3>Recent Searches <a href = "#"><i class = "icon-plus text-icon"></i></a></h3>
-
-            <div class = "bcrumbs-list bcrumbs-listing">
-              <span class = "bcrumbs-list-img img-crop"><img src = "img/bestface.png"></span>
-              <span><a href = "#">"date spots"</a></span>
-            </div>
-
-            <div class = "bcrumbs-list bcrumbs-listing">
-              <span class = "bcrumbs-list-img img-crop"><img src = "img/bestface.png"></span>
-              <span><a href = "#">"om nom places"</a></span>
-            </div>
-
-            <div class = "bcrumbs-list bcrumbs-listing">
-              <span class = "bcrumbs-list-img img-crop"><img src = "img/bestface.png"></span>
-              <span><a href = "#">"brunch"</a></span>
-            </div>
-
-            <div class = "bcrumbs-list bcrumbs-listing">
-              <span class = "bcrumbs-list-img img-crop"><img src = "img/bestface.png"></span>
-              <span><a href = "#">"psychics"</a></span>
-            </div>
-
+            <h3>Recent Searches <a href = "javascript:void(0)"><i class = "icon-plus text-icon"></i></a></h3>
+            <div class = "bcrumbs-recent-searches-items"></div>
+            <button class = "bcrumbs-recent-searches-collapse btn btn-link">Collapse <i class = "icon-arrow-up text-icon"></i></button>
           </div><!--categories browse-->
 
 
         </div><!--browse yelp-->
-
-        <!----------breadcrumbs: yelp search results---------->
-        <div class = "bcrumbs-yelp-results-view bcrumbs-view">
-
-          <ul class = "bcrumbs-path breadcrumb">
-            <li><a href = "#">Add Crumbs</a><span class = "divider">/</span></li>
-            <li class = "active">Search Results for "jazz venues"</li>
-          </ul>
-
-          <h2>Search Results for "jazz venues"</h2>
-
-          <div class = "bcrumbs-single-list-item bcrumbs-listing">
-            <span class = "bcrumbs-single-list-item-img img-crop">
-              <img src = "img/bestface.png">
-              <span class = "bcrumbs-single-icons">
-                <a href = "#"><i class="icon-info-sign"></i></a>
-                <a href = "#"><i class="icon-plus"></i></a>
-                <a href = "#"><i class="icon-list"></i></a>
-                <a href = "#"><i class="icon-star"></i></a>
-              </span>
-            </span>
-            <span><a href = "#">Smoke</a></span>
-          </div>
-
-          <div class = "bcrumbs-single-list-item bcrumbs-listing">
-            <span class = "bcrumbs-single-list-item-img img-crop">
-              <img src = "img/bestface.png">
-              <span class = "bcrumbs-single-icons">
-                <a href = "#"><i class="icon-info-sign"></i></a>
-                <a href = "#"><i class="icon-plus"></i></a>
-                <a href = "#"><i class="icon-list"></i></a>
-                <a href = "#"><i class="icon-star"></i></a>
-              </span>
-            </span>
-            <span><a href = "#">Smoke</a></span>
-          </div>
-
-          <div class = "bcrumbs-single-list-item bcrumbs-listing">
-            <span class = "bcrumbs-single-list-item-img img-crop">
-              <img src = "img/bestface.png">
-              <span class = "bcrumbs-single-icons">
-                <a href = "#"><i class="icon-info-sign"></i></a>
-                <a href = "#"><i class="icon-plus"></i></a>
-                <a href = "#"><i class="icon-list"></i></a>
-                <a href = "#"><i class="icon-star"></i></a>
-              </span>
-            </span>
-            <span><a href = "#">Smoke</a></span>
-          </div>
-
-
-          <div class = "bcrumbs-single-list-item bcrumbs-listing">
-            <span class = "bcrumbs-single-list-item-img img-crop">
-              <img src = "img/bestface.png">
-              <span class = "bcrumbs-single-icons">
-                <a href = "#"><i class="icon-info-sign"></i></a>
-                <a href = "#"><i class="icon-plus"></i></a>
-                <a href = "#"><i class="icon-list"></i></a>
-                <a href = "#"><i class="icon-star"></i></a>
-              </span>
-            </span>
-            <span><a href = "#">Smoke</a></span>
-          </div>
-
-
-          <div class = "bcrumbs-single-list-item bcrumbs-listing">
-            <span class = "bcrumbs-single-list-item-img img-crop">
-              <img src = "img/bestface.png">
-              <span class = "bcrumbs-single-icons">
-                <a href = "#"><i class="icon-info-sign"></i></a>
-                <a href = "#"><i class="icon-plus"></i></a>
-                <a href = "#"><i class="icon-list"></i></a>
-                <a href = "#"><i class="icon-star"></i></a>
-              </span>
-            </span>
-            <span><a href = "#">Smoke</a></span>
-          </div>
-
-
-          <div class = "bcrumbs-single-list-item bcrumbs-listing">
-            <span class = "bcrumbs-single-list-item-img img-crop">
-              <img src = "img/bestface.png">
-              <span class = "bcrumbs-single-icons">
-                <a href = "#"><i class="icon-info-sign"></i></a>
-                <a href = "#"><i class="icon-plus"></i></a>
-                <a href = "#"><i class="icon-list"></i></a>
-                <a href = "#"><i class="icon-star"></i></a>
-              </span>
-            </span>
-            <span><a href = "#">Smoke</a></span>
-          </div>
-
-
-
-        </div><!--yelp search results-->    
-
       </div><!--content-->
+
+      <div class = "bc-footer">
+        <span class = "bc-copyright">&copy; 2012 <a href = "javascript:void(0)">Breadcrumbs</a></span>
+        <span class = "bc-footer-links"><a href = "javascript:void(0)">About</a> | <a href = "javascript:void(0)">How It Works</a></span>
+      </div>
 
     </div><!--wrapper-->
     <div class="template history-list">
