@@ -17,9 +17,13 @@
       this.addCrumbsView = new LOAF.AddCrumbsView({
         el: this.$(".bcrumbs-yelp-view")
       });
+      this.myCrumbsView = new LOAF.MyCrumbsView({
+        el: this.$(".bcrumbs-mycrumbs-view")
+      });
       this.addCrumbsView.render();
-      this.$(".bcrumbs-yelp-view").show();
-      return this.myCrumbs = false;
+      this.myCrumbsView.render();
+      this.$(".bcrumbs-mycrumbs-view").show();
+      return this.myCrumbs = true;
     },
     startApplication: function(cb, context) {
       var loadApp,

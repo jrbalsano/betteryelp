@@ -12,11 +12,18 @@ LOAF.ApplicationView = LOAF.BreadcrumbView.extend
     # AddBookmarksView.hide()
     clearTimeout @loadingTimeout
     @$(".bcrumbs-loading").hide()
+    
+    # create necessary views
     @addCrumbsView = new LOAF.AddCrumbsView
       el: @$(".bcrumbs-yelp-view")
+    @myCrumbsView = new LOAF.MyCrumbsView
+      el: @$(".bcrumbs-mycrumbs-view")
+
+    # render pre-rendered views
     @addCrumbsView.render()
-    @$(".bcrumbs-yelp-view").show()
-    @myCrumbs = false
+    @myCrumbsView.render()
+    @$(".bcrumbs-mycrumbs-view").show()
+    @myCrumbs = true
 
   startApplication: (cb, context) ->
     loadApp = new LOAF.FsJsonObject
