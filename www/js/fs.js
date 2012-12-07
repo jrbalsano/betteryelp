@@ -34,12 +34,17 @@
         this._jsonObject = object;
         successCallback = successCallback || function() {};
         fileWriterHandler = function(fileWriter) {
-          var bb, json_string;
+          var bb, blob, json_string;
           window.BlobBuilder = window.BlobBuilder || window.WebKitBlobBuilder;
-          bb = new BlobBuilder();
           json_string = JSON.stringify(_this._jsonObject);
-          bb.append(json_string);
-          fileWriter.write(bb.getBlob('text/plain'));
+          if (typeof BlobBuilder !== 'undefined') {
+            bb = new BlobBuilder();
+            bb.append(json_string);
+            blob = bb.getBlob('text/plain');
+          } else {
+            blob = new Blob([json_string]);
+          }
+          fileWriter.write(blob);
           return successCallback();
         };
         fileEntryHandler = function(fileEntry) {
