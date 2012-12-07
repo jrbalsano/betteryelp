@@ -3,9 +3,10 @@
 
   LOAF.SingleListView = LOAF.BreadcrumbView.extend({
     tagName: 'div',
-    className: 'bcrumbs-yelp-view',
+    className: 'bcrumbs-list-view',
     initialize: function(options) {
       this.title = this.collection.title || this.collection.name;
+      this.type = options.type;
       this._historyRep = new LOAF.HistoryItem({
         title: this.title,
         view: this
@@ -13,13 +14,19 @@
       return this.initHistory(options);
     },
     render: function() {
-      var html, obj;
+      var html, itemsHtml, obj, template;
       html = "";
       obj = {
         title: this.collection.title || this.collection.name
       };
       html = Mustache.render(LOAF.templates.bcSingleListView, obj);
       this.$el.html(html);
+      itemsHtml = "";
+      template = this.type === "yelp" ? LOAF.templates.bcYelpViewSingle : LOAF.templates.bcListViewSingle;
+      this.collection.each(function(business) {
+        return itemsHtml += Mustache.render(template, business.attributes);
+      });
+      this.$(".bcrumbs-list-view-items").html(itemsHtml);
       return this.renderHistory();
     }
   });
