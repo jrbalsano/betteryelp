@@ -5,17 +5,20 @@
     initialize: function() {
       var _this = this;
       this.initHistory();
+      this.$(".bcrumbs-view").hide();
       this.loadingTimeout = setTimeout(function() {
         return _this.$(".bcrumbs-loading").show();
       }, 1000);
-      return this.startApplication(this.onStart);
+      return this.startApplication(this.onStart, this);
     },
     onStart: function() {
       clearTimeout(this.loadingTimeout);
       this.$(".bcrumbs-loading").hide();
+      this.addCrumbsView = new LOAF.AddCrumbsView;
+      this.addCrumbsView.render();
       return this.myCrumbs = true;
     },
-    startApplication: function(cb) {
+    startApplication: function(cb, context) {
       var loadApp,
         _this = this;
       return loadApp = new LOAF.FsJsonObject({
@@ -23,9 +26,9 @@
           var data;
           data = fs.getObject();
           if (data.sessionExists) {
-            return _this._loadSession(data, cb);
+            return _this._loadSession(data, cb, context);
           } else {
-            return _this._newSession(cb);
+            return _this._newSession(cb, context);
           }
         }
       });
@@ -65,7 +68,7 @@
         }
       });
     },
-    _newSession: function(cb) {
+    _newSession: function(cb, context) {
       var categories, categoryLists;
       LOAF.yelpLists = new LOAF.ListsList;
       LOAF.customLists = new LOAF.ListsList;
@@ -85,9 +88,9 @@
       });
       LOAF.yelpLists.addLists(categoryLists);
       this.saveApplication();
-      return cb();
+      return cb.call(context);
     },
-    _loadSession: function(session, cb) {
+    _loadSession: function(session, cb, context) {
       var cLs, tempCLs, tempYLs, yLs;
       console.log(session);
       yLs = session.yelpLists;
@@ -119,7 +122,7 @@
       LOAF.customLists = new LOAF.ListsList({
         lists: tempCLs
       });
-      return cb();
+      return cb.call(context);
     }
   });
 

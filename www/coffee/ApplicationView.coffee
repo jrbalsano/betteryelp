@@ -1,25 +1,28 @@
 LOAF.ApplicationView = LOAF.BreadcrumbView.extend
   initialize: ->
     @initHistory()
+    @$(".bcrumbs-view").hide()
     @loadingTimeout = setTimeout( =>
       @$(".bcrumbs-loading").show()
     1000)
-    @startApplication @onStart
+    @startApplication @onStart, @
 
   onStart: ->
     # MyBookmarksView.render()
     # AddBookmarksView.hide()
     clearTimeout @loadingTimeout
     @$(".bcrumbs-loading").hide()
+    @addCrumbsView = new LOAF.AddCrumbsView
+    @addCrumbsView.render()
     # @$(".bcrumbs-mycrumbs-view").show()
     @myCrumbs = true
 
-  startApplication: (cb) ->
+  startApplication: (cb, context) ->
     loadApp = new LOAF.FsJsonObject
       onReady: (fs) =>
         # This function implements all the features
         data = fs.getObject()
-        if data.sessionExists then @_loadSession data, cb else @_newSession cb
+        if data.sessionExists then @_loadSession data, cb, context else @_newSession cb, context
 
   events:
     "click .bcrumbs-add-crumbs-link": "showAddCrumbs"
@@ -50,7 +53,7 @@ LOAF.ApplicationView = LOAF.BreadcrumbView.extend
         newSave.writeObject object, ->
           console.log "Save complete"
 
-  _newSession: (cb) ->
+  _newSession: (cb, context) ->
     # Generate List of Yelp Lists
     LOAF.yelpLists = new LOAF.ListsList
     # create custom lists list and all crumbs list.
@@ -68,9 +71,9 @@ LOAF.ApplicationView = LOAF.BreadcrumbView.extend
     # Save the new Session
     @saveApplication()
     #Call the callback
-    cb()
+    cb.call(context)
 
-  _loadSession: (session, cb) -> 
+  _loadSession: (session, cb, context) ->
     console.log session
     # load in the yelp lists, creating models and collections
     yLs = session.yelpLists
@@ -96,4 +99,4 @@ LOAF.ApplicationView = LOAF.BreadcrumbView.extend
     LOAF.customLists = new LOAF.ListsList lists: tempCLs
     
     # Call the callback
-    cb()
+    cb.call(context)
