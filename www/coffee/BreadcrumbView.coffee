@@ -6,10 +6,7 @@ LOAF.BreadcrumbView = Backbone.View.extend
     @history.push options.caller
 
   renderHistory: ->
-    templateValues =
-      historyItems: @history
-      currentTitle: @title
-    list = Mustache.render $(".template.history-list").html(), templateValues
+    list = Mustache.render LOAF.templates.bcHistory, @
     @$(".bcrumbs-path").html list
     @$(".history-link").click (e) =>
       @_onHistoryClick(e)

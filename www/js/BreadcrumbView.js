@@ -13,13 +13,9 @@
       return this.history.push(options.caller);
     },
     renderHistory: function() {
-      var list, templateValues,
+      var list,
         _this = this;
-      templateValues = {
-        historyItems: this.history,
-        currentTitle: this.title
-      };
-      list = Mustache.render($(".template.history-list").html(), templateValues);
+      list = Mustache.render(LOAF.templates.bcHistory, this);
       this.$(".bcrumbs-path").html(list);
       return this.$(".history-link").click(function(e) {
         return _this._onHistoryClick(e);

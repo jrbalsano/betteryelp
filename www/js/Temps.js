@@ -9,6 +9,7 @@
         return temps.filter("#" + templateName).html();
       };
       LOAF.templates = {};
+      LOAF.templates.bcHistory = getTemplate("bc-history");
       LOAF.templates.bcListViewList = getTemplate("bc-list-view-list");
       LOAF.templates.bcListViewSingle = getTemplate("bc-list-view-single");
       LOAF.templates.bcListViewSingleInfoS = getTemplate("bc-list-view-single-info-s");
