@@ -8,6 +8,18 @@ LOAF.AddCrumbsView = LOAF.BreadcrumbView.extend
   events:
     "click .bcrumbs-browse-category-toggle": "onCategoryToggle"
     "click .bcrumbs-browse-collapse": "onCategoryToggle"
+    "click .bcrumbs-list a": "onShowList"
+
+  onShowList: (e) ->
+    e.preventDefault
+    listId = parseInt e.srcElement.dataset.id
+    el = $(".bcrumbs-list-view")
+    singleListView = new LOAF.SingleListView
+      collection: LOAF.yelpLists.where(id: listId)[0]
+      el: el
+    singleListView.render()
+    @$el.hide()
+    el.show()
 
   onCategoryToggle: (e) ->
     e.preventDefault
