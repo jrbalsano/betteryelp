@@ -21,10 +21,12 @@
     <script type="text/javascript" src="http://oauth.googlecode.com/svn/code/javascript/oauth.js"></script>
     <script type="text/javascript" src="http://oauth.googlecode.com/svn/code/javascript/sha1.js"></script>
     <script type="text/javascript" src="js/application.js"></script>
+    <script type="text/javascript" src="js/ListsList.js"></script>
     <script type="text/javascript" src="js/fs.js"></script>
     <script type="text/javascript" src="js/ListsList.js"></script>
     <script type="text/javascript" src="js/Temps.js"></script>
     <script type="text/javascript" src="js/BreadcrumbView.js"></script>
+    <script type="text/javascript" src="js/AddCrumbsView.js"></script>
     <script type="text/javascript" src="js/ApplicationView.js"></script>
     <script type="text/javascript" src="js/Business.js"></script>
     <script type="text/javascript" src="js/YelpList.js"></script>
@@ -52,7 +54,7 @@
           <span>My Crumbs</span>
         </a><!--my-crumbs-link-->
 
-		<p>|</p>
+        <p>|</p>
 
         <!--bcrumbs-add-crumbs-link-->
         <a href = "javascript:void(0)" class = "bcrumbs-add-crumbs-link bcrumbs-header-link">
@@ -62,19 +64,38 @@
 
       </div><!--header-->
       <div class = "clearfix"></div>
-      
+
       <!----------breadcrumbs content---------->
       <div class = "bcrumbs-content">
         <div class = "bcrumbs-view bcrumbs-loading">
           <img src="img/breadcrumbs_cat_load_color.gif" />
         </div>
+
+        <div class = "bcrumbs-yelp-view bcrumbs-view">
+          <h2>Add Crumbs</h2>
+          <!--bcrumbs-yelp-search-->
+          <form class = "pull-right"><div class = "bcrumbs-yelp-search input-append"><input type = "search" class = "bcrumbs-yelp-search-input" placeholder = "Search Yelp" name = "search"><button class = "btn add-on"><i class = "icon-search"></i></button></div></form>
+          <div class = "bcrumbs-browse-section bcrumbs-category-browse">
+            <a class = "bcrumbs-browse-category-toggle" href = "javascript:void(0)"><h3>Browse Categories +</h3></a>
+            <div class = "bcrumbs-browse-items"></div>
+            <button class = "bcrumbs-browse-collapse btn btn-link">Collapse <i class = "icon-arrow-up text-icon"></i></button>
+          </div><!--categories browse-->
+
+          <div class = "bcrumbs-recent-searches-section bcrumbs-category-browse">
+            <h3>Recent Searches <a href = "javascript:void(0)"><i class = "icon-plus text-icon"></i></a></h3>
+            <div class = "bcrumbs-recent-searches-items"></div>
+            <button class = "bcrumbs-recent-searches-collapse btn btn-link">Collapse <i class = "icon-arrow-up text-icon"></i></button>
+          </div><!--categories browse-->
+
+
+        </div><!--browse yelp-->
       </div><!--content-->
-	
-    <div class = "bc-footer">
-    	<span class = "bc-copyright">&copy; 2012 <a href = "javascript:void(0)">Breadcrumbs</a></span>
+
+      <div class = "bc-footer">
+        <span class = "bc-copyright">&copy; 2012 <a href = "javascript:void(0)">Breadcrumbs</a></span>
         <span class = "bc-footer-links"><a href = "javascript:void(0)">About</a> | <a href = "javascript:void(0)">How It Works</a></span>
-    </div>
-    
+      </div>
+
     </div><!--wrapper-->
     <div class="template history-list">
       {{#historyItems}}

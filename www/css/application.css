@@ -101,7 +101,6 @@ body,
 
 .bcrumbs-loading img {
   padding-left: 146px;
-  display: none;
 }
 
 .img-crop { /* Style for all elements that crop images */
@@ -388,6 +387,8 @@ body,
 /* ==========================================================================
    Breadcrumbs Browse View
    ========================================================================== */
+.bcrumbs-yelp-view {
+}
 
 .bcrumbs-browse-collapse {
 	width: 100%;

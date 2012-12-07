@@ -1,25 +1,29 @@
 LOAF.ApplicationView = LOAF.BreadcrumbView.extend
   initialize: ->
     @initHistory()
+    @$(".bcrumbs-view").hide()
     @loadingTimeout = setTimeout( =>
       @$(".bcrumbs-loading").show()
-    1000)
-    @startApplication @onStart
+    500)
+    @startApplication @onStart, @
 
   onStart: ->
     # MyBookmarksView.render()
     # AddBookmarksView.hide()
     clearTimeout @loadingTimeout
     @$(".bcrumbs-loading").hide()
-    # @$(".bcrumbs-mycrumbs-view").show()
-    @myCrumbs = true
+    @addCrumbsView = new LOAF.AddCrumbsView
+      el: @$(".bcrumbs-yelp-view")
+    @addCrumbsView.render()
+    @$(".bcrumbs-yelp-view").show()
+    @myCrumbs = false
 
-  startApplication: (cb) ->
+  startApplication: (cb, context) ->
     loadApp = new LOAF.FsJsonObject
       onReady: (fs) =>
         # This function implements all the features
         data = fs.getObject()
-        if data.sessionExists then @_loadSession data, cb else @_newSession cb
+        if data.sessionExists then @_loadSession data, cb, context else @_newSession cb, context
 
   events:
     "click .bcrumbs-add-crumbs-link": "showAddCrumbs"
@@ -50,7 +54,7 @@ LOAF.ApplicationView = LOAF.BreadcrumbView.extend
         newSave.writeObject object, ->
           console.log "Save complete"
 
-  _newSession: (cb) ->
+  _newSession: (cb, context) ->
     # Generate List of Yelp Lists
     LOAF.yelpLists = new LOAF.ListsList
     # create custom lists list and all crumbs list.
@@ -58,19 +62,23 @@ LOAF.ApplicationView = LOAF.BreadcrumbView.extend
     LOAF.allCrumbsList = new LOAF.CustomList [], name: "All Crumbs", isAllCrumbs: true
     LOAF.customLists.addList LOAF.allCrumbsList
     # Generate searches
-    categories = ["active", "arts", "food", "hotelstravel", "localflavor", 
-      "localservices", "nightlife", "restaurants", "shopping"]
+    categories = ["active", "arts", "food", "hotelstravel", "localflavor"
+            "localservices", "nightlife", "restaurants", "shopping"]
     categoryLists = _.map categories, (category) ->
       list = new LOAF.YelpList [], category: category
-      list.fetch()
       list
     LOAF.yelpLists.addLists categoryLists
-    # Save the new Session
-    @saveApplication()
-    #Call the callback
-    cb()
+    LOAF.yelpLists.fetchLists ( =>
+      # Save the new Session
+      @saveApplication()
+      #Call the callback
+      cb.call(context)),
+      (collection, xhr, options) ->
+        console.log xhr
+      
 
-  _loadSession: (session, cb) -> 
+
+  _loadSession: (session, cb, context) ->
     console.log session
     # load in the yelp lists, creating models and collections
     yLs = session.yelpLists
@@ -96,4 +104,4 @@ LOAF.ApplicationView = LOAF.BreadcrumbView.extend
     LOAF.customLists = new LOAF.ListsList lists: tempCLs
     
     # Call the callback
-    cb()
+    cb.call(context)

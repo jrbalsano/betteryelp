@@ -3,7 +3,8 @@ created by Yanyi Luo for UID Fall 2012
 modified
 -->
 
-<!-----------My Crumbs View: Wrapper----------->
+
+<!-----------My Crumbs View: Wrapper---------->
 <script id = "bcrumbs-mycrumbs-view-s" type = "text/html">
     <div class = "bcrumbs-mycrumbs-view bcrumbs-view">
 		<h2>My Crumbs</h2>
@@ -13,7 +14,7 @@ modified
 	</div><!--my crumbs-->
 </script>
 
-<!-----------My Crumbs View: List Item Template----------->
+<!-----------My Crumbs View: Add List Item Template---------->
 <script id = "bc-list-add-s" type = "text/html">
 	<div class = "bcrumbs-list-add bcrumbs-listing">
 		<span class = "bcrumbs-list-img img-crop"><img src = "img/bcrumbs-add.png"></span>
@@ -21,21 +22,21 @@ modified
 	</div>
 </script>
 
+<!-----------My Crumbs View: List Item Template---------->
 
-<!-----------My Crumbs View: List Item Template----------->
 <script id = "bc-list-view-list" type = "text/html">
   <div class = "bcrumbs-list bcrumbs-listing">
     <span class = "bcrumbs-list-stack">
-      <img class = "bcrumbs-list-img-3" src = "{{3rd most recently added business img}}">
-      <img class = "bcrumbs-list-img-2" src = "{{2nd most recently added business img}}">
-      <img class = "bcrumbs-list-img-1" src = "{{1st most recently added business img}}">
-      <span><a href = "{{link to list}}">{{name of list}}</a></span>
+      <img class = "bcrumbs-list-img-3" src = "{{image3}}">
+      <img class = "bcrumbs-list-img-2" src = "{{image2}}">
+      <img class = "bcrumbs-list-img-1" src = "{{image1}}">
     </span>
+    <span><a href = "javascript:void(0)" data-id = "{{id}}">{{name}}</a></span>
   </div>
 </script>
 
 
-<!-----------My Crumbs View: List Single Item Template----------->
+<!-----------My Crumbs View: List Single Item Template---------->
 <script id = "bc-list-view-single" type = "text/html">
   <div class = "bcrumbs-single-list-item bcrumbs-listing">
     <span class = "bcrumbs-single-list-item-img img-crop">
@@ -57,7 +58,7 @@ modified
   </div>
 </script>
 
-<!-----------List Single Item: Hover Templates----------->
+<!-----------List Single Item: Hover Templates---------->
 <!--Info hover-->
 <script id = "bc-list-view-single-info-s" type = "text/html">
   <span class = "bc-list-view-single-info" style = "display: none;">
@@ -102,7 +103,7 @@ modified
   </span>
 </script>
 
-<!-----------Add Crumbs View: List Single Item Template----------->
+<!-----------Add Crumbs View: List Single Item Template---------->
 <script id = "bc-yelp-view-single" type = "text/html">
   <div class = "bcrumbs-single-list-item bcrumbs-listing">
     <span class = "bcrumbs-single-list-item-img img-crop">
@@ -147,16 +148,14 @@ modified
 
 </script>
 
-<!-----------List Single Item: Section Templates----------->
+<!-----------List Single Item: Section Templates---------->
 
 <!--Information-->
 <script id = "bc-single-section-info-s" type = "text/html">
   <h3>Information</h3>
   <p>Rating: {{overall business rating}}</p>
   <p>Location: {{business address}}</p>
-  <p>Info: {{general overview}}</p>
-</script>
-
+  <p>Info: {{general overview}}<
 <!--Notes-->
 <script id = "bc-single-section-notes-s" type = "text/html">
   <h3>Notes</h3>

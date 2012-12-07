@@ -25,6 +25,30 @@
       return this.lists.slice(0);
     };
 
+    ListsList.prototype.fetchLists = function(onSuccess, onError) {
+      var heardBack, hollaBack,
+        _this = this;
+      heardBack = 0;
+      hollaBack = function() {
+        heardBack++;
+        if (heardBack === _this.lists.length) {
+          return onSuccess();
+        }
+      };
+      return _.each(this.lists, function(list) {
+        return list.fetch({
+          success: hollaBack,
+          error: function(c, x, o) {
+            return console.log(x);
+          }
+        });
+      });
+    };
+
+    ListsList.prototype.where = function(properties) {
+      return _.where(this.lists, properties);
+    };
+
     ListsList.prototype.search = function(term) {
       return _.flatten(_.map(this.lists, function(list) {
         return list.search(term);
