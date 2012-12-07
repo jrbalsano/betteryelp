@@ -3,6 +3,24 @@ created by Yanyi Luo for UID Fall 2012
 modified
 -->
 
+<!-----------My Crumbs View: Wrapper----------->
+<script id = "bcrumbs-mycrumbs-view-s" type = "text/html">
+    <div class = "bcrumbs-mycrumbs-view bcrumbs-view">
+		<h2>My Crumbs</h2>
+
+		<div class = "bcrumbs-list bcrumbs-listing">
+	</div><!--my crumbs-->
+</script>
+
+<!-----------My Crumbs View: List Item Template----------->
+<script id = "bc-list-add-s" type = "text/html">
+	<div class = "bcrumbs-list-add bcrumbs-listing">
+		<span class = "bcrumbs-list-img img-crop"><img src = "img/bcrumbs-add.png"></span>
+		<span>New List</span>
+	</div>
+</script>
+
+
 <!-----------My Crumbs View: List Item Template----------->
 <script id = "bc-list-view-list" type = "text/html">
   <div class = "bcrumbs-list bcrumbs-listing">
@@ -121,7 +139,9 @@ modified
     <li><i class = "icon-star"></i><a href = "#">Reviews</a></li>
     <div class = "clearfix"></div>
   </ul>
-
+  <div class = "bcrumbs-single-item-section">
+	<!--put in section info right below this line-->
+  </div>  
   <!--append section div below-->
 
 </script>
@@ -130,37 +150,29 @@ modified
 
 <!--Information-->
 <script id = "bc-single-section-info-s" type = "text/html">
-  <div class = "bcrumbs-single-item-info bcrumbs-single-item-section">
-    <h3>Information</h3>
-    <p>Rating: {{overall business rating}}</p>
-    <p>Location: {{business address}}</p>
-    <p>Info: {{general overview}}</p>
-  </div>
+  <h3>Information</h3>
+  <p>Rating: {{overall business rating}}</p>
+  <p>Location: {{business address}}</p>
+  <p>Info: {{general overview}}</p>
 </script>
 
 <!--Notes-->
 <script id = "bc-single-section-notes-s" type = "text/html">
-  <div class = "bcrumbs-single-item-notes bcrumbs-single-item-section">
-    <h3>Notes</h3>
-    <p>{{notes about business}}</p>
-  </div>
+  <h3>Notes</h3>
+  <p>{{notes about business}}</p>
 </script>
 
 <!--Lists-->
 <script id = "bc-single-section-lists-s" type = "text/html">
-  <div class = "bcrumbs-single-item-lists bcrumbs-single-item-section">
-    <h3>Lists</h3>
-    <p><a href = "{{link to list}}">{{name of list the business belongs to}}</a></p>
-  </div>
+  <h3>Lists</h3>
+  <p><a href = "{{link to list}}">{{name of list the business belongs to}}</a></p>
 </script>
 
 <!--Reviews-->
 <script id = "bc-single-section-reviews-s" type = "text/html">
-  <div class = "bcrumbs-single-item-reviews bcrumbs-single-item-section">
-    <h3>Reviews</h3>
-    <!--while has reviews-->
-    <p>Date: {{date of review}}</p>
-    <p>Rating: {{nearest whole number of stars /* while (hasStars) append <i class = "icon-star"></i> */}}</p>
-    <p>{{review text}}</p>
-  </div>
+  <h3>Reviews</h3>
+  <!--while has reviews-->
+  <p>Date: {{date of review}}</p>
+  <p>Rating: {{nearest whole number of stars /* while (hasStars) append <i class = "icon-star"></i> */}}</p>
+  <p>{{review text}}</p>
 </script>
