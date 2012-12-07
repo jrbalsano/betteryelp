@@ -14,9 +14,12 @@
     onStart: function() {
       clearTimeout(this.loadingTimeout);
       this.$(".bcrumbs-loading").hide();
-      this.addCrumbsView = new LOAF.AddCrumbsView;
+      this.addCrumbsView = new LOAF.AddCrumbsView({
+        el: this.$(".bcrumbs-yelp-view")
+      });
       this.addCrumbsView.render();
-      return this.myCrumbs = true;
+      this.$(".bcrumbs-yelp-view").show();
+      return this.myCrumbs = false;
     },
     startApplication: function(cb, context) {
       var loadApp,
