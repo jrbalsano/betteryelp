@@ -26,8 +26,11 @@
     <script type="text/javascript" src="js/ListsList.js"></script>
     <script type="text/javascript" src="js/Temps.js"></script>
     <script type="text/javascript" src="js/BreadcrumbView.js"></script>
+    <script type="text/javascript" src="js/MyCrumbsView.js"></script>
     <script type="text/javascript" src="js/AddCrumbsView.js"></script>
     <script type="text/javascript" src="js/SingleItemView.js"></script>
+    <script type="text/javascript" src="js/SingleListView.js"></script>
+    <script type="text/javascript" src="js/ListSingleItemView.js"></script>
     <script type="text/javascript" src="js/ApplicationView.js"></script>
     <script type="text/javascript" src="js/Business.js"></script>
     <script type="text/javascript" src="js/YelpList.js"></script>
@@ -71,6 +74,8 @@
         <div class = "bcrumbs-view bcrumbs-loading">
           <img src="img/breadcrumbs_cat_load_color.gif" />
         </div>
+
+        <!-- ======Add Breadcrumbs====== -->
         <div class = "bcrumbs-yelp-view bcrumbs-view">
           <h2>Add Crumbs</h2>
           <!--bcrumbs-yelp-search-->
@@ -86,10 +91,22 @@
             <div class = "bcrumbs-recent-searches-items"></div>
             <button class = "bcrumbs-recent-searches-collapse btn btn-link">Collapse <i class = "icon-arrow-up text-icon"></i></button>
           </div><!--categories browse-->
-
         </div><!--browse yelp-->
+
         <div class = "bcrumbs-single-view bcrumbs-view">
         </div>
+
+        <!-- ======My Breadcrumbs====== -->
+        <div class = "bcrumbs-mycrumbs-view bcrumbs-view">
+          <h2>My Crumbs</h2>
+          <div class = "bcrumbs-mycrumbs-section"></div>
+        </div>
+        <!-- My Breadcrumbs -->
+
+        <!-- ======= Single List View ====== -->
+        <div class = "bcrumbs-list-view bcrumbs-view">
+        </div><!--list view-->
+
       </div><!--content-->
 
       <div class = "bc-footer">
@@ -98,12 +115,5 @@
       </div>
 
     </div><!--wrapper-->
-    <div class="template history-list">
-      {{#historyItems}}
-      <li><a href = "javascript:void(0)" data-id="{{id}}" class = "history-link">{{title}}</a><span class = "divider">/</span></li>
-      {{/historyItems}}
-      <li class = "active">{{currentTitle}}</li>
-    </div>
-
   </body>
 </html>

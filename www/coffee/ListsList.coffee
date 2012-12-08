@@ -31,6 +31,9 @@ class LOAF.ListsList
   where: (properties) ->
     _.where @lists, properties
 
+  each: (iterator, context) ->
+    _.each @lists, iterator, context
+
   search: (term) ->
     _.flatten _.map @lists,
       (list) ->

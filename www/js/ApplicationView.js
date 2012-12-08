@@ -15,13 +15,15 @@
       clearTimeout(this.loadingTimeout);
       console.log("completed loading");
       this.$(".bcrumbs-loading").hide();
-      debugger;
-      this.singleItemView = new LOAF.SingleItemView({
-        el: $(".bcrumbs-single-view"),
-        model: LOAF.yelpLists.getLists()[0].models[0] || null
+      this.addCrumbsView = new LOAF.AddCrumbsView({
+        el: this.$(".bcrumbs-yelp-view")
       });
-      this.singleItemView.render();
-      $(".bcrumbs-single-view").show();
+      this.myCrumbsView = new LOAF.MyCrumbsView({
+        el: this.$(".bcrumbs-mycrumbs-view")
+      });
+      this.addCrumbsView.render();
+      this.myCrumbsView.render();
+      this.$(".bcrumbs-mycrumbs-view").show();
       return this.myCrumbs = true;
     },
     startApplication: function(cb, context) {
@@ -46,7 +48,7 @@
     showAddCrumbs: function(e) {
       e.preventDefault();
       if (this.myCrumbs) {
-        this.$(".bcrumbs-mycrumbs-view").hide();
+        this.$(".bcrumbs-view").hide();
         this.$(".bcrumbs-yelp-view").show();
         return this.myCrumbs = !this.myCrumbs;
       }
@@ -54,7 +56,7 @@
     showMyCrumbs: function(e) {
       e.preventDefault();
       if (!this.myCrumbs) {
-        this.$(".bcrumbs-yelp-view").hide();
+        this.$(".bcrumbs-view").hide();
         this.$(".bcrumbs-mycrumbs-view").show();
         return this.myCrumbs = !this.myCrumbs;
       }
@@ -119,7 +121,7 @@
       tempCLs = [];
       _.each(cLs, function(cL) {
         var customList;
-        customList = new LOAF.CustomList(cL, {
+        customList = new LOAF.CustomList(cL.models, {
           name: cL.name,
           isAllCrumbs: cL.isAllCrumbs,
           id: cL.id

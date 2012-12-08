@@ -13,19 +13,17 @@ LOAF.ApplicationView = LOAF.BreadcrumbView.extend
     clearTimeout @loadingTimeout
     console.log "completed loading"
     @$(".bcrumbs-loading").hide()
+    
+    # create necessary views
+    @addCrumbsView = new LOAF.AddCrumbsView
+      el: @$(".bcrumbs-yelp-view")
+    @myCrumbsView = new LOAF.MyCrumbsView
+      el: @$(".bcrumbs-mycrumbs-view")
 
-    #@addCrumbsView = new LOAF.AddCrumbsView
-    #  el: @$(".bcrumbs-yelp-view")
-    #@addCrumbsView.render()
-    #@$(".bcrumbs-yelp-view").show()
-    #@myCrumbs = false
-    debugger
-    @singleItemView = new LOAF.SingleItemView
-      el: $(".bcrumbs-single-view")
-      model: LOAF.yelpLists.getLists()[0].models[0] || null
-    @singleItemView.render()
-    $(".bcrumbs-single-view").show()
-    # @$(".bcrumbs-mycrumbs-view").show()
+    # render pre-rendered views
+    @addCrumbsView.render()
+    @myCrumbsView.render()
+    @$(".bcrumbs-mycrumbs-view").show()
     @myCrumbs = true
 
   startApplication: (cb, context) ->
@@ -41,14 +39,14 @@ LOAF.ApplicationView = LOAF.BreadcrumbView.extend
   showAddCrumbs: (e) ->
     e.preventDefault()
     if @myCrumbs
-      @$(".bcrumbs-mycrumbs-view").hide()
+      @$(".bcrumbs-view").hide()
       @$(".bcrumbs-yelp-view").show()
       @myCrumbs = !@myCrumbs
 
   showMyCrumbs: (e) ->
     e.preventDefault()
     unless @myCrumbs
-      @$(".bcrumbs-yelp-view").hide()
+      @$(".bcrumbs-view").hide()
       @$(".bcrumbs-mycrumbs-view").show()
       @myCrumbs = !@myCrumbs
 
@@ -103,7 +101,7 @@ LOAF.ApplicationView = LOAF.BreadcrumbView.extend
     cLs = session.customLists
     tempCLs = []
     _.each cLs, (cL) ->
-      customList = new LOAF.CustomList cL,
+      customList = new LOAF.CustomList cL.models,
         name: cL.name
         isAllCrumbs: cL.isAllCrumbs
         id: cL.id

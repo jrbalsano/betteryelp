@@ -6,11 +6,33 @@
     className: 'bcrumbs-yelp-view',
     initialize: function() {
       this.state = {};
-      return this.state.browseExpanded = false;
+      this.state.browseExpanded = false;
+      return this._historyRep = new LOAF.HistoryItem({
+        title: "Add Crumbs",
+        view: this
+      });
     },
     events: {
       "click .bcrumbs-browse-category-toggle": "onCategoryToggle",
-      "click .bcrumbs-browse-collapse": "onCategoryToggle"
+      "click .bcrumbs-browse-collapse": "onCategoryToggle",
+      "click .bcrumbs-list a": "onShowList"
+    },
+    onShowList: function(e) {
+      var el, listId, singleListView;
+      e.preventDefault;
+      listId = parseInt(e.srcElement.dataset.id);
+      el = $(".bcrumbs-list-view");
+      singleListView = new LOAF.SingleListView({
+        collection: LOAF.yelpLists.where({
+          id: listId
+        })[0],
+        el: el,
+        caller: this._historyRep,
+        type: "yelp"
+      });
+      singleListView.render();
+      this.$el.hide();
+      return el.show();
     },
     onCategoryToggle: function(e) {
       e.preventDefault;
