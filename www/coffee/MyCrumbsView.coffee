@@ -1,6 +1,25 @@
 LOAF.MyCrumbsView = LOAF.BreadcrumbView.extend
   tagName: 'div'
   className: 'bcrumbs-mycrumbs-view'
+  initialize: ->
+    @_historyRep = new LOAF.HistoryItem
+      title: "My Crumbs"
+      view: @
+
+  events:
+    "click .bcrumbs-list a": "onShowList"
+
+  onShowList: (e) ->
+    e.preventDefault
+    listId = parseInt e.srcElement.dataset.id
+    el = $(".bcrumbs-list-view")
+    singleListView = new LOAF.SingleListView
+      collection: LOAF.customLists.where(id: listId)[0]
+      el: el
+      caller: @_historyRep
+    singleListView.render()
+    @$el.hide()
+    el.show()
 
   render: ->
     html = ""

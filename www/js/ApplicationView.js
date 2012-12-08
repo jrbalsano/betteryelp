@@ -120,7 +120,7 @@
       tempCLs = [];
       _.each(cLs, function(cL) {
         var customList;
-        customList = new LOAF.CustomList(cL, {
+        customList = new LOAF.CustomList(cL.models, {
           name: cL.name,
           isAllCrumbs: cL.isAllCrumbs,
           id: cL.id

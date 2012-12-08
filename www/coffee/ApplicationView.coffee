@@ -101,7 +101,7 @@ LOAF.ApplicationView = LOAF.BreadcrumbView.extend
     cLs = session.customLists
     tempCLs = []
     _.each cLs, (cL) ->
-      customList = new LOAF.CustomList cL,
+      customList = new LOAF.CustomList cL.models,
         name: cL.name
         isAllCrumbs: cL.isAllCrumbs
         id: cL.id

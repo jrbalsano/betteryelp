@@ -4,6 +4,31 @@
   LOAF.MyCrumbsView = LOAF.BreadcrumbView.extend({
     tagName: 'div',
     className: 'bcrumbs-mycrumbs-view',
+    initialize: function() {
+      return this._historyRep = new LOAF.HistoryItem({
+        title: "My Crumbs",
+        view: this
+      });
+    },
+    events: {
+      "click .bcrumbs-list a": "onShowList"
+    },
+    onShowList: function(e) {
+      var el, listId, singleListView;
+      e.preventDefault;
+      listId = parseInt(e.srcElement.dataset.id);
+      el = $(".bcrumbs-list-view");
+      singleListView = new LOAF.SingleListView({
+        collection: LOAF.customLists.where({
+          id: listId
+        })[0],
+        el: el,
+        caller: this._historyRep
+      });
+      singleListView.render();
+      this.$el.hide();
+      return el.show();
+    },
     render: function() {
       var html, missingImage;
       html = "";
