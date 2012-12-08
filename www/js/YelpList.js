@@ -5,7 +5,8 @@
     initialize: function(models, options) {
       this.term = options.term;
       this.category = options.category;
-      return this.id = options.id;
+      this.id = options.id;
+      return this.title = options.title || options.category || options.term;
     },
     model: LOAF.Business,
     url: 'http://api.yelp.com/v2/search?',

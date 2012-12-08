@@ -4,22 +4,30 @@ modified
 -->
 
 
+<!----------All Views: History---------->
+<script id = "bc-history" type = "text/html">
+  {{#history}}
+  <li><a href = "javascript:void(0)" data-id="{{id}}" class = "history-link">{{title}}</a><span class = "divider">/</span></li>
+  {{/history}}
+  <li class = "active">{{title}}</li>
+</script>
+
 <!-----------My Crumbs View: Wrapper---------->
 <script id = "bcrumbs-mycrumbs-view-s" type = "text/html">
-    <div class = "bcrumbs-mycrumbs-view bcrumbs-view">
-		<h2>My Crumbs</h2>
-		
-		<!--appending the breadcrumbs items here-->
-		
-	</div><!--my crumbs-->
+  <div class = "bcrumbs-mycrumbs-view bcrumbs-view">
+    <h2>My Crumbs</h2>
+
+    <!--appending the breadcrumbs items here-->
+
+  </div><!--my crumbs-->
 </script>
 
 <!-----------My Crumbs View: Add List Item Template---------->
 <script id = "bc-list-add-s" type = "text/html">
-	<div class = "bcrumbs-list-add bcrumbs-listing">
-		<span class = "bcrumbs-list-img img-crop"><img src = "img/bcrumbs-add.png"></span>
-		<span>New List</span>
-	</div>
+  <div class = "bcrumbs-list-add bcrumbs-listing">
+    <span class = "bcrumbs-list-img img-crop"><img src = "img/bcrumbs-add.png"></span>
+    <span>New List</span>
+  </div>
 </script>
 
 <!-----------My Crumbs View: List Item Template---------->
@@ -35,6 +43,23 @@ modified
   </div>
 </script>
 
+<!----------Single List View Template---------->
+<script id = "bc-single-list-view" type = "text/html">
+  <ul class = "bcrumbs-path breadcrumb">
+  </ul>
+
+  <span class = "edit-toggle pull-right">
+    Edit Mode:            
+    <div class="btn-group">
+      <button class="btn">On</button>
+      <button class="btn">Off</button>
+    </div>
+  </span>
+
+  <h2>{{title}}</h2>
+
+  <div class = "bcrumbs-list-view-items"> </div>
+</script>
 
 <!-----------My Crumbs View: List Single Item Template---------->
 <script id = "bc-list-view-single" type = "text/html">
@@ -46,7 +71,7 @@ modified
       </span>
       <span class = "img-overlay" style = "display: none;"></span>
 
-      <img src = "{{image for this business}}">
+      <img src = "{{image_url}}">
       <span class = "bcrumbs-single-icons">
         <a href = "javascript:void(0)"><i class="icon-info-sign"></i></a>
         <a href = "javascript:void(0)"><i class="icon-edit"></i></a>
@@ -54,7 +79,7 @@ modified
         <a href = "javascript:void(0)"><i class="icon-star"></i></a>
       </span>
     </span>
-    <span><a href = "{{link to single view detail}}">{{name of business}}</a></span>
+    <span><a href = "javascript:void(0)">{{name}}</a></span>
   </div>
 </script>
 
