@@ -15,6 +15,7 @@
       clearTimeout(this.loadingTimeout);
       console.log("completed loading");
       this.$(".bcrumbs-loading").hide();
+      debugger;
       this.singleItemView = new LOAF.SingleItemView({
         el: $(".bcrumbs-single-view"),
         model: LOAF.yelpLists.getLists()[0].models[0] || null

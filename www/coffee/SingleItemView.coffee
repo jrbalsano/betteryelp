@@ -5,6 +5,7 @@ LOAF.SingleItemView = LOAF.BreadcrumbView.extend
   #currentStates = 
 
   render: ->
+    debugger
     html = Mustache.render(LOAF.templates.bcSingleItem, (if @model then @model.attributes else {}) )
     @$el.html html
 
@@ -18,41 +19,41 @@ LOAF.SingleItemView = LOAF.BreadcrumbView.extend
 
 
   showInfo: ->
-    if current != 'info'
-      $(".bc-single-section-info-s").show()
-      $(".bc-single-section-notes-s").hide()
-      $(".bc-single-section-lists-s").hide()
-      $(".bc-single-section-reviews-s").hide()
+    if @current != 'info'
+      $(".bcrumbs-single-item-section-info").show()
+      $(".bcrumbs-single-item-section-notes").hide()
+      $(".bcrumbs-single-item-section-lists").hide()
+      $(".bcrumbs-single-item-section-reviews").hide()
       $(".bcrumbs-single-item-tab").removeClass('active')
       $(".bcrumbs-single-item-info-link").addClass('active')
-    current = 'info'
+    @current = 'info'
 
   showNotes: ->
-    if current != 'notes'
-      $(".bc-single-section-info-s").hide()
-      $(".bc-single-section-notes-s").show()
-      $(".bc-single-section-lists-s").hide()
-      $(".bc-single-section-reviews-s").hide()
+    if @current != 'notes'
+      $(".bcrumbs-single-item-section-info").hide()
+      $(".bcrumbs-single-item-section-notes").show()
+      $(".bcrumbs-single-item-section-lists").hide()
+      $(".bcrumbs-single-item-section-reviews").hide()
       $(".bcrumbs-single-item-tab").removeClass('active')
       $(".bcrumbs-single-item-notes-link").addClass('active')
-    current = 'notes'
+    @current = 'notes'
 
   showLists: ->
-    if current != 'lists'
-      $(".bc-single-section-info-s").hide()
-      $(".bc-single-section-notes-s").hide()
-      $(".bc-single-section-lists-s").show()
-      $(".bc-single-section-reviews-s").hide()
+    if @current != 'lists'
+      $(".bcrumbs-single-item-section-info").hide()
+      $(".bcrumbs-single-item-section-notes").hide()
+      $(".bcrumbs-single-item-section-lists").show()
+      $(".bcrumbs-single-item-section-reviews").hide()
       $(".bcrumbs-single-item-tab").removeClass('active')
       $(".bcrumbs-single-item-lists-link").addClass('active')
-    current = 'lists'
+    @current = 'lists'
 
   showReviews: ->
-    if current != 'reviews'
-      $(".bc-single-section-info-s").hide()
-      $(".bc-single-section-notes-s").hide()
-      $(".bc-single-section-lists-s").hide()
-      $(".bc-single-section-reviews-s").show()
+    if @current != 'reviews'
+      $(".bcrumbs-single-item-section-info").hide()
+      $(".bcrumbs-single-item-section-notes").hide()
+      $(".bcrumbs-single-item-section-lists").hide()
+      $(".bcrumbs-single-item-section-reviews").show()
       $(".bcrumbs-single-item-tab").removeClass('active')
       $(".bcrumbs-single-item-reviews-link").addClass('active')
-    current = 'reviews'
+    @current = 'reviews'

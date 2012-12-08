@@ -6,6 +6,7 @@
     className: 'bcrumbs-single-view',
     current: 'info',
     render: function() {
+      debugger;
       var html;
       html = Mustache.render(LOAF.templates.bcSingleItem, (this.model ? this.model.attributes : {}));
       return this.$el.html(html);
@@ -17,52 +18,48 @@
       "click .bcrumbs-single-item-reviews-link": "showReviews"
     },
     showInfo: function() {
-      var current;
-      if (current !== 'info') {
-        $(".bc-single-section-info-s").show();
-        $(".bc-single-section-notes-s").hide();
-        $(".bc-single-section-lists-s").hide();
-        $(".bc-single-section-reviews-s").hide();
+      if (this.current !== 'info') {
+        $(".bcrumbs-single-item-section-info").show();
+        $(".bcrumbs-single-item-section-notes").hide();
+        $(".bcrumbs-single-item-section-lists").hide();
+        $(".bcrumbs-single-item-section-reviews").hide();
         $(".bcrumbs-single-item-tab").removeClass('active');
         $(".bcrumbs-single-item-info-link").addClass('active');
       }
-      return current = 'info';
+      return this.current = 'info';
     },
     showNotes: function() {
-      var current;
-      if (current !== 'notes') {
-        $(".bc-single-section-info-s").hide();
-        $(".bc-single-section-notes-s").show();
-        $(".bc-single-section-lists-s").hide();
-        $(".bc-single-section-reviews-s").hide();
+      if (this.current !== 'notes') {
+        $(".bcrumbs-single-item-section-info").hide();
+        $(".bcrumbs-single-item-section-notes").show();
+        $(".bcrumbs-single-item-section-lists").hide();
+        $(".bcrumbs-single-item-section-reviews").hide();
         $(".bcrumbs-single-item-tab").removeClass('active');
         $(".bcrumbs-single-item-notes-link").addClass('active');
       }
-      return current = 'notes';
+      return this.current = 'notes';
     },
     showLists: function() {
-      var current;
-      if (current !== 'lists') {
-        $(".bc-single-section-info-s").hide();
-        $(".bc-single-section-notes-s").hide();
-        $(".bc-single-section-lists-s").show();
-        $(".bc-single-section-reviews-s").hide();
+      if (this.current !== 'lists') {
+        $(".bcrumbs-single-item-section-info").hide();
+        $(".bcrumbs-single-item-section-notes").hide();
+        $(".bcrumbs-single-item-section-lists").show();
+        $(".bcrumbs-single-item-section-reviews").hide();
         $(".bcrumbs-single-item-tab").removeClass('active');
         $(".bcrumbs-single-item-lists-link").addClass('active');
       }
-      return current = 'lists';
+      return this.current = 'lists';
     },
     showReviews: function() {
-      var current;
-      if (current !== 'reviews') {
-        $(".bc-single-section-info-s").hide();
-        $(".bc-single-section-notes-s").hide();
-        $(".bc-single-section-lists-s").hide();
-        $(".bc-single-section-reviews-s").show();
+      if (this.current !== 'reviews') {
+        $(".bcrumbs-single-item-section-info").hide();
+        $(".bcrumbs-single-item-section-notes").hide();
+        $(".bcrumbs-single-item-section-lists").hide();
+        $(".bcrumbs-single-item-section-reviews").show();
         $(".bcrumbs-single-item-tab").removeClass('active');
         $(".bcrumbs-single-item-reviews-link").addClass('active');
       }
-      return current = 'reviews';
+      return this.current = 'reviews';
     }
   });
 

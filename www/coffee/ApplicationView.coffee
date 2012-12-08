@@ -19,7 +19,7 @@ LOAF.ApplicationView = LOAF.BreadcrumbView.extend
     #@addCrumbsView.render()
     #@$(".bcrumbs-yelp-view").show()
     #@myCrumbs = false
-
+    debugger
     @singleItemView = new LOAF.SingleItemView
       el: $(".bcrumbs-single-view")
       model: LOAF.yelpLists.getLists()[0].models[0] || null

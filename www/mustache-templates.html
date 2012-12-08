@@ -126,58 +126,48 @@ modified
   </div>
 </script>
 
-<!-----------Single Item Template----------->
+<!-----------Single Item Template---------->
 <script id = "bc-single-item" type = "text/html">
   <!--this page's breadcrumbs can be inserted right before the below-->
   <h2>{{name of business}}</h2>
   <div class = "bcrumbs-single-item-img">
-    <img src = "{{img of business}}" style = "margin-top:-25%;">
+    <img src = "{{image_url}}" style = "margin-top:-25%;">
   </div>
 
   <ul class="bcrumbs-single-item-nav nav nav-pills">
     <li class = "active bcrumbs-single-item-tab bcrumbs-single-item-info-link">
-      <i class = "icon-info-sign"></i> <a href = "#">Information</a></li>
+      <i class = "icon-info-sign"></i> <a href = "javascript:void(0)">Information</a></li>
     <li class = "bcrumbs-single-item-tab bcrumbs-single-item-notes-link">
-      <i class = "icon-edit"></i><a href = "#">Notes</a></li>
+      <i class = "icon-edit"></i><a href = "javascript:void(0)">Notes</a></li>
     <li class = "bcrumbs-single-item-tab bcrumbs-single-item-lists-link">
-      <i class = "icon-list"></i><a href = "#">Lists</a></li>
+      <i class = "icon-list"></i><a href = "javascript:void(0)">Lists</a></li>
     <li class = "bcrumbs-single-item-tab bcrumbs-single-item-reviews-link">
-      <i class = "icon-star"></i><a href = "#">Reviews</a></li>
+      <i class = "icon-star"></i><a href = "javascript:void(0)">Reviews</a></li>
     <div class = "clearfix"></div>
   </ul>
   <div class = "bcrumbs-single-item-section">
-	<!--put in section info right below this line-->
+    <div class = "bcrumbs-single-item-section-info">
+      <h3>Information</h3>
+      <p>Rating: {{rating}}/5</p>
+      <p>Location: {{location.display_address}}</p>
+      <p>Info: {{snippet_text}}</p>
+    </div>
+    <div class = "bcrumbs-single-item-section-notes" style = "display: none">
+      <h3>Notes</h3>
+      <p>{{notes}}{{^notes}}You don't have any notes for this business. Click here to write something.{{/notes}}</p>
+    </div>
+    <div class = "bcrumbs-single-item-section-lists" style = "display: none">
+      <h3>Lists</h3>
+      <p><a href = "{{link to list}}">{{name of list the business belongs to}}</a></p>
+    </div>
+    <div class = "bcrumbs-single-item-section-reviews" style = "display: none">
+      <h3>Reviews</h3>
+      <!--while has reviews-->
+      <p>Date: {{date of review}}</p>
+      <p>Rating: </p>
+      <p>{{review text}}</p>
+    </div>
   </div>  
   <!--append the section div below-->
 
-</script>
-
-<!-----------List Single Item: Section Templates---------->
-
-<!--Information-->
-<script id = "bc-single-section-info-s" type = "text/html">
-  <h3>Information</h3>
-  <p>Rating: {{overall business rating}}</p>
-  <p>Location: {{business address}}</p>
-  <p>Info: {{general overview}}</p>
-</script>
-<!--Notes-->
-<script id = "bc-single-section-notes-s" type = "text/html">
-  <h3>Notes</h3>
-  <p>{{notes about business}}</p>
-</script>
-
-<!--Lists-->
-<script id = "bc-single-section-lists-s" type = "text/html">
-  <h3>Lists</h3>
-  <p><a href = "{{link to list}}">{{name of list the business belongs to}}</a></p>
-</script>
-
-<!--Reviews-->
-<script id = "bc-single-section-reviews-s" type = "text/html">
-  <h3>Reviews</h3>
-  <!--while has reviews-->
-  <p>Date: {{date of review}}</p>
-  <p>Rating: {{nearest whole number of stars /* while (hasStars) append <i class = "icon-star"></i> */}}</p>
-  <p>{{review text}}</p>
 </script>
