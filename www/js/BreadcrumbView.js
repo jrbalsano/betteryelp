@@ -6,25 +6,39 @@
       if (!options) {
         options = {};
       }
-      return this.history = options.history ? options.history : [];
+      this.history = options.history ? options.history : [];
+      if (options.caller) {
+        options.caller.id = this.history.length;
+      }
+      return this.history.push(options.caller);
     },
     renderHistory: function() {
-      var list, templateValues;
-      templateValues = {
-        historyItems: this.history,
-        currentTitle: this.title
-      };
-      list = Mustache.render($(".template.history-list").html(), templateValues);
+      var list,
+        _this = this;
+      list = Mustache.render(LOAF.templates.bcHistory, this);
       this.$(".bcrumbs-path").html(list);
-      return this.$(".history-link").click(this._onHistoryClick);
+      return this.$(".history-link").click(function(e) {
+        return _this._onHistoryClick(e);
+      });
     },
     _onHistoryClick: function(e) {
       var viewToShow;
       e.preventDefault();
       this.$el.hide();
       viewToShow = this.history[e.currentTarget.dataset.id].view;
-      return viewToShow.show();
+      return viewToShow.$el.show();
     }
   });
+
+  LOAF.HistoryItem = (function() {
+
+    function HistoryItem(options) {
+      this.view = options.view;
+      this.title = options.title;
+    }
+
+    return HistoryItem;
+
+  })();
 
 }).call(this);

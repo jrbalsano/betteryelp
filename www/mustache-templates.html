@@ -4,22 +4,30 @@ modified
 -->
 
 
+<!----------All Views: History---------->
+<script id = "bc-history" type = "text/html">
+  {{#history}}
+  <li><a href = "javascript:void(0)" data-id="{{id}}" class = "history-link">{{title}}</a><span class = "divider">/</span></li>
+  {{/history}}
+  <li class = "active">{{title}}</li>
+</script>
+
 <!-----------My Crumbs View: Wrapper---------->
 <script id = "bcrumbs-mycrumbs-view-s" type = "text/html">
-    <div class = "bcrumbs-mycrumbs-view bcrumbs-view">
-		<h2>My Crumbs</h2>
-		
-		<!--appending the breadcrumbs items here-->
-		
-	</div><!--my crumbs-->
+  <div class = "bcrumbs-mycrumbs-view bcrumbs-view">
+    <h2>My Crumbs</h2>
+
+    <!--appending the breadcrumbs items here-->
+
+  </div><!--my crumbs-->
 </script>
 
 <!-----------My Crumbs View: Add List Item Template---------->
 <script id = "bc-list-add-s" type = "text/html">
-	<div class = "bcrumbs-list-add bcrumbs-listing">
-		<span class = "bcrumbs-list-img img-crop"><img src = "img/bcrumbs-add.png"></span>
-		<span>New List</span>
-	</div>
+  <div class = "bcrumbs-list-add bcrumbs-listing">
+    <span class = "bcrumbs-list-img img-crop"><img src = "img/bcrumbs-add.png"></span>
+    <span>New List</span>
+  </div>
 </script>
 
 <!-----------My Crumbs View: List Item Template---------->
@@ -35,6 +43,23 @@ modified
   </div>
 </script>
 
+<!----------Single List View Template---------->
+<script id = "bc-single-list-view" type = "text/html">
+  <ul class = "bcrumbs-path breadcrumb">
+  </ul>
+
+  <span class = "edit-toggle pull-right">
+    Edit Mode:            
+    <div class="btn-group">
+      <button class="btn">On</button>
+      <button class="btn">Off</button>
+    </div>
+  </span>
+
+  <h2>{{title}}</h2>
+
+  <div class = "bcrumbs-list-view-items"> </div>
+</script>
 
 <!-----------My Crumbs View: List Single Item Template---------->
 <script id = "bc-list-view-single" type = "text/html">
@@ -46,7 +71,7 @@ modified
       </span>
       <span class = "img-overlay" style = "display: none;"></span>
 
-      <img src = "{{image for this business}}">
+      <img src = "{{image_url}}">
       <span class = "bcrumbs-single-icons">
         <a href = "javascript:void(0)"><i class="icon-info-sign"></i></a>
         <a href = "javascript:void(0)"><i class="icon-edit"></i></a>
@@ -54,7 +79,7 @@ modified
         <a href = "javascript:void(0)"><i class="icon-star"></i></a>
       </span>
     </span>
-    <span><a href = "{{link to single view detail}}">{{name of business}}</a></span>
+    <span><a href = "javascript:void(0)">{{name}}</a></span>
   </div>
 </script>
 
@@ -105,25 +130,40 @@ modified
 
 <!-----------Add Crumbs View: List Single Item Template---------->
 <script id = "bc-yelp-view-single" type = "text/html">
-  <div class = "bcrumbs-single-list-item bcrumbs-listing">
-    <span class = "bcrumbs-single-list-item-img img-crop">
+  <span class = "bcrumbs-single-list-item-img img-crop">
 
-      <span class = "img-overlay-text" style = "display: none;">
-        <!--show/hide appropriate text here-->
+    <span class = "img-overlay-text" style = "display: none;">
+      <span class = "bc-list-view-single-info" style = "display: none;">
+        <button class = "close pull-right">&times;</button>
+        {{snippet_text}}
       </span>
-
-      <span class = "img-overlay" style = "display: none;"></span>
-
-      <img src = "{{image for this business}}">
-      <span class = "bcrumbs-single-icons">
-        <a href = "javascript:void(0)"><i class="icon-info-sign"></i></a>
-        <a href = "javascript:void(0)"><i class="icon-plus"></i></a>
-        <a href = "javascript:void(0)"><i class="icon-list"></i></a>
-        <a href = "javascript:void(0)"><i class="icon-star"></i></a>
+      <span class = "bc-list-view-single-add" style = "display: none;">
+        <button class = "close pull-right">&times;</button>
+        Click to save this business to your bookmarks
+      </span>
+      <span class = "bc-list-view-single-lists" style = "display: none;">
+        <button class = "close pull-right">&times;</button>
+        <!--while has lists (if need to be truncated, list as many as possible then append with +3, +4, etc)-->
+        {{this_business lists}}<br />
+      </span>
+      <span class = "bc-list-view-single-reviews" style = "display: none;">
+        <button class = "close pull-right">&times;</button>
+        Number of reviews: {{review_count}}<br />
+        Overal rating: {{rating}}/5
       </span>
     </span>
+
+    <span class = "img-overlay" style = "display: none;"></span>
+
+    <img src = "{{image_url}}">
+    <span class = "bcrumbs-single-icons">
+      <a href = "javascript:void(0)"><i class="icon-info-sign"></i></a>
+      <a href = "javascript:void(0)"><i class="icon-plus"></i></a>
+      <a href = "javascript:void(0)"><i class="icon-list"></i></a>
+      <a href = "javascript:void(0)"><i class="icon-star"></i></a>
+    </span>
+  </span>
     <span><a href = "{{link to single view detail}}">{{business name}}</a></span>
-  </div>
 </script>
 
 <!-----------Single Item Template----------->

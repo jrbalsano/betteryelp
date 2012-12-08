@@ -4,6 +4,7 @@ $(document).ready ->
     getTemplate = (templateName) ->
       temps.filter("##{templateName}").html()
     LOAF.templates = {}
+    LOAF.templates.bcHistory = getTemplate "bc-history"
     LOAF.templates.bcListViewList = getTemplate "bc-list-view-list" 
     LOAF.templates.bcListViewSingle = getTemplate "bc-list-view-single"
     LOAF.templates.bcListViewSingleInfoS = getTemplate "bc-list-view-single-info-s"
@@ -17,3 +18,4 @@ $(document).ready ->
     LOAF.templates.bcSingleSectionNotesS = getTemplate "bc-single-section-notes-s"
     LOAF.templates.bcSingleSectionListsS = getTemplate "bc-single-section-lists-s"
     LOAF.templates.bcSingleSectionReviewsS = getTemplate "bc-single-section-reviews-s"
+    LOAF.templates.bcSingleListView = getTemplate "bc-single-list-view"

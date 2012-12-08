@@ -154,6 +154,11 @@ body,
 	opacity: 0.8;
 }
 
+.bcrumbs-single-list-item-img img {
+  height: 200px;
+  width: 200px;
+}
+
 .bcrumbs-single-icons {
 	position: relative;
 	float: left;

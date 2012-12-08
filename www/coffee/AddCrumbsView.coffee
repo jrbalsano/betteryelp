@@ -4,10 +4,27 @@ LOAF.AddCrumbsView = LOAF.BreadcrumbView.extend
   initialize: ->
     @state = {}
     @state.browseExpanded = false
+    @_historyRep = new LOAF.HistoryItem
+      title: "Add Crumbs"
+      view: @
 
   events:
     "click .bcrumbs-browse-category-toggle": "onCategoryToggle"
     "click .bcrumbs-browse-collapse": "onCategoryToggle"
+    "click .bcrumbs-list a": "onShowList"
+
+  onShowList: (e) ->
+    e.preventDefault
+    listId = parseInt e.srcElement.dataset.id
+    el = $(".bcrumbs-list-view")
+    singleListView = new LOAF.SingleListView
+      collection: LOAF.yelpLists.where(id: listId)[0]
+      el: el
+      caller: @_historyRep
+      type: "yelp"
+    singleListView.render()
+    @$el.hide()
+    el.show()
 
   onCategoryToggle: (e) ->
     e.preventDefault

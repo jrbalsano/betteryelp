@@ -9,6 +9,7 @@
         return temps.filter("#" + templateName).html();
       };
       LOAF.templates = {};
+      LOAF.templates.bcHistory = getTemplate("bc-history");
       LOAF.templates.bcListViewList = getTemplate("bc-list-view-list");
       LOAF.templates.bcListViewSingle = getTemplate("bc-list-view-single");
       LOAF.templates.bcListViewSingleInfoS = getTemplate("bc-list-view-single-info-s");
@@ -21,7 +22,8 @@
       LOAF.templates.bcSingleSectionInfoS = getTemplate("bc-single-section-info-s");
       LOAF.templates.bcSingleSectionNotesS = getTemplate("bc-single-section-notes-s");
       LOAF.templates.bcSingleSectionListsS = getTemplate("bc-single-section-lists-s");
-      return LOAF.templates.bcSingleSectionReviewsS = getTemplate("bc-single-section-reviews-s");
+      LOAF.templates.bcSingleSectionReviewsS = getTemplate("bc-single-section-reviews-s");
+      return LOAF.templates.bcSingleListView = getTemplate("bc-single-list-view");
     });
   });
 

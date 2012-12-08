@@ -49,6 +49,10 @@
       return _.where(this.lists, properties);
     };
 
+    ListsList.prototype.each = function(iterator, context) {
+      return _.each(this.lists, iterator, context);
+    };
+
     ListsList.prototype.search = function(term) {
       return _.flatten(_.map(this.lists, function(list) {
         return list.search(term);

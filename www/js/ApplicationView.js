@@ -17,9 +17,13 @@
       this.addCrumbsView = new LOAF.AddCrumbsView({
         el: this.$(".bcrumbs-yelp-view")
       });
+      this.myCrumbsView = new LOAF.MyCrumbsView({
+        el: this.$(".bcrumbs-mycrumbs-view")
+      });
       this.addCrumbsView.render();
-      this.$(".bcrumbs-yelp-view").show();
-      return this.myCrumbs = false;
+      this.myCrumbsView.render();
+      this.$(".bcrumbs-mycrumbs-view").show();
+      return this.myCrumbs = true;
     },
     startApplication: function(cb, context) {
       var loadApp,
@@ -43,7 +47,7 @@
     showAddCrumbs: function(e) {
       e.preventDefault();
       if (this.myCrumbs) {
-        this.$(".bcrumbs-mycrumbs-view").hide();
+        this.$(".bcrumbs-view").hide();
         this.$(".bcrumbs-yelp-view").show();
         return this.myCrumbs = !this.myCrumbs;
       }
@@ -51,7 +55,7 @@
     showMyCrumbs: function(e) {
       e.preventDefault();
       if (!this.myCrumbs) {
-        this.$(".bcrumbs-yelp-view").hide();
+        this.$(".bcrumbs-view").hide();
         this.$(".bcrumbs-mycrumbs-view").show();
         return this.myCrumbs = !this.myCrumbs;
       }
@@ -116,7 +120,7 @@
       tempCLs = [];
       _.each(cLs, function(cL) {
         var customList;
-        customList = new LOAF.CustomList(cL, {
+        customList = new LOAF.CustomList(cL.models, {
           name: cL.name,
           isAllCrumbs: cL.isAllCrumbs,
           id: cL.id
