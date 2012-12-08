@@ -13,13 +13,15 @@
     },
     onStart: function() {
       clearTimeout(this.loadingTimeout);
+      console.log("completed loading");
       this.$(".bcrumbs-loading").hide();
-      this.addCrumbsView = new LOAF.AddCrumbsView({
-        el: this.$(".bcrumbs-yelp-view")
+      this.singleItemView = new LOAF.SingleItemView({
+        el: $(".bcrumbs-single-view"),
+        model: LOAF.yelpLists.getLists()[0].models[0] || null
       });
-      this.addCrumbsView.render();
-      this.$(".bcrumbs-yelp-view").show();
-      return this.myCrumbs = false;
+      this.singleItemView.render();
+      $(".bcrumbs-single-view").show();
+      return this.myCrumbs = true;
     },
     startApplication: function(cb, context) {
       var loadApp,

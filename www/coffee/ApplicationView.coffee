@@ -11,17 +11,26 @@ LOAF.ApplicationView = LOAF.BreadcrumbView.extend
     # MyBookmarksView.render()
     # AddBookmarksView.hide()
     clearTimeout @loadingTimeout
+    console.log "completed loading"
     @$(".bcrumbs-loading").hide()
-    @addCrumbsView = new LOAF.AddCrumbsView
-      el: @$(".bcrumbs-yelp-view")
-    @addCrumbsView.render()
-    @$(".bcrumbs-yelp-view").show()
-    @myCrumbs = false
+
+    #@addCrumbsView = new LOAF.AddCrumbsView
+    #  el: @$(".bcrumbs-yelp-view")
+    #@addCrumbsView.render()
+    #@$(".bcrumbs-yelp-view").show()
+    #@myCrumbs = false
+
+    @singleItemView = new LOAF.SingleItemView
+      el: $(".bcrumbs-single-view")
+      model: LOAF.yelpLists.getLists()[0].models[0] || null
+    @singleItemView.render()
+    $(".bcrumbs-single-view").show()
+    # @$(".bcrumbs-mycrumbs-view").show()
+    @myCrumbs = true
 
   startApplication: (cb, context) ->
     loadApp = new LOAF.FsJsonObject
       onReady: (fs) =>
-        # This function implements all the features
         data = fs.getObject()
         if data.sessionExists then @_loadSession data, cb, context else @_newSession cb, context
 
