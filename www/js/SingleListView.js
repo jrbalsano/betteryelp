@@ -14,19 +14,26 @@
       return this.initHistory(options);
     },
     render: function() {
-      var html, itemsHtml, obj, template;
+      var html, listItemViews, obj, template;
       html = "";
       obj = {
         title: this.collection.title || this.collection.name
       };
       html = Mustache.render(LOAF.templates.bcSingleListView, obj);
       this.$el.html(html);
-      itemsHtml = "";
+      listItemViews = [];
       template = this.type === "yelp" ? LOAF.templates.bcYelpViewSingle : LOAF.templates.bcListViewSingle;
       this.collection.each(function(business) {
-        return itemsHtml += Mustache.render(template, business.attributes);
+        return listItemViews.push(new LOAF.ListSingleItemView({
+          model: business,
+          template: template
+        }));
       });
-      this.$(".bcrumbs-list-view-items").html(itemsHtml);
+      _.each(listItemViews, function(o) {
+        o.render();
+        return this.$(".bcrumbs-list-view-items").append(o.el);
+      });
+      this.listItemViews = listItemViews;
       return this.renderHistory();
     }
   });

@@ -130,25 +130,40 @@ modified
 
 <!-----------Add Crumbs View: List Single Item Template---------->
 <script id = "bc-yelp-view-single" type = "text/html">
-  <div class = "bcrumbs-single-list-item bcrumbs-listing">
-    <span class = "bcrumbs-single-list-item-img img-crop">
+  <span class = "bcrumbs-single-list-item-img img-crop">
 
-      <span class = "img-overlay-text" style = "display: none;">
-        <!--show/hide appropriate text here-->
+    <span class = "img-overlay-text" style = "display: none;">
+      <span class = "bc-list-view-single-info" style = "display: none;">
+        <button class = "close pull-right">&times;</button>
+        {{snippet_text}}
       </span>
-
-      <span class = "img-overlay" style = "display: none;"></span>
-
-      <img src = "{{image for this business}}">
-      <span class = "bcrumbs-single-icons">
-        <a href = "javascript:void(0)"><i class="icon-info-sign"></i></a>
-        <a href = "javascript:void(0)"><i class="icon-plus"></i></a>
-        <a href = "javascript:void(0)"><i class="icon-list"></i></a>
-        <a href = "javascript:void(0)"><i class="icon-star"></i></a>
+      <span class = "bc-list-view-single-add" style = "display: none;">
+        <button class = "close pull-right">&times;</button>
+        Click to save this business to your bookmarks
+      </span>
+      <span class = "bc-list-view-single-lists" style = "display: none;">
+        <button class = "close pull-right">&times;</button>
+        <!--while has lists (if need to be truncated, list as many as possible then append with +3, +4, etc)-->
+        {{this_business lists}}<br />
+      </span>
+      <span class = "bc-list-view-single-reviews" style = "display: none;">
+        <button class = "close pull-right">&times;</button>
+        Number of reviews: {{review_count}}<br />
+        Overal rating: {{rating}}/5
       </span>
     </span>
+
+    <span class = "img-overlay" style = "display: none;"></span>
+
+    <img src = "{{image_url}}">
+    <span class = "bcrumbs-single-icons">
+      <a href = "javascript:void(0)"><i class="icon-info-sign"></i></a>
+      <a href = "javascript:void(0)"><i class="icon-plus"></i></a>
+      <a href = "javascript:void(0)"><i class="icon-list"></i></a>
+      <a href = "javascript:void(0)"><i class="icon-star"></i></a>
+    </span>
+  </span>
     <span><a href = "{{link to single view detail}}">{{business name}}</a></span>
-  </div>
 </script>
 
 <!-----------Single Item Template----------->

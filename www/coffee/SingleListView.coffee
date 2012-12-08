@@ -18,11 +18,16 @@ LOAF.SingleListView = LOAF.BreadcrumbView.extend
     @$el.html html
 
     # Add individual business
-    itemsHtml = ""
+    listItemViews = []
     template = if @type == "yelp" then LOAF.templates.bcYelpViewSingle else LOAF.templates.bcListViewSingle
     @collection.each (business) ->
-      itemsHtml += Mustache.render template, business.attributes
-    @$(".bcrumbs-list-view-items").html itemsHtml
+      listItemViews.push new LOAF.ListSingleItemView
+        model: business
+        template: template
+    _.each listItemViews, (o) ->
+      o.render()
+      @$(".bcrumbs-list-view-items").append o.el
+    @listItemViews = listItemViews
 
     # render history
     @renderHistory()

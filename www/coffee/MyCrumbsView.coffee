@@ -17,6 +17,7 @@ LOAF.MyCrumbsView = LOAF.BreadcrumbView.extend
       collection: LOAF.customLists.where(id: listId)[0]
       el: el
       caller: @_historyRep
+      type: "custom"
     singleListView.render()
     @$el.hide()
     el.show()

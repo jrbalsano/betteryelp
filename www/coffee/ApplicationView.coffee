@@ -39,14 +39,14 @@ LOAF.ApplicationView = LOAF.BreadcrumbView.extend
   showAddCrumbs: (e) ->
     e.preventDefault()
     if @myCrumbs
-      @$(".bcrumbs-mycrumbs-view").hide()
+      @$(".bcrumbs-view").hide()
       @$(".bcrumbs-yelp-view").show()
       @myCrumbs = !@myCrumbs
 
   showMyCrumbs: (e) ->
     e.preventDefault()
     unless @myCrumbs
-      @$(".bcrumbs-yelp-view").hide()
+      @$(".bcrumbs-view").hide()
       @$(".bcrumbs-mycrumbs-view").show()
       @myCrumbs = !@myCrumbs
 

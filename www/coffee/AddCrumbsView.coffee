@@ -21,6 +21,7 @@ LOAF.AddCrumbsView = LOAF.BreadcrumbView.extend
       collection: LOAF.yelpLists.where(id: listId)[0]
       el: el
       caller: @_historyRep
+      type: "yelp"
     singleListView.render()
     @$el.hide()
     el.show()

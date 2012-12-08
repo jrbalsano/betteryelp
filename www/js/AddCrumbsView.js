@@ -27,7 +27,8 @@
           id: listId
         })[0],
         el: el,
-        caller: this._historyRep
+        caller: this._historyRep,
+        type: "yelp"
       });
       singleListView.render();
       this.$el.hide();

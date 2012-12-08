@@ -23,7 +23,8 @@
           id: listId
         })[0],
         el: el,
-        caller: this._historyRep
+        caller: this._historyRep,
+        type: "custom"
       });
       singleListView.render();
       this.$el.hide();

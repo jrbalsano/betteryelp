@@ -47,7 +47,7 @@
     showAddCrumbs: function(e) {
       e.preventDefault();
       if (this.myCrumbs) {
-        this.$(".bcrumbs-mycrumbs-view").hide();
+        this.$(".bcrumbs-view").hide();
         this.$(".bcrumbs-yelp-view").show();
         return this.myCrumbs = !this.myCrumbs;
       }
@@ -55,7 +55,7 @@
     showMyCrumbs: function(e) {
       e.preventDefault();
       if (!this.myCrumbs) {
-        this.$(".bcrumbs-yelp-view").hide();
+        this.$(".bcrumbs-view").hide();
         this.$(".bcrumbs-mycrumbs-view").show();
         return this.myCrumbs = !this.myCrumbs;
       }
