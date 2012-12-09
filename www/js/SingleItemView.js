@@ -5,11 +5,15 @@
     tagName: 'div',
     className: 'bcrumbs-single-view',
     current: 'info',
+    initialize: function(options) {
+      this.title = this.model.get("name");
+      return this.initHistory(options);
+    },
     render: function() {
-      debugger;
       var html;
       html = Mustache.render(LOAF.templates.bcSingleItem, (this.model ? this.model.attributes : {}));
-      return this.$el.html(html);
+      this.$el.html(html);
+      return this.renderHistory();
     },
     events: {
       "click .bcrumbs-single-item-info-link": "showInfo",

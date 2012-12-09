@@ -23,8 +23,7 @@
       });
       this.addCrumbsView.render();
       this.myCrumbsView.render();
-      this.$(".bcrumbs-mycrumbs-view").show();
-      return this.myCrumbs = true;
+      return this.$(".bcrumbs-mycrumbs-view").show();
     },
     startApplication: function(cb, context) {
       var loadApp,
@@ -47,19 +46,15 @@
     },
     showAddCrumbs: function(e) {
       e.preventDefault();
-      if (this.myCrumbs) {
-        this.$(".bcrumbs-view").hide();
-        this.$(".bcrumbs-yelp-view").show();
-        return this.myCrumbs = !this.myCrumbs;
-      }
+      this.$(".bcrumbs-view").hide();
+      this.$(".bcrumbs-yelp-view").show();
+      return this.myCrumbs = !this.myCrumbs;
     },
     showMyCrumbs: function(e) {
       e.preventDefault();
-      if (!this.myCrumbs) {
-        this.$(".bcrumbs-view").hide();
-        this.$(".bcrumbs-mycrumbs-view").show();
-        return this.myCrumbs = !this.myCrumbs;
-      }
+      this.$(".bcrumbs-view").hide();
+      this.$(".bcrumbs-mycrumbs-view").show();
+      return this.myCrumbs = !this.myCrumbs;
     },
     saveApplication: function() {
       var object;

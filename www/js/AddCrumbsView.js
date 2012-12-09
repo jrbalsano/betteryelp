@@ -18,11 +18,14 @@
       "click .bcrumbs-list a": "onShowList"
     },
     onShowList: function(e) {
-      var el, listId, singleListView;
+      var el, listId;
       e.preventDefault;
       listId = parseInt(e.srcElement.dataset.id);
       el = $(".bcrumbs-list-view");
-      singleListView = new LOAF.SingleListView({
+      if (LOAF.singleListView != null) {
+        LOAF.singleListView.undelegateEvents();
+      }
+      LOAF.singleListView = new LOAF.SingleListView({
         collection: LOAF.yelpLists.where({
           id: listId
         })[0],
@@ -30,7 +33,7 @@
         caller: this._historyRep,
         type: "yelp"
       });
-      singleListView.render();
+      LOAF.singleListView.render();
       this.$el.hide();
       return el.show();
     },

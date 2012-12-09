@@ -9,6 +9,21 @@ LOAF.SingleListView = LOAF.BreadcrumbView.extend
       view: @
     @initHistory options
 
+  events:
+    "click .bcrumbs-single-list-view-link a": "onShowItem"
+
+  onShowItem: (e) ->
+    e.preventDefault()
+    LOAF.singleView.undelegateEvents() if LOAF.singleView?
+    LOAF.singleView = new LOAF.SingleItemView
+      el: $(".bcrumbs-single-view")
+      model: @collection.get(e.srcElement.dataset.id)
+      caller: @_historyRep
+      history: @history.slice(0)
+    LOAF.singleView.render()
+    @$el.hide()
+    LOAF.singleView.$el.show()
+
   render: ->
     # Create Basic Layout
     html = ""

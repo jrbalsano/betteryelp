@@ -24,7 +24,6 @@ LOAF.ApplicationView = LOAF.BreadcrumbView.extend
     @addCrumbsView.render()
     @myCrumbsView.render()
     @$(".bcrumbs-mycrumbs-view").show()
-    @myCrumbs = true
 
   startApplication: (cb, context) ->
     loadApp = new LOAF.FsJsonObject
@@ -38,17 +37,15 @@ LOAF.ApplicationView = LOAF.BreadcrumbView.extend
 
   showAddCrumbs: (e) ->
     e.preventDefault()
-    if @myCrumbs
-      @$(".bcrumbs-view").hide()
-      @$(".bcrumbs-yelp-view").show()
-      @myCrumbs = !@myCrumbs
+    @$(".bcrumbs-view").hide()
+    @$(".bcrumbs-yelp-view").show()
+    @myCrumbs = !@myCrumbs
 
   showMyCrumbs: (e) ->
     e.preventDefault()
-    unless @myCrumbs
-      @$(".bcrumbs-view").hide()
-      @$(".bcrumbs-mycrumbs-view").show()
-      @myCrumbs = !@myCrumbs
+    @$(".bcrumbs-view").hide()
+    @$(".bcrumbs-mycrumbs-view").show()
+    @myCrumbs = !@myCrumbs
 
   saveApplication: ->
     object = {}

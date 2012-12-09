@@ -79,7 +79,7 @@ modified
         <a href = "javascript:void(0)"><i class="icon-star"></i></a>
       </span>
     </span>
-    <span><a href = "javascript:void(0)">{{name}}</a></span>
+    <span class = "bcrumbs-single-list-view-link"><a href = "javascript:void(0)">{{name}}</a></span>
   </div>
 </script>
 
@@ -163,12 +163,14 @@ modified
       <a href = "javascript:void(0)"><i class="icon-star"></i></a>
     </span>
   </span>
-    <span><a href = "{{link to single view detail}}">{{business name}}</a></span>
+  <span class = "bcrumbs-single-list-view-link"><a href = "javascript:void(0)" data-id={{id}}>{{name}}</a></span>
 </script>
 
 <!-----------Single Item Template---------->
 <script id = "bc-single-item" type = "text/html">
-  <!--this page's breadcrumbs can be inserted right before the below-->
+  <ul class = "bcrumbs-path breadcrumb">
+  </ul>
+
   <h2>{{name of business}}</h2>
   <div class = "bcrumbs-single-item-img">
     <img src = "{{image_url}}" style = "margin-top:-25%;">
