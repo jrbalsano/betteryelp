@@ -2,6 +2,7 @@ LOAF.SingleItemView = LOAF.BreadcrumbView.extend
   tagName: 'div'
   className: 'bcrumbs-single-view'
   current: 'info'
+
   initialize: (options) ->
     @title = @model.get("name")
     @initHistory options
@@ -9,10 +10,11 @@ LOAF.SingleItemView = LOAF.BreadcrumbView.extend
   render: ->
     html = Mustache.render(LOAF.templates.bcSingleItem, (if @model then @model.attributes else {}) )
     @$el.html html
+    debugger
     @renderHistory()
 
+
   events:
-    #"click .bcrumbs-browse-category-toggle": "onCategoryToggle"
     "click .bcrumbs-single-item-info-link": "showInfo"
     "click .bcrumbs-single-item-notes-link": "showNotes"
     "click .bcrumbs-single-item-lists-link": "showLists"

@@ -1,4 +1,10 @@
 LOAF.Business = Backbone.Model.extend
+  #cover_image_url: 'none'
+
+  initialize: ->
+  	img_name_append = @.get("categories")[0][1]
+  	@.set("cover_image_url") = "img/cat_#{img_name_append}.jpg"
+
   search: (term) ->
     term = term.toUpperCase()
     _.some @attributes, (value, key) ->

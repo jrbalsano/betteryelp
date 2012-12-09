@@ -2,6 +2,11 @@
 (function() {
 
   LOAF.Business = Backbone.Model.extend({
+    initialize: function() {
+      var cover_image_url, img_name_append;
+      img_name_append = this.get("categories")[0][1];
+      return cover_image_url = "img/cat_" + img_name_append + ".jpg";
+    },
     search: function(term) {
       term = term.toUpperCase();
       return _.some(this.attributes, function(value, key) {

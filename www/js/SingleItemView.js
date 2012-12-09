@@ -13,6 +13,7 @@
       var html;
       html = Mustache.render(LOAF.templates.bcSingleItem, (this.model ? this.model.attributes : {}));
       this.$el.html(html);
+      debugger;
       return this.renderHistory();
     },
     events: {
