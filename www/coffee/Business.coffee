@@ -2,8 +2,12 @@ LOAF.Business = Backbone.Model.extend
   #cover_image_url: 'none'
 
   initialize: ->
-  	img_name_append = @.get("categories")[0][1]
-  	@.set("cover_image_url") = "img/cat_#{img_name_append}.jpg"
+    current_categories = ['active', 'arts', 'food', 'hotelstravel', 'localflavor', 'localservices', 'nightlife', 'restaurants', 'shopping', 'yoga', 'icecream', 'museums']
+    img_name_append = @.get("categories")[0][1]
+    if img_name_append not in current_categories
+      @.set("cover_image_url", "http://placehold.it/960x300&text=Business+Image+Missing+_#{img_name_append}")
+    else
+  	  @.set("cover_image_url", "img/cat_#{img_name_append}.jpg")
 
   search: (term) ->
     term = term.toUpperCase()

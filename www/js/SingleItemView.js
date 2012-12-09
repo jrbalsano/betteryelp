@@ -12,8 +12,8 @@
     render: function() {
       var html;
       html = Mustache.render(LOAF.templates.bcSingleItem, (this.model ? this.model.attributes : {}));
-      this.$el.html(html);
       debugger;
+      this.$el.html(html);
       return this.renderHistory();
     },
     events: {

@@ -9,8 +9,8 @@ LOAF.SingleItemView = LOAF.BreadcrumbView.extend
 
   render: ->
     html = Mustache.render(LOAF.templates.bcSingleItem, (if @model then @model.attributes else {}) )
-    @$el.html html
     debugger
+    @$el.html html
     @renderHistory()
 
 
