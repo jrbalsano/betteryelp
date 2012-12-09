@@ -13,6 +13,24 @@
       });
       return this.initHistory(options);
     },
+    events: {
+      "click .bcrumbs-single-list-view-link a": "onShowItem"
+    },
+    onShowItem: function(e) {
+      e.preventDefault();
+      if (LOAF.singleView != null) {
+        LOAF.singleView.undelegateEvents();
+      }
+      LOAF.singleView = new LOAF.SingleItemView({
+        el: $(".bcrumbs-single-view"),
+        model: this.collection.get(e.srcElement.dataset.id),
+        caller: this._historyRep,
+        history: this.history.slice(0)
+      });
+      LOAF.singleView.render();
+      this.$el.hide();
+      return LOAF.singleView.$el.show();
+    },
     render: function() {
       var html, listItemViews, obj, template;
       html = "";

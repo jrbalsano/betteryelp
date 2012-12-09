@@ -11,6 +11,7 @@ LOAF.ApplicationView = LOAF.BreadcrumbView.extend
     # MyBookmarksView.render()
     # AddBookmarksView.hide()
     clearTimeout @loadingTimeout
+    console.log "completed loading"
     @$(".bcrumbs-loading").hide()
     
     # create necessary views
@@ -23,12 +24,10 @@ LOAF.ApplicationView = LOAF.BreadcrumbView.extend
     @addCrumbsView.render()
     @myCrumbsView.render()
     @$(".bcrumbs-mycrumbs-view").show()
-    @myCrumbs = true
 
   startApplication: (cb, context) ->
     loadApp = new LOAF.FsJsonObject
       onReady: (fs) =>
-        # This function implements all the features
         data = fs.getObject()
         if data.sessionExists then @_loadSession data, cb, context else @_newSession cb, context
 
@@ -38,17 +37,15 @@ LOAF.ApplicationView = LOAF.BreadcrumbView.extend
 
   showAddCrumbs: (e) ->
     e.preventDefault()
-    if @myCrumbs
-      @$(".bcrumbs-view").hide()
-      @$(".bcrumbs-yelp-view").show()
-      @myCrumbs = !@myCrumbs
+    @$(".bcrumbs-view").hide()
+    @$(".bcrumbs-yelp-view").show()
+    @myCrumbs = !@myCrumbs
 
   showMyCrumbs: (e) ->
     e.preventDefault()
-    unless @myCrumbs
-      @$(".bcrumbs-view").hide()
-      @$(".bcrumbs-mycrumbs-view").show()
-      @myCrumbs = !@myCrumbs
+    @$(".bcrumbs-view").hide()
+    @$(".bcrumbs-mycrumbs-view").show()
+    @myCrumbs = !@myCrumbs
 
   saveApplication: ->
     object = {}

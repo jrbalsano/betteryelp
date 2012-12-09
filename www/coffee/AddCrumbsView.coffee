@@ -17,12 +17,13 @@ LOAF.AddCrumbsView = LOAF.BreadcrumbView.extend
     e.preventDefault
     listId = parseInt e.srcElement.dataset.id
     el = $(".bcrumbs-list-view")
-    singleListView = new LOAF.SingleListView
+    LOAF.singleListView.undelegateEvents() if LOAF.singleListView?
+    LOAF.singleListView = new LOAF.SingleListView
       collection: LOAF.yelpLists.where(id: listId)[0]
       el: el
       caller: @_historyRep
       type: "yelp"
-    singleListView.render()
+    LOAF.singleListView.render()
     @$el.hide()
     el.show()
 
