@@ -132,11 +132,15 @@ body,
 
 .bcrumbs-listing { /* Class for all list gridding */
 	width: 210px;
-	height: 260px;
 	margin: 0px 10px;
 	display: inline-block;
 	text-align: center;
 }
+
+.bcrumbs-listing:after {
+	clear: left;
+}
+
 
 .bcrumbs-listing > span,
 .bcrumbs-listing > img {
