@@ -153,10 +153,6 @@ body,
 	overflow: hidden;
 }
 
-.bcrumbs-single-list-item-img:hover {
-	opacity: 0.8;
-}
-
 .bcrumbs-single-list-item-img img {
   height: 200px;
   width: 200px;
