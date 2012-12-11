@@ -30,6 +30,7 @@ LOAF.ListSingleItemView = Backbone.View.extend
     @model.set "notes", note_text
     @$(".btn-info").addClass "btn-success"
     @$(".btn-info").removeClass "btn-info"
+    LOAF.appView.saveApplication()
 
   onClickInfo: ->
     if @current == "info"

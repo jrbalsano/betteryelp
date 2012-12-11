@@ -32,7 +32,8 @@
       note_text = this.$("textarea").val();
       this.model.set("notes", note_text);
       this.$(".btn-info").addClass("btn-success");
-      return this.$(".btn-info").removeClass("btn-info");
+      this.$(".btn-info").removeClass("btn-info");
+      return LOAF.appView.saveApplication();
     },
     onClickInfo: function() {
       if (this.current === "info") {

@@ -48,6 +48,7 @@ LOAF.ApplicationView = LOAF.BreadcrumbView.extend
     @myCrumbs = !@myCrumbs
 
   saveApplication: ->
+    $(".saving-cat").show()
     object = {}
     object.sessionExists = true
     object.yelpLists = LOAF.yelpLists.getLists()
@@ -57,6 +58,7 @@ LOAF.ApplicationView = LOAF.BreadcrumbView.extend
       onReady: (newSave) ->
         newSave.writeObject object, ->
           console.log "Save complete"
+          $(".saving-cat").hide()
 
   _newSession: (cb, context) ->
     # Generate List of Yelp Lists

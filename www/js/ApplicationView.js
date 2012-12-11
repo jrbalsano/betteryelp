@@ -58,6 +58,7 @@
     },
     saveApplication: function() {
       var object;
+      $(".saving-cat").show();
       object = {};
       object.sessionExists = true;
       object.yelpLists = LOAF.yelpLists.getLists();
@@ -66,7 +67,8 @@
         read: false,
         onReady: function(newSave) {
           return newSave.writeObject(object, function() {
-            return console.log("Save complete");
+            console.log("Save complete");
+            return $(".saving-cat").hide();
           });
         }
       });
