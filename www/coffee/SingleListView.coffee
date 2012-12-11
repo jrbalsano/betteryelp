@@ -83,15 +83,18 @@ LOAF.SingleListView = LOAF.BreadcrumbView.extend
     @$el.html html
 
     # Add individual business
-    listItemViews = []
-    template = if @type == "yelp" then LOAF.templates.bcYelpViewSingle else LOAF.templates.bcListViewSingle
-    @collection.each (business) ->
-      listItemViews.push new LOAF.ListSingleItemView
-        model: business
-        template: template
-    _.each listItemViews, (o) ->
-      o.render()
-      @$(".bcrumbs-list-view-items").append o.el
-    @listItemViews = listItemViews
+    if @collection.size() > 0
+      listItemViews = []
+      template = if @type == "yelp" then LOAF.templates.bcYelpViewSingle else LOAF.templates.bcListViewSingle
+      @collection.each (business) ->
+        listItemViews.push new LOAF.ListSingleItemView
+          model: business
+          template: template
+      _.each listItemViews, (o) ->
+        o.render()
+        @$(".bcrumbs-list-view-items").append o.el
+      @listItemViews = listItemViews
+    else
+      @$(".bcrumbs-list-view-items").html (Mustache.render LOAF.templates.bcSadCat, message: "There are no items in this list. You should add some!")
     # render history
     @renderHistory()
