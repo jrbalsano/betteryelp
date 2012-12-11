@@ -25,21 +25,19 @@ class LOAF.FsJsonObject
       successCallback = successCallback || ->
 
       fileWriterHandler = (fileWriter) =>
-        window.BlobBuilder = window.BlobBuilder || window.WebKitBlobBuilder
         json_string = JSON.stringify(@_jsonObject)
-        if typeof(BlobBuilder) != 'undefined'
-          bb = new BlobBuilder()
-          bb.append json_string
-          blob = bb.getBlob('text/plain')
-        else
-          blob = new Blob([json_string])
+        blob = new Blob([json_string])
         fileWriter.write blob
         successCallback()
 
       fileEntryHandler = (fileEntry) =>
         fileEntry.createWriter fileWriterHandler, @_onError
 
-      @fs.root.getFile @options.fileName, {create: true}, fileEntryHandler, @_onError
+      @fs.root.getFile @options.fileName, {create: false}, (fe) =>
+        fe.remove =>
+          @fs.root.getFile @options.fileName, {create: true}, fileEntryHandler, @_onError
+        , @onError
+      , @onError
 
   _onGranted: (fs) =>
     @fs = fs

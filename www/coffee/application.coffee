@@ -5,7 +5,7 @@ $(document).ready ->
 
 window.LOAF = {}
 
-LOAF.auth1 =
+LOAF.auth =
   consumerKey: "7KuRO73ZwWmHITKyZtYDiQ",
   consumerSecret: "PZQhVsM_Uq2AeuoTTs5hOIeaYgU",
   accessToken: "23Nr-ApBWYlaEBMu1xRiU9gytbVUPf91",
@@ -13,7 +13,7 @@ LOAF.auth1 =
   serviceProvider:
     signatureMethod: "HMAC-SHA1"
 
-LOAF.auth =
+LOAF.auth1 =
   consumerKey: "AEUkUwiC9VSIRHH6fL9Uyw"
   consumerSecret: "5y3UJ59898NrNHD9zVny6UO2xT0"
   accessToken: "UNsiNW4lTp-Z3BkAWlkcb0S-4cuyvOEg"
