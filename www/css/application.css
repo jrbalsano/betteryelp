@@ -187,13 +187,6 @@ body,
 	margin-top: 6px;
 	
 }
-
-/*Logan*/
-.bcrumbs-single-list-view-link {
-	font-family: Helvetica;
-	font-size: 16px;
-}
-/*Logan-End*/
 /* ==========================================================================
    Breadcrumbs Header & Footer
    ========================================================================== */
@@ -393,27 +386,6 @@ body,
 	margin-bottom: 20px;
 }
 
-/*Logan*/
-.bcrumbs-single-item-section-info {
-	font-family: Helvetica;
-	font-size: 14px;
-}
-
-.bcrumbs-single-item-section-notes {
-	font-family: Helvetica;
-	font-size: 14px;
-}
-
-.bcrumbs-single-item-section-lists {
-	font-family: Helvetica;
-	font-size: 14px;
-}
-
-.bcrumbs-single-item-section-reviews {
-	font-family: Helvetica;
-	font-size: 14px;
-}
-/*Logan-End*/
 .bcrumbs-single-item-img {
 	height: 300px;
 	width: 100%;
