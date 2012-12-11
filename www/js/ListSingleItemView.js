@@ -11,10 +11,12 @@
     events: {
       "mouseover .icon-info-sign": "onShowInfo",
       "mouseover .icon-plus": "onShowAdd",
+      "mouseover .icon-edit": "onShowEdit",
       "mouseover .icon-list": "onShowLists",
       "mouseover .icon-star": "onShowReviews",
       "click .icon-info-sign": "onClickInfo",
       "click .icon-plus": "onClickAdd",
+      "click .icon-edit": "onClickEdit",
       "click .icon-list": "onClickLists",
       "click .icon-star": "onClickReviews",
       "mouseout .bcrumbs-single-icons": "onExit"
@@ -43,6 +45,15 @@
     onClickAdd: function(e) {
       return LOAF.allCrumbsList.add(this.model);
     },
+
+    onClickEdit: function() {
+      if (this.current === "notes") {
+        return this.current = "none";
+      } else {
+      return this.current = "notes";
+      }
+    },
+
     onShowInfo: function() {
       if (this.current === "info" || this.current === "none") {
         this.$(".img-overlay-text >span").hide();
@@ -75,6 +86,16 @@
         return this.$(".bc-list-view-single-reviews").show();
       }
     },
+
+    onShowEdit: function() {
+      if (this.current === "edit" || this.current === "none") {
+      this.$(".img-overlay-text >span").hide();
+      this.$(".img-overlay-text").show();
+      this.$(".img-overlay").show();
+      return this.$(".bc-list-view-single-notes").show();
+      }
+    },
+
     onExit: function() {
       if (this.current === "none") {
         this.$(".img-overlay-text").hide();

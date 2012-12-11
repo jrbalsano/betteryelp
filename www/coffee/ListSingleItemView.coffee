@@ -9,10 +9,12 @@ LOAF.ListSingleItemView = Backbone.View.extend
   events:
     "mouseover .icon-info-sign": "onShowInfo"
     "mouseover .icon-plus": "onShowAdd"
+    "mouseover .icon-edit": "onShowEdit"
     "mouseover .icon-list": "onShowLists"
     "mouseover .icon-star": "onShowReviews"
     "click .icon-info-sign": "onClickInfo"
     "click .icon-plus": "onClickAdd"
+    "click .icon-edit": "onClickEdit"
     "click .icon-list": "onClickLists"
     "click .icon-star": "onClickReviews"
     "mouseout .bcrumbs-single-icons": "onExit"
@@ -37,6 +39,12 @@ LOAF.ListSingleItemView = Backbone.View.extend
 
   onClickAdd: (e) ->
     LOAF.allCrumbsList.add @model
+
+  onClickEdit: ->
+    if @current == "notes"
+      @current = "none"
+    else
+      @current = "notes"
 
   onShowInfo: ->
     if @current == "info" or @current == "none"
@@ -65,6 +73,13 @@ LOAF.ListSingleItemView = Backbone.View.extend
       @$(".img-overlay-text").show()
       @$(".img-overlay").show()
       @$(".bc-list-view-single-reviews").show()
+
+  onShowEdit: ->
+    if @current == "edit" or @current == "none"
+      @$(".img-overlay-text >span").hide()
+      @$(".img-overlay-text").show()
+      @$(".img-overlay").show()
+      @$(".bc-list-view-single-notes").show()
 
   onExit: ->
     if @current == "none"
