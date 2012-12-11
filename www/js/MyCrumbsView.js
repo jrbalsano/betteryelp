@@ -12,7 +12,8 @@
     },
     events: {
       "click .bcrumbs-list a": "onShowList",
-      "click .bcrumbs-list-add": "onAddNewList"
+      "click .bcrumbs-list-add": "onAddNewList",
+      "click .listname-confirm": "confirmNewList"
     },
     onShowList: function(e) {
       var el, listId;
@@ -37,7 +38,11 @@
     },
 
     onAddNewList: function() {
-      this.$('.new-list-name').css({'display':'block'});
+      return this.$('.new-list-name').css({'display':'block'});
+    },
+
+    confirmNewList: function() {
+      // $('.bcrumbs-mycrumbs-section').append(Mustache.render(LOAF.templates.bcListViewList, newObj));
       return $('.bcrumbs-mycrumbs-section').append(LOAF.templates.bcListAdd);
     },
 
