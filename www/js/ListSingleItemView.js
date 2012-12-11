@@ -72,7 +72,7 @@
       }
     },
     render: function() {
-      this.$el.html(Mustache.render(this.template, this.model.attributes));      
+      this.$el.html(Mustache.render(this.template, this.model.attributes));
       return this;
     }
   });

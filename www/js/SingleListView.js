@@ -37,59 +37,53 @@
       $('.img-overlay-text').hide();
       $('.img-overlay').hide();
     },
-
+    
     postRender: function() {
-    var arr;
-
-    // truncate the titles of the businesses
-    this.$('.bcrumbs-single-list-view-link > a').each(function(i) {
-      if (this.text.length > 20)
-        return $(this).text($(this).text().substring(0, 20) + "...");
-    });
-
-    var on, mode, container_path;
-    mode = on ? "on": "off";
-    container_path = on ? "img/iphone_switch_container_off.png" : "img/iphone_switch_container_on.png";
-    var el = $('.edit-toggle');
-    el.iphoneSwitch(mode,
-      (function() {
+      var arr, container_path, el, mode, on_;
+      this.$('.bcrumbs-single-list-view-link > a').each(function(i) {
+        if (this.text.length > 20) {
+          return $(this).text($(this).text().substring(0, 20) + "...");
+        }
+      });
+      on_ = false;
+      mode = "off";
+      container_path = "img/iphone_switch_container_off.png";
+      mode = (on_ ? "on" : "off");
+      container_path = (on_ ? "img/iphone_switch_container_off.png" : "img/iphone_switch_container_on.png");
+      el = $(".edit-toggle");
+      el.iphoneSwitch(mode, (function() {
         console.log("on?");
-        on = true;
-      }),
-      (function() {
+        return on_ = true;
+      }), (function() {
         console.log("off?");
-        on = false;
-      }), 
-      {
+        return on_ = false;
+      }), {
         switch_on_container_path: container_path
-    });
-
-    arr = [];
-    this.$('.bcrumbs-single-list-item').each(function(i) {
-      var high;
-      if (arr.length < 3) {
-        return arr.push($(this));
-      } else {
-        arr.push($(this));
-        high = arr[0];
-        if (high.height() < arr[1].height()) {
-          high = arr[1];
-        }
-        if (high.height() < arr[2].height()) {
-          high = arr[2];
-        }
-        if (high.height() < arr[3].height()) {
-          high = arr[3];
-        }
-        _.each(arr, function(o, i) {
-          return o.height(high.height());
-        });
-        console.log("Row complete");
-        return arr = [];
+      });
+      arr = [];
+      return this.$('.bcrumbs-single-list-item').each(function(i) {
+        var high;
+        if (arr.length < 3) {
+          return arr.push($(this));
+        } else {
+          arr.push($(this));
+          high = arr[0];
+          if (high.height() < arr[1].height()) {
+            high = arr[1];
+          }
+          if (high.height() < arr[2].height()) {
+            high = arr[2];
+          }
+          if (high.height() < arr[3].height()) {
+            high = arr[3];
+          }
+          _.each(arr, function(o, i) {
+            return o.height(high.height());
+          });
+          return arr = [];
         }
       });
     },
-
     render: function() {
       var html, listItemViews, obj, template;
       html = "";
@@ -110,7 +104,6 @@
         o.render();
         return this.$(".bcrumbs-list-view-items").append(o.el);
       });
-
       this.listItemViews = listItemViews;
       return this.renderHistory();
     }

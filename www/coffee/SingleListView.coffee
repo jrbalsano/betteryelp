@@ -31,10 +31,12 @@ LOAF.SingleListView = LOAF.BreadcrumbView.extend
 
   postRender: ->
     #Truncate business and add ellipsis if business names are over 20 characters
-      if $(@).text.length > 20 then $(@).text $(@).text().substring(0, 20) + "..."
+    @$('.bcrumbs-single-list-view-link > a').each (i) ->
+      if @.text.length > 20
+        $(@).text($(@).text().substring(0, 20) + "...")
 
     #Edit mode switch
-    on_ = false;
+    on_ = false
     mode = "off"
     container_path = "img/iphone_switch_container_off.png"
     mode = (if on_ then "on" else "off")
@@ -53,7 +55,6 @@ LOAF.SingleListView = LOAF.BreadcrumbView.extend
     arr = []
     @$('.bcrumbs-single-list-item').each (i)->
       #if array size is less than three
-      $(@).next('bcrumbs-single-list-view-link').jTruncate(length: 20)
       if arr.length < 3
         #push to array
         arr.push $(@)
