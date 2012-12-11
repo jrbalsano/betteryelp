@@ -57,7 +57,7 @@
       return LOAF.appView.saveApplication();
     },
     render: function() {
-      var html, missingImage;
+      var container_path, el, html, missingImage, on_;
       html = "";
       missingImage = "http://lorempixel.com/g/200/200/food";
       LOAF.customLists.each(function(list) {
@@ -72,7 +72,19 @@
         return html += Mustache.render(LOAF.templates.bcListViewList, obj);
       });
       html += LOAF.templates.bcListAdd;
-      return this.$(".bcrumbs-mycrumbs-section").html(html);
+      this.$(".bcrumbs-mycrumbs-section").html(html);
+      container_path = "img/iphone_switch_container_off.png";
+      on_ = false;
+      el = $(".edit-toggle");
+      return el.iphoneSwitch("off", (function() {
+        $('.delete').show();
+        return on_ = true;
+      }), (function() {
+        $('.delete').hide();
+        return on_ = false;
+      }), {
+        switch_on_container_path: container_path
+      });
     }
   });
 
