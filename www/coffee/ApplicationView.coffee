@@ -2,6 +2,7 @@ LOAF.ApplicationView = LOAF.BreadcrumbView.extend
   initialize: ->
     @initHistory()
     @$(".bcrumbs-view").hide()
+    @$(".saving-cat").hide()
     @loadingTimeout = setTimeout( =>
       @$(".bcrumbs-loading").show()
     500)
