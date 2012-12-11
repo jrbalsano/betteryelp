@@ -10,9 +10,21 @@
       return this.initHistory(options);
     },
     render: function() {
-      var html;
+      var checkboxes, html,
+        _this = this;
       html = Mustache.render(LOAF.templates.bcSingleItem, (this.model ? this.model.attributes : {}));
       this.$el.html(html);
+      checkboxes = "";
+      _.each(LOAF.customLists.getLists(), function(list) {
+        var obj;
+        obj = {
+          id: list.id,
+          name: list.name
+        };
+        obj.checked = _.contains(_this.model.get("listIds"), obj.id);
+        return checkboxes += Mustache.render(LOAF.templates.bcListCheckboxS, obj);
+      });
+      this.$(".bc-list-checkboxes").html(checkboxes);
       return this.renderHistory();
     },
     events: {
@@ -21,7 +33,8 @@
       "click .bcrumbs-single-item-lists-link": "showLists",
       "click .bcrumbs-single-item-reviews-link": "showReviews",
       "click .bcrumbs-single-item-section-notes .btn-info": "saveNotes",
-      "keypress textarea": "changeNotes"
+      "keypress textarea": "changeNotes",
+      "click .bc-list-checkbox": "onCheckToggle"
     },
     saveNotes: function(e) {
       var note_text;
@@ -33,6 +46,20 @@
     },
     changeNotes: function() {
       return this.$(".bcrumbs-single-item-section-notes .btn-success").addClass("btn-info").removeClass("btn-success");
+    },
+    onCheckToggle: function(e) {
+      var chkbx, listId;
+      chkbx = $(e.srcElement);
+      listId = e.srcElement.dataset.id;
+      if (chkbx.prop("checked")) {
+        return LOAF.customLists.where({
+          id: parseInt(listId)
+        })[0].add(this.model);
+      } else {
+        return LOAF.customLists.where({
+          id: parseInt(listId)
+        })[0].remove(this.model);
+      }
     },
     showInfo: function() {
       if (this.current !== 'info') {
