@@ -48,7 +48,8 @@
       return this.$(".bcrumbs-single-item-section-notes .btn-success").addClass("btn-info").removeClass("btn-success");
     },
     onCheckToggle: function(e) {
-      var chkbx, listId;
+      var chkbx, listId,
+        _this = this;
       chkbx = $(e.srcElement);
       listId = e.srcElement.dataset.id;
       if (chkbx.prop("checked")) {
@@ -56,9 +57,18 @@
           id: parseInt(listId)
         })[0].add(this.model);
       } else {
-        return LOAF.customLists.where({
+        LOAF.customLists.where({
           id: parseInt(listId)
         })[0].remove(this.model);
+        if (listId === "0") {
+          _.each(this.model.get("listIds"), function(id) {
+            LOAF.customLists.where({
+              id: id
+            })[0].remove(_this.model.id);
+            return _this.model.attributes.listIds = _.without(_this.model.attributes.listIds, list.id);
+          });
+          return this.$(".bc-list-checkbox").prop("checked", false);
+        }
       }
     },
     showInfo: function() {

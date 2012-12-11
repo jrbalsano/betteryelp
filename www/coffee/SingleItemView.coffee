@@ -49,6 +49,12 @@ LOAF.SingleItemView = LOAF.BreadcrumbView.extend
       LOAF.customLists.where(id: parseInt listId)[0].add @model
     else
       LOAF.customLists.where(id: parseInt listId)[0].remove @model
+      if listId == "0"
+        _.each @model.get("listIds"), (id) =>
+          LOAF.customLists.where(id: id)[0].remove @model.id
+          @model.attributes.listIds = _.without @model.attributes.listIds, list.id
+        @$(".bc-list-checkbox").prop("checked", false)
+          
 
 
   showInfo: ->
