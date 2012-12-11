@@ -146,6 +146,7 @@ body,
 	display: block;
 }
 
+.bcrumbs-list-name, /* lists and single business names have same style */
 .bcrumbs-single-list-view-link {
 	font-size: 16px;
 	font-weight:600;
@@ -292,11 +293,15 @@ body,
   padding: 25px;
 }
 
+.bcrumbs-list-name {
+	margin-top: 15px;
+}
+
 .bcrumbs-list-stack {
 	height: 200px; 
-  position: relative;
-  width: 200px;
-  padding-bottom:15px;
+	position: relative;
+	width: 200px;
+	padding-bottom:15px;
 }
 
 .bcrumbs-list-img-2,
@@ -395,8 +400,6 @@ body,
 /* ==========================================================================
    Breadcrumbs Browse View
    ========================================================================== */
-.bcrumbs-yelp-view {
-}
 
 .bcrumbs-browse-collapse {
 	width: 100%;
@@ -404,6 +407,15 @@ body,
 	font-family: Quicksand;
 	font-weight: 700;
 	font-size: 20px;
+}
+
+/* ==========================================================================
+   Breadcrumbs History
+   ========================================================================== */
+.bcrumbs-path {
+	font-size: 14px;
+	text-transform: uppercase;
+	font-weight: 600;
 }
 
 /* ==========================================================================
