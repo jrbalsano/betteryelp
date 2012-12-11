@@ -27,9 +27,8 @@ modified
   <div class = "bcrumbs-list-add bcrumbs-listing">
     <span class = "bcrumbs-list-img img-crop"><img src = "img/bcrumbs-add.png"></span>
     <span id = "bcrumbs-new-list-text">New List</span>
-    <form class = "new-list-name" style = "display:none;">
-      <input type="text" class="bcrumbs-listname" name="listname"><br>
-      <button class = "btn btn-success listname-confirm">Confirm</button>
+    <form class = "new-list-name input-append" style = "display:none;">
+      <input type="text" class="bcrumbs-listname" name="listname"><button class = "btn btn-success add-on listname-confirm"><i class = "icon-ok icon-white"></i></button>
     </form>
   </div>
 </script>
@@ -74,28 +73,31 @@ modified
       <span class = "img-overlay-text" style = "display: none;">
         <!--show/hide appropriate text here-->
         <span class = "bc-list-view-single-info" style = "display: none;">
-          <button class = "close pull-right">&times;</button>
+          <button class = "close pull-right"><i class = "icon-remove-sign icon-white"></i></button>
+          <b>Business Info:<br /></b>
           {{snippet_text}}
         </span>
 
         <span class = "bc-list-view-single-notes" style = "display: none;">
-          <button class = "close pull-right">&times;</button>
-          Notes:
+          <button class = "close pull-right"><i class = "icon-remove-sign icon-white"></i></button>
+          <b>Notes:<br /></b>
           <textarea>{{notes}}</textarea>
           <button class = "btn btn-info">Save</button>
         </span>
         
         <span class = "bc-list-view-single-lists" style = "display: none;">
-          <button class = "close pull-right">&times;</button>
+          <button class = "close pull-right"><i class = "icon-remove-sign icon-white"></i></button>
+          <b>Your Crumbs:<br /></b>
           <form class = "bc-list-checkboxes" action = "">
             <!--call bc-list-checkbox template here-->
           </form>
         </span>
         
         <span class = "bc-list-view-single-reviews" style = "display: none;">
-          <button class = "close pull-right">&times;</button>
+          <button class = "close pull-right"><i class = "icon-remove-sign icon-white"></i></button>
+          <b>Ratings:<br /></b>
           Number of reviews: {{review_count}}<br />
-          Overal rating: {{rating}}/5
+          Overall rating: {{rating}}/5
         </span>
       </span>
       <span class = "img-overlay" style = "display: none;"></span>
@@ -120,23 +122,26 @@ modified
 
     <span class = "img-overlay-text" style = "display: none;">
       <span class = "bc-list-view-single-info" style = "display: none;">
-        <button class = "close pull-right">&times;</button>
+        <button class = "close pull-right"><i class = "icon-remove-sign icon-white"></i></button>
+        <b>Business Info:<br /></b>
         {{snippet_text}}
       </span>
       <span class = "bc-list-view-single-add" style = "display: none;">
-        <button class = "close pull-right">&times;</button>
-        Click to save this business to your bookmarks
+        <button class = "close pull-right"><i class = "icon-remove-sign icon-white"></i></button>
+        <span class = "add-message">Add this to your Crumbs!</span>
       </span>
       <span class = "bc-list-view-single-lists" style = "display: none;">
-        <button class = "close pull-right">&times;</button>
+        <button class = "close pull-right"><i class = "icon-remove-sign icon-white"></i></button>
+        <b>Your Crumbs:<br /></b>
         <form class = "bc-list-checkboxes" action = "">
           <!--call bc-list-checkbox template here-->
         </form>
       </span>
       <span class = "bc-list-view-single-reviews" style = "display: none;">
-        <button class = "close pull-right">&times;</button>
+      <button class = "close pull-right"><i class = "icon-remove-sign icon-white"></i></button>
+        <b>Ratings:<br /></b>
         Number of reviews: {{review_count}}<br />
-        Overal rating: {{rating}}/5
+        Overall rating: {{rating}}/5
       </span>
     </span>
 

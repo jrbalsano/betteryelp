@@ -61,6 +61,7 @@
     onClickAdd: function(e) {
       var allCrumbsBox;
       this.$(".icon-plus").addClass("icon-ok").removeClass("icon-plus");
+      this.$(".add-message").empty().append("Added to your Crumbs!");
       LOAF.allCrumbsList.add(this.model);
       allCrumbsBox = _.filter(this.$('.bc-list-checkbox'), function(chkbx) {
         return chkbx.dataset.id === "0";
@@ -93,7 +94,8 @@
       }
     },
     onClickDelete: function() {
-      return this.$(".bcrumbs-listing").hide();
+      this.$el.hide();
+      return this.collection.remove(this.model);
     },
     onShowInfo: function() {
       if (this.current === "info" || this.current === "none") {

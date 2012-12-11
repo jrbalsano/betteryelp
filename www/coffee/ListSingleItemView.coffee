@@ -54,6 +54,7 @@ LOAF.ListSingleItemView = Backbone.View.extend
 
   onClickAdd: (e) ->
     @$(".icon-plus").addClass("icon-ok").removeClass "icon-plus"
+    @$(".add-message").empty().append "Added to your Crumbs!"
     LOAF.allCrumbsList.add @model
     allCrumbsBox = _.filter @$('.bc-list-checkbox'), (chkbx) ->
       chkbx.dataset.id == "0"
@@ -79,9 +80,9 @@ LOAF.ListSingleItemView = Backbone.View.extend
       @current = "notes"
 
   onClickDelete: ->
-    @$(".bcrumbs-listing").hide()
+    @$el.hide()
+    @collection.remove @model
     
-
   onShowInfo: ->
     if @current == "info" or @current == "none"
       @$(".img-overlay-text >span").hide()

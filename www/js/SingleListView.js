@@ -94,10 +94,12 @@
       this.$el.html(html);
       listItemViews = [];
       template = this.type === "yelp" ? LOAF.templates.bcYelpViewSingle : LOAF.templates.bcListViewSingle;
+      _this = this
       this.collection.each(function(business) {
         return listItemViews.push(new LOAF.ListSingleItemView({
           model: business,
-          template: template
+          template: template,
+          collection: _this.collection
         }));
       });
       _.each(listItemViews, function(o) {
