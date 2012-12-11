@@ -18,8 +18,7 @@ LOAF.SingleItemView = LOAF.BreadcrumbView.extend
         name: list.name
       obj.checked = _.contains @model.get("listIds"), obj.id
       checkboxes += Mustache.render LOAF.templates.bcListCheckboxS, obj
-    @$(".bc-list-checkboxes").html checkboxes
-
+    @$(".bc-list-checkboxes-single-page").html checkboxes
     @renderHistory()
 
 
