@@ -51,6 +51,7 @@ LOAF.ListSingleItemView = Backbone.View.extend
       @current = "reviews"
 
   onClickAdd: (e) ->
+    @$(".icon-plus").addClass("icon-ok").removeClass "icon-plus"
     LOAF.allCrumbsList.add @model
 
   onClickEdit: ->
@@ -59,8 +60,9 @@ LOAF.ListSingleItemView = Backbone.View.extend
     else
       @current = "notes"
 
-  onClickDelete: -> # alas, this does not work right now
-    LOAF.allCrumbsList.remove @model
+  onClickDelete: ->
+    @$(".bcrumbs-listing").hide()
+    
 
   onShowInfo: ->
     if @current == "info" or @current == "none"

@@ -57,6 +57,7 @@
       }
     },
     onClickAdd: function(e) {
+      this.$('.icon-plus').addClass('icon-ok').removeClass('icon-plus');
       return LOAF.allCrumbsList.add(this.model);
     },
     onClickEdit: function() {
@@ -67,7 +68,8 @@
       }
     },
     onClickDelete: function() {
-      return LOAF.allCrumbsList.remove(this.model);
+      console.log(this);
+      return $(this).css({ 'display':'none'});
     },
     onShowInfo: function() {
       if (this.current === "info" || this.current === "none") {

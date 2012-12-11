@@ -25,6 +25,7 @@ modified
 <!-----------My Crumbs View: Add List Item Template---------->
 <script id = "bc-list-add-s" type = "text/html">
   <div class = "bcrumbs-list-add bcrumbs-listing">
+    <form class = "new-list-name" style = "display:none;"><input type="text" name="listname"><br></form>
     <span class = "bcrumbs-list-img img-crop"><img src = "img/bcrumbs-add.png"></span>
     <span>New List</span>
   </div>
@@ -62,7 +63,7 @@ modified
 
 <!-----------My Crumbs View: List Single Item Template---------->
 <script id = "bc-list-view-single" type = "text/html">
-  <div class = "bcrumbs-single-list-item bcrumbs-listing">
+  
     <span class = "bcrumbs-single-list-item-img img-crop">
 
       <a href = "javascript:void(0)" class = "delete pull-right" style = "display:none;"><i class = "icon-minus-sign"></i></a>
@@ -105,7 +106,7 @@ modified
       </span>
     </span>
     <span class = "bcrumbs-single-list-view-link"><a href = "javascript:void(0)" data-id = "{{id}}">{{name}}</a></span>
-  </div>
+  
 </script>
 
 <!-----------Add Crumbs View: List Single Item Template---------->
