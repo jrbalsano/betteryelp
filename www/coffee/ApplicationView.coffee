@@ -36,6 +36,7 @@ LOAF.ApplicationView = LOAF.BreadcrumbView.extend
     "click .bcrumbs-add-crumbs-link": "showAddCrumbs"
     "click .bcrumbs-my-crumbs-link": "showMyCrumbs"
     "click .bcrumbs-header .add-on": "searchLists"
+    "click .bc-footer-links > a": "showInstructions"
 
   searchLists: (e) ->
     e.preventDefault()
@@ -72,6 +73,12 @@ LOAF.ApplicationView = LOAF.BreadcrumbView.extend
     @myCrumbsView.render()
     @$(".bcrumbs-view").hide()
     @$(".bcrumbs-mycrumbs-view").show()
+    @myCrumbs = !@myCrumbs
+
+  showInstructions: (e) ->
+    e.preventDefault()
+    @$(".bcrumbs-view").hide()
+    @$(".bcrumbs-instructions-view").show()
     @myCrumbs = !@myCrumbs
 
   saveApplication: ->

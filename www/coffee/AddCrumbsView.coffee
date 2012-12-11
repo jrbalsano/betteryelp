@@ -34,7 +34,8 @@ LOAF.AddCrumbsView = LOAF.BreadcrumbView.extend
           $(".bcrumbs-view").hide()
           el.show()
           LOAF.singleListView.postRender()
-          $(".iphone_switch_container").hide()
+          $(".edit-toggle").hide()
+          $(".edit-mode").hide()
 
   onShowList: (e) ->
     e.preventDefault
@@ -50,6 +51,8 @@ LOAF.AddCrumbsView = LOAF.BreadcrumbView.extend
     @$el.hide()
     el.show()
     LOAF.singleListView.postRender()
+    $(".edit-toggle").hide()
+    $(".edit-mode").hide()
 
   onCategoryToggle: (e) ->
     e.preventDefault
@@ -79,6 +82,7 @@ LOAF.AddCrumbsView = LOAF.BreadcrumbView.extend
     _.each @$(".bcrumbs-browse-items >.bcrumbs-list.bcrumbs-listing"), (o, i) ->
       $(o).hide() if i > 2
     @$(".bcrumbs-browse-collapse").hide()
+    @$(".edit-toggle").hide()
 
     if (LOAF.yelpLists.where "term": false).length == 0 then @$(".bcrumbs-recent-searches-section").hide()
     @$(".bcrumbs-recent-searches-collapse").hide()
