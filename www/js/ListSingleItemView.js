@@ -19,6 +19,7 @@
       "click .icon-edit": "onClickEdit",
       "click .icon-list": "onClickLists",
       "click .icon-star": "onClickReviews",
+      "click .icon-minus-sign": "onClickDelete",
       "mouseout .bcrumbs-single-icons": "onExit"
     },
     onClickInfo: function() {
@@ -45,19 +46,16 @@
     onClickAdd: function(e) {
       return LOAF.allCrumbsList.add(this.model);
     },
-
     onClickEdit: function() {
       if (this.current === "notes") {
         return this.current = "none";
       } else {
-      return this.current = "notes";
+        return this.current = "notes";
       }
     },
-
     onClickDelete: function() {
       return LOAF.allCrumbsList.remove(this.model);
     },
-
     onShowInfo: function() {
       if (this.current === "info" || this.current === "none") {
         this.$(".img-overlay-text >span").hide();
@@ -90,7 +88,6 @@
         return this.$(".bc-list-view-single-reviews").show();
       }
     },
-
     onShowEdit: function() {
       if (this.current === "edit" || this.current === "none") {
         this.$(".img-overlay-text >span").hide();
@@ -99,7 +96,6 @@
         return this.$(".bc-list-view-single-notes").show();
       }
     },
-
     onExit: function() {
       if (this.current === "none") {
         this.$(".img-overlay-text").hide();
