@@ -60,6 +60,7 @@
     onClickAdd: function(e) {
       var allCrumbsBox;
       this.$(".icon-plus").addClass("icon-ok").removeClass("icon-plus");
+      this.$(".add-message").empty().append("Added to your Crumbs!");
       LOAF.allCrumbsList.add(this.model);
       allCrumbsBox = _.filter(this.$('.bc-list-checkbox'), function(chkbx) {
         return chkbx.dataset.id === "0";

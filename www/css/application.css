@@ -119,7 +119,7 @@ body,
 .img-overlay {
 	background-color: #000;
 	z-index: 1000;
-	opacity: 0.5;
+	opacity: 0.8;
 	height: 200px;
 	width: 200px;
 	margin: 0 5px;
@@ -147,6 +147,14 @@ body,
 	color: #000;
 	font-family: Quicksand;
 	font-size: 14px;
+}
+
+.add-message {
+	text-align: center;
+	font-weight: 600;
+	position: relative;
+	margin: auto;
+	font-size: 20px;
 }
 
 /* Prettier scrollbar*/
