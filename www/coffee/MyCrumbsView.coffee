@@ -10,6 +10,11 @@ LOAF.MyCrumbsView = LOAF.BreadcrumbView.extend
     "click .bcrumbs-list a": "onShowList"
     "click .bcrumbs-list-add": "onAddNewList"
     "click .listname-confirm": "confirmNewList"
+    "keypress .bcrumbs-listname": "onkey"
+
+  onkey: (e) ->
+    if e.keyCode == 13
+      confirmNewList(e)
 
   onShowList: (e) ->
     e.preventDefault
@@ -27,14 +32,16 @@ LOAF.MyCrumbsView = LOAF.BreadcrumbView.extend
     LOAF.singleListView.postRender()
 
   onAddNewList: ->
-    @$('.new-list-name').css({'display': 'block'})
+    @$('#bcrumbs-new-list-text').hide()
+    @$('.new-list-name').show()
 
-  confirmNewList: ->
-    # save list function here
-    # add new list stack here
-    # $('.bcrumbs-mycrumbs-section').append(Mustache.render LOAF.templates.bcListViewList, newObj)
-    # okay, append the new add lists section AFTER the user confirms the new list (so the next method)
-    $('.bcrumbs-mycrumbs-section').append(LOAF.templates.bcListAdd)
+  confirmNewList: (e)->
+    e.preventDefault()
+    newCustomList = new LOAF.CustomList [],
+      name: @$(".bcrumbs-listname").val()
+    LOAF.customLists.addList newCustomList
+    @render()
+    LOAF.appView.saveApplication()
 
   render: ->
     html = ""
@@ -47,5 +54,5 @@ LOAF.MyCrumbsView = LOAF.BreadcrumbView.extend
         image3: if list.size() > 2 then list.models[2].get("image_url") else missingImage
         id: list.id
       html += Mustache.render LOAF.templates.bcListViewList, obj
-      html += LOAF.templates.bcListAdd
+    html += LOAF.templates.bcListAdd
     @$(".bcrumbs-mycrumbs-section").html html

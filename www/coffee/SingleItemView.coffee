@@ -10,6 +10,16 @@ LOAF.SingleItemView = LOAF.BreadcrumbView.extend
   render: ->
     html = Mustache.render(LOAF.templates.bcSingleItem, (if @model then @model.attributes else {}) )
     @$el.html html
+    
+    checkboxes = ""
+    _.each LOAF.customLists.getLists(), (list) =>
+      obj =
+        id: list.id
+        name: list.name
+      obj.checked = _.contains @model.get("listIds"), obj.id
+      checkboxes += Mustache.render LOAF.templates.bcListCheckboxS, obj
+    @$(".bc-list-checkboxes").html checkboxes
+
     @renderHistory()
 
 
@@ -18,6 +28,28 @@ LOAF.SingleItemView = LOAF.BreadcrumbView.extend
     "click .bcrumbs-single-item-notes-link": "showNotes"
     "click .bcrumbs-single-item-lists-link": "showLists"
     "click .bcrumbs-single-item-reviews-link": "showReviews"
+    "click .bcrumbs-single-item-section-notes .btn-info": "saveNotes"
+    "keypress textarea": "changeNotes"
+    "click .bc-list-checkbox": "onCheckToggle"
+
+  saveNotes: (e) ->
+    note_text = @$(".bcrumbs-single-item-section-notes textarea").val()
+    @model.set "notes", note_text
+    @$(".bcrumbs-single-item-section-notes .btn-info").addClass "btn-success"
+    @$(".bcrumbs-single-item-section-notes .btn-info").removeClass "btn-info"
+    LOAF.appView.saveApplication()
+
+  changeNotes: () ->
+    @$(".bcrumbs-single-item-section-notes .btn-success").addClass("btn-info").removeClass("btn-success")
+
+  onCheckToggle: (e) ->
+    chkbx = $(e.srcElement)
+    listId = e.srcElement.dataset.id
+    if chkbx.prop("checked")
+      LOAF.customLists.where(id: parseInt listId)[0].add @model
+    else
+      LOAF.customLists.where(id: parseInt listId)[0].remove @model
+
 
   showInfo: ->
     if @current != 'info'

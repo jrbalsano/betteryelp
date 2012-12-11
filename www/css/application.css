@@ -143,8 +143,8 @@ body,
 .bc-list-view-single-notes > textarea {
 	width: 175px;
 	height: 80px;
-	background-color: transparent;
-	color: #fff;
+	background-color: #fff;
+	color: #000;
 	font-family: Quicksand;
 	font-size: 14px;
 }

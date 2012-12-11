@@ -111,6 +111,9 @@ LOAF.ListSingleItemView = Backbone.View.extend
   onCheckToggle: (e) ->
     chkbx = $(e.srcElement)
     listId = e.srcElement.dataset.id
+    if listId == "0"
+      el = @$(".icon-plus, .icon-ok")
+      el.toggleClass("icon-ok").toggleClass "icon-plus"
     if chkbx.prop("checked")
       LOAF.customLists.where(id: parseInt listId)[0].add @model
     else
@@ -118,6 +121,8 @@ LOAF.ListSingleItemView = Backbone.View.extend
 
   render: ->
     @$el.html Mustache.render @template, @model.attributes
+
+    # render checkboxes
     checkboxes = ""
     _.each LOAF.customLists.getLists(), (list) =>
       obj =
@@ -126,4 +131,9 @@ LOAF.ListSingleItemView = Backbone.View.extend
       obj.checked = _.contains @model.get("listIds"), obj.id
       checkboxes += Mustache.render LOAF.templates.bcListCheckboxS, obj
     @$(".bc-list-checkboxes").html checkboxes
+
+    # render add sign to match checkboxes
+    if LOAF.allCrumbsList.get @model.id
+      @$(".icon-plus").addClass("icon-ok").removeClass "icon-plus"
+      
     @

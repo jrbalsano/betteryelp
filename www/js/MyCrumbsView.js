@@ -13,7 +13,13 @@
     events: {
       "click .bcrumbs-list a": "onShowList",
       "click .bcrumbs-list-add": "onAddNewList",
-      "click .listname-confirm": "confirmNewList"
+      "click .listname-confirm": "confirmNewList",
+      "keypress .bcrumbs-listname": "onkey"
+    },
+    onkey: function(e) {
+      if (e.keyCode === 13) {
+        return confirmNewList(e);
+      }
     },
     onShowList: function(e) {
       var el, listId;
@@ -36,16 +42,20 @@
       el.show();
       return LOAF.singleListView.postRender();
     },
-
     onAddNewList: function() {
-      return this.$('.new-list-name').css({'display':'block'});
+      this.$('#bcrumbs-new-list-text').hide();
+      return this.$('.new-list-name').show();
     },
-
-    confirmNewList: function() {
-      // $('.bcrumbs-mycrumbs-section').append(Mustache.render(LOAF.templates.bcListViewList, newObj));
-      return $('.bcrumbs-mycrumbs-section').append(LOAF.templates.bcListAdd);
+    confirmNewList: function(e) {
+      var newCustomList;
+      e.preventDefault();
+      newCustomList = new LOAF.CustomList([], {
+        name: this.$(".bcrumbs-listname").val()
+      });
+      LOAF.customLists.addList(newCustomList);
+      this.render();
+      return LOAF.appView.saveApplication();
     },
-
     render: function() {
       var html, missingImage;
       html = "";
@@ -59,10 +69,9 @@
           image3: list.size() > 2 ? list.models[2].get("image_url") : missingImage,
           id: list.id
         };
-
-        html += Mustache.render(LOAF.templates.bcListViewList, obj);
-        return html += LOAF.templates.bcListAdd;
+        return html += Mustache.render(LOAF.templates.bcListViewList, obj);
       });
+      html += LOAF.templates.bcListAdd;
       return this.$(".bcrumbs-mycrumbs-section").html(html);
     }
   });
