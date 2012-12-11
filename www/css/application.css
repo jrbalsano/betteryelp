@@ -245,6 +245,18 @@ body,
 	margin-bottom: 15px;
 }
 
+.bcrumbs-sad-cat > img {
+	display: inline-block;
+	width: 400px;
+}
+
+.bcrumbs-sad-cat > span {
+	display: inline-block;
+	font-size: 16px;
+	font-weight: 600;
+	color: #909090;	
+}
+
 /* ==========================================================================
    Breadcrumbs Header & Footer
    ========================================================================== */
