@@ -144,6 +144,15 @@ body,
 	overflow-y: auto;
 }
 
+.bc-list-view-single-notes > textarea {
+	width: 175px;
+	height: 80px;
+	background-color: transparent;
+	color: #fff;
+	font-family: Quicksand;
+	font-size: 14px;
+}
+
 /* Prettier scrollbar*/
 
 ::-webkit-scrollbar {
