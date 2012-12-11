@@ -75,6 +75,7 @@ body,
 
 .breadcrumb { /* resetting Bootstrap breadcrumb (user path) ul background*/
 	background-color: transparent;
+	padding: 5px;
 }
 
 .input-append button.add-on { /* attaches buttons to input fields, notably header searchbox */
@@ -282,6 +283,26 @@ body,
 
 .bc-footer-links {
 	float: right;
+}
+
+/* ==========================================================================
+   Breadcrumbs Edit Mode Toggle button
+   ========================================================================== */
+.iphone_switch_container {
+	height: 27px;
+	width: 94px;
+	position: relative;
+	overflow: hidden;
+}
+.edit-toggle {
+	cursor: pointer;
+}
+
+.iphone_switch {
+	height: 27px;
+	width: 94px;
+	background-image: url(../img/iphone_switch.png);
+	background-position: 0px;
 }
 
 /* ==========================================================================

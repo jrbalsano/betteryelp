@@ -28,7 +28,8 @@
       });
       singleListView.render();
       this.$el.hide();
-      return el.show();
+      el.show();
+      return singleListView.postRender();
     },
     render: function() {
       var html, missingImage;

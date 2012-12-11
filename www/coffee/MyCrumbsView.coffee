@@ -21,6 +21,7 @@ LOAF.MyCrumbsView = LOAF.BreadcrumbView.extend
     singleListView.render()
     @$el.hide()
     el.show()
+    singleListView.postRender()
 
   render: ->
     html = ""

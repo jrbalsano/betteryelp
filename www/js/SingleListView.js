@@ -31,14 +31,35 @@
       this.$el.hide();
       return LOAF.singleView.$el.show();
     },
+
     postRender: function() {
     var arr;
+
+    // truncate the titles of the businesses
     this.$('.bcrumbs-single-list-view-link > a').each(function(i) {
       if (this.text.length > 20)
         return $(this).text($(this).text().substring(0, 20) + "...");
     });
+
+    var on, mode, container_path;
+    mode = on ? "on": "off";
+    container_path = on ? "img/iphone_switch_container_off.png" : "img/iphone_switch_container_on.png";
+    var el = $('.edit-toggle');
+    el.iphoneSwitch(mode,
+      (function() {
+        console.log("on?");
+        on = true;
+      }),
+      (function() {
+        console.log("off?");
+        on = false;
+      }), 
+      {
+        switch_on_container_path: container_path
+    });
+
     arr = [];
-    return this.$('.bcrumbs-single-list-item').each(function(i) {
+    this.$('.bcrumbs-single-list-item').each(function(i) {
       var high;
       if (arr.length < 3) {
         return arr.push($(this));

@@ -11,6 +11,7 @@ LOAF.SingleListView = LOAF.BreadcrumbView.extend
 
   events:
     "click .bcrumbs-single-list-view-link a": "onShowItem"
+    "click .edit-toggle": "useiPhoneSwitch"
 
   onShowItem: (e) ->
     e.preventDefault()
@@ -24,10 +25,34 @@ LOAF.SingleListView = LOAF.BreadcrumbView.extend
     @$el.hide()
     LOAF.singleView.$el.show()
 
+  useiPhoneSwitch: (e) ->
+    $('.edit-toggle').iphoneSwitch "on", (->
+      # default: edit mode off function
+      ), (->
+      # edit mode on function
+    ),
+      switch_on_container_path:"img/iphone_switch_container_off.png"
+
   postRender: ->
-    #Truncate business names
-    @$('.bcrumbs-single-list-view-link').each (i)->
-      if $(@).text.length > 20 then $(@).val($(@).text().substring(0, 20))
+    #Truncate business and add ellipsis if business names are over 20 characters
+      if $(@).text.length > 20 then $(@).text $(@).text().substring(0, 20) + "..."
+
+    #Edit mode switch
+    on_ = false;
+    mode = "off"
+    container_path = "img/iphone_switch_container_off.png"
+    mode = (if on_ then "on" else "off")
+    container_path = (if on_ then "img/iphone_switch_container_off.png" else "img/iphone_switch_container_on.png")
+    el = $(".edit-toggle")
+    el.iphoneSwitch mode, (->
+      console.log "on?"
+      on_ = true
+    ), (->
+      console.log "off?"
+      on_ = false
+    ),
+      switch_on_container_path: container_path
+
     #Adjust heights
     arr = []
     @$('.bcrumbs-single-list-item').each (i)->
