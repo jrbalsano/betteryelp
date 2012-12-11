@@ -53,6 +53,7 @@ modified
             <img class = "iphone_switch" src = "img/iphone_switch_container_off.png">
       </div>
   </span>
+  <span class = "edit-mode pull-right">Edit Mode:</span>
 
   <h2>{{title}}</h2>
 
@@ -64,6 +65,8 @@ modified
   <div class = "bcrumbs-single-list-item bcrumbs-listing">
     <span class = "bcrumbs-single-list-item-img img-crop">
 
+      <a href = "javascript:void(0)" class = "delete pull-right" style = "display:none;"><i class = "icon-minus-sign"></i></a>
+    
       <span class = "img-overlay-text" style = "display: none;">
         <!--show/hide appropriate text here-->
         <span class = "bc-list-view-single-info" style = "display: none;">
@@ -74,9 +77,7 @@ modified
         <span class = "bc-list-view-single-notes" style = "display: none;">
           <button class = "close pull-right">&times;</button>
           Notes:
-          <textarea>
-            {{notes}}
-          </textarea>
+          <textarea>{{notes}}</textarea>
           <button class = "btn btn-info">Save</button>
         </span>
         
@@ -103,13 +104,15 @@ modified
         <a href = "javascript:void(0)"><i class="icon-star"></i></a>
       </span>
     </span>
-    <span class = "bcrumbs-single-list-view-link"><a href = "javascript:void(0)" data-id= "{{id}}">{{name}}</a></span>
+    <span class = "bcrumbs-single-list-view-link"><a href = "javascript:void(0)" data-id = "{{id}}">{{name}}</a></span>
   </div>
 </script>
 
 <!-----------Add Crumbs View: List Single Item Template---------->
 <script id = "bc-yelp-view-single" type = "text/html">
   <span class = "bcrumbs-single-list-item-img img-crop">
+
+    <a href = "javascript:void(0)" class = "delete pull-right" style = "display:none;"><i class = "icon-minus-sign"></i></a>
 
     <span class = "img-overlay-text" style = "display: none;">
       <span class = "bc-list-view-single-info" style = "display: none;">

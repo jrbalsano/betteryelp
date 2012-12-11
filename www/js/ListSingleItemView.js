@@ -19,7 +19,21 @@
       "click .icon-edit": "onClickEdit",
       "click .icon-list": "onClickLists",
       "click .icon-star": "onClickReviews",
-      "mouseout .bcrumbs-single-icons": "onExit"
+      "click .icon-minus-sign": "onClickDelete",
+      "mouseout .bcrumbs-single-icons": "onExit",
+      "click .btn-info": "saveNotes",
+      "keypress textarea": "changeNote"
+    },
+    changeNote: function(e) {
+      return this.$(".btn-success").addClass("btn-info").removeClass("btn-success");
+    },
+    saveNotes: function(e) {
+      var note_text;
+      note_text = this.$("textarea").val();
+      this.model.set("notes", note_text);
+      this.$(".btn-info").addClass("btn-success");
+      this.$(".btn-info").removeClass("btn-info");
+      return LOAF.appView.saveApplication();
     },
     onClickInfo: function() {
       if (this.current === "info") {
@@ -51,6 +65,9 @@
       } else {
         return this.current = "notes";
       }
+    },
+    onClickDelete: function() {
+      return LOAF.allCrumbsList.remove(this.model);
     },
     onShowInfo: function() {
       if (this.current === "info" || this.current === "none") {

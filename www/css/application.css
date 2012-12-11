@@ -104,10 +104,6 @@ body,
 	padding: 10px;
 }
 
-.bcrumbs-loading img {
-  padding-left: 146px;
-}
-
 .img-crop { /* Style for all elements that crop images */
 	overflow: hidden;
 }
@@ -223,6 +219,32 @@ body,
 	margin-top: 6px;
 	
 }
+
+/* ==========================================================================
+   Breadcrumbs: Cat
+   ========================================================================== */
+.saving-cat {
+	position: fixed;
+	top: 90px;
+	right: 40px;
+	font-size: 16px;
+}
+.saving-cat,
+.bcrumbs-loading {
+	text-align: center;
+	color: #e95d00;
+	font-weight: 600;
+}
+
+.bcrumbs-loading {
+	font-size: 60px;
+}
+
+.bcrumbs-loading > img {
+	height: 500px;
+	margin-bottom: 15px;
+}
+
 /* ==========================================================================
    Breadcrumbs Header & Footer
    ========================================================================== */
@@ -327,9 +349,20 @@ body,
 	width: 94px;
 	position: relative;
 	overflow: hidden;
+	display: inline-block;
 }
 .edit-toggle {
 	cursor: pointer;
+	width: 120px;
+	height: 27px;
+}
+
+.edit-mode {
+	font-weight: 600;
+	text-transform: uppercase;
+	font-size: 14px;
+	color: #00aeff;
+	margin-right: 5px;
 }
 
 .iphone_switch {
