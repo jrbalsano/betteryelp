@@ -14,6 +14,7 @@ LOAF.ListSingleItemView = Backbone.View.extend
     "mouseover .icon-star": "onShowReviews"
     "click .icon-info-sign": "onClickInfo"
     "click .icon-plus": "onClickAdd"
+    "click .icon-ok": "onClickRemove"
     "click .icon-edit": "onClickEdit"
     "click .icon-list": "onClickLists"
     "click .icon-star": "onClickReviews"
@@ -57,6 +58,19 @@ LOAF.ListSingleItemView = Backbone.View.extend
     allCrumbsBox = _.filter @$('.bc-list-checkbox'), (chkbx) ->
       chkbx.dataset.id == "0"
     $(allCrumbsBox[0]).prop("checked", "checked")
+
+  onClickRemove: (e) ->
+    console.log "onclick"
+    @$(".icon-ok").addClass("icon-plus").removeClass "icon-ok"
+    LOAF.allCrumbsList.remove @model
+    @model
+    _.each @model.get("listIds"), (id) =>
+      list = LOAF.customLists.where(id: id)[0]
+      if list?
+        list.remove @model.id
+        @model.attributes.listIds = _.without @model.attributes.listIds, list.id
+    @$(".bc-list-checkbox").prop("checked", false)
+
 
   onClickEdit: ->
     if @current == "notes"
@@ -115,15 +129,24 @@ LOAF.ListSingleItemView = Backbone.View.extend
       el = @$(".icon-plus, .icon-ok")
       el.toggleClass("icon-ok").toggleClass "icon-plus"
     if chkbx.prop("checked")
+      LOAF.allCrumbsList.add @model
+      allCrumbsCheck = _.find @$(".bc-list-checkbox"), (eachCheck) ->
+        eachCheck.dataset.id == "0"
+      $(allCrumbsCheck).prop("checked", true)
+      el = @$(".icon-plus, .icon-ok")
+      el.removeClass("icon-plus").removeClass("icon-ok").addClass("icon-ok")
       LOAF.customLists.where(id: parseInt listId)[0].add @model
     else
       LOAF.customLists.where(id: parseInt listId)[0].remove @model
       if listId == "0"
-        _.each @model.get("listIds"), (id) =>
-          LOAF.customLists.where(id: id)[0].remove @model.id
-          @model.attributes.listIds = _.without @model.attributes.listIds, list.id
-        @$(".bc-list-checkbox").prop("checked", false)
-
+        try
+          _.each @model.get("listIds"), (id) =>
+            list = LOAF.customLists.where(id: id)[0]
+            if list?
+              list.remove @model.id
+              @model.attributes.listIds = _.without @model.attributes.listIds, list.id
+        finally
+          @$(".bc-list-checkbox").prop("checked", false)
 
   render: ->
     @$el.html Mustache.render @template, @model.attributes

@@ -16,6 +16,7 @@
       "mouseover .icon-star": "onShowReviews",
       "click .icon-info-sign": "onClickInfo",
       "click .icon-plus": "onClickAdd",
+      "click .icon-ok": "onClickRemove",
       "click .icon-edit": "onClickEdit",
       "click .icon-list": "onClickLists",
       "click .icon-star": "onClickReviews",
@@ -65,6 +66,24 @@
         return chkbx.dataset.id === "0";
       });
       return $(allCrumbsBox[0]).prop("checked", "checked");
+    },
+    onClickRemove: function(e) {
+      var _this = this;
+      console.log("onclick");
+      this.$(".icon-ok").addClass("icon-plus").removeClass("icon-ok");
+      LOAF.allCrumbsList.remove(this.model);
+      this.model;
+      _.each(this.model.get("listIds"), function(id) {
+        var list;
+        list = LOAF.customLists.where({
+          id: id
+        })[0];
+        if (list != null) {
+          list.remove(_this.model.id);
+          return _this.model.attributes.listIds = _.without(_this.model.attributes.listIds, list.id);
+        }
+      });
+      return this.$(".bc-list-checkbox").prop("checked", false);
     },
     onClickEdit: function() {
       if (this.current === "notes") {
@@ -123,7 +142,7 @@
       }
     },
     onCheckToggle: function(e) {
-      var chkbx, el, listId,
+      var allCrumbsCheck, chkbx, el, listId,
         _this = this;
       chkbx = $(e.srcElement);
       listId = e.srcElement.dataset.id;
@@ -132,6 +151,13 @@
         el.toggleClass("icon-ok").toggleClass("icon-plus");
       }
       if (chkbx.prop("checked")) {
+        LOAF.allCrumbsList.add(this.model);
+        allCrumbsCheck = _.find(this.$(".bc-list-checkbox"), function(eachCheck) {
+          return eachCheck.dataset.id === "0";
+        });
+        $(allCrumbsCheck).prop("checked", true);
+        el = this.$(".icon-plus, .icon-ok");
+        el.removeClass("icon-plus").removeClass("icon-ok").addClass("icon-ok");
         return LOAF.customLists.where({
           id: parseInt(listId)
         })[0].add(this.model);
@@ -140,13 +166,20 @@
           id: parseInt(listId)
         })[0].remove(this.model);
         if (listId === "0") {
-          _.each(this.model.get("listIds"), function(id) {
-            LOAF.customLists.where({
-              id: id
-            })[0].remove(_this.model.id);
-            return _this.model.attributes.listIds = _.without(_this.model.attributes.listIds, list.id);
-          });
-          return this.$(".bc-list-checkbox").prop("checked", false);
+          try {
+            return _.each(this.model.get("listIds"), function(id) {
+              var list;
+              list = LOAF.customLists.where({
+                id: id
+              })[0];
+              if (list != null) {
+                list.remove(_this.model.id);
+                return _this.model.attributes.listIds = _.without(_this.model.attributes.listIds, list.id);
+              }
+            });
+          } finally {
+            this.$(".bc-list-checkbox").prop("checked", false);
+          }
         }
       }
     },
