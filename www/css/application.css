@@ -509,7 +509,8 @@ p {
    Breadcrumbs Browse View
    ========================================================================== */
 
-.bcrumbs-browse-collapse {
+.bcrumbs-browse-collapse,
+.bcrumbs-recent-searches-collapse {
 	width: 100%;
 	height: 50px;
 	font-family: Quicksand;
