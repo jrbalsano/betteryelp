@@ -41,6 +41,9 @@ LOAF.ListSingleItemView = Backbone.View.extend
 
   onClickAdd: (e) ->
     LOAF.allCrumbsList.add @model
+    allCrumbsBox = _.filter @$('.bc-list-checkbox'), (chkbx) ->
+      chkbx.dataset.id == "0"
+    $(allCrumbsBox[0]).prop("checked", "checked")
 
   onClickEdit: ->
     if @current == "notes"

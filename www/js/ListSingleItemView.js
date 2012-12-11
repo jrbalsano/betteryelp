@@ -45,7 +45,12 @@
       }
     },
     onClickAdd: function(e) {
-      return LOAF.allCrumbsList.add(this.model);
+      var allCrumbsBox;
+      LOAF.allCrumbsList.add(this.model);
+      allCrumbsBox = _.filter(this.$('.bc-list-checkbox'), function(chkbx) {
+        return chkbx.dataset.id === "0";
+      });
+      return $(allCrumbsBox[0]).prop("checked", "checked");
     },
     onClickEdit: function() {
       if (this.current === "notes") {
