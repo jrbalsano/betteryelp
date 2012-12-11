@@ -8,7 +8,7 @@ LOAF.MyCrumbsView = LOAF.BreadcrumbView.extend
 
   events:
     "click .bcrumbs-list a": "onShowList"
-    #"click .bcrumbs-list-add": "onAddNewList"
+    "click .bcrumbs-list-add": "onAddNewList"
 
   onShowList: (e) ->
     e.preventDefault
@@ -26,7 +26,7 @@ LOAF.MyCrumbsView = LOAF.BreadcrumbView.extend
     LOAF.singleListView.postRender()
 
   onAddNewList: ->
-    @$('.new-list-name').show()
+    @$('.new-list-name').css({'display': 'block'})
     $('.bcrumbs-mycrumbs-section').append(LOAF.templates.bcListAdd)
 
   render: ->

@@ -12,7 +12,7 @@
     },
     events: {
       "click .bcrumbs-list a": "onShowList",
-   //   "click .bcrumbs-list-add": "onAddNewList"
+      "click .bcrumbs-list-add": "onAddNewList"
     },
     onShowList: function(e) {
       var el, listId;
@@ -37,7 +37,7 @@
     },
 
     onAddNewList: function() {
-      this.$('.new-list-name').show();
+      this.$('.new-list-name').css({'display':'block'});
       return $('.bcrumbs-mycrumbs-section').append(LOAF.templates.bcListAdd);
     },
 
