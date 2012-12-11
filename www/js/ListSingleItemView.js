@@ -77,8 +77,8 @@
       }
     },
     onClickDelete: function() {
-      console.log(this);
-      return $(this).css({ 'display':'none'});
+      this.$el.hide();
+      return this.collection.remove(this.model);
     },
     onShowInfo: function() {
       if (this.current === "info" || this.current === "none") {

@@ -65,9 +65,9 @@ LOAF.ListSingleItemView = Backbone.View.extend
       @current = "notes"
 
   onClickDelete: ->
-    @$(".bcrumbs-listing").hide()
+    @$el.hide()
+    @collection.remove @model
     
-
   onShowInfo: ->
     if @current == "info" or @current == "none"
       @$(".img-overlay-text >span").hide()
