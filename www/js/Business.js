@@ -13,6 +13,17 @@
         return this.set("cover_image_url", "img/cat_" + img_name_append + ".jpg");
       }
     },
+    listIds: [],
+    addList: function(list) {
+      if (!_.contains(this.listIds, list.id)) {
+        this.listIds.push(list.id);
+        return this.trigger("change", this.listIds);
+      }
+    },
+    removeList: function(list) {
+      this.listIds = _.without(this.listIds, list.id);
+      return this.trigger("change", this.listIds);
+    },
     search: function(term) {
       term = term.toUpperCase();
       return _.some(this.attributes, function(value, key) {

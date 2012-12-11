@@ -6,9 +6,19 @@
       options = options ? options : {};
       this.name = options.name;
       this.isAllCrumbs = options.isAllCrumbs || false;
-      return this.id = options.id;
+      this.id = options.id;
+      this.on("add", this.onAdd, this);
+      return this.on("remove", this.onRemove, this);
     },
     model: LOAF.Business,
+    onAdd: function(business) {
+      business.addList(this);
+      return LOAF.appView.saveApplication();
+    },
+    onRemove: function(business) {
+      business.removeList(this);
+      return LOAF.appView.saveApplication();
+    },
     search: function(term) {
       return this.filter(function(model) {
         return model.search(term);

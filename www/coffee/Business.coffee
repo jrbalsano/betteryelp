@@ -1,6 +1,4 @@
 LOAF.Business = Backbone.Model.extend
-  #cover_image_url: 'none'
-
   initialize: ->
     current_categories = ['active', 'arts', 'food', 'hotelstravel', 'localflavor', 'localservices', 'nightlife', 'restaurants', 'shopping', 'yoga', 'icecream', 'museums']
     img_name_append = @.get("categories")[0][1]
@@ -8,6 +6,17 @@ LOAF.Business = Backbone.Model.extend
       @.set("cover_image_url", "http://placehold.it/960x300&text=Business+Image+Missing+_#{img_name_append}")
     else
   	  @.set("cover_image_url", "img/cat_#{img_name_append}.jpg")
+
+  listIds: []
+
+  addList: (list) ->
+    unless _.contains @listIds, list.id
+      @listIds.push list.id
+      @trigger "change", @listIds
+
+  removeList: (list) ->
+    @listIds = _.without @listIds, list.id
+    @trigger "change", @listIds
 
   search: (term) ->
     term = term.toUpperCase()

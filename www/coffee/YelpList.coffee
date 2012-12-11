@@ -4,6 +4,8 @@ LOAF.YelpList = Backbone.Collection.extend
     @category = options.category
     @id = options.id
     @title = options.title || options.category || options.term
+    @.on "add", @onAdd, @
+    @.on "remove", @onRemove, @
 
   model: LOAF.Business
   
@@ -17,6 +19,14 @@ LOAF.YelpList = Backbone.Collection.extend
   search: (term) ->
     @filter (model) ->
       model.search(term)
+
+  onAdd: (business) ->
+    business.addList @
+    LOAF.appView.saveApplication()
+
+  onRemove: (business) ->
+    business.removeList @
+    LOAF.appView.saveApplication()
 
   fetch: (controls) ->
     options = {}
@@ -36,7 +46,7 @@ LOAF.YelpList = Backbone.Collection.extend
     parameters.push ['category_filter', @category] if @category
     parameters.push ['offset', (controls.page - 1) * 20] if controls && controls.page
 
-    message = 
+    message =
       'action': @url,
       'method': 'GET',
       'parameters': parameters

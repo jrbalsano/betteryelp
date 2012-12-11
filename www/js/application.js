@@ -2,9 +2,8 @@
 (function() {
 
   $(document).ready(function() {
-    var myApplication;
     console.log("Initialized Properly");
-    return myApplication = new LOAF.ApplicationView({
+    return LOAF.appView = new LOAF.ApplicationView({
       el: $(".bcrumbs-wrapper")
     });
   });

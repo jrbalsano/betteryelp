@@ -19,6 +19,7 @@ LOAF.SingleListView = LOAF.BreadcrumbView.extend
       el: $(".bcrumbs-single-view")
       model: @collection.get(e.srcElement.dataset.id)
       caller: @_historyRep
+      collection: @collection
       history: @history.slice(0)
     LOAF.singleView.render()
     @$el.hide()

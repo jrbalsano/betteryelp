@@ -40,30 +40,40 @@
         return this.current = "reviews";
       }
     },
-    onClickAdd: function() {},
+    onClickAdd: function(e) {
+      return LOAF.allCrumbsList.add(this.model);
+    },
     onShowInfo: function() {
-      this.$(".img-overlay-text >span").hide();
-      this.$(".img-overlay-text").show();
-      this.$(".img-overlay").show();
-      return this.$(".bc-list-view-single-info").show();
+      if (this.current === "info" || this.current === "none") {
+        this.$(".img-overlay-text >span").hide();
+        this.$(".img-overlay-text").show();
+        this.$(".img-overlay").show();
+        return this.$(".bc-list-view-single-info").show();
+      }
     },
     onShowAdd: function() {
-      this.$(".img-overlay-text >span").hide();
-      this.$(".img-overlay-text").show();
-      this.$(".img-overlay").show();
-      return this.$(".bc-list-view-single-add").show();
+      if (this.current === "none") {
+        this.$(".img-overlay-text >span").hide();
+        this.$(".img-overlay-text").show();
+        this.$(".img-overlay").show();
+        return this.$(".bc-list-view-single-add").show();
+      }
     },
     onShowLists: function() {
-      this.$(".img-overlay-text >span").hide();
-      this.$(".img-overlay-text").show();
-      this.$(".img-overlay").show();
-      return this.$(".bc-list-view-single-lists").show();
+      if (this.current === "lists" || this.current === "none") {
+        this.$(".img-overlay-text >span").hide();
+        this.$(".img-overlay-text").show();
+        this.$(".img-overlay").show();
+        return this.$(".bc-list-view-single-lists").show();
+      }
     },
     onShowReviews: function() {
-      this.$(".img-overlay-text >span").hide();
-      this.$(".img-overlay-text").show();
-      this.$(".img-overlay").show();
-      return this.$(".bc-list-view-single-reviews").show();
+      if (this.current === "reviews" || this.current === "none") {
+        this.$(".img-overlay-text >span").hide();
+        this.$(".img-overlay-text").show();
+        this.$(".img-overlay").show();
+        return this.$(".bc-list-view-single-reviews").show();
+      }
     },
     onExit: function() {
       if (this.current === "none") {
