@@ -66,6 +66,28 @@ modified
 
       <span class = "img-overlay-text" style = "display: none;">
         <!--show/hide appropriate text here-->
+        <span class = "bc-list-view-single-info" style = "display: none;">
+          <button class = "close pull-right">&times;</button>
+          {{snippet_text}}
+        </span>
+
+        <span class = "bc-list-view-single-notes" style = "display: none;">
+          <button class = "close pull-right">&times;</button>
+          Add notes here
+        </span>
+        
+        <span class = "bc-list-view-single-lists" style = "display: none;">
+          <button class = "close pull-right">&times;</button>
+          <form class = "bc-list-checkboxes" action = "">
+            <!--call bc-list-checkbox template here-->
+          </form>
+        </span>
+        
+        <span class = "bc-list-view-single-reviews" style = "display: none;">
+          <button class = "close pull-right">&times;</button>
+          Number of reviews: {{review_count}}<br />
+          Overal rating: {{rating}}/5
+        </span>
       </span>
       <span class = "img-overlay" style = "display: none;"></span>
 
@@ -79,51 +101,6 @@ modified
     </span>
     <span class = "bcrumbs-single-list-view-link"><a href = "javascript:void(0)">{{name}}</a></span>
   </div>
-</script>
-
-<!-----------List Single Item: Hover Templates---------->
-<!--Info hover-->
-<script id = "bc-list-view-single-info-s" type = "text/html">
-  <span class = "bc-list-view-single-info" style = "display: none;">
-    <button class = "close pull-right">&times;</button>
-    <b>Price</b> {{how expensive in $$$}}<br />
-    <b>Rating</b> {{while (hasStars) append <i class = "icon-star icon-white"></i>}}<br />
-    <b>Reviews</b> {{number of reviews}}
-  </span>
-</script>
-
-<!--Notes hover-->
-<script id = "bc-list-view-single-notes-s" type = "text/html">
-  <span class = "bc-list-view-single-notes" style = "display: none;">
-    <button class = "close pull-right">&times;</button>
-    {{this_business notes}}
-  </span>
-</script>
-
-<!--Lists hover-->
-<script id = "bc-list-view-single-lists-s" type = "text/html">
-  <span class = "bc-list-view-single-lists" style = "display: none;">
-    <button class = "close pull-right">&times;</button>
-    <!--while has lists (if need to be truncated, list as many as possible then append with +3, +4, etc)-->
-    {{this_business lists}}<br />
-  </span>
-</script>
-
-<!--Reviews hover-->
-<script id = "bc-list-view-single-reviews-s" type = "text/html">
-  <span class = "bc-list-view-single-reviews" style = "display: none;">
-    <button class = "close pull-right">&times;</button>
-    <!--most recent review-->
-    {{this_business most recent reviews}}<br />
-  </span>
-</script>
-
-<!--Add to list hover-->
-<script id = "bc-list-view-single-add-s" type = "text/html">
-  <span class = "bc-list-view-single-add" style = "display: none;">
-    <button class = "close pull-right">&times;</button>
-    <!--Not sure what this interaction looks like -- list dropdown?-->
-  </span>
 </script>
 
 <!-----------Add Crumbs View: List Single Item Template---------->
