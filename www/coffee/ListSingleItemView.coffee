@@ -19,6 +19,7 @@ LOAF.ListSingleItemView = Backbone.View.extend
     "click .icon-star": "onClickReviews"
     "click .icon-minus-sign": "onClickDelete"
     "mouseout .bcrumbs-single-icons": "onExit"
+    "click .bc-list-checkbox": "onCheckToggle"
 
   onClickInfo: ->
     if @current == "info"
@@ -90,6 +91,22 @@ LOAF.ListSingleItemView = Backbone.View.extend
       @$(".img-overlay-text").hide()
       @$(".img-overlay").hide()
 
+  onCheckToggle: (e) ->
+    chkbx = $(e.srcElement)
+    listId = e.srcElement.dataset.id
+    if chkbx.prop("checked")
+      LOAF.customLists.where(id: parseInt listId)[0].add @model
+    else
+      LOAF.customLists.where(id: parseInt listId)[0].remove @model
+
   render: ->
     @$el.html Mustache.render @template, @model.attributes
+    checkboxes = ""
+    _.each LOAF.customLists.getLists(), (list) =>
+      obj =
+        id: list.id
+        name: list.name
+      obj.checked = _.contains @model.get("listIds"), obj.id
+      checkboxes += Mustache.render LOAF.templates.bcListCheckboxS, obj
+    @$(".bc-list-checkboxes").html checkboxes
     @

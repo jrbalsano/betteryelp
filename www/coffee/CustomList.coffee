@@ -11,10 +11,12 @@ LOAF.CustomList = Backbone.Collection.extend
 
   onAdd: (business) ->
     business.addList @
+    console.log "added #{business.attributes.id} to #{@name}"
     LOAF.appView.saveApplication()
 
   onRemove: (business) ->
     business.removeList @
+    console.log "removed #{business.attributes.id} from #{@name}"
     LOAF.appView.saveApplication()
 
   search: (term) ->

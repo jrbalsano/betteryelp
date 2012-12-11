@@ -13,10 +13,12 @@
     model: LOAF.Business,
     onAdd: function(business) {
       business.addList(this);
+      console.log("added " + business.attributes.id + " to " + this.name);
       return LOAF.appView.saveApplication();
     },
     onRemove: function(business) {
       business.removeList(this);
+      console.log("removed " + business.attributes.id + " from " + this.name);
       return LOAF.appView.saveApplication();
     },
     search: function(term) {

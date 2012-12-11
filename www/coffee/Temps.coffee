@@ -19,3 +19,4 @@ $(document).ready ->
     LOAF.templates.bcSingleSectionListsS = getTemplate "bc-single-section-lists-s"
     LOAF.templates.bcSingleSectionReviewsS = getTemplate "bc-single-section-reviews-s"
     LOAF.templates.bcSingleListView = getTemplate "bc-single-list-view"
+    LOAF.templates.bcListCheckboxS = getTemplate "bc-list-checkbox-s"

@@ -20,7 +20,8 @@
       "click .icon-list": "onClickLists",
       "click .icon-star": "onClickReviews",
       "click .icon-minus-sign": "onClickDelete",
-      "mouseout .bcrumbs-single-icons": "onExit"
+      "mouseout .bcrumbs-single-icons": "onExit",
+      "click .bc-list-checkbox": "onCheckToggle"
     },
     onClickInfo: function() {
       if (this.current === "info") {
@@ -102,8 +103,35 @@
         return this.$(".img-overlay").hide();
       }
     },
+    onCheckToggle: function(e) {
+      var chkbx, listId;
+      chkbx = $(e.srcElement);
+      listId = e.srcElement.dataset.id;
+      if (chkbx.prop("checked")) {
+        return LOAF.customLists.where({
+          id: parseInt(listId)
+        })[0].add(this.model);
+      } else {
+        return LOAF.customLists.where({
+          id: parseInt(listId)
+        })[0].remove(this.model);
+      }
+    },
     render: function() {
+      var checkboxes,
+        _this = this;
       this.$el.html(Mustache.render(this.template, this.model.attributes));
+      checkboxes = "";
+      _.each(LOAF.customLists.getLists(), function(list) {
+        var obj;
+        obj = {
+          id: list.id,
+          name: list.name
+        };
+        obj.checked = _.contains(_this.model.get("listIds"), obj.id);
+        return checkboxes += Mustache.render(LOAF.templates.bcListCheckboxS, obj);
+      });
+      this.$(".bc-list-checkboxes").html(checkboxes);
       return this;
     }
   });
