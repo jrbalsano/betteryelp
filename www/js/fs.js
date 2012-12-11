@@ -34,16 +34,9 @@
         this._jsonObject = object;
         successCallback = successCallback || function() {};
         fileWriterHandler = function(fileWriter) {
-          var bb, blob, json_string;
-          window.BlobBuilder = window.BlobBuilder || window.WebKitBlobBuilder;
+          var blob, json_string;
           json_string = JSON.stringify(_this._jsonObject);
-          if (typeof BlobBuilder !== 'undefined') {
-            bb = new BlobBuilder();
-            bb.append(json_string);
-            blob = bb.getBlob('text/plain');
-          } else {
-            blob = new Blob([json_string]);
-          }
+          blob = new Blob([json_string]);
           fileWriter.write(blob);
           return successCallback();
         };
@@ -51,8 +44,14 @@
           return fileEntry.createWriter(fileWriterHandler, _this._onError);
         };
         return this.fs.root.getFile(this.options.fileName, {
-          create: true
-        }, fileEntryHandler, this._onError);
+          create: false
+        }, function(fe) {
+          return fe.remove(function() {
+            return _this.fs.root.getFile(_this.options.fileName, {
+              create: true
+            }, fileEntryHandler, _this._onError);
+          }, _this.onError);
+        }, this.onError);
       }
     };
 

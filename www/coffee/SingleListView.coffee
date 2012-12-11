@@ -71,6 +71,9 @@ LOAF.SingleListView = LOAF.BreadcrumbView.extend
         #dump array
         arr = []
 
+    #Show iphone switch
+    @$(".iphone_switch_container").show()
+
   render: ->
     # Create Basic Layout
     html = ""
