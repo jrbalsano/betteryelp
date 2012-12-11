@@ -26,7 +26,11 @@
       e.preventDefault();
       this.$el.hide();
       viewToShow = this.history[e.currentTarget.dataset.id].view;
-      return viewToShow.$el.show();
+      viewToShow.render();
+      viewToShow.$el.show();
+      if (viewToShow.postRender != null) {
+        return viewToShow.postRender();
+      }
     }
   });
 

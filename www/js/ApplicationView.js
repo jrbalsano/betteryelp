@@ -47,12 +47,14 @@
     },
     showAddCrumbs: function(e) {
       e.preventDefault();
+      this.addCrumbsView.render();
       this.$(".bcrumbs-view").hide();
       this.$(".bcrumbs-yelp-view").show();
       return this.myCrumbs = !this.myCrumbs;
     },
     showMyCrumbs: function(e) {
       e.preventDefault();
+      this.myCrumbsView.render();
       this.$(".bcrumbs-view").hide();
       this.$(".bcrumbs-mycrumbs-view").show();
       return this.myCrumbs = !this.myCrumbs;
