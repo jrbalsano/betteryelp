@@ -89,10 +89,10 @@
 
     onShowEdit: function() {
       if (this.current === "edit" || this.current === "none") {
-      this.$(".img-overlay-text >span").hide();
-      this.$(".img-overlay-text").show();
-      this.$(".img-overlay").show();
-      return this.$(".bc-list-view-single-notes").show();
+        this.$(".img-overlay-text >span").hide();
+        this.$(".img-overlay-text").show();
+        this.$(".img-overlay").show();
+        return this.$(".bc-list-view-single-notes").show();
       }
     },
 

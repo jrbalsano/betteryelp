@@ -51,10 +51,10 @@
       container_path = (on_ ? "img/iphone_switch_container_off.png" : "img/iphone_switch_container_on.png");
       el = $(".edit-toggle");
       el.iphoneSwitch(mode, (function() {
-        console.log("on?");
+        $('.delete').show();
         return on_ = true;
       }), (function() {
-        console.log("off?");
+        $('.delete').hide();
         return on_ = false;
       }), {
         switch_on_container_path: container_path
