@@ -123,9 +123,13 @@
       }
     },
     onCheckToggle: function(e) {
-      var chkbx, listId;
+      var chkbx, el, listId;
       chkbx = $(e.srcElement);
       listId = e.srcElement.dataset.id;
+      if (listId === "0") {
+        el = this.$(".icon-plus, .icon-ok");
+        el.toggleClass("icon-ok").toggleClass("icon-plus");
+      }
       if (chkbx.prop("checked")) {
         return LOAF.customLists.where({
           id: parseInt(listId)
@@ -151,6 +155,9 @@
         return checkboxes += Mustache.render(LOAF.templates.bcListCheckboxS, obj);
       });
       this.$(".bc-list-checkboxes").html(checkboxes);
+      if (LOAF.allCrumbsList.get(this.model.id)) {
+        this.$(".icon-plus").addClass("icon-ok").removeClass("icon-plus");
+      }
       return this;
     }
   });
