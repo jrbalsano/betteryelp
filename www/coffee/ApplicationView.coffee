@@ -38,17 +38,20 @@ LOAF.ApplicationView = LOAF.BreadcrumbView.extend
 
   showAddCrumbs: (e) ->
     e.preventDefault()
+    @addCrumbsView.render()
     @$(".bcrumbs-view").hide()
     @$(".bcrumbs-yelp-view").show()
     @myCrumbs = !@myCrumbs
 
   showMyCrumbs: (e) ->
     e.preventDefault()
+    @myCrumbsView.render()
     @$(".bcrumbs-view").hide()
     @$(".bcrumbs-mycrumbs-view").show()
     @myCrumbs = !@myCrumbs
 
   saveApplication: ->
+    $(".saving-cat").show()
     object = {}
     object.sessionExists = true
     object.yelpLists = LOAF.yelpLists.getLists()
@@ -58,6 +61,9 @@ LOAF.ApplicationView = LOAF.BreadcrumbView.extend
       onReady: (newSave) ->
         newSave.writeObject object, ->
           console.log "Save complete"
+          setTimeout( ->
+            $(".saving-cat").hide()
+          1000)
 
   _newSession: (cb, context) ->
     # Generate List of Yelp Lists
