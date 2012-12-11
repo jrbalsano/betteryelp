@@ -11,7 +11,15 @@
       });
     },
     events: {
-      "click .bcrumbs-list a": "onShowList"
+      "click .bcrumbs-list a": "onShowList",
+      "click .bcrumbs-list-add": "onAddNewList",
+      "click .listname-confirm": "confirmNewList",
+      "keypress .bcrumbs-listname": "onkey"
+    },
+    onkey: function(e) {
+      if (e.keyCode === 13) {
+        return confirmNewList(e);
+      }
     },
     onShowList: function(e) {
       var el, listId;
@@ -34,6 +42,20 @@
       el.show();
       return LOAF.singleListView.postRender();
     },
+    onAddNewList: function() {
+      this.$('#bcrumbs-new-list-text').hide();
+      return this.$('.new-list-name').show();
+    },
+    confirmNewList: function(e) {
+      var newCustomList;
+      e.preventDefault();
+      newCustomList = new LOAF.CustomList([], {
+        name: this.$(".bcrumbs-listname").val()
+      });
+      LOAF.customLists.addList(newCustomList);
+      this.render();
+      return LOAF.appView.saveApplication();
+    },
     render: function() {
       var html, missingImage;
       html = "";
@@ -49,6 +71,7 @@
         };
         return html += Mustache.render(LOAF.templates.bcListViewList, obj);
       });
+      html += LOAF.templates.bcListAdd;
       return this.$(".bcrumbs-mycrumbs-section").html(html);
     }
   });

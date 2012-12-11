@@ -26,7 +26,11 @@ modified
 <script id = "bc-list-add-s" type = "text/html">
   <div class = "bcrumbs-list-add bcrumbs-listing">
     <span class = "bcrumbs-list-img img-crop"><img src = "img/bcrumbs-add.png"></span>
-    <span>New List</span>
+    <span id = "bcrumbs-new-list-text">New List</span>
+    <form class = "new-list-name" style = "display:none;">
+      <input type="text" class="bcrumbs-listname" name="listname"><br>
+      <button class = "btn btn-success listname-confirm">Confirm</button>
+    </form>
   </div>
 </script>
 
@@ -62,7 +66,7 @@ modified
 
 <!-----------My Crumbs View: List Single Item Template---------->
 <script id = "bc-list-view-single" type = "text/html">
-  <div class = "bcrumbs-single-list-item bcrumbs-listing">
+  
     <span class = "bcrumbs-single-list-item-img img-crop">
 
       <a href = "javascript:void(0)" class = "delete pull-right" style = "display:none;"><i class = "icon-minus-sign"></i></a>
@@ -105,7 +109,7 @@ modified
       </span>
     </span>
     <span class = "bcrumbs-single-list-view-link"><a href = "javascript:void(0)" data-id = "{{id}}">{{name}}</a></span>
-  </div>
+  
 </script>
 
 <!-----------Add Crumbs View: List Single Item Template---------->
@@ -127,8 +131,8 @@ modified
         <button class = "close pull-right">&times;</button>
         <form class = "bc-list-checkboxes" action = "">
           <!--call bc-list-checkbox template here-->
-      </form>
-    </span>
+        </form>
+      </span>
       <span class = "bc-list-view-single-reviews" style = "display: none;">
         <button class = "close pull-right">&times;</button>
         Number of reviews: {{review_count}}<br />
@@ -185,11 +189,14 @@ modified
     </div>
     <div class = "bcrumbs-single-item-section-notes" style = "display: none">
       <h3>Notes</h3>
-      <p>{{notes}}{{^notes}}You don't have any notes for this business. Click here to write something.{{/notes}}</p>
+      <textarea class = "single-item-notes" placeholder = "You haven't written anything yet! Click here to write something.">{{notes}}</textarea><br />
+      <button class = "btn btn-info">Save</button>
     </div>
     <div class = "bcrumbs-single-item-section-lists" style = "display: none">
       <h3>Lists</h3>
-      <p><a href = "{{link to list}}">{{name of list the business belongs to}}</a></p>
+      <form class = "bc-list-checkboxes" action = "">
+        <!--call bc-list-checkbox template here-->
+      </form>
     </div>
     <div class = "bcrumbs-single-item-section-reviews" style = "display: none">
       <h3>Reviews</h3>

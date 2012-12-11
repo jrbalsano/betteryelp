@@ -8,6 +8,13 @@ LOAF.MyCrumbsView = LOAF.BreadcrumbView.extend
 
   events:
     "click .bcrumbs-list a": "onShowList"
+    "click .bcrumbs-list-add": "onAddNewList"
+    "click .listname-confirm": "confirmNewList"
+    "keypress .bcrumbs-listname": "onkey"
+
+  onkey: (e) ->
+    if e.keyCode == 13
+      confirmNewList(e)
 
   onShowList: (e) ->
     e.preventDefault
@@ -24,6 +31,18 @@ LOAF.MyCrumbsView = LOAF.BreadcrumbView.extend
     el.show()
     LOAF.singleListView.postRender()
 
+  onAddNewList: ->
+    @$('#bcrumbs-new-list-text').hide()
+    @$('.new-list-name').show()
+
+  confirmNewList: (e)->
+    e.preventDefault()
+    newCustomList = new LOAF.CustomList [],
+      name: @$(".bcrumbs-listname").val()
+    LOAF.customLists.addList newCustomList
+    @render()
+    LOAF.appView.saveApplication()
+
   render: ->
     html = ""
     missingImage = "http://lorempixel.com/g/200/200/food"
@@ -35,4 +54,5 @@ LOAF.MyCrumbsView = LOAF.BreadcrumbView.extend
         image3: if list.size() > 2 then list.models[2].get("image_url") else missingImage
         id: list.id
       html += Mustache.render LOAF.templates.bcListViewList, obj
+    html += LOAF.templates.bcListAdd
     @$(".bcrumbs-mycrumbs-section").html html

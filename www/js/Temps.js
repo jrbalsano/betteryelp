@@ -15,6 +15,7 @@
       LOAF.templates.bcListViewSingleInfoS = getTemplate("bc-list-view-single-info-s");
       LOAF.templates.bcListViewSingleNotesS = getTemplate("bc-list-view-single-notes-s");
       LOAF.templates.bcListViewSingleListsS = getTemplate("bc-list-view-single-lists-s");
+      LOAF.templates.bcListAdd = getTemplate("bc-list-add-s");
       LOAF.templates.bcListViewSingleReviewsS = getTemplate("bc-list-view-single-reviews-s");
       LOAF.templates.bcListViewSingleAddS = getTemplate("bc-list-view-single-add-s");
       LOAF.templates.bcYelpViewSingle = getTemplate("bc-yelp-view-single");
