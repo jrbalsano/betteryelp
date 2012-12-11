@@ -75,6 +75,7 @@ body,
 
 .breadcrumb { /* resetting Bootstrap breadcrumb (user path) ul background*/
 	background-color: transparent;
+	padding: 5px;
 }
 
 .input-append button.add-on { /* attaches buttons to input fields, notably header searchbox */
@@ -119,39 +120,43 @@ body,
 	background-color: #000;
 	z-index: 1000;
 	opacity: 0.5;
-	height: 210px;
-	width: 210px;
+	height: 200px;
+	width: 200px;
+	margin: 0 5px;
 }
 
 .img-overlay-text {
 	text-align: left;
 	color: #fff;
+	height: 190px;
+	width: 190px;
 	font-size: 15px;
-	margin: 5px;
+	margin: 5px 10px;
 }
 
 .bcrumbs-listing { /* Class for all list gridding */
 	width: 210px;
-	height: 260px;
-	margin: 0px 10px;
+	margin: 0px 10px 15px 10px;
 	display: inline-block;
 	text-align: center;
 }
 
+
 .bcrumbs-listing > span,
 .bcrumbs-listing > img {
 	display: block;
-	margin-bottom: 20px;
+}
+
+.bcrumbs-list-name, /* lists and single business names have same style */
+.bcrumbs-single-list-view-link {
+	font-size: 16px;
+	font-weight:600;
 }
 
 .bcrumbs-single-list-item-img {
 	width: 210px;
 	height: 210px;
 	overflow: hidden;
-}
-
-.bcrumbs-single-list-item-img:hover {
-	opacity: 0.8;
 }
 
 .bcrumbs-single-list-item-img img {
@@ -184,6 +189,12 @@ body,
 	
 }
 
+/*Logan*/
+.bcrumbs-single-list-view-link {
+	font-family: Helvetica;
+	font-size: 16px;
+}
+/*Logan-End*/
 /* ==========================================================================
    Breadcrumbs Header & Footer
    ========================================================================== */
@@ -281,6 +292,26 @@ body,
 }
 
 /* ==========================================================================
+   Breadcrumbs Edit Mode Toggle button
+   ========================================================================== */
+.iphone_switch_container {
+	height: 27px;
+	width: 94px;
+	position: relative;
+	overflow: hidden;
+}
+.edit-toggle {
+	cursor: pointer;
+}
+
+.iphone_switch {
+	height: 27px;
+	width: 94px;
+	background-image: url(../img/iphone_switch.png);
+	background-position: 0px;
+}
+
+/* ==========================================================================
    Breadcrumbs My Crumbs View
    ========================================================================== */
 
@@ -289,11 +320,15 @@ body,
   padding: 25px;
 }
 
+.bcrumbs-list-name {
+	margin-top: 15px;
+}
+
 .bcrumbs-list-stack {
 	height: 200px; 
-  position: relative;
-  width: 200px;
-  padding-bottom:15px;
+	position: relative;
+	width: 200px;
+	padding-bottom:15px;
 }
 
 .bcrumbs-list-img-2,
@@ -383,6 +418,27 @@ body,
 	margin-bottom: 20px;
 }
 
+/*Logan*/
+.bcrumbs-single-item-section-info {
+	font-family: Helvetica;
+	font-size: 14px;
+}
+
+.bcrumbs-single-item-section-notes {
+	font-family: Helvetica;
+	font-size: 14px;
+}
+
+.bcrumbs-single-item-section-lists {
+	font-family: Helvetica;
+	font-size: 14px;
+}
+
+.bcrumbs-single-item-section-reviews {
+	font-family: Helvetica;
+	font-size: 14px;
+}
+/*Logan-End*/
 .bcrumbs-single-item-img {
 	height: 300px;
 	width: 100%;
@@ -392,8 +448,6 @@ body,
 /* ==========================================================================
    Breadcrumbs Browse View
    ========================================================================== */
-.bcrumbs-yelp-view {
-}
 
 .bcrumbs-browse-collapse {
 	width: 100%;
@@ -401,6 +455,15 @@ body,
 	font-family: Quicksand;
 	font-weight: 700;
 	font-size: 20px;
+}
+
+/* ==========================================================================
+   Breadcrumbs History
+   ========================================================================== */
+.bcrumbs-path {
+	font-size: 14px;
+	text-transform: uppercase;
+	font-weight: 600;
 }
 
 /* ==========================================================================

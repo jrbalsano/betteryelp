@@ -39,7 +39,7 @@ modified
       <img class = "bcrumbs-list-img-2" src = "{{image2}}">
       <img class = "bcrumbs-list-img-1" src = "{{image1}}">
     </span>
-    <span><a href = "javascript:void(0)" data-id = "{{id}}">{{name}}</a></span>
+    <span class = "bcrumbs-list-name"><a href = "javascript:void(0)" data-id = "{{id}}">{{name}}</a></span>
   </div>
 </script>
 
@@ -49,11 +49,9 @@ modified
   </ul>
 
   <span class = "edit-toggle pull-right">
-    Edit Mode:            
-    <div class="btn-group">
-      <button class="btn">On</button>
-      <button class="btn">Off</button>
-    </div>
+      <div class = "iphone_switch_container">
+            <img class = "iphone_switch" src = "img/iphone_switch_container_off.png">
+      </div>
   </span>
 
   <h2>{{title}}</h2>
@@ -152,8 +150,8 @@ modified
         Overal rating: {{rating}}/5
       </span>
     </span>
-
-    <span class = "img-overlay" style = "display: none;"></span>
+span
+    < class = "img-overlay" style = "display: none;"></span>
 
     <img src = "{{image_url}}">
     <span class = "bcrumbs-single-icons">
@@ -166,14 +164,14 @@ modified
   <span class = "bcrumbs-single-list-view-link"><a href = "javascript:void(0)" data-id={{id}}>{{name}}</a></span>
 </script>
 
-<!-----------Single Item Template---------->
+<!----------- Single Item Template ---------->
 <script id = "bc-single-item" type = "text/html">
   <ul class = "bcrumbs-path breadcrumb">
   </ul>
 
   <h2>{{name of business}}</h2>
   <div class = "bcrumbs-single-item-img">
-    <img src = "{{image_url}}" style = "margin-top:-25%;">
+    <img src = "{{cover_image_url}}">
   </div>
 
   <ul class="bcrumbs-single-item-nav nav nav-pills">

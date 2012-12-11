@@ -26,6 +26,7 @@ LOAF.AddCrumbsView = LOAF.BreadcrumbView.extend
     LOAF.singleListView.render()
     @$el.hide()
     el.show()
+    LOAF.singleListView.postRender()
 
   onCategoryToggle: (e) ->
     e.preventDefault
