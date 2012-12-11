@@ -73,8 +73,8 @@
         this.$(".bcrumbs-view").hide();
         el.show();
         LOAF.singleListView.postRender();
-        LOAF.singleListView.$(".edit-toggle").hide();
-        LOAF.singleListView.$(".edit-mode").hide();
+        $(".edit-toggle").hide();
+        return $(".edit-mode").hide();
       }
     },
     showAddCrumbs: function(e) {

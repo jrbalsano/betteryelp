@@ -11,10 +11,21 @@
       });
     },
     events: {
-      "click .bcrumbs-list a": "onShowList",
+      "click .bcrumbs-list .bcrumbs-show-list": "onShowList",
       "click .bcrumbs-list-add": "onAddNewList",
       "click .listname-confirm": "confirmNewList",
-      "keypress .bcrumbs-listname": "onkey"
+      "keypress .bcrumbs-listname": "onkey",
+      "click .delete": "onDelete"
+    },
+    onDelete: function(e) {
+      var list, listId;
+      e.preventDefault();
+      $(e.srcElement.parentElement.parentElement).hide();
+      listId = e.srcElement.dataset.id;
+      list = LOAF.customLists.where({
+        id: parseInt(listId)
+      });
+      return LOAF.customLists.removeList(list[0]);
     },
     onkey: function(e) {
       if (e.keyCode === 13) {
@@ -57,7 +68,7 @@
       return LOAF.appView.saveApplication();
     },
     render: function() {
-      var html, missingImage;
+      var container_path, el, html, missingImage, on_;
       html = "";
       missingImage = "http://lorempixel.com/g/200/200/food";
       LOAF.customLists.each(function(list) {
@@ -72,7 +83,19 @@
         return html += Mustache.render(LOAF.templates.bcListViewList, obj);
       });
       html += LOAF.templates.bcListAdd;
-      return this.$(".bcrumbs-mycrumbs-section").html(html);
+      this.$(".bcrumbs-mycrumbs-section").html(html);
+      container_path = "img/iphone_switch_container_off.png";
+      on_ = false;
+      el = $(".edit-toggle");
+      return el.iphoneSwitch("off", (function() {
+        $('.delete').show();
+        return on_ = true;
+      }), (function() {
+        $('.delete').hide();
+        return on_ = false;
+      }), {
+        switch_on_container_path: container_path
+      });
     }
   });
 

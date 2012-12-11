@@ -24,7 +24,13 @@
       "mouseout .bcrumbs-single-icons": "onExit",
       "click .bc-list-checkbox": "onCheckToggle",
       "click .btn-info": "saveNotes",
-      "keypress textarea": "changeNote"
+      "keypress textarea": "changeNote",
+      "click .close": "closeHover"
+    },
+    closeHover: function() {
+      this.$('.img-overlay-text').hide();
+      this.$('.img-overlay').hide();
+      return this.current = "none";
     },
     changeNote: function(e) {
       return this.$(".btn-success").addClass("btn-info").removeClass("btn-success");
@@ -37,25 +43,28 @@
       this.$(".btn-info").removeClass("btn-info");
       return LOAF.appView.saveApplication();
     },
-    onClickInfo: function() {
+    onClickInfo: function(e) {
       if (this.current === "info") {
         return this.current = "none";
       } else {
-        return this.current = "info";
+        this.current = "info";
+        return this.onShowInfo(e);
       }
     },
-    onClickLists: function() {
+    onClickLists: function(e) {
       if (this.current === "lists") {
         return this.current = "none";
       } else {
-        return this.current = "lists";
+        this.current = "lists";
+        return this.onShowLists(e);
       }
     },
-    onClickReviews: function() {
+    onClickReviews: function(e) {
       if (this.current === "reviews") {
         return this.current = "none";
       } else {
-        return this.current = "reviews";
+        this.current = "reviews";
+        return this.onShowReviewss(e);
       }
     },
     onClickAdd: function(e) {

@@ -23,6 +23,12 @@ LOAF.ListSingleItemView = Backbone.View.extend
     "click .bc-list-checkbox": "onCheckToggle"
     "click .btn-info": "saveNotes"
     "keypress textarea": "changeNote"
+    "click .close": "closeHover"
+
+  closeHover: ->
+    @$('.img-overlay-text').hide()
+    @$('.img-overlay').hide()
+    @current = "none"
 
   changeNote: (e) ->
     @$(".btn-success").addClass("btn-info").removeClass("btn-success")
@@ -34,23 +40,26 @@ LOAF.ListSingleItemView = Backbone.View.extend
     @$(".btn-info").removeClass "btn-info"
     LOAF.appView.saveApplication()
 
-  onClickInfo: ->
+  onClickInfo: (e) ->
     if @current == "info"
       @current = "none"
     else
       @current = "info"
+      @onShowInfo(e)
 
-  onClickLists: ->
+  onClickLists: (e) ->
     if @current == "lists"
       @current = "none"
     else
       @current = "lists"
+      @onShowLists(e)
 
-  onClickReviews: ->
+  onClickReviews: (e) ->
     if @current == "reviews"
       @current = "none"
     else
       @current = "reviews"
+      @onShowReviewss(e)
 
   onClickAdd: (e) ->
     @$(".icon-plus").addClass("icon-ok").removeClass "icon-plus"

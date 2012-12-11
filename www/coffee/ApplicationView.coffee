@@ -58,8 +58,8 @@ LOAF.ApplicationView = LOAF.BreadcrumbView.extend
       @$(".bcrumbs-view").hide()
       el.show()
       LOAF.singleListView.postRender()
-      LOAF.singleListView.$(".edit-toggle").hide()
-      LOAF.singleListView.$(".edit-mode").hide()
+      $(".edit-toggle").hide()
+      $(".edit-mode").hide()
 
   showAddCrumbs: (e) ->
     e.preventDefault()

@@ -7,10 +7,18 @@ LOAF.MyCrumbsView = LOAF.BreadcrumbView.extend
       view: @
 
   events:
-    "click .bcrumbs-list a": "onShowList"
+    "click .bcrumbs-list .bcrumbs-show-list": "onShowList"
     "click .bcrumbs-list-add": "onAddNewList"
     "click .listname-confirm": "confirmNewList"
     "keypress .bcrumbs-listname": "onkey"
+    "click .delete": "onDelete"
+
+  onDelete: (e) ->
+    e.preventDefault()
+    $(e.srcElement.parentElement.parentElement).hide()
+    listId = e.srcElement.dataset.id
+    list = LOAF.customLists.where id: parseInt listId
+    LOAF.customLists.removeList list[0]
 
   onkey: (e) ->
     if e.keyCode == 13
@@ -56,3 +64,15 @@ LOAF.MyCrumbsView = LOAF.BreadcrumbView.extend
       html += Mustache.render LOAF.templates.bcListViewList, obj
     html += LOAF.templates.bcListAdd
     @$(".bcrumbs-mycrumbs-section").html html
+    container_path = "img/iphone_switch_container_off.png"
+    on_ = false
+    el = $(".edit-toggle")
+    el.iphoneSwitch "off", (->
+      $('.delete').show()
+      on_ = true
+    ), (->
+      $('.delete').hide()
+      on_ = false
+    ),
+      switch_on_container_path: container_path
+

@@ -24,7 +24,7 @@
         obj.checked = _.contains(_this.model.get("listIds"), obj.id);
         return checkboxes += Mustache.render(LOAF.templates.bcListCheckboxS, obj);
       });
-      this.$(".bc-list-checkboxes-single-page").html(checkboxes);
+      this.$(".bc-list-checkboxes").html(checkboxes);
       return this.renderHistory();
     },
     events: {
@@ -34,7 +34,7 @@
       "click .bcrumbs-single-item-reviews-link": "showReviews",
       "click .bcrumbs-single-item-section-notes .btn-info": "saveNotes",
       "keypress textarea": "changeNotes",
-      "click .bc-list-checkbox": "onCheckToggle"
+      "click .bc-list-checkbox-single-page": "onCheckToggle"
     },
     saveNotes: function(e) {
       var note_text;

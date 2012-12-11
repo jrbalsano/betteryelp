@@ -37,12 +37,13 @@ modified
 
 <script id = "bc-list-view-list" type = "text/html">
   <div class = "bcrumbs-list bcrumbs-listing">
+    <a href = "javascript:void(0)" class = "delete pull-right" style = "display:none;"><i data-id = "{{id}}" class = "icon-minus-sign"></i></a>
     <span class = "bcrumbs-list-stack">
       <img class = "bcrumbs-list-img-3" src = "{{image3}}">
       <img class = "bcrumbs-list-img-2" src = "{{image2}}">
       <img class = "bcrumbs-list-img-1" src = "{{image1}}">
     </span>
-    <span class = "bcrumbs-list-name"><a href = "javascript:void(0)" data-id = "{{id}}">{{name}}</a></span>
+    <span class = "bcrumbs-list-name"><a href = "javascript:void(0)" data-id = "{{id}}" class="bcrumbs-show-list">{{name}}</a></span>
   </div>
 </script>
 
@@ -56,7 +57,7 @@ modified
             <img class = "iphone_switch" src = "img/iphone_switch_container_off.png">
       </div>
   </span>
-  <span class = "edit-mode pull-right">Edit Mode:</span>
+  <span class = "edit-mode pull-right">Delete Mode:</span>
 
   <h2>{{title}}</h2>
 
@@ -68,7 +69,7 @@ modified
   
     <span class = "bcrumbs-single-list-item-img img-crop">
 
-      <a href = "javascript:void(0)" class = "delete pull-right" style = "display:none;"><i class = "icon-minus-sign"></i></a>
+      <a href = "javascript:void(0)" class = "delete pull-right" data-id = "{{id}}" style = "display:none;"><i class = "icon-minus-sign"></i></a>
     
       <span class = "img-overlay-text" style = "display: none;">
         <!--show/hide appropriate text here-->
@@ -89,7 +90,6 @@ modified
           <button class = "close pull-right"><i class = "icon-remove-sign icon-white"></i></button>
           <b>Your Crumbs:<br /></b>
           <form class = "bc-list-checkboxes" action = "">
-            <!--call bc-list-checkbox template here-->
           </form>
         </span>
         
@@ -162,6 +162,14 @@ modified
 <!-----------Single Item View: Hover OverLay Lists Checkboxes Template---------->
 <script id = "bc-list-checkbox-s" type = "text/html">
   <input type="checkbox" class="bc-list-checkbox" data-id = "{{id}}" {{#checked}}checked{{/checked}}> {{name}}<br />
+</script>
+
+<!-- ======== Sad Cat is sad ======== -->
+<script id = "bc-sad-cat" type = "text/html">
+  <div class = "bcrumbs-sad-cat">
+    <img src = "img/breadcat_sad.png">
+    <span>{{message}}</span>
+  </div>
 </script>
 
 <!-----------Single Item Template---------->

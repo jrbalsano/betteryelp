@@ -14,8 +14,7 @@
       return this.initHistory(options);
     },
     events: {
-      "click .bcrumbs-single-list-view-link a": "onShowItem",
-      "click .close": "closeHover"
+      "click .bcrumbs-single-list-view-link a": "onShowItem"
     },
     onShowItem: function(e) {
       e.preventDefault();
@@ -32,10 +31,6 @@
       LOAF.singleView.render();
       this.$el.hide();
       return LOAF.singleView.$el.show();
-    },
-    closeHover: function() {
-      $('.img-overlay-text').hide();
-      return $('.img-overlay').hide();
     },
     postRender: function() {
       var arr, container_path, el, mode, on_;
@@ -85,28 +80,34 @@
       return this.$(".iphone_switch_container").show();
     },
     render: function() {
-      var html, listItemViews, obj, template;
+      var html, listItemViews, obj, template,
+        _this = this;
       html = "";
       obj = {
         title: this.collection.title || this.collection.name
       };
       html = Mustache.render(LOAF.templates.bcSingleListView, obj);
       this.$el.html(html);
-      listItemViews = [];
-      template = this.type === "yelp" ? LOAF.templates.bcYelpViewSingle : LOAF.templates.bcListViewSingle;
-      _this = this
-      this.collection.each(function(business) {
-        return listItemViews.push(new LOAF.ListSingleItemView({
-          model: business,
-          template: template,
-          collection: _this.collection
+      if (this.collection.size() > 0) {
+        listItemViews = [];
+        template = this.type === "yelp" ? LOAF.templates.bcYelpViewSingle : LOAF.templates.bcListViewSingle;
+        this.collection.each(function(business) {
+          return listItemViews.push(new LOAF.ListSingleItemView({
+            model: business,
+            template: template,
+            collection: _this.collection
+          }));
+        });
+        _.each(listItemViews, function(o) {
+          o.render();
+          return this.$(".bcrumbs-list-view-items").append(o.el);
+        });
+        this.listItemViews = listItemViews;
+      } else {
+        this.$(".bcrumbs-list-view-items").html(Mustache.render(LOAF.templates.bcSadCat, {
+          message: "There are no items in this list. You should add some!"
         }));
-      });
-      _.each(listItemViews, function(o) {
-        o.render();
-        return this.$(".bcrumbs-list-view-items").append(o.el);
-      });
-      this.listItemViews = listItemViews;
+      }
       return this.renderHistory();
     }
   });

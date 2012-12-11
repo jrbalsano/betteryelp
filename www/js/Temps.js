@@ -25,7 +25,8 @@
       LOAF.templates.bcSingleSectionListsS = getTemplate("bc-single-section-lists-s");
       LOAF.templates.bcSingleSectionReviewsS = getTemplate("bc-single-section-reviews-s");
       LOAF.templates.bcSingleListView = getTemplate("bc-single-list-view");
-      return LOAF.templates.bcListCheckboxS = getTemplate("bc-list-checkbox-s");
+      LOAF.templates.bcListCheckboxS = getTemplate("bc-list-checkbox-s");
+      return LOAF.templates.bcSadCat = getTemplate("bc-sad-cat");
     });
   });
 
