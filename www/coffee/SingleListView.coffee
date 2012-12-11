@@ -63,7 +63,7 @@ LOAF.SingleListView = LOAF.BreadcrumbView.extend
         arr.push $(@)
         #find the tallest of the three and make their heights the same
         high = arr[0]
-        if high.height() < arr[1].height() then high = arr[1] 
+        if high.height() < arr[1].height() then high = arr[1]
         if high.height() < arr[2].height() then high = arr[2]
         if high.height() < arr[3].height() then high = arr[3]
         _.each arr, (o, i) ->
