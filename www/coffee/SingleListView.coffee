@@ -11,7 +11,6 @@ LOAF.SingleListView = LOAF.BreadcrumbView.extend
 
   events:
     "click .bcrumbs-single-list-view-link a": "onShowItem"
-    "click .edit-toggle": "useiPhoneSwitch"
     "click .close": "closeHover"
 
   onShowItem: (e) ->
