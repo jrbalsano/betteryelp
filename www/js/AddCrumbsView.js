@@ -15,7 +15,39 @@
     events: {
       "click .bcrumbs-browse-category-toggle": "onCategoryToggle",
       "click .bcrumbs-browse-collapse": "onCategoryToggle",
-      "click .bcrumbs-list a": "onShowList"
+      "click .bcrumbs-list a": "onShowList",
+      "click .bcrumbs-yelp-search .add-on": "searchForCrumbs"
+    },
+    searchForCrumbs: function(e) {
+      var el, searchResults, searchTerm,
+        _this = this;
+      e.preventDefault();
+      el = $(".bcrumbs-list-view");
+      searchTerm = $(".bcrumbs-yelp-search-input").val();
+      if (searchTerm) {
+        searchResults = new LOAF.YelpList([], {
+          term: searchTerm
+        });
+        return searchResults.fetch({
+          success: function() {
+            LOAF.yelpLists.addList(searchResults);
+            if (LOAF.singleListView != null) {
+              LOAF.singleListView.undelegateEvents();
+            }
+            LOAF.singleListView = new LOAF.SingleListView({
+              collection: searchResults,
+              el: el,
+              caller: _this._historyRep,
+              type: "yelp"
+            });
+            LOAF.singleListView.render();
+            $(".bcrumbs-view").hide();
+            el.show();
+            LOAF.singleListView.postRender();
+            return $(".iphone_switch_container").hide();
+          }
+        });
+      }
     },
     onShowList: function(e) {
       var el, listId;

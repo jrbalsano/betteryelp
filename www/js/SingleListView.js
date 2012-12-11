@@ -60,7 +60,7 @@
         switch_on_container_path: container_path
       });
       arr = [];
-      return this.$('.bcrumbs-single-list-item').each(function(i) {
+      this.$('.bcrumbs-single-list-item').each(function(i) {
         var high;
         if (arr.length < 3) {
           return arr.push($(this));
@@ -82,6 +82,7 @@
           return arr = [];
         }
       });
+      return this.$(".iphone_switch_container").show();
     },
     render: function() {
       var html, listItemViews, obj, template;
