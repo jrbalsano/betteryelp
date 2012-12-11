@@ -187,7 +187,9 @@ modified
     </div>
     <div class = "bcrumbs-single-item-section-notes" style = "display: none">
       <h3>Notes</h3>
-      <p>{{notes}}{{^notes}}You don't have any notes for this business. Click here to write something.{{/notes}}</p>
+      <p>{{^notes}}You don't have any notes for this business. Add some now!{{/notes}}</p>
+      <textarea class = "single-item-notes">{{notes}}</textarea><br />
+      <button class = "btn btn-success">Save</button>
     </div>
     <div class = "bcrumbs-single-item-section-lists" style = "display: none">
       <h3>Lists</h3>
