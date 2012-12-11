@@ -29,7 +29,7 @@ LOAF.SingleItemView = LOAF.BreadcrumbView.extend
     "click .bcrumbs-single-item-reviews-link": "showReviews"
     "click .bcrumbs-single-item-section-notes .btn-info": "saveNotes"
     "keypress textarea": "changeNotes"
-    "click .bc-list-checkbox-single-page": "onCheckToggle"
+    "click .bc-list-checkboxes-single-page": "onCheckToggle"
 
   saveNotes: (e) ->
     note_text = @$(".bcrumbs-single-item-section-notes textarea").val()
@@ -46,7 +46,7 @@ LOAF.SingleItemView = LOAF.BreadcrumbView.extend
     listId = e.srcElement.dataset.id
     if chkbx.prop("checked")
       LOAF.allCrumbsList.add @model
-      allCrumbsCheck = _.find @$(".bc-list-checkbox"), (eachCheck) ->
+      allCrumbsCheck = _.find @$(".bc-list-checkboxes-single-page"), (eachCheck) ->
         eachCheck.dataset.id == "0"
       $(allCrumbsCheck).prop("checked", true)
       LOAF.customLists.where(id: parseInt listId)[0].add @model
@@ -58,10 +58,8 @@ LOAF.SingleItemView = LOAF.BreadcrumbView.extend
           if list?
             list.remove @model.id
             @model.attributes.listIds = _.without @model.attributes.listIds, list.id
-        @$(".bc-list-checkbox").prop("checked", false)
+        @$(".bc-list-checkboxes-single-page").prop("checked", false)
           
-
-
   showInfo: ->
     if @current != 'info'
       $(".bcrumbs-single-item-section-info").show()

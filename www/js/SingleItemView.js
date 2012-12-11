@@ -34,7 +34,7 @@
       "click .bcrumbs-single-item-reviews-link": "showReviews",
       "click .bcrumbs-single-item-section-notes .btn-info": "saveNotes",
       "keypress textarea": "changeNotes",
-      "click .bc-list-checkbox-single-page": "onCheckToggle"
+      "click .bc-list-checkboxes-single-page": "onCheckToggle"
     },
     saveNotes: function(e) {
       var note_text;
@@ -54,7 +54,7 @@
       listId = e.srcElement.dataset.id;
       if (chkbx.prop("checked")) {
         LOAF.allCrumbsList.add(this.model);
-        allCrumbsCheck = _.find(this.$(".bc-list-checkbox"), function(eachCheck) {
+        allCrumbsCheck = _.find(this.$(".bc-list-checkboxes-single-page"), function(eachCheck) {
           return eachCheck.dataset.id === "0";
         });
         $(allCrumbsCheck).prop("checked", true);
@@ -76,7 +76,7 @@
               return _this.model.attributes.listIds = _.without(_this.model.attributes.listIds, list.id);
             }
           });
-          return this.$(".bc-list-checkbox").prop("checked", false);
+          return this.$(".bc-list-checkboxes-single-page").prop("checked", false);
         }
       }
     },
