@@ -11,7 +11,9 @@
       });
     },
     events: {
-      "click .bcrumbs-list a": "onShowList"
+      "click .bcrumbs-list a": "onShowList",
+      "click .bcrumbs-list-add": "onAddNewList",
+      "click .listname-confirm": "confirmNewList"
     },
     onShowList: function(e) {
       var el, listId;
@@ -35,7 +37,11 @@
       return LOAF.singleListView.postRender();
     },
     onAddNewList: function() {
-      this.$('.new-list-name').show();
+      return this.$('.new-list-name').css({
+        'display': 'block'
+      });
+    },
+    confirmNewList: function() {
       return $('.bcrumbs-mycrumbs-section').append(LOAF.templates.bcListAdd);
     },
     render: function() {

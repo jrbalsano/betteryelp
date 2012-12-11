@@ -8,7 +8,8 @@ LOAF.MyCrumbsView = LOAF.BreadcrumbView.extend
 
   events:
     "click .bcrumbs-list a": "onShowList"
-    #"click .bcrumbs-list-add": "onAddNewList"
+    "click .bcrumbs-list-add": "onAddNewList"
+    "click .listname-confirm": "confirmNewList"
 
   onShowList: (e) ->
     e.preventDefault
@@ -26,7 +27,13 @@ LOAF.MyCrumbsView = LOAF.BreadcrumbView.extend
     LOAF.singleListView.postRender()
 
   onAddNewList: ->
-    @$('.new-list-name').show()
+    @$('.new-list-name').css({'display': 'block'})
+
+  confirmNewList: ->
+    # save list function here
+    # add new list stack here
+    # $('.bcrumbs-mycrumbs-section').append(Mustache.render LOAF.templates.bcListViewList, newObj)
+    # okay, append the new add lists section AFTER the user confirms the new list (so the next method)
     $('.bcrumbs-mycrumbs-section').append(LOAF.templates.bcListAdd)
 
   render: ->
