@@ -12,6 +12,7 @@ LOAF.SingleListView = LOAF.BreadcrumbView.extend
   events:
     "click .bcrumbs-single-list-view-link a": "onShowItem"
     "click .edit-toggle": "useiPhoneSwitch"
+    "click .close": "closeHover"
 
   onShowItem: (e) ->
     e.preventDefault()
@@ -25,13 +26,9 @@ LOAF.SingleListView = LOAF.BreadcrumbView.extend
     @$el.hide()
     LOAF.singleView.$el.show()
 
-  useiPhoneSwitch: (e) ->
-    $('.edit-toggle').iphoneSwitch "on", (->
-      # default: edit mode off function
-      ), (->
-      # edit mode on function
-    ),
-      switch_on_container_path:"img/iphone_switch_container_off.png"
+  closeHover: ->
+    $('.img-overlay-text').hide()
+    $('.img-overlay').hide()
 
   postRender: ->
     #Truncate business and add ellipsis if business names are over 20 characters

@@ -14,7 +14,8 @@
       return this.initHistory(options);
     },
     events: {
-      "click .bcrumbs-single-list-view-link a": "onShowItem"
+      "click .bcrumbs-single-list-view-link a": "onShowItem",
+      "click .close": "closeHover"
     },
     onShowItem: function(e) {
       e.preventDefault();
@@ -30,6 +31,11 @@
       LOAF.singleView.render();
       this.$el.hide();
       return LOAF.singleView.$el.show();
+    },
+
+    closeHover: function() {
+      $('.img-overlay-text').hide();
+      $('.img-overlay').hide();
     },
 
     postRender: function() {
