@@ -25,6 +25,7 @@
         el: $(".bcrumbs-single-view"),
         model: this.collection.get(e.srcElement.dataset.id),
         caller: this._historyRep,
+        collection: this.collection,
         history: this.history.slice(0)
       });
       LOAF.singleView.render();

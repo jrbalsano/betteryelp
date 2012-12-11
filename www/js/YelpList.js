@@ -6,7 +6,9 @@
       this.term = options.term;
       this.category = options.category;
       this.id = options.id;
-      return this.title = options.title || options.category || options.term;
+      this.title = options.title || options.category || options.term;
+      this.on("add", this.onAdd, this);
+      return this.on("remove", this.onRemove, this);
     },
     model: LOAF.Business,
     url: 'http://api.yelp.com/v2/search?',
@@ -21,6 +23,14 @@
       return this.filter(function(model) {
         return model.search(term);
       });
+    },
+    onAdd: function(business) {
+      business.addList(this);
+      return LOAF.appView.saveApplication();
+    },
+    onRemove: function(business) {
+      business.removeList(this);
+      return LOAF.appView.saveApplication();
     },
     fetch: function(controls) {
       var accessor, message, options, parameterMap, parameters,

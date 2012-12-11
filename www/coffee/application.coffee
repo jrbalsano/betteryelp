@@ -1,6 +1,6 @@
 $(document).ready ->
   console.log "Initialized Properly"
-  myApplication = new LOAF.ApplicationView
+  LOAF.appView = new LOAF.ApplicationView
     el: $(".bcrumbs-wrapper")
 
 window.LOAF = {}

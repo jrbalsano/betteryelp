@@ -1,4 +1,16 @@
 LOAF.Business = Backbone.Model.extend
+  listIds: []
+
+  addList: (list) ->
+    unless _.contains @listIds, list.id
+      @listIds.push list.id
+      @trigger "change", @listIds
+
+  removeList: (list) ->
+    @listIds = _.without @listIds, list.id
+    @trigger "change", @listIds
+
+
   search: (term) ->
     term = term.toUpperCase()
     _.some @attributes, (value, key) ->

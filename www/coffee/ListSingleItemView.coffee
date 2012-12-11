@@ -35,31 +35,36 @@ LOAF.ListSingleItemView = Backbone.View.extend
     else
       @current = "reviews"
 
-  onClickAdd: ->
+  onClickAdd: (e) ->
+    LOAF.allCrumbsList.add @model
 
   onShowInfo: ->
-    @$(".img-overlay-text >span").hide()
-    @$(".img-overlay-text").show()
-    @$(".img-overlay").show()
-    @$(".bc-list-view-single-info").show()
+    if @current == "info" or @current == "none"
+      @$(".img-overlay-text >span").hide()
+      @$(".img-overlay-text").show()
+      @$(".img-overlay").show()
+      @$(".bc-list-view-single-info").show()
 
   onShowAdd: ->
-    @$(".img-overlay-text >span").hide()
-    @$(".img-overlay-text").show()
-    @$(".img-overlay").show()
-    @$(".bc-list-view-single-add").show()
+    if @current == "none"
+      @$(".img-overlay-text >span").hide()
+      @$(".img-overlay-text").show()
+      @$(".img-overlay").show()
+      @$(".bc-list-view-single-add").show()
 
   onShowLists: ->
-    @$(".img-overlay-text >span").hide()
-    @$(".img-overlay-text").show()
-    @$(".img-overlay").show()
-    @$(".bc-list-view-single-lists").show()
+    if @current == "lists" or @current == "none"
+      @$(".img-overlay-text >span").hide()
+      @$(".img-overlay-text").show()
+      @$(".img-overlay").show()
+      @$(".bc-list-view-single-lists").show()
 
   onShowReviews: ->
-    @$(".img-overlay-text >span").hide()
-    @$(".img-overlay-text").show()
-    @$(".img-overlay").show()
-    @$(".bc-list-view-single-reviews").show()
+    if @current == "reviews" or @current == "none"
+      @$(".img-overlay-text >span").hide()
+      @$(".img-overlay-text").show()
+      @$(".img-overlay").show()
+      @$(".bc-list-view-single-reviews").show()
 
   onExit: ->
     if @current == "none"

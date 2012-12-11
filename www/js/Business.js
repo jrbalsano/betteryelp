@@ -2,6 +2,17 @@
 (function() {
 
   LOAF.Business = Backbone.Model.extend({
+    listIds: [],
+    addList: function(list) {
+      if (!_.contains(this.listIds, list.id)) {
+        this.listIds.push(list.id);
+        return this.trigger("change", this.listIds);
+      }
+    },
+    removeList: function(list) {
+      this.listIds = _.without(this.listIds, list.id);
+      return this.trigger("change", this.listIds);
+    },
     search: function(term) {
       term = term.toUpperCase();
       return _.some(this.attributes, function(value, key) {
