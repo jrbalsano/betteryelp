@@ -8,21 +8,23 @@
       current_categories = ['active', 'arts', 'food', 'hotelstravel', 'localflavor', 'localservices', 'nightlife', 'restaurants', 'shopping', 'yoga', 'icecream', 'museums'];
       img_name_append = this.get("categories")[0][1];
       if (__indexOf.call(current_categories, img_name_append) < 0) {
-        return this.set("cover_image_url", "http://placehold.it/960x300&text=Business+Image+Missing+_" + img_name_append);
+        this.set("cover_image_url", "http://placehold.it/960x300&text=Business+Image+Missing+_" + img_name_append);
       } else {
-        return this.set("cover_image_url", "img/cat_" + img_name_append + ".jpg");
+        this.set("cover_image_url", "img/cat_" + img_name_append + ".jpg");
+      }
+      if (this.get("listIds") == null) {
+        return this.set("listIds", []);
       }
     },
-    listIds: [],
     addList: function(list) {
-      if (!_.contains(this.listIds, list.id)) {
-        this.listIds.push(list.id);
+      if (!_.contains(this.attributes.listIds, list.id)) {
+        this.attributes.listIds.push(list.id);
         return this.trigger("change", this.listIds);
       }
     },
     removeList: function(list) {
-      this.listIds = _.without(this.listIds, list.id);
-      return this.trigger("change", this.listIds);
+      this.attributes.listIds = _.without(this.attributes.listIds, list.id);
+      return this.trigger("change", this.attributes.listIds);
     },
     search: function(term) {
       term = term.toUpperCase();

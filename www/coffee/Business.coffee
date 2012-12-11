@@ -6,17 +6,17 @@ LOAF.Business = Backbone.Model.extend
       @.set("cover_image_url", "http://placehold.it/960x300&text=Business+Image+Missing+_#{img_name_append}")
     else
   	  @.set("cover_image_url", "img/cat_#{img_name_append}.jpg")
-
-  listIds: []
+    unless @.get("listIds")?
+      @.set "listIds", []
 
   addList: (list) ->
-    unless _.contains @listIds, list.id
-      @listIds.push list.id
+    unless _.contains @attributes.listIds, list.id
+      @attributes.listIds.push list.id
       @trigger "change", @listIds
 
   removeList: (list) ->
-    @listIds = _.without @listIds, list.id
-    @trigger "change", @listIds
+    @attributes.listIds = _.without @attributes.listIds, list.id
+    @trigger "change", @attributes.listIds
 
   search: (term) ->
     term = term.toUpperCase()

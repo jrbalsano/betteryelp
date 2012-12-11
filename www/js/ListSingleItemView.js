@@ -21,6 +21,7 @@
       "click .icon-star": "onClickReviews",
       "click .icon-minus-sign": "onClickDelete",
       "mouseout .bcrumbs-single-icons": "onExit",
+      "click .bc-list-checkbox": "onCheckToggle",
       "click .btn-info": "saveNotes",
       "keypress textarea": "changeNote"
     },
@@ -57,7 +58,12 @@
       }
     },
     onClickAdd: function(e) {
-      return LOAF.allCrumbsList.add(this.model);
+      var allCrumbsBox;
+      LOAF.allCrumbsList.add(this.model);
+      allCrumbsBox = _.filter(this.$('.bc-list-checkbox'), function(chkbx) {
+        return chkbx.dataset.id === "0";
+      });
+      return $(allCrumbsBox[0]).prop("checked", "checked");
     },
     onClickEdit: function() {
       if (this.current === "notes") {
@@ -115,8 +121,35 @@
         return this.$(".img-overlay").hide();
       }
     },
+    onCheckToggle: function(e) {
+      var chkbx, listId;
+      chkbx = $(e.srcElement);
+      listId = e.srcElement.dataset.id;
+      if (chkbx.prop("checked")) {
+        return LOAF.customLists.where({
+          id: parseInt(listId)
+        })[0].add(this.model);
+      } else {
+        return LOAF.customLists.where({
+          id: parseInt(listId)
+        })[0].remove(this.model);
+      }
+    },
     render: function() {
+      var checkboxes,
+        _this = this;
       this.$el.html(Mustache.render(this.template, this.model.attributes));
+      checkboxes = "";
+      _.each(LOAF.customLists.getLists(), function(list) {
+        var obj;
+        obj = {
+          id: list.id,
+          name: list.name
+        };
+        obj.checked = _.contains(_this.model.get("listIds"), obj.id);
+        return checkboxes += Mustache.render(LOAF.templates.bcListCheckboxS, obj);
+      });
+      this.$(".bc-list-checkboxes").html(checkboxes);
       return this;
     }
   });
