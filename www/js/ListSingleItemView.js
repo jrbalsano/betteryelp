@@ -57,7 +57,7 @@
       }
     },
     onClickAdd: function(e) {
-      this.$('.icon-plus').addClass('icon-ok').removeClass('icon-plus');
+      this.$(".icon-plus").addClass("icon-ok").removeClass("icon-plus");
       return LOAF.allCrumbsList.add(this.model);
     },
     onClickEdit: function() {
@@ -68,8 +68,7 @@
       }
     },
     onClickDelete: function() {
-      console.log(this);
-      return $(this).css({ 'display':'none'});
+      return this.$(".bcrumbs-listing").hide();
     },
     onShowInfo: function() {
       if (this.current === "info" || this.current === "none") {

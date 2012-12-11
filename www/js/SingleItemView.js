@@ -19,7 +19,20 @@
       "click .bcrumbs-single-item-info-link": "showInfo",
       "click .bcrumbs-single-item-notes-link": "showNotes",
       "click .bcrumbs-single-item-lists-link": "showLists",
-      "click .bcrumbs-single-item-reviews-link": "showReviews"
+      "click .bcrumbs-single-item-reviews-link": "showReviews",
+      "click .bcrumbs-single-item-section-notes .btn-info": "saveNotes",
+      "keypress textarea": "changeNotes"
+    },
+    saveNotes: function(e) {
+      var note_text;
+      note_text = this.$(".bcrumbs-single-item-section-notes textarea").val();
+      this.model.set("notes", note_text);
+      this.$(".bcrumbs-single-item-section-notes .btn-info").addClass("btn-success");
+      this.$(".bcrumbs-single-item-section-notes .btn-info").removeClass("btn-info");
+      return LOAF.appView.saveApplication();
+    },
+    changeNotes: function() {
+      return this.$(".bcrumbs-single-item-section-notes .btn-success").addClass("btn-info").removeClass("btn-success");
     },
     showInfo: function() {
       if (this.current !== 'info') {

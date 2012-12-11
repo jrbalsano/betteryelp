@@ -11,8 +11,7 @@
       });
     },
     events: {
-      "click .bcrumbs-list a": "onShowList",
-   //   "click .bcrumbs-list-add": "onAddNewList"
+      "click .bcrumbs-list a": "onShowList"
     },
     onShowList: function(e) {
       var el, listId;
@@ -35,12 +34,10 @@
       el.show();
       return LOAF.singleListView.postRender();
     },
-
     onAddNewList: function() {
       this.$('.new-list-name').show();
       return $('.bcrumbs-mycrumbs-section').append(LOAF.templates.bcListAdd);
     },
-
     render: function() {
       var html, missingImage;
       html = "";
@@ -54,7 +51,6 @@
           image3: list.size() > 2 ? list.models[2].get("image_url") : missingImage,
           id: list.id
         };
-
         html += Mustache.render(LOAF.templates.bcListViewList, obj);
         return html += LOAF.templates.bcListAdd;
       });

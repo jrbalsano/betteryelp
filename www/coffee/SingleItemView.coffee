@@ -18,6 +18,20 @@ LOAF.SingleItemView = LOAF.BreadcrumbView.extend
     "click .bcrumbs-single-item-notes-link": "showNotes"
     "click .bcrumbs-single-item-lists-link": "showLists"
     "click .bcrumbs-single-item-reviews-link": "showReviews"
+    "click .bcrumbs-single-item-section-notes .btn-info": "saveNotes"
+    "keypress textarea": "changeNotes"
+
+  saveNotes: (e) ->
+    note_text = @$(".bcrumbs-single-item-section-notes textarea").val()
+    @model.set "notes", note_text
+    @$(".bcrumbs-single-item-section-notes .btn-info").addClass "btn-success"
+    @$(".bcrumbs-single-item-section-notes .btn-info").removeClass "btn-info"
+    LOAF.appView.saveApplication()
+
+  changeNotes: () ->
+    @$(".bcrumbs-single-item-section-notes .btn-success").addClass("btn-info").removeClass("btn-success")
+
+
 
   showInfo: ->
     if @current != 'info'
