@@ -327,9 +327,20 @@ body,
 	width: 94px;
 	position: relative;
 	overflow: hidden;
+	display: inline-block;
 }
 .edit-toggle {
 	cursor: pointer;
+	width: 120px;
+	height: 27px;
+}
+
+.edit-mode {
+	font-weight: 600;
+	text-transform: uppercase;
+	font-size: 14px;
+	color: #00aeff;
+	margin-right: 5px;
 }
 
 .iphone_switch {

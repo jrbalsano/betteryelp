@@ -54,6 +54,10 @@
       }
     },
 
+    onClickDelete: function() {
+      return LOAF.allCrumbsList.remove(this.model);
+    },
+
     onShowInfo: function() {
       if (this.current === "info" || this.current === "none") {
         this.$(".img-overlay-text >span").hide();
