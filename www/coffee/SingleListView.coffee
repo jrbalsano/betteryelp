@@ -63,7 +63,7 @@ LOAF.SingleListView = LOAF.BreadcrumbView.extend
         arr.push $(@)
         #find the tallest of the three and make their heights the same
         high = arr[0]
-        if high.height() < arr[1].height() then high = arr[1] 
+        if high.height() < arr[1].height() then high = arr[1]
         if high.height() < arr[2].height() then high = arr[2]
         if high.height() < arr[3].height() then high = arr[3]
         _.each arr, (o, i) ->
@@ -83,16 +83,19 @@ LOAF.SingleListView = LOAF.BreadcrumbView.extend
     @$el.html html
 
     # Add individual business
-    listItemViews = []
-    template = if @type == "yelp" then LOAF.templates.bcYelpViewSingle else LOAF.templates.bcListViewSingle
-    @collection.each (business) =>
-      listItemViews.push new LOAF.ListSingleItemView
-        model: business
-        template: template
-        collection: @collection
-    _.each listItemViews, (o) ->
-      o.render()
-      @$(".bcrumbs-list-view-items").append o.el
-    @listItemViews = listItemViews
+    if @collection.size() > 0
+      listItemViews = []
+      template = if @type == "yelp" then LOAF.templates.bcYelpViewSingle else LOAF.templates.bcListViewSingle
+      @collection.each (business) ->
+        listItemViews.push new LOAF.ListSingleItemView
+          model: business
+          template: template
+          collection: @collection
+      _.each listItemViews, (o) ->
+        o.render()
+        @$(".bcrumbs-list-view-items").append o.el
+      @listItemViews = listItemViews
+    else
+      @$(".bcrumbs-list-view-items").html (Mustache.render LOAF.templates.bcSadCat, message: "There are no items in this list. You should add some!")
     # render history
     @renderHistory()
