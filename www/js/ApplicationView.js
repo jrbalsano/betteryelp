@@ -6,6 +6,7 @@
       var _this = this;
       this.initHistory();
       this.$(".bcrumbs-view").hide();
+      this.$(".saving-cat").hide();
       this.loadingTimeout = setTimeout(function() {
         return _this.$(".bcrumbs-loading").show();
       }, 500);
