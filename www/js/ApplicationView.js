@@ -44,7 +44,8 @@
     events: {
       "click .bcrumbs-add-crumbs-link": "showAddCrumbs",
       "click .bcrumbs-my-crumbs-link": "showMyCrumbs",
-      "click .bcrumbs-header .add-on": "searchLists"
+      "click .bcrumbs-header .add-on": "searchLists",
+      "click .bc-footer-links > a": "showInstructions"
     },
     searchLists: function(e) {
       var el, searchArray, searchResults, searchTerm;
@@ -88,6 +89,12 @@
       this.myCrumbsView.render();
       this.$(".bcrumbs-view").hide();
       this.$(".bcrumbs-mycrumbs-view").show();
+      return this.myCrumbs = !this.myCrumbs;
+    },
+    showInstructions: function(e) {
+      e.preventDefault();
+      this.$(".bcrumbs-view").hide();
+      this.$(".bcrumbs-instructions-view").show();
       return this.myCrumbs = !this.myCrumbs;
     },
     saveApplication: function() {
