@@ -34,6 +34,28 @@ LOAF.ApplicationView = LOAF.BreadcrumbView.extend
   events:
     "click .bcrumbs-add-crumbs-link": "showAddCrumbs"
     "click .bcrumbs-my-crumbs-link": "showMyCrumbs"
+    "click .bcrumbs-header .add-on": "searchLists"
+
+  searchLists: (e) ->
+    e.preventDefault()
+    searchTerm = $(".bcrumbs-crumbs-search-input").val()
+    if searchTerm
+      searchArray = LOAF.customLists.search searchTerm
+      el = $(".bcrumbs-list-view")
+      searchResults = new LOAF.CustomList searchArray,
+        name: "Search for: " + searchTerm
+      LOAF.singleListView.undelegateEvents() if LOAF.singleListView?
+      LOAF.singleListView = new LOAF.SingleListView 
+        collection: searchResults
+        el: el
+        caller: 
+          title: "My Crumbs"
+          view: @myCrumbsView
+        type: "custom"
+      LOAF.singleListView.render()
+      @$(".bcrumbs-view").hide()
+      el.show()
+      LOAF.singleListView.postRender()
 
   showAddCrumbs: (e) ->
     e.preventDefault()

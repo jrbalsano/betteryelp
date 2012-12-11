@@ -45,15 +45,13 @@
     onClickAdd: function(e) {
       return LOAF.allCrumbsList.add(this.model);
     },
-
     onClickEdit: function() {
       if (this.current === "notes") {
         return this.current = "none";
       } else {
-      return this.current = "notes";
+        return this.current = "notes";
       }
     },
-
     onShowInfo: function() {
       if (this.current === "info" || this.current === "none") {
         this.$(".img-overlay-text >span").hide();
@@ -86,16 +84,14 @@
         return this.$(".bc-list-view-single-reviews").show();
       }
     },
-
     onShowEdit: function() {
       if (this.current === "edit" || this.current === "none") {
-      this.$(".img-overlay-text >span").hide();
-      this.$(".img-overlay-text").show();
-      this.$(".img-overlay").show();
-      return this.$(".bc-list-view-single-notes").show();
+        this.$(".img-overlay-text >span").hide();
+        this.$(".img-overlay-text").show();
+        this.$(".img-overlay").show();
+        return this.$(".bc-list-view-single-notes").show();
       }
     },
-
     onExit: function() {
       if (this.current === "none") {
         this.$(".img-overlay-text").hide();

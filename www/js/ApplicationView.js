@@ -42,7 +42,36 @@
     },
     events: {
       "click .bcrumbs-add-crumbs-link": "showAddCrumbs",
-      "click .bcrumbs-my-crumbs-link": "showMyCrumbs"
+      "click .bcrumbs-my-crumbs-link": "showMyCrumbs",
+      "click .bcrumbs-header .add-on": "searchLists"
+    },
+    searchLists: function(e) {
+      var el, searchArray, searchResults, searchTerm;
+      e.preventDefault();
+      searchTerm = $(".bcrumbs-crumbs-search-input").val();
+      if (searchTerm) {
+        searchArray = LOAF.customLists.search(searchTerm);
+        el = $(".bcrumbs-list-view");
+        searchResults = new LOAF.CustomList(searchArray, {
+          name: "Search for: " + searchTerm
+        });
+        if (LOAF.singleListView != null) {
+          LOAF.singleListView.undelegateEvents();
+        }
+        LOAF.singleListView = new LOAF.SingleListView({
+          collection: searchResults,
+          el: el,
+          caller: {
+            title: "My Crumbs",
+            view: this.myCrumbsView
+          },
+          type: "custom"
+        });
+        LOAF.singleListView.render();
+        this.$(".bcrumbs-view").hide();
+        el.show();
+        return LOAF.singleListView.postRender();
+      }
     },
     showAddCrumbs: function(e) {
       e.preventDefault();
