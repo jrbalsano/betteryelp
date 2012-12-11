@@ -85,7 +85,8 @@
       return this.$(".iphone_switch_container").show();
     },
     render: function() {
-      var html, listItemViews, obj, template;
+      var html, listItemViews, obj, template,
+        _this = this;
       html = "";
       obj = {
         title: this.collection.title || this.collection.name
@@ -99,7 +100,7 @@
           return listItemViews.push(new LOAF.ListSingleItemView({
             model: business,
             template: template,
-            collection: this.collection
+            collection: _this.collection
           }));
         });
         _.each(listItemViews, function(o) {

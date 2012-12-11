@@ -86,7 +86,7 @@ LOAF.SingleListView = LOAF.BreadcrumbView.extend
     if @collection.size() > 0
       listItemViews = []
       template = if @type == "yelp" then LOAF.templates.bcYelpViewSingle else LOAF.templates.bcListViewSingle
-      @collection.each (business) ->
+      @collection.each (business) =>
         listItemViews.push new LOAF.ListSingleItemView
           model: business
           template: template
