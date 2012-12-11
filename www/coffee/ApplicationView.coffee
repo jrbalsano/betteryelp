@@ -56,6 +56,7 @@ LOAF.ApplicationView = LOAF.BreadcrumbView.extend
       @$(".bcrumbs-view").hide()
       el.show()
       LOAF.singleListView.postRender()
+      LOAF.singleListView.$(".iphone_switch_container").hide()
 
   showAddCrumbs: (e) ->
     e.preventDefault()

@@ -70,7 +70,8 @@
         LOAF.singleListView.render();
         this.$(".bcrumbs-view").hide();
         el.show();
-        return LOAF.singleListView.postRender();
+        LOAF.singleListView.postRender();
+        return LOAF.singleListView.$(".iphone_switch_container").hide();
       }
     },
     showAddCrumbs: function(e) {
