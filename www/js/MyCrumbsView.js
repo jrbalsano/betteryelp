@@ -14,11 +14,15 @@
       "click .bcrumbs-list a": "onShowList"
     },
     onShowList: function(e) {
-      var el, listId, singleListView;
+      var el, listId;
       e.preventDefault;
+      debugger;
       listId = parseInt(e.srcElement.dataset.id);
       el = $(".bcrumbs-list-view");
-      singleListView = new LOAF.SingleListView({
+      if (LOAF.singleListView != null) {
+        LOAF.singleListView.undelegateEvents();
+      }
+      LOAF.singleListView = new LOAF.SingleListView({
         collection: LOAF.customLists.where({
           id: listId
         })[0],
@@ -26,9 +30,10 @@
         caller: this._historyRep,
         type: "custom"
       });
-      singleListView.render();
+      LOAF.singleListView.render();
       this.$el.hide();
-      return el.show();
+      el.show();
+      return LOAF.singleListView.postRender();
     },
     render: function() {
       var html, missingImage;
@@ -38,7 +43,7 @@
         var obj;
         obj = {
           name: list.name,
-          image1: list.size() > 1 ? list.models[0].get("image_url") : missingImage,
+          image1: list.size() > 0 ? list.models[0].get("image_url") : missingImage,
           image2: list.size() > 1 ? list.models[1].get("image_url") : missingImage,
           image3: list.size() > 2 ? list.models[2].get("image_url") : missingImage,
           id: list.id

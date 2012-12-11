@@ -35,7 +35,8 @@
       });
       LOAF.singleListView.render();
       this.$el.hide();
-      return el.show();
+      el.show();
+      return LOAF.singleListView.postRender();
     },
     onCategoryToggle: function(e) {
       e.preventDefault;
