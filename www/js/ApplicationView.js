@@ -6,6 +6,7 @@
       var _this = this;
       this.initHistory();
       this.$(".bcrumbs-view").hide();
+      this.$(".saving-cat").hide();
       this.loadingTimeout = setTimeout(function() {
         return _this.$(".bcrumbs-loading").show();
       }, 500);
@@ -46,18 +47,21 @@
     },
     showAddCrumbs: function(e) {
       e.preventDefault();
+      this.addCrumbsView.render();
       this.$(".bcrumbs-view").hide();
       this.$(".bcrumbs-yelp-view").show();
       return this.myCrumbs = !this.myCrumbs;
     },
     showMyCrumbs: function(e) {
       e.preventDefault();
+      this.myCrumbsView.render();
       this.$(".bcrumbs-view").hide();
       this.$(".bcrumbs-mycrumbs-view").show();
       return this.myCrumbs = !this.myCrumbs;
     },
     saveApplication: function() {
       var object;
+      $(".saving-cat").show();
       object = {};
       object.sessionExists = true;
       object.yelpLists = LOAF.yelpLists.getLists();
@@ -66,7 +70,10 @@
         read: false,
         onReady: function(newSave) {
           return newSave.writeObject(object, function() {
-            return console.log("Save complete");
+            console.log("Save complete");
+            return setTimeout(function() {
+              return $(".saving-cat").hide();
+            }, 1000);
           });
         }
       });

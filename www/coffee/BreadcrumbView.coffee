@@ -15,7 +15,9 @@ LOAF.BreadcrumbView = Backbone.View.extend
     e.preventDefault()
     @$el.hide()
     viewToShow = @history[e.currentTarget.dataset.id].view
+    viewToShow.render()
     viewToShow.$el.show()
+    viewToShow.postRender() if viewToShow.postRender?
 
 class LOAF.HistoryItem
   constructor: (options) ->

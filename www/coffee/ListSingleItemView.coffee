@@ -20,6 +20,18 @@ LOAF.ListSingleItemView = Backbone.View.extend
     "click .icon-minus-sign": "onClickDelete"
     "mouseout .bcrumbs-single-icons": "onExit"
     "click .bc-list-checkbox": "onCheckToggle"
+    "click .btn-info": "saveNotes"
+    "keypress textarea": "changeNote"
+
+  changeNote: (e) ->
+    @$(".btn-success").addClass("btn-info").removeClass("btn-success")
+
+  saveNotes: (e) ->
+    note_text = @$("textarea").val()
+    @model.set "notes", note_text
+    @$(".btn-info").addClass "btn-success"
+    @$(".btn-info").removeClass "btn-info"
+    LOAF.appView.saveApplication()
 
   onClickInfo: ->
     if @current == "info"
