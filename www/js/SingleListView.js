@@ -32,12 +32,10 @@
       this.$el.hide();
       return LOAF.singleView.$el.show();
     },
-
     closeHover: function() {
       $('.img-overlay-text').hide();
-      $('.img-overlay').hide();
+      return $('.img-overlay').hide();
     },
-    
     postRender: function() {
       var arr, container_path, el, mode, on_;
       this.$('.bcrumbs-single-list-view-link > a').each(function(i) {

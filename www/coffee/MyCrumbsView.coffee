@@ -11,7 +11,6 @@ LOAF.MyCrumbsView = LOAF.BreadcrumbView.extend
 
   onShowList: (e) ->
     e.preventDefault
-    debugger
     listId = parseInt e.srcElement.dataset.id
     el = $(".bcrumbs-list-view")
     LOAF.singleListView.undelegateEvents() if LOAF.singleListView?

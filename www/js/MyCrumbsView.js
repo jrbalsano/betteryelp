@@ -16,7 +16,6 @@
     onShowList: function(e) {
       var el, listId;
       e.preventDefault;
-      debugger;
       listId = parseInt(e.srcElement.dataset.id);
       el = $(".bcrumbs-list-view");
       if (LOAF.singleListView != null) {
