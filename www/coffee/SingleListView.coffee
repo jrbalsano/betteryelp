@@ -44,10 +44,10 @@ LOAF.SingleListView = LOAF.BreadcrumbView.extend
     container_path = (if on_ then "img/iphone_switch_container_off.png" else "img/iphone_switch_container_on.png")
     el = $(".edit-toggle")
     el.iphoneSwitch mode, (->
-      console.log "on?"
+      $('.delete').show()
       on_ = true
     ), (->
-      console.log "off?"
+      $('.delete').hide()
       on_ = false
     ),
       switch_on_container_path: container_path

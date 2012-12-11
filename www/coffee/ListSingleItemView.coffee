@@ -17,6 +17,7 @@ LOAF.ListSingleItemView = Backbone.View.extend
     "click .icon-edit": "onClickEdit"
     "click .icon-list": "onClickLists"
     "click .icon-star": "onClickReviews"
+    "click .icon-minus-sign": "onClickDelete"
     "mouseout .bcrumbs-single-icons": "onExit"
 
   onClickInfo: ->
@@ -45,6 +46,9 @@ LOAF.ListSingleItemView = Backbone.View.extend
       @current = "none"
     else
       @current = "notes"
+
+  onClickDelete: -> # alas, this does not work right now
+    LOAF.allCrumbsList.remove @model
 
   onShowInfo: ->
     if @current == "info" or @current == "none"
