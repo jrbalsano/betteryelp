@@ -25,10 +25,14 @@ LOAF.SingleListView = LOAF.BreadcrumbView.extend
     LOAF.singleView.$el.show()
 
   postRender: ->
+    #Truncate business names
+    @$('.bcrumbs-single-list-view-link').each (i)->
+      if $(@).text.length > 20 then $(@).val($(@).text().substring(0, 20))
     #Adjust heights
     arr = []
     @$('.bcrumbs-single-list-item').each (i)->
       #if array size is less than three
+      $(@).next('bcrumbs-single-list-view-link').jTruncate(length: 20)
       if arr.length < 3
         #push to array
         arr.push $(@)
@@ -43,8 +47,6 @@ LOAF.SingleListView = LOAF.BreadcrumbView.extend
           o.height high.height()
         #dump array
         arr = []
-
-
 
   render: ->
     # Create Basic Layout

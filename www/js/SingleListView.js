@@ -33,6 +33,10 @@
     },
     postRender: function() {
     var arr;
+    this.$('.bcrumbs-single-list-view-link > a').each(function(i) {
+      if (this.text.length > 20)
+        return $(this).text($(this).text().substring(0, 20) + "...");
+    });
     arr = [];
     return this.$('.bcrumbs-single-list-item').each(function(i) {
       var high;
@@ -51,14 +55,14 @@
           high = arr[3];
         }
         _.each(arr, function(o, i) {
-          console.log(high.height());
           return o.height(high.height());
         });
         console.log("Row complete");
         return arr = [];
-      }
-    });
-  },
+        }
+      });
+    },
+
     render: function() {
       var html, listItemViews, obj, template;
       html = "";
@@ -79,6 +83,7 @@
         o.render();
         return this.$(".bcrumbs-list-view-items").append(o.el);
       });
+
       this.listItemViews = listItemViews;
       return this.renderHistory();
     }

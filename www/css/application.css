@@ -135,7 +135,7 @@ body,
 
 .bcrumbs-listing { /* Class for all list gridding */
 	width: 210px;
-	margin: 0px 10px;
+	margin: 0px 10px 15px 10px;
 	display: inline-block;
 	text-align: center;
 }
@@ -144,7 +144,11 @@ body,
 .bcrumbs-listing > span,
 .bcrumbs-listing > img {
 	display: block;
-	margin-bottom: 20px;
+}
+
+.bcrumbs-single-list-view-link {
+	font-size: 16px;
+	font-weight:600;
 }
 
 .bcrumbs-single-list-item-img {
