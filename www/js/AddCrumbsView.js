@@ -19,7 +19,8 @@
       "click .bcrumbs-yelp-search .add-on": "searchForCrumbs"
     },
     searchForCrumbs: function(e) {
-      var el, searchResults, searchTerm;
+      var el, searchResults, searchTerm,
+        _this = this;
       e.preventDefault();
       el = $(".bcrumbs-list-view");
       searchTerm = $(".bcrumbs-yelp-search-input").val();
@@ -27,22 +28,25 @@
         searchResults = new LOAF.YelpList([], {
           term: searchTerm
         });
-        searchResults.fetch();
-        LOAF.yelpLists.addList(searchResults);
-        if (LOAF.singleListView != null) {
-          LOAF.singleListView.undelegateEvents();
-        }
-        LOAF.singleListView = new LOAF.SingleListView({
-          collection: searchResults,
-          el: el,
-          caller: this._historyRep,
-          type: "yelp"
+        return searchResults.fetch({
+          success: function() {
+            LOAF.yelpLists.addList(searchResults);
+            if (LOAF.singleListView != null) {
+              LOAF.singleListView.undelegateEvents();
+            }
+            LOAF.singleListView = new LOAF.SingleListView({
+              collection: searchResults,
+              el: el,
+              caller: _this._historyRep,
+              type: "yelp"
+            });
+            LOAF.singleListView.render();
+            $(".bcrumbs-view").hide();
+            el.show();
+            LOAF.singleListView.postRender();
+            return $(".iphone_switch_container").hide();
+          }
         });
-        LOAF.singleListView.render();
-        this.$(".bcrumbs-view").hide();
-        el.show();
-        LOAF.singleListView.postRender();
-        return $(".iphone_switch_container").hide();
       }
     },
     onShowList: function(e) {

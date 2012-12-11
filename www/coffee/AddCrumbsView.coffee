@@ -21,19 +21,20 @@ LOAF.AddCrumbsView = LOAF.BreadcrumbView.extend
     if searchTerm
       searchResults = new LOAF.YelpList [],
         term: searchTerm
-      searchResults.fetch()
-      LOAF.yelpLists.addList searchResults
-      LOAF.singleListView.undelegateEvents() if LOAF.singleListView?
-      LOAF.singleListView = new LOAF.SingleListView 
-        collection: searchResults
-        el: el
-        caller: @_historyRep
-        type: "yelp"
-      LOAF.singleListView.render()
-      @$(".bcrumbs-view").hide()
-      el.show()
-      LOAF.singleListView.postRender()
-      $(".iphone_switch_container").hide()
+      searchResults.fetch
+        success: =>
+          LOAF.yelpLists.addList searchResults
+          LOAF.singleListView.undelegateEvents() if LOAF.singleListView?
+          LOAF.singleListView = new LOAF.SingleListView
+            collection: searchResults
+            el: el
+            caller: @_historyRep
+            type: "yelp"
+          LOAF.singleListView.render()
+          $(".bcrumbs-view").hide()
+          el.show()
+          LOAF.singleListView.postRender()
+          $(".iphone_switch_container").hide()
 
   onShowList: (e) ->
     e.preventDefault
