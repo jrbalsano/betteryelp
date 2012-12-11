@@ -98,10 +98,10 @@ body,
 }
 
 .bcrumbs-view { /* set height/width of each Breadcrumbs view */
-	width: 100%;
 	min-height: 100%;
 	display: block;
-	padding: 10px;
+	padding: 10px 10px 50px 10px;
+	padding-bottom:50px;
 }
 
 .img-crop { /* Style for all elements that crop images */
@@ -472,11 +472,19 @@ body,
 	margin-left: 5px;
 }
 
+p {
+	font-size: 16px;
+}
+
 .bcrumbs-single-item-section > p {
-	font-size: 20px;
 	font-weight: 400;
 	line-height: 26px;
 	margin-bottom: 20px;
+}
+
+.single-item-notes {
+	width: 600px;
+	height: 200px;
 }
 
 .bcrumbs-single-item-img {
