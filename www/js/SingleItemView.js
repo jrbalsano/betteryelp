@@ -24,7 +24,7 @@
         obj.checked = _.contains(_this.model.get("listIds"), obj.id);
         return checkboxes += Mustache.render(LOAF.templates.bcListCheckboxS, obj);
       });
-      this.$(".bc-list-checkboxes").html(checkboxes);
+      this.$(".bc-list-checkboxes-single-page").html(checkboxes);
       return this.renderHistory();
     },
     events: {
