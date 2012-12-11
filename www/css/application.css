@@ -192,6 +192,10 @@ body,
 	font-weight:600;
 }
 
+.bcrumbs-listname { /* the input field for adding new list in my crumbs view*/
+	width: 120px;
+}
+
 .bcrumbs-single-list-item-img {
 	width: 210px;
 	height: 210px;
