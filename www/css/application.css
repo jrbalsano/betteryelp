@@ -78,6 +78,10 @@ body,
 	padding: 5px;
 }
 
+.close { /* override bootstrap's opaciy for close */
+	opacity: 1!important;
+}
+
 .input-append button.add-on { /* attaches buttons to input fields, notably header searchbox */
     height: 30px !important;
 }
@@ -130,8 +134,30 @@ body,
 	color: #fff;
 	height: 190px;
 	width: 190px;
-	font-size: 15px;
+	font-size: 14px;
 	margin: 5px 10px;
+}
+
+.bc-list-checkboxes { /* checkboxes for lists on single items during hover */
+	width: 195px;
+	height: 145px;
+	overflow-y: auto;
+}
+
+/* Prettier scrollbar*/
+
+::-webkit-scrollbar {
+	width: 8px;
+	height: 8px;
+}
+
+::-webkit-scrollbar-track {
+	background: transparent;
+}
+
+::-webkit-scrollbar-thumb        {
+	background: #d0d0d0;
+	
 }
 
 .bcrumbs-listing { /* Class for all list gridding */
