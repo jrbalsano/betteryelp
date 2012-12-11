@@ -69,7 +69,9 @@
         onReady: function(newSave) {
           return newSave.writeObject(object, function() {
             console.log("Save complete");
-            return $(".saving-cat").hide();
+            return setTimeout(function() {
+              return $(".saving-cat").hide();
+            }, 1000);
           });
         }
       });

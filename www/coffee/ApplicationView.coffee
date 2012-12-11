@@ -59,7 +59,9 @@ LOAF.ApplicationView = LOAF.BreadcrumbView.extend
       onReady: (newSave) ->
         newSave.writeObject object, ->
           console.log "Save complete"
-          $(".saving-cat").hide()
+          setTimeout( ->
+            $(".saving-cat").hide()
+          1000)
 
   _newSession: (cb, context) ->
     # Generate List of Yelp Lists
