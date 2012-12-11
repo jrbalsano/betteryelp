@@ -24,7 +24,13 @@
       "mouseout .bcrumbs-single-icons": "onExit",
       "click .bc-list-checkbox": "onCheckToggle",
       "click .btn-info": "saveNotes",
-      "keypress textarea": "changeNote"
+      "keypress textarea": "changeNote",
+      "click .close": "closeHover"
+    },
+    closeHover: function() {
+      this.$('.img-overlay-text').hide();
+      this.$('.img-overlay').hide();
+      return this.current = "none";
     },
     changeNote: function(e) {
       return this.$(".btn-success").addClass("btn-info").removeClass("btn-success");

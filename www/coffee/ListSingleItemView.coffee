@@ -23,6 +23,12 @@ LOAF.ListSingleItemView = Backbone.View.extend
     "click .bc-list-checkbox": "onCheckToggle"
     "click .btn-info": "saveNotes"
     "keypress textarea": "changeNote"
+    "click .close": "closeHover"
+
+  closeHover: ->
+    @$('.img-overlay-text').hide()
+    @$('.img-overlay').hide()
+    @current = "none"
 
   changeNote: (e) ->
     @$(".btn-success").addClass("btn-info").removeClass("btn-success")
