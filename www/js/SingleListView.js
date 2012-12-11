@@ -31,6 +31,34 @@
       this.$el.hide();
       return LOAF.singleView.$el.show();
     },
+    postRender: function() {
+    var arr;
+    arr = [];
+    return this.$('.bcrumbs-single-list-item').each(function(i) {
+      var high;
+      if (arr.length < 3) {
+        return arr.push($(this));
+      } else {
+        arr.push($(this));
+        high = arr[0];
+        if (high.height() < arr[1].height()) {
+          high = arr[1];
+        }
+        if (high.height() < arr[2].height()) {
+          high = arr[2];
+        }
+        if (high.height() < arr[3].height()) {
+          high = arr[3];
+        }
+        _.each(arr, function(o, i) {
+          console.log(high.height());
+          return o.height(high.height());
+        });
+        console.log("Row complete");
+        return arr = [];
+      }
+    });
+  },
     render: function() {
       var html, listItemViews, obj, template;
       html = "";
