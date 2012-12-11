@@ -47,7 +47,8 @@
             $(".bcrumbs-view").hide();
             el.show();
             LOAF.singleListView.postRender();
-            return $(".iphone_switch_container").hide();
+            $(".edit-toggle").hide();
+            return $(".edit-mode").hide();
           }
         });
       }
@@ -71,7 +72,9 @@
       LOAF.singleListView.render();
       this.$el.hide();
       el.show();
-      return LOAF.singleListView.postRender();
+      LOAF.singleListView.postRender();
+      $(".edit-toggle").hide();
+      return $(".edit-mode").hide();
     },
     onCategoryToggle: function(e) {
       e.preventDefault();
@@ -140,6 +143,7 @@
         this.$(".bcrumbs-browse-items").html(categoryHtml);
       }
       this.$(".bcrumbs-browse-collapse").hide();
+      this.$(".edit-toggle").hide();
       searchHtml = "";
       searches = _.filter(LOAF.yelpLists.getLists(), function(list) {
         return list.term != null;

@@ -90,6 +90,7 @@ LOAF.SingleListView = LOAF.BreadcrumbView.extend
         listItemViews.push new LOAF.ListSingleItemView
           model: business
           template: template
+          collection: @collection
       _.each listItemViews, (o) ->
         o.render()
         @$(".bcrumbs-list-view-items").append o.el

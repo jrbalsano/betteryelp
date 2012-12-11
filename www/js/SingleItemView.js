@@ -34,7 +34,7 @@
       "click .bcrumbs-single-item-reviews-link": "showReviews",
       "click .bcrumbs-single-item-section-notes .btn-info": "saveNotes",
       "keypress textarea": "changeNotes",
-      "click .bc-list-checkbox": "onCheckToggle"
+      "click .bc-list-checkbox-single-page": "onCheckToggle"
     },
     saveNotes: function(e) {
       var note_text;
@@ -48,17 +48,36 @@
       return this.$(".bcrumbs-single-item-section-notes .btn-success").addClass("btn-info").removeClass("btn-success");
     },
     onCheckToggle: function(e) {
-      var chkbx, listId;
+      var allCrumbsCheck, chkbx, listId,
+        _this = this;
       chkbx = $(e.srcElement);
       listId = e.srcElement.dataset.id;
       if (chkbx.prop("checked")) {
+        LOAF.allCrumbsList.add(this.model);
+        allCrumbsCheck = _.find(this.$(".bc-list-checkbox"), function(eachCheck) {
+          return eachCheck.dataset.id === "0";
+        });
+        $(allCrumbsCheck).prop("checked", true);
         return LOAF.customLists.where({
           id: parseInt(listId)
         })[0].add(this.model);
       } else {
-        return LOAF.customLists.where({
+        LOAF.customLists.where({
           id: parseInt(listId)
         })[0].remove(this.model);
+        if (listId === "0") {
+          _.each(this.model.get("listIds"), function(id) {
+            var list;
+            list = LOAF.customLists.where({
+              id: id
+            })[0];
+            if (list != null) {
+              list.remove(_this.model.id);
+              return _this.model.attributes.listIds = _.without(_this.model.attributes.listIds, list.id);
+            }
+          });
+          return this.$(".bc-list-checkbox").prop("checked", false);
+        }
       }
     },
     showInfo: function() {

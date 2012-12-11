@@ -98,7 +98,8 @@
         this.collection.each(function(business) {
           return listItemViews.push(new LOAF.ListSingleItemView({
             model: business,
-            template: template
+            template: template,
+            collection: this.collection
           }));
         });
         _.each(listItemViews, function(o) {

@@ -37,7 +37,8 @@ LOAF.AddCrumbsView = LOAF.BreadcrumbView.extend
           $(".bcrumbs-view").hide()
           el.show()
           LOAF.singleListView.postRender()
-          $(".iphone_switch_container").hide()
+          $(".edit-toggle").hide()
+          $(".edit-mode").hide()
 
   onShowList: (e) ->
     e.preventDefault()
@@ -53,6 +54,8 @@ LOAF.AddCrumbsView = LOAF.BreadcrumbView.extend
     @$el.hide()
     el.show()
     LOAF.singleListView.postRender()
+    $(".edit-toggle").hide()
+    $(".edit-mode").hide()
 
   onCategoryToggle: (e) ->
     e.preventDefault()
@@ -102,6 +105,7 @@ LOAF.AddCrumbsView = LOAF.BreadcrumbView.extend
       categoryHtml = Mustache.render LOAF.templates.bcSadCat, message: "There are no categories available. Please refresh the page"
       @$(".bcrumbs-browse-items").html categoryHtml
     @$(".bcrumbs-browse-collapse").hide()
+    @$(".edit-toggle").hide()
 
     searchHtml = ""
     searches = _.filter LOAF.yelpLists.getLists(), (list) ->
