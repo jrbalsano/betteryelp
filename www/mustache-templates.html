@@ -141,17 +141,18 @@ modified
       </span>
       <span class = "bc-list-view-single-lists" style = "display: none;">
         <button class = "close pull-right">&times;</button>
-        <!--while has lists (if need to be truncated, list as many as possible then append with +3, +4, etc)-->
-        {{this_business lists}}<br />
-      </span>
+        <form class = "bc-list-checkboxes" action = "">
+          <!--call bc-list-checkbox template here-->
+      </form>
+    </span>
       <span class = "bc-list-view-single-reviews" style = "display: none;">
         <button class = "close pull-right">&times;</button>
         Number of reviews: {{review_count}}<br />
         Overal rating: {{rating}}/5
       </span>
     </span>
-span
-    < class = "img-overlay" style = "display: none;"></span>
+
+    <span class = "img-overlay" style = "display: none;"></span>
 
     <img src = "{{image_url}}">
     <span class = "bcrumbs-single-icons">
@@ -164,7 +165,13 @@ span
   <span class = "bcrumbs-single-list-view-link"><a href = "javascript:void(0)" data-id={{id}}>{{name}}</a></span>
 </script>
 
-<!----------- Single Item Template ---------->
+
+<!-----------Single Item View: Hover OverLay Lists Checkboxes Template---------->
+<script id = "bc-list-checkbox-s" type = "text/html">
+  <input type="checkbox" class="bc-list-checkbox" name = "{{list_name}}"> {{list_name}}<br />
+</script>
+
+<!-----------Single Item Template---------->
 <script id = "bc-single-item" type = "text/html">
   <ul class = "bcrumbs-path breadcrumb">
   </ul>
@@ -209,5 +216,4 @@ span
     </div>
   </div>  
   <!--append the section div below-->
-
 </script>

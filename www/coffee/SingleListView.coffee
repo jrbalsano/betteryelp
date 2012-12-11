@@ -11,6 +11,7 @@ LOAF.SingleListView = LOAF.BreadcrumbView.extend
 
   events:
     "click .bcrumbs-single-list-view-link a": "onShowItem"
+    "click .close": "closeHover"
 
   onShowItem: (e) ->
     e.preventDefault()
@@ -24,6 +25,10 @@ LOAF.SingleListView = LOAF.BreadcrumbView.extend
     LOAF.singleView.render()
     @$el.hide()
     LOAF.singleView.$el.show()
+
+  closeHover: ->
+    $('.img-overlay-text').hide()
+    $('.img-overlay').hide()
 
   postRender: ->
     #Truncate business and add ellipsis if business names are over 20 characters
