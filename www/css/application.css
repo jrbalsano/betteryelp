@@ -232,6 +232,18 @@ body,
 	
 }
 
+/* Single Item View Template tweaks */
+.single-item-notes,
+.bc-list-checkboxes-single-page {
+	font-family: Quicksand;
+}
+
+.bc-list-checkboxes-single-page {
+	font-weight: 600;
+	font-size: 16px;
+	line-height: 25px;
+}
+
 /* ==========================================================================
    Breadcrumbs: Cat
    ========================================================================== */

@@ -30,7 +30,7 @@ LOAF.SingleItemView = LOAF.BreadcrumbView.extend
     "click .bcrumbs-single-item-reviews-link": "showReviews"
     "click .bcrumbs-single-item-section-notes .btn-info": "saveNotes"
     "keypress textarea": "changeNotes"
-    "click .bc-list-checkbox": "onCheckToggle"
+    "click .bc-list-checkbox-single-page": "onCheckToggle"
 
   saveNotes: (e) ->
     note_text = @$(".bcrumbs-single-item-section-notes textarea").val()
