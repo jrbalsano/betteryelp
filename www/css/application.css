@@ -425,6 +425,7 @@ body,
 	height: 200px; 
 	position: relative;
 	width: 200px;
+  margin-top: 20px;
 	padding-bottom:15px;
 }
 

@@ -7,10 +7,18 @@ LOAF.MyCrumbsView = LOAF.BreadcrumbView.extend
       view: @
 
   events:
-    "click .bcrumbs-list a": "onShowList"
+    "click .bcrumbs-list .bcrumbs-show-list": "onShowList"
     "click .bcrumbs-list-add": "onAddNewList"
     "click .listname-confirm": "confirmNewList"
     "keypress .bcrumbs-listname": "onkey"
+    "click .delete": "onDelete"
+
+  onDelete: (e) ->
+    e.preventDefault()
+    $(e.srcElement.parentElement.parentElement).hide()
+    listId = e.srcElement.dataset.id
+    list = LOAF.customLists.where id: parseInt listId
+    LOAF.customLists.removeList list[0]
 
   onkey: (e) ->
     if e.keyCode == 13

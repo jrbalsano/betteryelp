@@ -11,10 +11,21 @@
       });
     },
     events: {
-      "click .bcrumbs-list a": "onShowList",
+      "click .bcrumbs-list .bcrumbs-show-list": "onShowList",
       "click .bcrumbs-list-add": "onAddNewList",
       "click .listname-confirm": "confirmNewList",
-      "keypress .bcrumbs-listname": "onkey"
+      "keypress .bcrumbs-listname": "onkey",
+      "click .delete": "onDelete"
+    },
+    onDelete: function(e) {
+      var list, listId;
+      e.preventDefault();
+      $(e.srcElement.parentElement.parentElement).hide();
+      listId = e.srcElement.dataset.id;
+      list = LOAF.customLists.where({
+        id: parseInt(listId)
+      });
+      return LOAF.customLists.removeList(list[0]);
     },
     onkey: function(e) {
       if (e.keyCode === 13) {
