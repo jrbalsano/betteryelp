@@ -75,4 +75,6 @@ LOAF.MyCrumbsView = LOAF.BreadcrumbView.extend
       on_ = false
     ),
       switch_on_container_path: container_path
+      $(".edit-toggle").show()
+      $(".edit-mode").show()
 
