@@ -38,11 +38,11 @@ LOAF.SingleListView = LOAF.BreadcrumbView.extend
     mode = (if on_ then "on" else "off")
     container_path = (if on_ then "img/iphone_switch_container_off.png" else "img/iphone_switch_container_on.png")
     el = $(".edit-toggle")
-    el.iphoneSwitch mode, (->
-      $('.delete').show()
+    el.iphoneSwitch mode, (=>
+      @startDeleteMode()
       on_ = true
-    ), (->
-      $('.delete').hide()
+    ), (=>
+      @endDeleteMode()
       on_ = false
     ),
       switch_on_container_path: container_path
@@ -68,6 +68,12 @@ LOAF.SingleListView = LOAF.BreadcrumbView.extend
 
     #Show iphone switch
     @$(".iphone_switch_container").show()
+
+  startDeleteMode: ->
+    $('.delete').show()
+
+  endDeleteMode: ->
+    $('.delete').hide()
 
   render: ->
     # Create Basic Layout

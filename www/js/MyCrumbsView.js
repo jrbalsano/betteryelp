@@ -87,15 +87,15 @@
       container_path = "img/iphone_switch_container_off.png";
       on_ = false;
       el = $(".edit-toggle");
-      return el.iphoneSwitch("off", (function() {
-        $('.delete').show();
-        return on_ = true;
+      el.iphoneSwitch("off", (function() {
+        return $('.delete').show();
       }), (function() {
-        $('.delete').hide();
-        return on_ = false;
+        return $('.delete').hide();
       }), {
         switch_on_container_path: container_path
-      }, $(".edit-toggle").show(), $(".edit-mode").show());
+      });
+      $(".edit-toggle").show();
+      return $(".edit-mode").show();
     }
   });
 

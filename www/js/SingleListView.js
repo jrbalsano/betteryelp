@@ -33,7 +33,8 @@
       return LOAF.singleView.$el.show();
     },
     postRender: function() {
-      var arr, container_path, el, mode, on_;
+      var arr, container_path, el, mode, on_,
+        _this = this;
       this.$('.bcrumbs-single-list-view-link > a').each(function(i) {
         if (this.text.length > 20) {
           return $(this).text($(this).text().substring(0, 20) + "...");
@@ -46,10 +47,10 @@
       container_path = (on_ ? "img/iphone_switch_container_off.png" : "img/iphone_switch_container_on.png");
       el = $(".edit-toggle");
       el.iphoneSwitch(mode, (function() {
-        $('.delete').show();
+        _this.startDeleteMode();
         return on_ = true;
       }), (function() {
-        $('.delete').hide();
+        _this.endDeleteMode();
         return on_ = false;
       }), {
         switch_on_container_path: container_path
@@ -78,6 +79,12 @@
         }
       });
       return this.$(".iphone_switch_container").show();
+    },
+    startDeleteMode: function() {
+      return $('.delete').show();
+    },
+    endDeleteMode: function() {
+      return $('.delete').hide();
     },
     render: function() {
       var html, listItemViews, obj, template,

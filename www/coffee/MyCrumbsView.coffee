@@ -69,12 +69,10 @@ LOAF.MyCrumbsView = LOAF.BreadcrumbView.extend
     el = $(".edit-toggle")
     el.iphoneSwitch "off", (->
       $('.delete').show()
-      on_ = true
     ), (->
       $('.delete').hide()
-      on_ = false
     ),
       switch_on_container_path: container_path
-      $(".edit-toggle").show()
-      $(".edit-mode").show()
+    $(".edit-toggle").show()
+    $(".edit-mode").show()
 
