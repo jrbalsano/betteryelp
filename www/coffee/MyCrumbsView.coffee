@@ -22,7 +22,7 @@ LOAF.MyCrumbsView = LOAF.BreadcrumbView.extend
 
   onkey: (e) ->
     if e.keyCode == 13
-      confirmNewList(e)
+      @confirmNewList(e)
 
   onShowList: (e) ->
     e.preventDefault

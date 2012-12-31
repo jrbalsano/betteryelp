@@ -29,7 +29,7 @@
     },
     onkey: function(e) {
       if (e.keyCode === 13) {
-        return confirmNewList(e);
+        return this.confirmNewList(e);
       }
     },
     onShowList: function(e) {
