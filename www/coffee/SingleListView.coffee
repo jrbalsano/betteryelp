@@ -31,22 +31,6 @@ LOAF.SingleListView = LOAF.BreadcrumbView.extend
       if @.text.length > 20
         $(@).text($(@).text().substring(0, 20) + "...")
 
-    #Edit mode switch
-    on_ = false
-    mode = "off"
-    container_path = "img/iphone_switch_container_off.png"
-    mode = (if on_ then "on" else "off")
-    container_path = (if on_ then "img/iphone_switch_container_off.png" else "img/iphone_switch_container_on.png")
-    el = $(".edit-toggle")
-    el.iphoneSwitch mode, (=>
-      @startDeleteMode()
-      on_ = true
-    ), (=>
-      @endDeleteMode()
-      on_ = false
-    ),
-      switch_on_container_path: container_path
-
     #Adjust heights
     arr = []
     @$('.bcrumbs-single-list-item').each (i)->
@@ -65,9 +49,6 @@ LOAF.SingleListView = LOAF.BreadcrumbView.extend
           o.height high.height()
         #dump array
         arr = []
-
-    #Show iphone switch
-    @$(".iphone_switch_container").show()
 
   startDeleteMode: ->
     $('.delete').show()

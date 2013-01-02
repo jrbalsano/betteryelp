@@ -64,15 +64,3 @@ LOAF.MyCrumbsView = LOAF.BreadcrumbView.extend
       html += Mustache.render LOAF.templates.bcListViewList, obj
     html += LOAF.templates.bcListAdd
     @$(".bcrumbs-mycrumbs-section").html html
-    container_path = "img/iphone_switch_container_off.png"
-    on_ = false
-    el = $(".edit-toggle")
-    el.iphoneSwitch "off", (->
-      $('.delete').show()
-    ), (->
-      $('.delete').hide()
-    ),
-      switch_on_container_path: container_path
-    $(".edit-toggle").show()
-    $(".edit-mode").show()
-
