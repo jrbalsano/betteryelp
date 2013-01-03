@@ -50,12 +50,6 @@ LOAF.SingleListView = LOAF.BreadcrumbView.extend
         #dump array
         arr = []
 
-  startDeleteMode: ->
-    $('.delete').show()
-
-  endDeleteMode: ->
-    $('.delete').hide()
-
   render: ->
     # Create Basic Layout
     html = ""
@@ -81,3 +75,4 @@ LOAF.SingleListView = LOAF.BreadcrumbView.extend
       @$(".bcrumbs-list-view-items").html (Mustache.render LOAF.templates.bcSadCat, message: "There are no items in this list. You should add some!")
     # render history
     @renderHistory()
+    $('.delete').show()

@@ -63,12 +63,6 @@
         }
       });
     },
-    startDeleteMode: function() {
-      return $('.delete').show();
-    },
-    endDeleteMode: function() {
-      return $('.delete').hide();
-    },
     render: function() {
       var html, listItemViews, obj, template,
         _this = this;
@@ -98,7 +92,8 @@
           message: "There are no items in this list. You should add some!"
         }));
       }
-      return this.renderHistory();
+      this.renderHistory();
+      return $('.delete').show();
     }
   });
 

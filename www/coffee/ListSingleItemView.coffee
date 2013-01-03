@@ -90,7 +90,11 @@ LOAF.ListSingleItemView = Backbone.View.extend
 
   onClickDelete: ->
     @$el.hide()
+    index = @collection.indexOf @model
     @collection.remove @model
+    LOAF.appView.setUndo "#{@model.name} removed from #{@collection.name}.", "Undo?", =>
+      @collection.add @model, at: index
+      @$el.show()
     
   onShowInfo: ->
     if @current == "info" or @current == "none"

@@ -18,7 +18,11 @@ LOAF.MyCrumbsView = LOAF.BreadcrumbView.extend
     $(e.srcElement.parentElement.parentElement).hide()
     listId = e.srcElement.dataset.id
     list = LOAF.customLists.where id: parseInt listId
+    index = LOAF.customLists.lists.indexOf list[0]
     LOAF.customLists.removeList list[0]
+    LOAF.appView.setUndo "#{list[0].name} has been deleted.", "Undo?", =>
+      LOAF.customLists.lists.splice index, 0, list[0]
+      @render()
 
   onkey: (e) ->
     if e.keyCode == 13
@@ -64,3 +68,4 @@ LOAF.MyCrumbsView = LOAF.BreadcrumbView.extend
       html += Mustache.render LOAF.templates.bcListViewList, obj
     html += LOAF.templates.bcListAdd
     @$(".bcrumbs-mycrumbs-section").html html
+    @$('.delete').show()

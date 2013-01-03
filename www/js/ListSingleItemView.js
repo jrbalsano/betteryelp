@@ -103,8 +103,17 @@
       }
     },
     onClickDelete: function() {
+      var index,
+        _this = this;
       this.$el.hide();
-      return this.collection.remove(this.model);
+      index = this.collection.indexOf(this.model);
+      this.collection.remove(this.model);
+      return LOAF.appView.setUndo("" + this.model.name + " removed from " + this.collection.name + ".", "Undo?", function() {
+        _this.collection.add(_this.model, {
+          at: index
+        });
+        return _this.$el.show();
+      });
     },
     onShowInfo: function() {
       if (this.current === "info" || this.current === "none") {

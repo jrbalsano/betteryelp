@@ -18,14 +18,20 @@
       "click .delete": "onDelete"
     },
     onDelete: function(e) {
-      var list, listId;
+      var index, list, listId,
+        _this = this;
       e.preventDefault();
       $(e.srcElement.parentElement.parentElement).hide();
       listId = e.srcElement.dataset.id;
       list = LOAF.customLists.where({
         id: parseInt(listId)
       });
-      return LOAF.customLists.removeList(list[0]);
+      index = LOAF.customLists.lists.indexOf(list[0]);
+      LOAF.customLists.removeList(list[0]);
+      return LOAF.appView.setUndo("" + list[0].name + " has been deleted.", "Undo?", function() {
+        LOAF.customLists.lists.splice(index, 0, list[0]);
+        return _this.render();
+      });
     },
     onkey: function(e) {
       if (e.keyCode === 13) {
@@ -83,7 +89,8 @@
         return html += Mustache.render(LOAF.templates.bcListViewList, obj);
       });
       html += LOAF.templates.bcListAdd;
-      return this.$(".bcrumbs-mycrumbs-section").html(html);
+      this.$(".bcrumbs-mycrumbs-section").html(html);
+      return this.$('.delete').show();
     }
   });
 
