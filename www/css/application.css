@@ -378,6 +378,25 @@ body,
 }
 
 /* ==========================================================================
+   Breadcrumbs Message
+   ========================================================================== */
+.bcrumbs-alert {
+  position: fixed;
+  top: 0px;
+  width: 100%;
+  text-align: center;
+  z-index: 99;
+  margin: 0;
+}
+.bcrumbs-message {
+  background: #E95D00;
+  display: inline-block;
+  margin: 0;
+  padding: 0px 15px 0px 15px;
+  border-radius: 0px 0px 10px 10px;
+}
+
+/* ==========================================================================
    Breadcrumbs My Crumbs View
    ========================================================================== */
 

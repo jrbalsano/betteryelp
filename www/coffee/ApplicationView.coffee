@@ -37,6 +37,25 @@ LOAF.ApplicationView = LOAF.BreadcrumbView.extend
     "click .bcrumbs-my-crumbs-link": "showMyCrumbs"
     "click .bcrumbs-header .add-on": "searchLists"
     "click .bc-footer-links > a": "showInstructions"
+    "click .bcrumbs-undo": "onUndo"
+    "click .bcrumbs-undo-hide": "hideUndo"
+
+  setUndo: (text, command, f) ->
+    html = "#{text} <a href=\"javascript:void(0)\" class=\"bcrumbs-undo\">#{command}</a> (<a href=\"javascript:void(0)\" class=\"bcrumbs-undo-hide\">hide this</a>)"
+    @$(".bcrumbs-message p").html html
+    @$(".bcrumbs-alert").animate top: "75px"
+    setTimeout (=>
+      @hideUndo()
+      ), 15000
+    @undo = f
+
+  onUndo: (e) ->
+    e.preventDefault()
+    @undo()
+    @hideUndo()
+
+  hideUndo: (e) ->
+    @$(".bcrumbs-alert").animate top: "0px"
 
   searchLists: (e) ->
     e.preventDefault()
@@ -50,7 +69,7 @@ LOAF.ApplicationView = LOAF.BreadcrumbView.extend
       LOAF.singleListView = new LOAF.SingleListView 
         collection: searchResults
         el: el
-        caller: 
+        caller:
           title: "My Crumbs"
           view: @myCrumbsView
         type: "custom"
