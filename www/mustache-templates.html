@@ -99,13 +99,13 @@ modified
       </span>
       <span class = "img-overlay" style = "display: none;"></span>
 
-      <img src = "{{image_url}}">
+      <a href = "javascript:void(0)" data-id={{id}}><img src = "{{image_url}}"></a>
       <span class = "bcrumbs-single-icons btn-group">
-        <button class = "btn"><i class="icon-info-sign"></i></button>
-        <button class = "btn"><i class="icon-edit"></i></button>
-        <button class = "btn"><i class="icon-list"></i></button>
-        <button class = "btn"><i class="icon-star"></i></button>
-        <button class = "btn delete" data-id = "{{id}}" ><i class = "icon-trash"></i></button>
+        <button class = "btn my-crumbs-icon"><i class="icon-info-sign"></i></button>
+        <button class = "btn my-crumbs-icon"><i class="icon-edit"></i></button>
+        <button class = "btn my-crumbs-icon"><i class="icon-list"></i></button>
+        <button class = "btn my-crumbs-icon"><i class="icon-star"></i></button>
+        <button class = "btn delete my-crumbs-icon" data-id = "{{id}}" ><i class = "icon-trash"></i></button>
       </span>
     </span>
   
@@ -113,6 +113,7 @@ modified
 
 <!-----------Add Crumbs View: List Single Item Template---------->
 <script id = "bc-yelp-view-single" type = "text/html">
+  <span class = "bcrumbs-single-list-view-link"><a href = "javascript:void(0)" data-id={{id}}>{{name}}</a></span>
   <span class = "bcrumbs-single-list-item-img img-crop">
 
     <span class = "img-overlay-text" style = "display: none;">
@@ -142,15 +143,14 @@ modified
 
     <span class = "img-overlay" style = "display: none;"></span>
 
-    <img src = "{{image_url}}">
-    <span class = "bcrumbs-single-icons">
-      <a href = "javascript:void(0)"><i class="icon-info-sign"></i></a>
-      <a href = "javascript:void(0)"><i class="icon-plus"></i></a>
-      <a href = "javascript:void(0)"><i class="icon-list"></i></a>
-      <a href = "javascript:void(0)"><i class="icon-star"></i></a>
-    </span>
+    <a href = "javascript:void(0)" data-id={{id}}><img src = "{{image_url}}"></a>
+      <span class = "bcrumbs-single-icons btn-group">
+        <button class = "btn add-crumbs-icon"><i class="icon-info-sign"></i></button>
+        <button class = "btn add-crumbs-icon"><i class="icon-plus"></i></button>
+        <button class = "btn add-crumbs-icon"><i class="icon-list"></i></button>
+        <button class = "btn add-crumbs-icon"><i class="icon-star"></i></button>
+      </span>
   </span>
-  <span class = "bcrumbs-single-list-view-link"><a href = "javascript:void(0)" data-id={{id}}>{{name}}</a></span>
 </script>
 
 

@@ -202,8 +202,8 @@ body,
 }
 
 .bcrumbs-single-list-item-img > img {
-  height: 200px;
-  width: 200px;
+  height: 210px;
+  width: 210px;
 }
 
 .bcrumbs-single-icons {
@@ -212,12 +212,18 @@ body,
 	height: 40px;
 }
 
+
+.add-crumbs-icon {
+	display: inline-block;
+	padding: 10px 18.7px;
+}
+
 .img-overlay-text,
 .bcrumbs-single-icons {
 	z-index: 9999;
 }
 
-.bcrumbs-single-icons > button { /* Class for all single items shown in lists */
+.my-crumbs-icon { /* Class for all single items shown in lists */
 	display: inline-block;
 	padding: 10px 13.45px;
 }
@@ -512,6 +518,7 @@ p {
 	width: 100%;
 	overflow: hidden;
 }
+
 
 /* ==========================================================================
    Breadcrumbs Browse View
