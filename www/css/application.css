@@ -224,7 +224,7 @@ body,
 
 .bcrumbs-single-icons > a { /* Class for all single items shown in lists */
 	display: inline-block;
-	padding: 0px 15.4px;
+	padding: 7px 19px;
 }
 
 .text-icon { /* alignment for icons that are placed next to text */
