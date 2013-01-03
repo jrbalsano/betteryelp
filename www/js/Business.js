@@ -15,7 +15,9 @@
       if (this.get("listIds") == null) {
         this.set("listIds", []);
       }
-      return this.attributes.image_url = this.attributes.image_url.replace("ms.jpg", "ls.jpg");
+      if (this.attributes.image_url != null) {
+        return this.attributes.image_url = this.attributes.image_url.replace("ms.jpg", "ls.jpg");
+      }
     },
     addList: function(list) {
       if (!_.contains(this.attributes.listIds, list.id)) {

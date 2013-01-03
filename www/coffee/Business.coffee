@@ -9,7 +9,7 @@ LOAF.Business = Backbone.Model.extend
     unless @.get("listIds")?
       @.set "listIds", []
     # Get better images
-    @attributes.image_url = @attributes.image_url.replace "ms.jpg", "ls.jpg"
+    @attributes.image_url = @attributes.image_url.replace "ms.jpg", "ls.jpg" if @attributes.image_url?
 
   addList: (list) ->
     unless _.contains @attributes.listIds, list.id
