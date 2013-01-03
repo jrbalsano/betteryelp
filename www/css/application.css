@@ -2,7 +2,7 @@
  * UTF-8
  * Breadcrumbs - Base styles
  * created by Yanyi Luo, Fall 2012
- * modified
+ * modified by Jonathan Balsano, January 2013
  *
  */
 
@@ -375,37 +375,6 @@ body,
 
 .bc-footer-links {
 	float: right;
-}
-
-/* ==========================================================================
-   Breadcrumbs Edit Mode Toggle button
-   ========================================================================== */
-.iphone_switch_container {
-	height: 27px;
-	width: 94px;
-	position: relative;
-	overflow: hidden;
-	display: inline-block;
-}
-.edit-toggle {
-	cursor: pointer;
-	width: 120px;
-	height: 27px;
-}
-
-.edit-mode {
-	font-weight: 600;
-	text-transform: uppercase;
-	font-size: 14px;
-	color: #00aeff;
-	margin-right: 5px;
-}
-
-.iphone_switch {
-	height: 27px;
-	width: 94px;
-	background-image: url(../img/iphone_switch.png);
-	background-position: 0px;
 }
 
 /* ==========================================================================
