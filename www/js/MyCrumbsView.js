@@ -21,7 +21,7 @@
       var index, list, listId,
         _this = this;
       e.preventDefault();
-      $(e.srcElement.parentElement.parentElement).hide();
+      $(e.srcElement.parentElement.parentElement.parentElement).hide();
       listId = e.srcElement.dataset.id;
       list = LOAF.customLists.where({
         id: parseInt(listId)
