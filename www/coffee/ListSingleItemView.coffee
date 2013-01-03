@@ -19,7 +19,7 @@ LOAF.ListSingleItemView = Backbone.View.extend
     "click .icon-edit": "onClickEdit"
     "click .icon-list": "onClickLists"
     "click .icon-star": "onClickReviews"
-    "click .icon-minus-sign": "onClickDelete"
+    "click .icon-trash": "onClickDelete"
     "mouseout .bcrumbs-single-icons": "onExit"
     "click .bc-list-checkbox": "onCheckToggle"
     "click .btn-info": "saveNotes"
