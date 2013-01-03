@@ -250,6 +250,10 @@ body,
 	font-weight: bold;
 }
 
+.bcrumbs-message > p > a:hover {
+	color: #fff;
+}
+
 .bcrumbs-list-delete {
 	opacity: 0.3;
 	margin: 3px 0 0 3px;
