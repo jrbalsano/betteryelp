@@ -155,6 +155,14 @@
         return this.$(".bc-list-view-single-notes").show();
       }
     },
+    onShowDelete: function() {
+      if (this.current === "delete" || this.current === "none") {
+        this.$(".img-overlay-text >span").hide();
+        this.$(".img-overlay-text").show();
+        this.$(".img-overlay").show();
+        return this.$(".bc-list-view-single-delete").show();
+      }
+    },
     onExit: function() {
       if (this.current === "none") {
         this.$(".img-overlay-text").hide();

@@ -12,6 +12,7 @@ LOAF.ListSingleItemView = Backbone.View.extend
     "mouseover .icon-edit": "onShowEdit"
     "mouseover .icon-list": "onShowLists"
     "mouseover .icon-star": "onShowReviews"
+    "mouseover .icon-trash": "onShowDelete"
     "click .icon-info-sign": "onClickInfo"
     "click .icon-plus": "onClickAdd"
     "click .icon-ok": "onClickRemove"
@@ -130,6 +131,13 @@ LOAF.ListSingleItemView = Backbone.View.extend
       @$(".img-overlay-text").show()
       @$(".img-overlay").show()
       @$(".bc-list-view-single-notes").show()
+
+  onShowDelete: ->
+    if @current == "delete" or @current == "none"
+      @$(".img-overlay-text >span").hide()
+      @$(".img-overlay-text").show()
+      @$(".img-overlay").show()
+      @$(".bc-list-view-single-delete").show()
 
   onExit: ->
     if @current == "none"

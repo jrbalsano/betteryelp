@@ -37,7 +37,7 @@ modified
 
 <script id = "bc-list-view-list" type = "text/html">
   <div class = "bcrumbs-list bcrumbs-listing">
-    <a href = "javascript:void(0)" class = "delete pull-right" style = "display:none;"><i data-id = "{{id}}" class = "icon-minus-sign"></i></a>
+    <a href = "javascript:void(0)" class = "delete pull-right"><i data-id = "{{id}}" class = "icon-trash"></i></a>
     <span class = "bcrumbs-list-stack">
       <img class = "bcrumbs-list-img-3" src = "{{image3}}">
       <img class = "bcrumbs-list-img-2" src = "{{image2}}">
@@ -59,10 +59,9 @@ modified
 
 <!-----------My Crumbs View: List Single Item Template---------->
 <script id = "bc-list-view-single" type = "text/html">
-  
+    <span class = "bcrumbs-single-list-view-link"><a href = "javascript:void(0)" data-id = "{{id}}">{{name}}</a>
+    </span>
     <span class = "bcrumbs-single-list-item-img img-crop">
-
-      <a href = "javascript:void(0)" class = "delete pull-right" data-id = "{{id}}" ><i class = "icon-minus-sign"></i></a>
     
       <span class = "img-overlay-text" style = "display: none;">
         <!--show/hide appropriate text here-->
@@ -92,18 +91,23 @@ modified
           Number of reviews: {{review_count}}<br />
           Overall rating: {{rating}}/5
         </span>
+        <span class = "bc-list-view-single-delete" style = "display: none;">
+          <button class = "close pull-right"><i class = "icon-trash icon-white"></i></button>
+          Click to remove this Breadcrumb.
+        </span>
+
       </span>
       <span class = "img-overlay" style = "display: none;"></span>
 
       <img src = "{{image_url}}">
-      <span class = "bcrumbs-single-icons">
-        <a href = "javascript:void(0)"><i class="icon-info-sign"></i></a>
-        <a href = "javascript:void(0)"><i class="icon-edit"></i></a>
-        <a href = "javascript:void(0)"><i class="icon-list"></i></a>
-        <a href = "javascript:void(0)"><i class="icon-star"></i></a>
-      </span>
+      <span class = "bcrumbs-single-icons btn-group">
+        <button class = "btn"><i class="icon-info-sign"></i></button>
+        <button class = "btn"><i class="icon-edit"></i></button>
+        <button class = "btn"><i class="icon-list"></i></button>
+        <button class = "btn"><i class="icon-star"></i></button>
+        <<button class = "btn delete" data-id = "{{id}}" ><i class = "icon-trash"></i></button>
     </span>
-    <span class = "bcrumbs-single-list-view-link"><a href = "javascript:void(0)" data-id = "{{id}}">{{name}}</a></span>
+    </span>
   
 </script>
 
