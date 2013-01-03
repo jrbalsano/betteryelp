@@ -31,22 +31,6 @@ LOAF.SingleListView = LOAF.BreadcrumbView.extend
       if @.text.length > 20
         $(@).text($(@).text().substring(0, 20) + "...")
 
-    #Edit mode switch
-    on_ = false
-    mode = "off"
-    container_path = "img/iphone_switch_container_off.png"
-    mode = (if on_ then "on" else "off")
-    container_path = (if on_ then "img/iphone_switch_container_off.png" else "img/iphone_switch_container_on.png")
-    el = $(".edit-toggle")
-    el.iphoneSwitch mode, (->
-      $('.delete').show()
-      on_ = true
-    ), (->
-      $('.delete').hide()
-      on_ = false
-    ),
-      switch_on_container_path: container_path
-
     #Adjust heights
     arr = []
     @$('.bcrumbs-single-list-item').each (i)->
@@ -65,9 +49,6 @@ LOAF.SingleListView = LOAF.BreadcrumbView.extend
           o.height high.height()
         #dump array
         arr = []
-
-    #Show iphone switch
-    @$(".iphone_switch_container").show()
 
   render: ->
     # Create Basic Layout
@@ -94,3 +75,4 @@ LOAF.SingleListView = LOAF.BreadcrumbView.extend
       @$(".bcrumbs-list-view-items").html (Mustache.render LOAF.templates.bcSadCat, message: "There are no items in this list. You should add some!")
     # render history
     @renderHistory()
+    $('.delete').show()

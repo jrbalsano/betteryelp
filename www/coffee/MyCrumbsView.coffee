@@ -15,14 +15,18 @@ LOAF.MyCrumbsView = LOAF.BreadcrumbView.extend
 
   onDelete: (e) ->
     e.preventDefault()
-    $(e.srcElement.parentElement.parentElement).hide()
+    $(e.srcElement.parentElement.parentElement.parentElement).hide()
     listId = e.srcElement.dataset.id
     list = LOAF.customLists.where id: parseInt listId
+    index = LOAF.customLists.lists.indexOf list[0]
     LOAF.customLists.removeList list[0]
+    LOAF.appView.setUndo "#{list[0].name} has been deleted.", "Undo?", =>
+      LOAF.customLists.lists.splice index, 0, list[0]
+      @render()
 
   onkey: (e) ->
     if e.keyCode == 13
-      confirmNewList(e)
+      @confirmNewList(e)
 
   onShowList: (e) ->
     e.preventDefault
@@ -64,17 +68,4 @@ LOAF.MyCrumbsView = LOAF.BreadcrumbView.extend
       html += Mustache.render LOAF.templates.bcListViewList, obj
     html += LOAF.templates.bcListAdd
     @$(".bcrumbs-mycrumbs-section").html html
-    container_path = "img/iphone_switch_container_off.png"
-    on_ = false
-    el = $(".edit-toggle")
-    el.iphoneSwitch "off", (->
-      $('.delete').show()
-      on_ = true
-    ), (->
-      $('.delete').hide()
-      on_ = false
-    ),
-      switch_on_container_path: container_path
-      $(".edit-toggle").show()
-      $(".edit-mode").show()
-
+    @$('.delete').show()

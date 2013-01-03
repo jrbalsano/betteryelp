@@ -7,18 +7,19 @@ LOAF.ListSingleItemView = Backbone.View.extend
     @template = options.template
 
   events:
-    "mouseover .icon-info-sign": "onShowInfo"
-    "mouseover .icon-plus": "onShowAdd"
-    "mouseover .icon-edit": "onShowEdit"
-    "mouseover .icon-list": "onShowLists"
-    "mouseover .icon-star": "onShowReviews"
-    "click .icon-info-sign": "onClickInfo"
-    "click .icon-plus": "onClickAdd"
-    "click .icon-ok": "onClickRemove"
-    "click .icon-edit": "onClickEdit"
-    "click .icon-list": "onClickLists"
-    "click .icon-star": "onClickReviews"
-    "click .icon-minus-sign": "onClickDelete"
+    "mouseover .bcrumbs-mouseover-info": "onShowInfo"
+    "mouseover .bcrumbs-mouseover-plus": "onShowAdd"
+    "mouseover .bcrumbs-mouseover-edit": "onShowEdit"
+    "mouseover .bcrumbs-mouseover-list": "onShowLists"
+    "mouseover .bcrumbs-mouseover-star": "onShowReviews"
+    "mouseover .bcrumbs-mouseover-trash": "onShowDelete"
+    "click .bcrumbs-mouseover-info": "onClickInfo"
+    "click .bcrumbs-mouseover-plus": "onClickAdd"
+    "click .bcrumbs-mouseover-ok": "onClickRemove"
+    "click .bcrumbs-mouseover-edit": "onClickEdit"
+    "click .bcrumbs-mouseover-list": "onClickLists"
+    "click .bcrumbs-mouseover-star": "onClickReviews"
+    "click .bcrumbs-mouseover-trash": "onClickDelete"
     "mouseout .bcrumbs-single-icons": "onExit"
     "click .bc-list-checkbox": "onCheckToggle"
     "click .btn-info": "saveNotes"
@@ -26,6 +27,7 @@ LOAF.ListSingleItemView = Backbone.View.extend
     "click .close": "closeHover"
 
   closeHover: ->
+    @$(".btn").removeClass("active")
     @$('.img-overlay-text').hide()
     @$('.img-overlay').hide()
     @current = "none"
@@ -41,25 +43,31 @@ LOAF.ListSingleItemView = Backbone.View.extend
     LOAF.appView.saveApplication()
 
   onClickInfo: (e) ->
+    @$(".btn").removeClass("active")
     if @current == "info"
       @current = "none"
     else
+      @$(".bcrumbs-mouseover-info").button('toggle')
       @current = "info"
       @onShowInfo(e)
 
   onClickLists: (e) ->
+    @$(".btn").removeClass("active")
     if @current == "lists"
       @current = "none"
     else
       @current = "lists"
+      @$(".bcrumbs-mouseover-list").button('toggle')
       @onShowLists(e)
 
   onClickReviews: (e) ->
+    @$(".btn").removeClass("active")
     if @current == "reviews"
       @current = "none"
     else
       @current = "reviews"
-      @onShowReviewss(e)
+      @$(".bcrumbs-mouseover-star").button('toggle')
+      @onShowReviews(e)
 
   onClickAdd: (e) ->
     @$(".icon-plus").addClass("icon-ok").removeClass "icon-plus"
@@ -83,14 +91,20 @@ LOAF.ListSingleItemView = Backbone.View.extend
 
 
   onClickEdit: ->
+    @$(".btn").removeClass("active")
     if @current == "notes"
       @current = "none"
     else
+      @$(".bcrumbs-mouseover-edit").button('toggle')
       @current = "notes"
 
   onClickDelete: ->
     @$el.hide()
+    index = @collection.indexOf @model
     @collection.remove @model
+    LOAF.appView.setUndo "#{@model.name} removed from #{@collection.name}.", "Undo?", =>
+      @collection.add @model, at: index
+      @$el.show()
     
   onShowInfo: ->
     if @current == "info" or @current == "none"
@@ -126,6 +140,13 @@ LOAF.ListSingleItemView = Backbone.View.extend
       @$(".img-overlay-text").show()
       @$(".img-overlay").show()
       @$(".bc-list-view-single-notes").show()
+
+  onShowDelete: ->
+    if @current == "delete" or @current == "none"
+      @$(".img-overlay-text >span").hide()
+      @$(".img-overlay-text").show()
+      @$(".img-overlay").show()
+      @$(".bc-list-view-single-delete").show()
 
   onExit: ->
     if @current == "none"

@@ -9,18 +9,19 @@
       return this.template = options.template;
     },
     events: {
-      "mouseover .icon-info-sign": "onShowInfo",
-      "mouseover .icon-plus": "onShowAdd",
-      "mouseover .icon-edit": "onShowEdit",
-      "mouseover .icon-list": "onShowLists",
-      "mouseover .icon-star": "onShowReviews",
-      "click .icon-info-sign": "onClickInfo",
-      "click .icon-plus": "onClickAdd",
-      "click .icon-ok": "onClickRemove",
-      "click .icon-edit": "onClickEdit",
-      "click .icon-list": "onClickLists",
-      "click .icon-star": "onClickReviews",
-      "click .icon-minus-sign": "onClickDelete",
+      "mouseover .bcrumbs-mouseover-info": "onShowInfo",
+      "mouseover .bcrumbs-mouseover-plus": "onShowAdd",
+      "mouseover .bcrumbs-mouseover-edit": "onShowEdit",
+      "mouseover .bcrumbs-mouseover-list": "onShowLists",
+      "mouseover .bcrumbs-mouseover-star": "onShowReviews",
+      "mouseover .bcrumbs-mouseover-trash": "onShowDelete",
+      "click .bcrumbs-mouseover-info": "onClickInfo",
+      "click .bcrumbs-mouseover-plus": "onClickAdd",
+      "click .bcrumbs-mouseover-ok": "onClickRemove",
+      "click .bcrumbs-mouseover-edit": "onClickEdit",
+      "click .bcrumbs-mouseover-list": "onClickLists",
+      "click .bcrumbs-mouseover-star": "onClickReviews",
+      "click .bcrumbs-mouseover-trash": "onClickDelete",
       "mouseout .bcrumbs-single-icons": "onExit",
       "click .bc-list-checkbox": "onCheckToggle",
       "click .btn-info": "saveNotes",
@@ -28,6 +29,7 @@
       "click .close": "closeHover"
     },
     closeHover: function() {
+      this.$(".btn").removeClass("active");
       this.$('.img-overlay-text').hide();
       this.$('.img-overlay').hide();
       return this.current = "none";
@@ -44,27 +46,33 @@
       return LOAF.appView.saveApplication();
     },
     onClickInfo: function(e) {
+      this.$(".btn").removeClass("active");
       if (this.current === "info") {
         return this.current = "none";
       } else {
+        this.$(".bcrumbs-mouseover-info").button('toggle');
         this.current = "info";
         return this.onShowInfo(e);
       }
     },
     onClickLists: function(e) {
+      this.$(".btn").removeClass("active");
       if (this.current === "lists") {
         return this.current = "none";
       } else {
         this.current = "lists";
+        this.$(".bcrumbs-mouseover-list").button('toggle');
         return this.onShowLists(e);
       }
     },
     onClickReviews: function(e) {
+      this.$(".btn").removeClass("active");
       if (this.current === "reviews") {
         return this.current = "none";
       } else {
         this.current = "reviews";
-        return this.onShowReviewss(e);
+        this.$(".bcrumbs-mouseover-star").button('toggle');
+        return this.onShowReviews(e);
       }
     },
     onClickAdd: function(e) {
@@ -96,15 +104,26 @@
       return this.$(".bc-list-checkbox").prop("checked", false);
     },
     onClickEdit: function() {
+      this.$(".btn").removeClass("active");
       if (this.current === "notes") {
         return this.current = "none";
       } else {
+        this.$(".bcrumbs-mouseover-edit").button('toggle');
         return this.current = "notes";
       }
     },
     onClickDelete: function() {
+      var index,
+        _this = this;
       this.$el.hide();
-      return this.collection.remove(this.model);
+      index = this.collection.indexOf(this.model);
+      this.collection.remove(this.model);
+      return LOAF.appView.setUndo("" + this.model.name + " removed from " + this.collection.name + ".", "Undo?", function() {
+        _this.collection.add(_this.model, {
+          at: index
+        });
+        return _this.$el.show();
+      });
     },
     onShowInfo: function() {
       if (this.current === "info" || this.current === "none") {
@@ -144,6 +163,14 @@
         this.$(".img-overlay-text").show();
         this.$(".img-overlay").show();
         return this.$(".bc-list-view-single-notes").show();
+      }
+    },
+    onShowDelete: function() {
+      if (this.current === "delete" || this.current === "none") {
+        this.$(".img-overlay-text >span").hide();
+        this.$(".img-overlay-text").show();
+        this.$(".img-overlay").show();
+        return this.$(".bc-list-view-single-delete").show();
       }
     },
     onExit: function() {

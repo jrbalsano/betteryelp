@@ -13,7 +13,10 @@
         this.set("cover_image_url", "img/cat_" + img_name_append + ".jpg");
       }
       if (this.get("listIds") == null) {
-        return this.set("listIds", []);
+        this.set("listIds", []);
+      }
+      if (this.attributes.image_url != null) {
+        return this.attributes.image_url = this.attributes.image_url.replace("ms.jpg", "ls.jpg");
       }
     },
     addList: function(list) {

@@ -33,29 +33,14 @@
       return LOAF.singleView.$el.show();
     },
     postRender: function() {
-      var arr, container_path, el, mode, on_;
+      var arr;
       this.$('.bcrumbs-single-list-view-link > a').each(function(i) {
         if (this.text.length > 20) {
           return $(this).text($(this).text().substring(0, 20) + "...");
         }
       });
-      on_ = false;
-      mode = "off";
-      container_path = "img/iphone_switch_container_off.png";
-      mode = (on_ ? "on" : "off");
-      container_path = (on_ ? "img/iphone_switch_container_off.png" : "img/iphone_switch_container_on.png");
-      el = $(".edit-toggle");
-      el.iphoneSwitch(mode, (function() {
-        $('.delete').show();
-        return on_ = true;
-      }), (function() {
-        $('.delete').hide();
-        return on_ = false;
-      }), {
-        switch_on_container_path: container_path
-      });
       arr = [];
-      this.$('.bcrumbs-single-list-item').each(function(i) {
+      return this.$('.bcrumbs-single-list-item').each(function(i) {
         var high;
         if (arr.length < 3) {
           return arr.push($(this));
@@ -77,7 +62,6 @@
           return arr = [];
         }
       });
-      return this.$(".iphone_switch_container").show();
     },
     render: function() {
       var html, listItemViews, obj, template,
@@ -108,7 +92,8 @@
           message: "There are no items in this list. You should add some!"
         }));
       }
-      return this.renderHistory();
+      this.renderHistory();
+      return $('.delete').show();
     }
   });
 

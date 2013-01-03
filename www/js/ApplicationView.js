@@ -45,7 +45,32 @@
       "click .bcrumbs-add-crumbs-link": "showAddCrumbs",
       "click .bcrumbs-my-crumbs-link": "showMyCrumbs",
       "click .bcrumbs-header .add-on": "searchLists",
-      "click .bc-footer-links > a": "showInstructions"
+      "click .bc-footer-links > a": "showInstructions",
+      "click .bcrumbs-undo": "onUndo",
+      "click .bcrumbs-undo-hide": "hideUndo"
+    },
+    setUndo: function(text, command, f) {
+      var html,
+        _this = this;
+      html = "" + text + " <a href=\"javascript:void(0)\" class=\"bcrumbs-undo\">" + command + "</a> (<a href=\"javascript:void(0)\" class=\"bcrumbs-undo-hide\">hide this</a>)";
+      this.$(".bcrumbs-message p").html(html);
+      this.$(".bcrumbs-alert").animate({
+        top: "75px"
+      });
+      setTimeout((function() {
+        return _this.hideUndo();
+      }), 15000);
+      return this.undo = f;
+    },
+    onUndo: function(e) {
+      e.preventDefault();
+      this.undo();
+      return this.hideUndo();
+    },
+    hideUndo: function(e) {
+      return this.$(".bcrumbs-alert").animate({
+        top: "0px"
+      });
     },
     searchLists: function(e) {
       var el, searchArray, searchResults, searchTerm;

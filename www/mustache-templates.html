@@ -37,13 +37,12 @@ modified
 
 <script id = "bc-list-view-list" type = "text/html">
   <div class = "bcrumbs-list bcrumbs-listing">
-    <a href = "javascript:void(0)" class = "delete pull-right" style = "display:none;"><i data-id = "{{id}}" class = "icon-minus-sign"></i></a>
     <span class = "bcrumbs-list-stack">
       <img class = "bcrumbs-list-img-3" src = "{{image3}}">
       <img class = "bcrumbs-list-img-2" src = "{{image2}}">
       <img class = "bcrumbs-list-img-1" src = "{{image1}}">
     </span>
-    <span class = "bcrumbs-list-name"><a href = "javascript:void(0)" data-id = "{{id}}" class="bcrumbs-show-list">{{name}}</a></span>
+    <span class = "bcrumbs-list-name"><a href = "javascript:void(0)" data-id = "{{id}}" class="bcrumbs-show-list">{{name}}</a><a href = "javascript:void(0)" class = "delete"><i data-id = "{{id}}" class = "icon-remove-sign bcrumbs-list-delete"></i></a></span>
   </div>
 </script>
 
@@ -52,13 +51,6 @@ modified
   <ul class = "bcrumbs-path breadcrumb">
   </ul>
 
-  <span class = "edit-toggle pull-right">
-      <div class = "iphone_switch_container">
-            <img class = "iphone_switch" src = "img/iphone_switch_container_off.png">
-      </div>
-  </span>
-  <span class = "edit-mode pull-right">Delete Mode:</span>
-
   <h2>{{title}}</h2>
 
   <div class = "bcrumbs-list-view-items"> </div>
@@ -66,10 +58,9 @@ modified
 
 <!-----------My Crumbs View: List Single Item Template---------->
 <script id = "bc-list-view-single" type = "text/html">
-  
+    <span class = "bcrumbs-single-list-view-link"><a href = "javascript:void(0)" data-id = "{{id}}">{{name}}</a>
+    </span>
     <span class = "bcrumbs-single-list-item-img img-crop">
-
-      <a href = "javascript:void(0)" class = "delete pull-right" data-id = "{{id}}" style = "display:none;"><i class = "icon-minus-sign"></i></a>
     
       <span class = "img-overlay-text" style = "display: none;">
         <!--show/hide appropriate text here-->
@@ -99,26 +90,30 @@ modified
           Number of reviews: {{review_count}}<br />
           Overall rating: {{rating}}/5
         </span>
+        <span class = "bc-list-view-single-delete" style = "display: none;">
+          <button class = "close pull-right"><i class = "icon-remove-sign icon-white"></i></button>
+          Click to remove this Breadcrumb.
+        </span>
+
       </span>
       <span class = "img-overlay" style = "display: none;"></span>
 
-      <img src = "{{image_url}}">
-      <span class = "bcrumbs-single-icons">
-        <a href = "javascript:void(0)"><i class="icon-info-sign"></i></a>
-        <a href = "javascript:void(0)"><i class="icon-edit"></i></a>
-        <a href = "javascript:void(0)"><i class="icon-list"></i></a>
-        <a href = "javascript:void(0)"><i class="icon-star"></i></a>
+      <a href = "javascript:void(0)" data-id={{id}}><img src = "{{image_url}}"></a>
+      <span class = "bcrumbs-single-icons btn-group">
+        <button class = "btn my-crumbs-icon bcrumbs-mouseover-info"><i class="icon-info-sign"></i></button>
+        <button class = "btn my-crumbs-icon bcrumbs-mouseover-edit"><i class="icon-edit"></i></button>
+        <button class = "btn my-crumbs-icon bcrumbs-mouseover-list"><i class="icon-list"></i></button>
+        <button class = "btn my-crumbs-icon bcrumbs-mouseover-star"><i class="icon-star"></i></button>
+        <button class = "btn delete my-crumbs-icon bcrumbs-mouseover-trash" data-id = "{{id}}" ><i class = "icon-trash"></i></button>
       </span>
     </span>
-    <span class = "bcrumbs-single-list-view-link"><a href = "javascript:void(0)" data-id = "{{id}}">{{name}}</a></span>
   
 </script>
 
 <!-----------Add Crumbs View: List Single Item Template---------->
 <script id = "bc-yelp-view-single" type = "text/html">
+  <span class = "bcrumbs-single-list-view-link"><a href = "javascript:void(0)" data-id={{id}}>{{name}}</a></span>
   <span class = "bcrumbs-single-list-item-img img-crop">
-
-    <a href = "javascript:void(0)" class = "delete pull-right" style = "display:none;"><i class = "icon-minus-sign"></i></a>
 
     <span class = "img-overlay-text" style = "display: none;">
       <span class = "bc-list-view-single-info" style = "display: none;">
@@ -147,15 +142,14 @@ modified
 
     <span class = "img-overlay" style = "display: none;"></span>
 
-    <img src = "{{image_url}}">
-    <span class = "bcrumbs-single-icons">
-      <a href = "javascript:void(0)"><i class="icon-info-sign"></i></a>
-      <a href = "javascript:void(0)"><i class="icon-plus"></i></a>
-      <a href = "javascript:void(0)"><i class="icon-list"></i></a>
-      <a href = "javascript:void(0)"><i class="icon-star"></i></a>
-    </span>
+    <a href = "javascript:void(0)" data-id={{id}}><img src = "{{image_url}}"></a>
+      <span class = "bcrumbs-single-icons btn-group">
+        <button class = "btn add-crumbs-icon bcrumbs-mouseover-info"><i class="icon-info-sign"></i></button>
+        <button class = "btn add-crumbs-icon bcrumbs-mouseover-plus"><i class="icon-plus"></i></button>
+        <button class = "btn add-crumbs-icon bcrumbs-mouseover-list"><i class="icon-list"></i></button>
+        <button class = "btn add-crumbs-icon bcrumbs-mouseover-star"><i class="icon-star"></i></button>
+      </span>
   </span>
-  <span class = "bcrumbs-single-list-view-link"><a href = "javascript:void(0)" data-id={{id}}>{{name}}</a></span>
 </script>
 
 
