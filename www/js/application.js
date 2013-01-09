@@ -20,14 +20,4 @@
     }
   };
 
-  LOAF.auth1 = {
-    consumerKey: "AEUkUwiC9VSIRHH6fL9Uyw",
-    consumerSecret: "5y3UJ59898NrNHD9zVny6UO2xT0",
-    accessToken: "UNsiNW4lTp-Z3BkAWlkcb0S-4cuyvOEg",
-    accessTokenSecret: "yvQuPozWOXLuG5ts584MMefOR20",
-    serviceProvider: {
-      signatureMethod: "HMAC-SHA1"
-    }
-  };
-
 }).call(this);
