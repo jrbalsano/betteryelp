@@ -2,6 +2,11 @@
 (function() {
 
   LOAF.ApiView = Backbone.View.extend({
+    initialize: function(options) {
+      this.callback = options.callback;
+      this.cbContext = options.cbContext;
+      return this.cbParams = options.cbParams;
+    },
     events: {
       "click .api-key-save": "onSave",
       "keyup .consumer-key": "verify",
@@ -10,23 +15,31 @@
       "keyup .access-token-secret": "verify"
     },
     verify: function() {
+      var accessToken, accessTokenSecret, consumerKey, consumerSecret;
+      consumerKey = this.$(".consumer-key");
+      consumerSecret = this.$(".consumer-secret");
+      accessToken = this.$(".access-token");
+      accessTokenSecret = this.$(".access-token-secret");
       if (consumerKey.val() && consumerSecret.val() && accessToken.val() && accessTokenSecret.val()) {
         return this.$(".api-key-save").removeAttr("disabled");
       } else {
         return this.$(".api-key-save").attr("disabled", "true");
       }
     },
-    onSave: function() {
+    onSave: function(e) {
       var accessToken, accessTokenSecret, consumerKey, consumerSecret;
-      consumerKey = this.$("consumer-key");
-      consumerSecret = this.$("consumer-secret");
-      accessToken = this.$("access-token");
-      accessTokenSecret = this.$("access-token-secret");
+      e.preventDefault();
+      consumerKey = this.$(".consumer-key");
+      consumerSecret = this.$(".consumer-secret");
+      accessToken = this.$(".access-token");
+      accessTokenSecret = this.$(".access-token-secret");
       if (consumerKey.val() && consumerSecret.val() && accessToken.val() && accessTokenSecret.val()) {
         LOAF.auth.consumerKey = consumerKey.val();
         LOAF.auth.consumerSecret = consumerSecret.val();
         LOAF.auth.accessToken = accessToken.val();
-        return LOAF.auth.accessTokenSecret = accessTokenSecret.val();
+        LOAF.auth.accessTokenSecret = accessTokenSecret.val();
+        this.$el.hide();
+        return this.callback.apply(this.cbContext, this.cbParams);
       }
     }
   });

@@ -14,7 +14,6 @@
     },
     onStart: function() {
       clearTimeout(this.loadingTimeout);
-      console.log("completed loading");
       this.$(".bcrumbs-loading").hide();
       this.addCrumbsView = new LOAF.AddCrumbsView({
         el: this.$(".bcrumbs-yelp-view")
@@ -36,7 +35,7 @@
           if (data.sessionExists) {
             return _this._loadSession(data, cb, context);
           } else {
-            return _this._newSession(cb, context);
+            return _this._retrieveApiKeysFromUser(cb, context);
           }
         }
       });
@@ -129,6 +128,7 @@
       object.sessionExists = true;
       object.yelpLists = LOAF.yelpLists.getLists();
       object.customLists = LOAF.customLists.getLists();
+      object.auth = LOAF.auth;
       return new LOAF.FsJsonObject({
         read: false,
         onReady: function(newSave) {
@@ -141,9 +141,24 @@
         }
       });
     },
+    _retrieveApiKeysFromUser: function(cb, context) {
+      var apiView;
+      apiView = new LOAF.ApiView({
+        callback: this._newSession,
+        cbContext: this,
+        cbParams: [cb, context],
+        el: this.$(".bcrumbs-api-login")
+      });
+      clearTimeout(this.loadingTimeout);
+      this.$(".bcrumbs-loading").hide();
+      return apiView.$el.show();
+    },
     _newSession: function(cb, context) {
       var categories, categoryLists,
         _this = this;
+      this.loadingTimeout = setTimeout(function() {
+        return _this.$(".bcrumbs-loading").show();
+      }, 500);
       LOAF.yelpLists = new LOAF.ListsList;
       LOAF.customLists = new LOAF.ListsList;
       LOAF.allCrumbsList = new LOAF.CustomList([], {
@@ -170,6 +185,7 @@
     _loadSession: function(session, cb, context) {
       var cLs, tempCLs, tempYLs, yLs;
       console.log(session);
+      LOAF.auth = session.auth;
       yLs = session.yelpLists;
       tempYLs = [];
       _.each(yLs, function(yL) {
