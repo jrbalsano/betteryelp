@@ -27,7 +27,8 @@
       }
     },
     onSave: function(e) {
-      var accessToken, accessTokenSecret, consumerKey, consumerSecret;
+      var accessToken, accessTokenSecret, accessor, consumerKey, consumerSecret, message, parameterMap, parameters,
+        _this = this;
       e.preventDefault();
       consumerKey = this.$(".consumer-key");
       consumerSecret = this.$(".consumer-secret");
@@ -38,8 +39,47 @@
         LOAF.auth.consumerSecret = consumerSecret.val();
         LOAF.auth.accessToken = accessToken.val();
         LOAF.auth.accessTokenSecret = accessTokenSecret.val();
-        this.$el.hide();
-        return this.callback.apply(this.cbContext, this.cbParams);
+        this.$(".api-key-save").html("Verifying...");
+        this.$(".api-key-save").attr("disabled", "true");
+        accessor = {
+          consumerSecret: LOAF.auth.consumerSecret,
+          tokenSecret: LOAF.auth.accessTokenSecret
+        };
+        parameters = [];
+        parameters.push(['callback', 'cb']);
+        parameters.push(['oauth_consumer_key', LOAF.auth.consumerKey]);
+        parameters.push(['oauth_consumer_secret', LOAF.auth.consumerSecret]);
+        parameters.push(['oauth_token', LOAF.auth.accessToken]);
+        parameters.push(['oauth_signature_method', 'HMAC-SHA1']);
+        parameters.push(['location', "New York City"]);
+        parameters.push(['term', 'test']);
+        message = {
+          'action': 'http://api.yelp.com/v2/search?',
+          'method': 'GET',
+          'parameters': parameters
+        };
+        OAuth.setTimestampAndNonce(message);
+        OAuth.SignatureMethod.sign(message, accessor);
+        parameterMap = OAuth.getParameterMap(message.parameters);
+        parameterMap.oauth_signature = OAuth.percentEncode(parameterMap.oauth_signature);
+        return $.ajax({
+          url: message.action,
+          data: parameterMap,
+          cache: true,
+          dataType: 'jsonp',
+          crossDomain: true,
+          success: function(a, b, c) {
+            console.log("done");
+            _this.$el.hide();
+            return _this.callback.apply(_this.cbContext, _this.cbParams);
+          },
+          error: function(a, b, c) {
+            console.log("fail");
+            return _this.$el.html("<h2>Uh-oh</h2>Looks like there was a problem with your API key. Either there are too many requests on it today or its been copied over incorrectly. Please refresh the page and try again.");
+          },
+          timeout: 10000,
+          context: this
+        });
       }
     }
   });
