@@ -180,10 +180,11 @@
         isAllCrumbs: true
       });
       LOAF.customLists.addList(LOAF.allCrumbsList);
-      categoryLists = _.map(LOAF.categories, function(category) {
+      categoryLists = _.map(LOAF.categories, function(cat) {
         var list;
         list = new LOAF.YelpList([], {
-          category: category
+          category: cat.category,
+          title: cat.title
         });
         return list;
       });
@@ -207,6 +208,7 @@
         return tempYLs.push(new LOAF.YelpList(yL.models, {
           category: yL.category,
           term: yL.term,
+          title: yL.title,
           id: yL.id
         }));
       });

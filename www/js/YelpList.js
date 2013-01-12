@@ -102,6 +102,7 @@
         models: Backbone.Collection.prototype.toJSON.call(this),
         category: this.category,
         term: this.term,
+        title: this.title,
         id: this.id
       };
     }

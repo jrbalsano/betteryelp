@@ -81,4 +81,5 @@ LOAF.YelpList = Backbone.Collection.extend
       models: Backbone.Collection.prototype.toJSON.call this
       category: @category
       term: @term
+      title: @title
       id: @id

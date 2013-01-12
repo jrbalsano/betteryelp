@@ -149,8 +149,10 @@ LOAF.ApplicationView = LOAF.BreadcrumbView.extend
     LOAF.allCrumbsList = new LOAF.CustomList [], name: "All Crumbs", isAllCrumbs: true
     LOAF.customLists.addList LOAF.allCrumbsList
     # Generate searches
-    categoryLists = _.map LOAF.categories, (category) ->
-      list = new LOAF.YelpList [], category: category
+    categoryLists = _.map LOAF.categories, (cat) ->
+      list = new LOAF.YelpList [],
+        category: cat.category
+        title: cat.title
       list
     LOAF.yelpLists.addLists categoryLists
     LOAF.yelpLists.fetchLists ( =>
@@ -176,6 +178,7 @@ LOAF.ApplicationView = LOAF.BreadcrumbView.extend
       tempYLs.push new LOAF.YelpList yL.models,
         category: yL.category
         term: yL.term
+        title: yL.title
         id: yL.id
     LOAF.yelpLists = new LOAF.ListsList lists: tempYLs
 

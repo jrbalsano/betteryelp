@@ -23,9 +23,14 @@
     },
     onChecking: function(e) {
       if (e.srcElement.checked) {
-        return this.categories.push(e.srcElement.value);
+        return this.categories.push({
+          category: e.srcElement.value,
+          title: e.srcElement.parentElement.textContent.replace(/\s*([A-z ]*)\s*/, "$1")
+        });
       } else {
-        return this.categories = _(this.categories).without(e.srcElement.value);
+        return this.categories = _(this.categories).without(_(this.categories).find(function(el) {
+          return e.srcElement.value === el.category;
+        }));
       }
     },
     onToggle: function(e) {

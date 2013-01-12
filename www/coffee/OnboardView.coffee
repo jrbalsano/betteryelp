@@ -19,9 +19,12 @@ LOAF.OnboardView = Backbone.View.extend
 
   onChecking: (e) ->
     if e.srcElement.checked
-      @categories.push e.srcElement.value
+      @categories.push
+        category: e.srcElement.value
+        title: e.srcElement.parentElement.textContent.replace(/\s*([A-z ]*)\s*/, "$1")
     else
-      @categories = _(@categories).without e.srcElement.value
+      @categories = _(@categories).without _(@categories).find (el) ->
+        e.srcElement.value == el.category
 
   onToggle: (e) ->
     e.preventDefault()
