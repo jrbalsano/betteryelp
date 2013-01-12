@@ -21,11 +21,7 @@ LOAF.ApplicationView = LOAF.BreadcrumbView.extend
     # render pre-rendered views
     @addCrumbsView.render()
     @myCrumbsView.render()
-    #@$(".bcrumbs-mycrumbs-view").show()
-    @obView = new LOAF.OnboardView
-      el: @$(".bcrumbs-onboard")
-    @$(".bcrumbs-onboard").show()
-    @obView.render()
+    @$(".bcrumbs-mycrumbs-view").show()
     
 
   startApplication: (cb, context) ->
@@ -122,13 +118,25 @@ LOAF.ApplicationView = LOAF.BreadcrumbView.extend
 
   _retrieveApiKeysFromUser: (cb, context) ->
     apiView = new LOAF.ApiView
-      callback: @_newSession
+      callback: @_retrieveCategoriesFromUser
       cbContext: @
       cbParams: [cb, context]
       el: @$(".bcrumbs-api-login")
     clearTimeout @loadingTimeout
     @$(".bcrumbs-loading").hide()
     apiView.$el.show()
+
+  _retrieveCategoriesFromUser: (cb, context) ->
+    @obView = new LOAF.OnboardView
+      el: @$(".bcrumbs-onboard")
+      callback: @_newSession
+      cbContext: @
+      cbParams: [cb, context]
+    clearTimeout @loadingTimeout
+    @$(".bcrumbs-loading").hide()
+    @obView.render()
+    @$(".bcrumbs-onboard").show()
+
 
   _newSession: (cb, context) ->
     @loadingTimeout = setTimeout( =>

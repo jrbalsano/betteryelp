@@ -44,6 +44,7 @@
       if (this.$(".user-location").val()) {
         LOAF.categories = this.categories;
         LOAF.location = this.$(".user-location").val();
+        this.$el.hide();
         return this.callback.apply(this.cbContext, this.cbParams);
       }
     },

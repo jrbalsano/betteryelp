@@ -38,6 +38,7 @@ LOAF.OnboardView = Backbone.View.extend
     if @$(".user-location").val()
       LOAF.categories = @categories
       LOAF.location = @$(".user-location").val()
+      @$el.hide()
       @callback.apply @cbContext, @cbParams
 
   render: ->
