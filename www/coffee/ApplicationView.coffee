@@ -10,7 +10,6 @@ LOAF.ApplicationView = LOAF.BreadcrumbView.extend
 
   onStart: ->
     clearTimeout @loadingTimeout
-    console.log "completed loading"
     @$(".bcrumbs-loading").hide()
     
     # create necessary views
@@ -33,7 +32,7 @@ LOAF.ApplicationView = LOAF.BreadcrumbView.extend
     loadApp = new LOAF.FsJsonObject
       onReady: (fs) =>
         data = fs.getObject()
-        if data.sessionExists then @_loadSession data, cb, context else @_newSession cb, context
+        if data.sessionExists then @_loadSession data, cb, context else @_retrieveApiKeysFromUser cb, context
 
   events:
     "click .bcrumbs-add-crumbs-link": "showAddCrumbs"
@@ -69,7 +68,7 @@ LOAF.ApplicationView = LOAF.BreadcrumbView.extend
       searchResults = new LOAF.CustomList searchArray,
         name: "Search for: " + searchTerm
       LOAF.singleListView.undelegateEvents() if LOAF.singleListView?
-      LOAF.singleListView = new LOAF.SingleListView 
+      LOAF.singleListView = new LOAF.SingleListView
         collection: searchResults
         el: el
         caller:
@@ -111,6 +110,7 @@ LOAF.ApplicationView = LOAF.BreadcrumbView.extend
     object.customLists = LOAF.customLists.getLists()
     object.categories = LOAF.categories
     object.location = LOAF.location
+    object.auth = LOAF.auth
     new LOAF.FsJsonObject
       read: false
       onReady: (newSave) ->
@@ -120,7 +120,20 @@ LOAF.ApplicationView = LOAF.BreadcrumbView.extend
             $(".saving-cat").hide()
           1000)
 
+  _retrieveApiKeysFromUser: (cb, context) ->
+    apiView = new LOAF.ApiView
+      callback: @_newSession
+      cbContext: @
+      cbParams: [cb, context]
+      el: @$(".bcrumbs-api-login")
+    clearTimeout @loadingTimeout
+    @$(".bcrumbs-loading").hide()
+    apiView.$el.show()
+
   _newSession: (cb, context) ->
+    @loadingTimeout = setTimeout( =>
+      @$(".bcrumbs-loading").show()
+    500)
     # Generate List of Yelp Lists
     LOAF.yelpLists = new LOAF.ListsList
     # create custom lists list and all crumbs list.
@@ -147,6 +160,7 @@ LOAF.ApplicationView = LOAF.BreadcrumbView.extend
 
     LOAF.categories = session.categories
     LOAF.location = session.location
+    LOAF.auth = session.auth
     # load in the yelp lists, creating models and collections
     yLs = session.yelpLists
     tempYLs = []

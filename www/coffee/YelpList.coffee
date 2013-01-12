@@ -22,7 +22,6 @@ LOAF.YelpList = Backbone.Collection.extend
 
   onAdd: (business) ->
     business.addList @
-    LOAF.appView.saveApplication()
 
   onRemove: (business) ->
     business.removeList @

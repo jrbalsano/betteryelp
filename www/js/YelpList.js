@@ -25,8 +25,7 @@
       });
     },
     onAdd: function(business) {
-      business.addList(this);
-      return LOAF.appView.saveApplication();
+      return business.addList(this);
     },
     onRemove: function(business) {
       business.removeList(this);

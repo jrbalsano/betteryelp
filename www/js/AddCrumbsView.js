@@ -48,7 +48,8 @@
             el.show();
             LOAF.singleListView.postRender();
             $(".edit-toggle").hide();
-            return $(".edit-mode").hide();
+            $(".edit-mode").hide();
+            return LOAF.appView.saveApplication();
           }
         });
       }
