@@ -24,7 +24,11 @@
       });
       this.addCrumbsView.render();
       this.myCrumbsView.render();
-      return this.$(".bcrumbs-mycrumbs-view").show();
+      this.obView = new LOAF.OnboardView({
+        el: this.$(".bcrumbs-onboard")
+      });
+      this.$(".bcrumbs-onboard").show();
+      return this.obView.render();
     },
     startApplication: function(cb, context) {
       var loadApp,
@@ -129,6 +133,8 @@
       object.sessionExists = true;
       object.yelpLists = LOAF.yelpLists.getLists();
       object.customLists = LOAF.customLists.getLists();
+      object.categories = LOAF.categories;
+      object.location = LOAF.location;
       return new LOAF.FsJsonObject({
         read: false,
         onReady: function(newSave) {
@@ -142,7 +148,7 @@
       });
     },
     _newSession: function(cb, context) {
-      var categories, categoryLists,
+      var categoryLists,
         _this = this;
       LOAF.yelpLists = new LOAF.ListsList;
       LOAF.customLists = new LOAF.ListsList;
@@ -151,8 +157,7 @@
         isAllCrumbs: true
       });
       LOAF.customLists.addList(LOAF.allCrumbsList);
-      categories = ["active", "arts", "food", "hotelstravel", "localflavor", "localservices", "nightlife", "restaurants", "shopping"];
-      categoryLists = _.map(categories, function(category) {
+      categoryLists = _.map(LOAF.categories, function(category) {
         var list;
         list = new LOAF.YelpList([], {
           category: category
@@ -170,6 +175,8 @@
     _loadSession: function(session, cb, context) {
       var cLs, tempCLs, tempYLs, yLs;
       console.log(session);
+      LOAF.categories = session.categories;
+      LOAF.location = session.location;
       yLs = session.yelpLists;
       tempYLs = [];
       _.each(yLs, function(yL) {

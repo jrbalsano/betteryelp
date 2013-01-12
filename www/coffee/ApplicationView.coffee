@@ -9,8 +9,6 @@ LOAF.ApplicationView = LOAF.BreadcrumbView.extend
     @startApplication @onStart, @
 
   onStart: ->
-    # MyBookmarksView.render()
-    # AddBookmarksView.hide()
     clearTimeout @loadingTimeout
     console.log "completed loading"
     @$(".bcrumbs-loading").hide()
@@ -24,7 +22,12 @@ LOAF.ApplicationView = LOAF.BreadcrumbView.extend
     # render pre-rendered views
     @addCrumbsView.render()
     @myCrumbsView.render()
-    @$(".bcrumbs-mycrumbs-view").show()
+    #@$(".bcrumbs-mycrumbs-view").show()
+    @obView = new LOAF.OnboardView
+      el: @$(".bcrumbs-onboard")
+    @$(".bcrumbs-onboard").show()
+    @obView.render()
+    
 
   startApplication: (cb, context) ->
     loadApp = new LOAF.FsJsonObject
@@ -106,6 +109,8 @@ LOAF.ApplicationView = LOAF.BreadcrumbView.extend
     object.sessionExists = true
     object.yelpLists = LOAF.yelpLists.getLists()
     object.customLists = LOAF.customLists.getLists()
+    object.categories = LOAF.categories
+    object.location = LOAF.location
     new LOAF.FsJsonObject
       read: false
       onReady: (newSave) ->
@@ -123,9 +128,7 @@ LOAF.ApplicationView = LOAF.BreadcrumbView.extend
     LOAF.allCrumbsList = new LOAF.CustomList [], name: "All Crumbs", isAllCrumbs: true
     LOAF.customLists.addList LOAF.allCrumbsList
     # Generate searches
-    categories = ["active", "arts", "food", "hotelstravel", "localflavor"
-            "localservices", "nightlife", "restaurants", "shopping"]
-    categoryLists = _.map categories, (category) ->
+    categoryLists = _.map LOAF.categories, (category) ->
       list = new LOAF.YelpList [], category: category
       list
     LOAF.yelpLists.addLists categoryLists
@@ -141,6 +144,9 @@ LOAF.ApplicationView = LOAF.BreadcrumbView.extend
 
   _loadSession: (session, cb, context) ->
     console.log session
+
+    LOAF.categories = session.categories
+    LOAF.location = session.location
     # load in the yelp lists, creating models and collections
     yLs = session.yelpLists
     tempYLs = []
