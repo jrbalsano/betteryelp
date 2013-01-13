@@ -137,18 +137,25 @@ LOAF.ApplicationView = LOAF.BreadcrumbView.extend
       (collection, xhr, options) ->
         console.log xhr
       
-
-
   _loadSession: (session, cb, context) ->
     console.log session
     # load in the yelp lists, creating models and collections
     yLs = session.yelpLists
     tempYLs = []
     _.each yLs, (yL) ->
-      tempYLs.push new LOAF.YelpList yL.models,
-        category: yL.category
-        term: yL.term
-        id: yL.id
+      if yL.updateAt < new Date().getTime()
+        newList = new LOAF.YelpList [],
+          category: yL.category
+          term: yL.term
+          id:yL.id
+        newList.fetch()
+      else
+        newList = new LOAF.YelpList yL.models,
+          category: yL.category
+          term: yL.term
+          id: yL.id
+          updateAt: new Date(yL.updateAt)
+      tempYLs.push newList
     LOAF.yelpLists = new LOAF.ListsList lists: tempYLs
 
     #load in the custom lists, creating models and collections

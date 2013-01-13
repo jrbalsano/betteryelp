@@ -3,10 +3,16 @@
 
   LOAF.YelpList = Backbone.Collection.extend({
     initialize: function(models, options) {
+      var sevenDays;
       this.term = options.term;
       this.category = options.category;
       this.id = options.id;
       this.title = options.title || options.category || options.term;
+      if (!options.updateAt) {
+        sevenDays = new Date();
+        sevenDays.setDate(sevenDays.getDate() + 7);
+      }
+      this.updateAt = options.updateAt || sevenDays;
       this.on("add", this.onAdd, this);
       return this.on("remove", this.onRemove, this);
     },
@@ -103,7 +109,8 @@
         models: Backbone.Collection.prototype.toJSON.call(this),
         category: this.category,
         term: this.term,
-        id: this.id
+        id: this.id,
+        updateAt: this.updateAt.getTime()
       };
     }
   });
