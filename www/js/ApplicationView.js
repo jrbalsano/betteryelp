@@ -128,6 +128,8 @@
       object.sessionExists = true;
       object.yelpLists = LOAF.yelpLists.getLists();
       object.customLists = LOAF.customLists.getLists();
+      object.categories = LOAF.categories;
+      object.location = LOAF.location;
       object.auth = LOAF.auth;
       return new LOAF.FsJsonObject({
         read: false,
@@ -144,7 +146,7 @@
     _retrieveApiKeysFromUser: function(cb, context) {
       var apiView;
       apiView = new LOAF.ApiView({
-        callback: this._newSession,
+        callback: this._retrieveCategoriesFromUser,
         cbContext: this,
         cbParams: [cb, context],
         el: this.$(".bcrumbs-api-login")
@@ -153,8 +155,20 @@
       this.$(".bcrumbs-loading").hide();
       return apiView.$el.show();
     },
+    _retrieveCategoriesFromUser: function(cb, context) {
+      this.obView = new LOAF.OnboardView({
+        el: this.$(".bcrumbs-onboard"),
+        callback: this._newSession,
+        cbContext: this,
+        cbParams: [cb, context]
+      });
+      clearTimeout(this.loadingTimeout);
+      this.$(".bcrumbs-loading").hide();
+      this.obView.render();
+      return this.$(".bcrumbs-onboard").show();
+    },
     _newSession: function(cb, context) {
-      var categories, categoryLists,
+      var categoryLists,
         _this = this;
       this.loadingTimeout = setTimeout(function() {
         return _this.$(".bcrumbs-loading").show();
@@ -166,11 +180,11 @@
         isAllCrumbs: true
       });
       LOAF.customLists.addList(LOAF.allCrumbsList);
-      categories = ["active", "arts", "food", "hotelstravel", "localflavor", "localservices", "nightlife", "restaurants", "shopping"];
-      categoryLists = _.map(categories, function(category) {
+      categoryLists = _.map(LOAF.categories, function(cat) {
         var list;
         list = new LOAF.YelpList([], {
-          category: category
+          category: cat.category,
+          title: cat.title
         });
         return list;
       });
@@ -185,6 +199,8 @@
     _loadSession: function(session, cb, context) {
       var cLs, tempCLs, tempYLs, yLs;
       console.log(session);
+      LOAF.categories = session.categories;
+      LOAF.location = session.location;
       LOAF.auth = session.auth;
       yLs = session.yelpLists;
       tempYLs = [];
@@ -192,6 +208,7 @@
         return tempYLs.push(new LOAF.YelpList(yL.models, {
           category: yL.category,
           term: yL.term,
+          title: yL.title,
           id: yL.id
         }));
       });

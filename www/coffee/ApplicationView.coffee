@@ -9,8 +9,6 @@ LOAF.ApplicationView = LOAF.BreadcrumbView.extend
     @startApplication @onStart, @
 
   onStart: ->
-    # MyBookmarksView.render()
-    # AddBookmarksView.hide()
     clearTimeout @loadingTimeout
     @$(".bcrumbs-loading").hide()
     
@@ -24,6 +22,7 @@ LOAF.ApplicationView = LOAF.BreadcrumbView.extend
     @addCrumbsView.render()
     @myCrumbsView.render()
     @$(".bcrumbs-mycrumbs-view").show()
+    
 
   startApplication: (cb, context) ->
     loadApp = new LOAF.FsJsonObject
@@ -105,6 +104,8 @@ LOAF.ApplicationView = LOAF.BreadcrumbView.extend
     object.sessionExists = true
     object.yelpLists = LOAF.yelpLists.getLists()
     object.customLists = LOAF.customLists.getLists()
+    object.categories = LOAF.categories
+    object.location = LOAF.location
     object.auth = LOAF.auth
     new LOAF.FsJsonObject
       read: false
@@ -117,13 +118,25 @@ LOAF.ApplicationView = LOAF.BreadcrumbView.extend
 
   _retrieveApiKeysFromUser: (cb, context) ->
     apiView = new LOAF.ApiView
-      callback: @_newSession
+      callback: @_retrieveCategoriesFromUser
       cbContext: @
       cbParams: [cb, context]
       el: @$(".bcrumbs-api-login")
     clearTimeout @loadingTimeout
     @$(".bcrumbs-loading").hide()
     apiView.$el.show()
+
+  _retrieveCategoriesFromUser: (cb, context) ->
+    @obView = new LOAF.OnboardView
+      el: @$(".bcrumbs-onboard")
+      callback: @_newSession
+      cbContext: @
+      cbParams: [cb, context]
+    clearTimeout @loadingTimeout
+    @$(".bcrumbs-loading").hide()
+    @obView.render()
+    @$(".bcrumbs-onboard").show()
+
 
   _newSession: (cb, context) ->
     @loadingTimeout = setTimeout( =>
@@ -136,10 +149,10 @@ LOAF.ApplicationView = LOAF.BreadcrumbView.extend
     LOAF.allCrumbsList = new LOAF.CustomList [], name: "All Crumbs", isAllCrumbs: true
     LOAF.customLists.addList LOAF.allCrumbsList
     # Generate searches
-    categories = ["active", "arts", "food", "hotelstravel", "localflavor"
-            "localservices", "nightlife", "restaurants", "shopping"]
-    categoryLists = _.map categories, (category) ->
-      list = new LOAF.YelpList [], category: category
+    categoryLists = _.map LOAF.categories, (cat) ->
+      list = new LOAF.YelpList [],
+        category: cat.category
+        title: cat.title
       list
     LOAF.yelpLists.addLists categoryLists
     LOAF.yelpLists.fetchLists ( =>
@@ -154,6 +167,9 @@ LOAF.ApplicationView = LOAF.BreadcrumbView.extend
 
   _loadSession: (session, cb, context) ->
     console.log session
+
+    LOAF.categories = session.categories
+    LOAF.location = session.location
     LOAF.auth = session.auth
     # load in the yelp lists, creating models and collections
     yLs = session.yelpLists
@@ -162,6 +178,7 @@ LOAF.ApplicationView = LOAF.BreadcrumbView.extend
       tempYLs.push new LOAF.YelpList yL.models,
         category: yL.category
         term: yL.term
+        title: yL.title
         id: yL.id
     LOAF.yelpLists = new LOAF.ListsList lists: tempYLs
 

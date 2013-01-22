@@ -123,7 +123,7 @@
         _.each(categories, function(list) {
           var obj;
           obj = {
-            name: list.category,
+            name: list.title,
             image1: list.size() > 0 ? list.models[0].get("image_url") : void 0,
             image2: list.size() > 1 ? list.models[1].get("image_url") : void 0,
             image3: list.size() > 2 ? list.models[2].get("image_url") : void 0,
@@ -153,7 +153,7 @@
         _.each(searches, function(list) {
           var obj;
           obj = {
-            name: list.term,
+            name: list.title,
             image1: list.size() > 0 ? list.models[0].get("image_url") : void 0,
             image2: list.size() > 1 ? list.models[1].get("image_url") : void 0,
             image3: list.size() > 2 ? list.models[2].get("image_url") : void 0,

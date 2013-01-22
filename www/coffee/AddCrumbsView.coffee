@@ -93,7 +93,7 @@ LOAF.AddCrumbsView = LOAF.BreadcrumbView.extend
         list.category?
       _.each categories, (list) ->
         obj =
-          name: list.category,
+          name: list.title
           image1: if list.size() > 0 then list.models[0].get("image_url")
           image2: if list.size() > 1 then list.models[1].get("image_url")
           image3: if list.size() > 2 then list.models[2].get("image_url")
@@ -114,7 +114,7 @@ LOAF.AddCrumbsView = LOAF.BreadcrumbView.extend
     if searches.length > 0
       _.each searches, (list) ->
         obj =
-          name: list.term
+          name: list.title
           image1: if list.size() > 0 then list.models[0].get("image_url")
           image2: if list.size() > 1 then list.models[1].get("image_url")
           image3: if list.size() > 2 then list.models[2].get("image_url")

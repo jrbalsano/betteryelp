@@ -410,6 +410,27 @@ body,
   padding: 0px 15px 0px 15px;
   border-radius: 0px 0px 10px 10px;
 }
+/* ==========================================================================
+   Breadcrumbs On Board View
+   ========================================================================== */
+
+.yelp-categories-list label {
+  display: inline-block;
+}
+
+.yelp-categories-list li {
+}
+
+.yelp-categories-list label {
+  position: relative;
+}
+  
+.yelp-categories-list a {
+  padding-left: 20px;
+  display: inline-block;
+  font-size: 12pt;
+  line-height: 20px;
+}
 
 /* ==========================================================================
    Breadcrumbs My Crumbs View
