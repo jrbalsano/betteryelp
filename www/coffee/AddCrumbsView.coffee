@@ -39,6 +39,7 @@ LOAF.AddCrumbsView = LOAF.BreadcrumbView.extend
           LOAF.singleListView.postRender()
           $(".edit-toggle").hide()
           $(".edit-mode").hide()
+          LOAF.appView.saveApplication()
 
   onShowList: (e) ->
     e.preventDefault()

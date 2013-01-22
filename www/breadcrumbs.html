@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <html lang = "en" xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -35,6 +35,7 @@
     <script type="text/javascript" src="js/Business.js"></script>
     <script type="text/javascript" src="js/YelpList.js"></script>
     <script type="text/javascript" src="js/CustomList.js"></script>
+    <script type="text/javascript" src="js/ApiView.js"></script>
 
     <title>Breadcrumbs</title>
   </head>
@@ -81,6 +82,45 @@
         <div class = "bcrumbs-view bcrumbs-loading">
           <img src="img/breadcrumbs_cat_load_color.gif" /><br />
           <span>Loading...</span>
+        </div>
+
+        <!-- ====== Login ====== -->
+        <div class = "bcrumbs-view bcrumbs-api-login">
+          <h2>Welcome</h2>
+          <p>In order to use Breadcrumbs, you'll need to get a Yelp API key. Don't worry - we won't save it to our servers! We'll save it to your computer so that anytime you access Breadcrumbs from your computer, you won't have to input this information again. We use your key to access the Yelp API. Providing your key will be understood as your consent to use the key to perform your searches against the Yelp database and populate categories.</p>
+          <form class="form-horizontal api-form">
+            <div class="control-group">
+              <label class="control-label">Consumer Key</label>
+              <div class="controls">
+                <input type="text" class="consumer-key"></input>
+              </div>
+            </div>
+            <div class="control-group">
+              <label class="control-label">Consumer Secret</label>
+              <div class="controls">
+                <input type="text" class="consumer-secret"></input>
+              </div>
+            </div>
+            <div class="control-group">
+              <label class="control-label">Access Token</label>
+              <div class="controls">
+                <input type="text" class="access-token"></input>
+              </div>
+            </div>
+            <div class="control-group">
+              <label class="control-label">Access Token Secret</label>
+              <div class="controls">
+                <input type="text" class="access-token-secret"></input>
+              </div>
+            </div>
+            <div class="control-group">
+              <div class="controls">
+                <button type="submit" class="api-key-save" disabled>Save</input>
+              </div>
+            </div>
+            
+          </form>
+
         </div>
 
         <!-- ======Add Breadcrumbs====== -->
