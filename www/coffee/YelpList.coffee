@@ -28,7 +28,6 @@ LOAF.YelpList = Backbone.Collection.extend
 
   onAdd: (business) ->
     business.addList @
-    LOAF.appView.saveApplication()
 
   onRemove: (business) ->
     business.removeList @
@@ -47,7 +46,7 @@ LOAF.YelpList = Backbone.Collection.extend
     parameters.push ['oauth_consumer_secret', LOAF.auth.consumerSecret]
     parameters.push ['oauth_token', LOAF.auth.accessToken]
     parameters.push ['oauth_signature_method', 'HMAC-SHA1']
-    parameters.push ['location', "New York City"]
+    parameters.push ['location', LOAF.location]
     parameters.push ['term', @term] if @term
     parameters.push ['category_filter', @category] if @category
     parameters.push ['offset', (controls.page - 1) * 20] if controls && controls.page
@@ -88,5 +87,6 @@ LOAF.YelpList = Backbone.Collection.extend
       models: Backbone.Collection.prototype.toJSON.call this
       category: @category
       term: @term
+      title: @title
       id: @id
       updateAt: @updateAt.getTime()

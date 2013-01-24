@@ -31,8 +31,7 @@
       });
     },
     onAdd: function(business) {
-      business.addList(this);
-      return LOAF.appView.saveApplication();
+      return business.addList(this);
     },
     onRemove: function(business) {
       business.removeList(this);
@@ -54,7 +53,7 @@
       parameters.push(['oauth_consumer_secret', LOAF.auth.consumerSecret]);
       parameters.push(['oauth_token', LOAF.auth.accessToken]);
       parameters.push(['oauth_signature_method', 'HMAC-SHA1']);
-      parameters.push(['location', "New York City"]);
+      parameters.push(['location', LOAF.location]);
       if (this.term) {
         parameters.push(['term', this.term]);
       }
@@ -109,6 +108,7 @@
         models: Backbone.Collection.prototype.toJSON.call(this),
         category: this.category,
         term: this.term,
+        title: this.title,
         id: this.id,
         updateAt: this.updateAt.getTime()
       };
