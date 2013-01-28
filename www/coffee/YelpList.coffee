@@ -4,6 +4,12 @@ LOAF.YelpList = Backbone.Collection.extend
     @category = options.category
     @id = options.id
     @title = options.title || options.category || options.term
+    
+    unless options.updateAt
+      sevenDays = new Date()
+      sevenDays.setDate(sevenDays.getDate() + 7)
+    @updateAt = options.updateAt || sevenDays
+
     @.on "add", @onAdd, @
     @.on "remove", @onRemove, @
 
@@ -83,3 +89,4 @@ LOAF.YelpList = Backbone.Collection.extend
       term: @term
       title: @title
       id: @id
+      updateAt: @updateAt.getTime()

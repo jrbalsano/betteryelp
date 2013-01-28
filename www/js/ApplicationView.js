@@ -205,12 +205,25 @@
       yLs = session.yelpLists;
       tempYLs = [];
       _.each(yLs, function(yL) {
-        return tempYLs.push(new LOAF.YelpList(yL.models, {
-          category: yL.category,
-          term: yL.term,
-          title: yL.title,
-          id: yL.id
-        }));
+        var newList;
+        if (yL.updateAt < new Date().getTime()) {
+          newList = new LOAF.YelpList([], {
+            category: yL.category,
+            term: yL.term,
+            title: yL.title,
+            id: yL.id
+          });
+          newList.fetch();
+        } else {
+          newList = new LOAF.YelpList(yL.models, {
+            category: yL.category,
+            term: yL.term,
+            title: yL.title,
+            id: yL.id,
+            updateAt: new Date(yL.updateAt)
+          });
+        }
+        return tempYLs.push(newList);
       });
       LOAF.yelpLists = new LOAF.ListsList({
         lists: tempYLs
