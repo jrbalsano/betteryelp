@@ -14,7 +14,6 @@
     },
     onStart: function() {
       clearTimeout(this.loadingTimeout);
-      console.log("completed loading");
       this.$(".bcrumbs-loading").hide();
       this.addCrumbsView = new LOAF.AddCrumbsView({
         el: this.$(".bcrumbs-yelp-view")
@@ -36,7 +35,7 @@
           if (data.sessionExists) {
             return _this._loadSession(data, cb, context);
           } else {
-            return _this._newSession(cb, context);
+            return _this._retrieveApiKeysFromUser(cb, context);
           }
         }
       });
@@ -129,6 +128,9 @@
       object.sessionExists = true;
       object.yelpLists = LOAF.yelpLists.getLists();
       object.customLists = LOAF.customLists.getLists();
+      object.categories = LOAF.categories;
+      object.location = LOAF.location;
+      object.auth = LOAF.auth;
       return new LOAF.FsJsonObject({
         read: false,
         onReady: function(newSave) {
@@ -141,9 +143,36 @@
         }
       });
     },
+    _retrieveApiKeysFromUser: function(cb, context) {
+      var apiView;
+      apiView = new LOAF.ApiView({
+        callback: this._retrieveCategoriesFromUser,
+        cbContext: this,
+        cbParams: [cb, context],
+        el: this.$(".bcrumbs-api-login")
+      });
+      clearTimeout(this.loadingTimeout);
+      this.$(".bcrumbs-loading").hide();
+      return apiView.$el.show();
+    },
+    _retrieveCategoriesFromUser: function(cb, context) {
+      this.obView = new LOAF.OnboardView({
+        el: this.$(".bcrumbs-onboard"),
+        callback: this._newSession,
+        cbContext: this,
+        cbParams: [cb, context]
+      });
+      clearTimeout(this.loadingTimeout);
+      this.$(".bcrumbs-loading").hide();
+      this.obView.render();
+      return this.$(".bcrumbs-onboard").show();
+    },
     _newSession: function(cb, context) {
-      var categories, categoryLists,
+      var categoryLists,
         _this = this;
+      this.loadingTimeout = setTimeout(function() {
+        return _this.$(".bcrumbs-loading").show();
+      }, 500);
       LOAF.yelpLists = new LOAF.ListsList;
       LOAF.customLists = new LOAF.ListsList;
       LOAF.allCrumbsList = new LOAF.CustomList([], {
@@ -151,11 +180,11 @@
         isAllCrumbs: true
       });
       LOAF.customLists.addList(LOAF.allCrumbsList);
-      categories = ["active", "arts", "food", "hotelstravel", "localflavor", "localservices", "nightlife", "restaurants", "shopping"];
-      categoryLists = _.map(categories, function(category) {
+      categoryLists = _.map(LOAF.categories, function(cat) {
         var list;
         list = new LOAF.YelpList([], {
-          category: category
+          category: cat.category,
+          title: cat.title
         });
         return list;
       });
@@ -170,14 +199,31 @@
     _loadSession: function(session, cb, context) {
       var cLs, tempCLs, tempYLs, yLs;
       console.log(session);
+      LOAF.categories = session.categories;
+      LOAF.location = session.location;
+      LOAF.auth = session.auth;
       yLs = session.yelpLists;
       tempYLs = [];
       _.each(yLs, function(yL) {
-        return tempYLs.push(new LOAF.YelpList(yL.models, {
-          category: yL.category,
-          term: yL.term,
-          id: yL.id
-        }));
+        var newList;
+        if (yL.updateAt < new Date().getTime()) {
+          newList = new LOAF.YelpList([], {
+            category: yL.category,
+            term: yL.term,
+            title: yL.title,
+            id: yL.id
+          });
+          newList.fetch();
+        } else {
+          newList = new LOAF.YelpList(yL.models, {
+            category: yL.category,
+            term: yL.term,
+            title: yL.title,
+            id: yL.id,
+            updateAt: new Date(yL.updateAt)
+          });
+        }
+        return tempYLs.push(newList);
       });
       LOAF.yelpLists = new LOAF.ListsList({
         lists: tempYLs
